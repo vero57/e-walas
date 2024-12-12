@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Login E Walas</title>
+    <title>Form Login E Walas| Siswa</title>
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -12,7 +12,7 @@
 		<div class="screen__content">
 			
 			<form class="login">
-			<h2>Login Form</h2>
+			<h2>Login Form Siswa</h2>
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
 					<input type="text" class="login__input" placeholder="User name / Email">

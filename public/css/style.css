@@ -3,12 +3,12 @@
 * {
 	box-sizing: border-box;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 	font-family: Raleway, sans-serif;
 }
 
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #2C3E50, #34495E);
 }
 
 .container {
@@ -18,21 +18,21 @@ body {
 	min-height: 100vh;
 }
 
-.screen {		
-	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
-	position: relative;	
+.screen {
+	background: linear-gradient(90deg, #2C3E50, #3B5998);
+	position: relative;
 	height: 600px;
-	width: 360px;	
-	box-shadow: 0px 0px 24px #5C5696;
+	width: 360px;
+	box-shadow: 0px 0px 24px #1A242F;
 }
 
 .screen__content {
 	z-index: 1;
-	position: relative;	
+	position: relative;
 	height: 100%;
 }
 
-.screen__background {		
+.screen__background {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -40,7 +40,7 @@ body {
 	bottom: 0;
 	z-index: 0;
 	-webkit-clip-path: inset(0 0 0 0);
-	clip-path: inset(0 0 0 0);	
+	clip-path: inset(0 0 0 0);
 }
 
 .screen__background__shape {
@@ -51,36 +51,36 @@ body {
 .screen__background__shape1 {
 	height: 520px;
 	width: 520px;
-	background: #FFF;	
+	background: #BDC3C7;
 	top: -50px;
-	right: 120px;	
+	right: 120px;
 	border-radius: 0 72px 0 0;
 }
 
 .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
-	background: #6C63AC;	
+	background: #566573;
 	top: -172px;
-	right: 0;	
+	right: 0;
 	border-radius: 32px;
 }
 
 .screen__background__shape3 {
 	height: 540px;
 	width: 190px;
-	background: linear-gradient(270deg, #5D54A4, #6A679E);
+	background: linear-gradient(270deg, #34495E, #2C3E50);
 	top: -24px;
-	right: 0;	
+	right: 0;
 	border-radius: 32px;
 }
 
 .screen__background__shape4 {
 	height: 400px;
 	width: 200px;
-	background: #7E7BB9;	
+	background: #4A6075;
 	top: 420px;
-	right: 50px;	
+	right: 50px;
 	border-radius: 60px;
 }
 
@@ -91,19 +91,19 @@ body {
 }
 
 .login__field {
-	padding: 20px 0px;	
-	position: relative;	
+	padding: 20px 0px;
+	position: relative;
 }
 
 .login__icon {
 	position: absolute;
 	top: 30px;
-	color: #7875B5;
+	color: #99A3A4;
 }
 
 .login__input {
 	border: none;
-	border-bottom: 2px solid #D1D1D4;
+	border-bottom: 2px solid #5D6D7E;
 	background: none;
 	padding: 10px;
 	padding-left: 24px;
@@ -116,23 +116,23 @@ body {
 .login__input:focus,
 .login__input:hover {
 	outline: none;
-	border-bottom-color: #6A679E;
+	border-bottom-color: #3B5998;
 }
 
 .login__submit {
-	background: #fff;
+	background: #BDC3C7;
 	font-size: 14px;
 	margin-top: 30px;
 	padding: 16px 20px;
 	border-radius: 26px;
-	border: 1px solid #D4D3E8;
+	border: 1px solid #99A3A4;
 	text-transform: uppercase;
 	font-weight: 700;
 	display: flex;
 	align-items: center;
 	width: 100%;
-	color: #4C489D;
-	box-shadow: 0px 2px 2px #5C5696;
+	color: #1A242F;
+	box-shadow: 0px 2px 2px #2C3E50;
 	cursor: pointer;
 	transition: .2s;
 }
@@ -140,24 +140,24 @@ body {
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
-	border-color: #6A679E;
+	border-color: #34495E;
 	outline: none;
 }
 
 .button__icon {
 	font-size: 24px;
 	margin-left: auto;
-	color: #7875B5;
+	color: #99A3A4;
 }
 
-.social-login {	
+.social-login {
 	position: absolute;
 	height: 140px;
 	width: 160px;
 	text-align: center;
 	bottom: 0px;
 	right: 0px;
-	color: #fff;
+	color: #BDC3C7;
 }
 
 .social-icons {
@@ -168,11 +168,12 @@ body {
 
 .social-login__icon {
 	padding: 20px 10px;
-	color: #fff;
-	text-decoration: none;	
-	text-shadow: 0px 0px 8px #7875B5;
+	color: #BDC3C7;
+	text-decoration: none;
+	text-shadow: 0px 0px 8px #5D6D7E;
 }
 
 .social-login__icon:hover {
-	transform: scale(1.5);	
+	transform: scale(1.5);
 }
+
