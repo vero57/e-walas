@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama',255);
             $table->enum('jenis_kelamin', ['Perempuan', 'Laki-laki'])->default('Laki-laki');
-            $table->string('no_wa',255);
+            $table->string('no_wa',15);
             $table->string('password',255);
             $table->string('image_url',255)->nullable();
             $table->timestamps();

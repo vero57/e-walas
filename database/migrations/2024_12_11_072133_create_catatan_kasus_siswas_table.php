@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('nama')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->string('kasus',255);
             $table->string('tindak_lanjut',255);
-            $table->string('keterangan');
+            $table->text('keterangan');
             $table->timestamps();
         });
     }

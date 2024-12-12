@@ -95,7 +95,7 @@ FACEBOOK: https://www.facebook.com/themefisher
           <a href="/logingtk" class="button-link">
             <i class="ti-user text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
-            <h3 class="text-capitalize">GTK</h3>
+            <h3 class="text-capitalize">Wali Kelas</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
@@ -121,7 +121,7 @@ FACEBOOK: https://www.facebook.com/themefisher
           <a href="/loginkaprog" class="button-link">
             <i class="ti-briefcase text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
-            <h3 class="text-capitalize">Kepala Jurusan</h3>
+            <h3 class="text-capitalize">Kepala Kompetensi</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">

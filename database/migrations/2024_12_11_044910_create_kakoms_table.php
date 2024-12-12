@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kakoms', function (Blueprint $table) {
             $table->id();
             $table->string('nama',255);
-            $table->string('no_wa',255);
+            $table->string('no_wa',15);
             $table->string('password',255);
             $table->enum('kompetensi', ['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP','TFLM', 'TKR', 'TOI'])->default('SIJA');
             $table->string('image_url',255)->nullable();
