@@ -584,7 +584,7 @@ button:focus,
 
 .footer-main {
   padding: 92px 0;
-  background: #1a1b1f;
+  background: #2e2e33;
 }
 
 @media (max-width: 768px) {
@@ -2242,4 +2242,41 @@ hr {
   .button-link:hover h3 {
     color: #fff;
   }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Warna tombol */
+    color: white;
+    text-decoration: none;
+    border-radius: 50px; /* Membuat tombol oval */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan default */
+    transition: all 0.3s ease; /* Animasi transisi */
+}
+
+.btn:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+    transform: translateY(-3px); /* Efek mengangkat tombol */
+    background-color: #0056b3; /* Warna lebih gelap saat hover */
+}
+
+html {
+    scroll-behavior: smooth; /* Membuat scrolling lebih halus */
+}
+
+.footer-logo {
+  width: 2px; /* Atur lebar gambar sesuai keinginan */
+  height: auto; /* Menjaga rasio aspek gambar */
+  transition: transform 0.3s ease; /* Efek animasi transisi */
+}
+
+.footer-logo:hover {
+  transform: scale(1.1); /* Sedikit memperbesar gambar saat hover */
+}
+
+/* .service-thumb {
+  padding: 20 15px; /* Tambahkan padding kiri dan kanan */
+/* } */ 
+
+
 /*# sourceMappingURL=style.css.map */

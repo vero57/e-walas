@@ -32,7 +32,7 @@ FACEBOOK: https://www.facebook.com/themefisher
   <meta name="generator" content="Themefisher Small Apps Template v1.0">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/logokampak.png" />
   
   <!-- PLUGINS CSS STYLE -->
   <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
@@ -74,18 +74,24 @@ FACEBOOK: https://www.facebook.com/themefisher
 		<div class="row align-items-center">
 			<div class="col-md-6 order-2 order-md-1 text-center text-md-left">
 				<h1 class="text-white font-weight-bold mb-4">E - Walas Website SMK Negeri 1 Cibinong</h1>
-				<p class="text-white mb-5">Buat buku E-Walas lebih mudah dan efisien hanya dalam satu platform yang terintegrasi, memungkinkan anda mengakses berbagai fitur secara praktis</p>
-				<a href="FAQ.html" class="btn btn-main-md">Pelajari Lebih Lanjut</a>
+				<p class="text-white normal-text mb-1">Buat buku E-Walas lebih mudah dan efisien hanya dalam satu platform yang terintegrasi, memungkinkan Anda mengakses berbagai fitur secara praktis.</p>
+        <p class="text-white normal-text mt-1">Dengan menggunakan satu sistem yang lengkap, Anda dapat dengan mudah mengelola, membuat, dan mempublikasikan buku E-Walas dengan proses yang lebih sederhana dan cepat.</p>
+				<br>
+				<a href="#penjelasan1" class="btn btn-main-md">Pelajari Lebih Lanjut</a>
 			</div>
 			<div class="col-md-6 text-center order-1 order-md-2">
-				<img class="img-fluid" src="images/mobile.png" alt="screenshot">
+				<img 
+					class="img-fluid rounded-custom" 
+					src="images/foto2kampak.jpg" 
+					alt="screenshot" 
+					style="border-radius: 23px; width: 100%; max-width: 650px;">
 			</div>
 		</div>
 	</div>
 </section>
 <!--====  End of Hero Section  ====-->
 
-<section class="section pt-0 position-relative pull-top">
+<section class="section pt-0 position-relative pull-top" id="login">
   <div class="container">
     <div class="rounded shadow p-5 bg-white">
       <h2 class="text-center text-dark font-weight-bold mb-4">Selamat Datang</h2>
@@ -95,7 +101,7 @@ FACEBOOK: https://www.facebook.com/themefisher
           <a href="/logingtk" class="button-link">
             <i class="ti-user text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
-            <h3 class="text-capitalize">GTK</h3>
+            <h3 class="text-capitalize">Wali Kelas</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
@@ -121,7 +127,7 @@ FACEBOOK: https://www.facebook.com/themefisher
           <a href="/loginkaprog" class="button-link">
             <i class="ti-briefcase text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
-            <h3 class="text-capitalize">Kepala Jurusan</h3>
+            <h3 class="text-capitalize">Kepala Kompetensi</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
@@ -147,27 +153,25 @@ FACEBOOK: https://www.facebook.com/themefisher
 <!--==================================
 =            Feature Grid            =
 ===================================-->
-<section class="feature section pt-0">
+<section class="feature section pt-0" id="penjelasan1">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 ml-auto justify-content-center">
 				<!-- Feature Mockup -->
 				<div class="image-content" data-aos="fade-right">
-					<img class="img-fluid" src="images/feature/feature-new-01.jpg" alt="iphone">
+					<img class="img-fluid" src="images/rd3.jpg" alt="iphone" width="480" height="280">
 				</div>
 			</div>
 			<div class="col-lg-6 mr-auto align-self-center">
 				<div class="feature-content">
 					<!-- Feature Title -->
-					<h2>Increase your productivity with <a
-							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a></h2>
+					<h2>Buat rekapan data e walas lebih mudah dan praktis hanya dalam <a
+							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">1 platform</a></h2>
 					<!-- Feature Description -->
-					<p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-						aliquip ex ea commodo consequat.</p>
+					<p class="desc">E-Walas adalah platform digital yang dirancang untuk membantu wali kelas dalam mengelola informasi terkait siswa. Hal ini membantu walas dan siswa dalam melihat dan membuat data terkait perbukuan walas</p>
 				</div>
 				<!-- Testimonial Quote -->
-				<div class="testimonial">
+				<!-- <div class="testimonial">
 					<p>
 						"InVision is a window into everything that's being designed at Twitter. It gets all of our best work in one
 						place."
@@ -178,7 +182,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 						</li>
 						<li class="list-inline-item">Jonathon Andrew , Themefisher.com</li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -190,31 +194,16 @@ FACEBOOK: https://www.facebook.com/themefisher
 			<div class="col-lg-6 ml-auto align-self-center">
 				<div class="feature-content">
 					<!-- Feature Title -->
-					<h2>Increase your productivity with <a
-							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a></h2>
+					<h2>Mengelola Data Siswa Lebih Cepat dan Praktis Hanya dengan <a
+							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">E-Walas Website</a></h2>
 					<!-- Feature Description -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-						ea commodo consequat.</p>
-				</div>
-				<!-- Testimonial Quote -->
-				<div class="testimonial">
-					<p>
-						"InVision is a window into everything that's being designed at Twitter. It gets all of our best work in one
-						place."
-					</p>
-					<ul class="list-inline meta">
-						<li class="list-inline-item">
-							<img src="images/testimonial/feature-testimonial-thumb.jpg" alt="">
-						</li>
-						<li class="list-inline-item">Jonathon Andrew , Themefisher.com</li>
-					</ul>
+					<p>E-Walas adalah solusi digital inovatif untuk wali kelas, memungkinkan pengelolaan data siswa menjadi lebih terstruktur dan efisien. Dengan fitur-fitur lengkap, platform ini mempermudah walas dan siswa dalam mengakses informasi, mencatat data penting, hingga menyusun laporan, semuanya dalam satu tempat yang mudah digunakan.</p>
 				</div>
 			</div>
 			<div class="col-lg-6 mr-auto justify-content-center">
 				<!-- Feature mockup -->
-				<div class="image-content" data-aos="fade-left">
-					<img class="img-fluid" src="images/feature/feature-new-02.jpg" alt="ipad">
+        <div class="image-content" data-aos="fade-right">
+        <img class="img-fluid" src="images/rd4.png" alt="ipad">
 				</div>
 			</div>
 		</div>
@@ -225,24 +214,28 @@ FACEBOOK: https://www.facebook.com/themefisher
 <!--==============================
 =            Services            =
 ===============================-->
-<section class="service section bg-gray">
+<section class="service section bg-gray" id="fitur">
 	<div class="container-fluid p-0">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="section-title">
-					<h2>An Interface For Lifestyle</h2>
-					<p><a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a> makes
-						it easy to stay on top of your Life Style. No late tasks. No gimmicks.</p>
+					<h2>Fitur Unggulan </h2>
+					<p><a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">E-Walas</a> Berikut adalah beberapa fitur unggulan dari website E-Walas</p>
 				</div>
 			</div>
 		</div>
 		<div class="row no-gutters">
-			<div class="col-lg-6 align-self-center">
-				<!-- Feature Image -->
-				<div class="service-thumb left" data-aos="fade-right">
-					<img class="img-fluid" src="images/feature/iphone-ipad.jpg" alt="iphone-ipad">
-				</div>
-			</div>
+    <div class="col-lg-6 align-self-center">
+  <!-- Feature Image -->
+  <div class="col-lg-8 ml-right">
+  <!-- Feature Mockup -->
+  <div class="image-content" data-aos="fade-right" style="margin-right: -50%;">
+    <img class="img-fluid" src="images/fiur1rb.png" alt="iphone" width="580" height="280">
+  </div>
+</div>
+
+</div>
+
 			<div class="col-lg-5 mr-auto align-self-center">
 				<div class="service-box">
 					<div class="row align-items-center">
@@ -298,150 +291,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 </section>
 <!--====  End of Services  ====-->
 
-
-<!--=================================
-=            Video Promo            =
-==================================-->
-<section class="video-promo section bg-1">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="content-block">
-					<!-- Heading -->
-					<h2>Watch Our Promo Video</h2>
-					<!-- Promotional Speech -->
-					<p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet et,
-						porttitor at sem. Vivamus </p>
-					<!-- Popup Video -->
-					<a data-fancybox href="https://www.youtube.com/watch?v=jrkvirglgaQ">
-						<i class="ti-control-play video"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!--====  End of Video Promo  ====-->
-
-<!--=================================
-=            Testimonial            =
-==================================-->
-<section class="section testimonial" id="testimonial">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<!-- Testimonial Slider -->
-				<div class="testimonial-slider owl-carousel owl-theme">
-					<!-- Testimonial 01 -->
-					<div class="item">
-						<div class="block shadow">
-							<!-- Speech -->
-							<p>
-								Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-								Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-								sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-								pretium ut lacinia in, elementum id enim.
-							</p>
-							<!-- Person Thumb -->
-							<div class="image">
-								<img src="images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-							</div>
-							<!-- Name and Company -->
-							<cite>Abraham Linkon , Themefisher.com</cite>
-						</div>
-					</div>
-					<!-- Testimonial 01 -->
-					<div class="item">
-						<div class="block shadow">
-							<!-- Speech -->
-							<p>
-								Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-								Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-								sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-								pretium ut lacinia in, elementum id enim.
-							</p>
-							<!-- Person Thumb -->
-							<div class="image">
-								<img src="images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-							</div>
-							<!-- Name and Company -->
-							<cite>Abraham Linkon , Themefisher.com</cite>
-						</div>
-					</div>
-					<!-- Testimonial 01 -->
-					<div class="item">
-						<div class="block shadow">
-							<!-- Speech -->
-							<p>
-								Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-								Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-								sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-								pretium ut lacinia in, elementum id enim.
-							</p>
-							<!-- Person Thumb -->
-							<div class="image">
-								<img src="images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-							</div>
-							<!-- Name and Company -->
-							<cite>Abraham Linkon , Themefisher.com</cite>
-						</div>
-					</div>
-					<!-- Testimonial 01 -->
-					<div class="item">
-						<div class="block shadow">
-							<!-- Speech -->
-							<p>
-								Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-								Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-								sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-								pretium ut lacinia in, elementum id enim.
-							</p>
-							<!-- Person Thumb -->
-							<div class="image">
-								<img src="images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-							</div>
-							<!-- Name and Company -->
-							<cite>Abraham Linkon , Themefisher.com</cite>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 <!--====  End of Testimonial  ====-->
-
-<section class="call-to-action-app section bg-blue">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>It's time to change your mind</h2>
-				<p>Download over 2 million humans .Get <a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a> free forever!
-					<br>We say you won’t look back.</p>
-				<ul class="list-inline">
-					<li class="list-inline-item">
-						<a href="" class="btn btn-rounded-icon">
-							<i class="ti-apple"></i>
-							Iphone
-						</a>
-					</li>
-					<li class="list-inline-item">
-						<a href="" class="btn btn-rounded-icon">
-							<i class="ti-android"></i>
-							Android
-						</a>
-					</li>
-					<li class="list-inline-item">
-						<a href="" class="btn btn-rounded-icon">
-							<i class="ti-microsoft-alt"></i>
-							Windows
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</section>
 
 <!--============================
 =            Footer            =
@@ -450,32 +300,32 @@ FACEBOOK: https://www.facebook.com/themefisher
   <div class="footer-main">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-12 m-md-auto align-self-center">
-          <div class="block">
-            <a href="index.html"><img src="images/logo-alt.png" alt="footer-logo"></a>
-            <!-- Social Site Icons -->
-            <ul class="social-icon list-inline">
-              <li class="list-inline-item">
-                <a href="https://www.facebook.com/themefisher"><i class="ti-facebook"></i></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="https://twitter.com/themefisher"><i class="ti-twitter"></i></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="https://www.instagram.com/themefisher/"><i class="ti-instagram"></i></a>
-              </li>
-            </ul>
-          </div>
+      <div class="col-lg-4 col-md-12 m-md-auto align-self-center">
+        <div class="block d-flex flex-column align-items-center">
+          <a href=""><img src="images/logokampak2.png" alt="footer-logo" width="330" height="150"></a>
+          <!-- Social Site Icons -->
+          <ul class="social-icon list-inline d-flex justify-content-center mt-3">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/themefisher"><i class="ti-facebook"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://twitter.com/themefisher"><i class="ti-twitter"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/themefisher/"><i class="ti-instagram"></i></a>
+            </li>
+          </ul>
         </div>
+      </div>
         <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
           <div class="block-2">
             <!-- heading -->
-            <h6>Product</h6>
+            <h6>E-Walas</h6>
             <!-- links -->
             <ul>
-              <li><a href="team.html">Teams</a></li>
-              <li><a href="blog.html">Blogs</a></li>
-              <li><a href="FAQ.html">FAQs</a></li>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#penjelasan1">Tentang</a></li>
+              <li><a href="#fitur">Fitur</a></li>
             </ul>
           </div>
         </div>
@@ -486,7 +336,7 @@ FACEBOOK: https://www.facebook.com/themefisher
             <!-- links -->
             <ul>
               <li><a href="sign-up.html">Singup</a></li>
-              <li><a href="sign-in.html">Login</a></li>
+              <li><a href="#login">Login</a></li>
               <li><a href="blog.html">Blog</a></li>
             </ul>
           </div>
@@ -520,12 +370,8 @@ FACEBOOK: https://www.facebook.com/themefisher
       </div>
     </div>
   </div>
-  <div class="text-center bg-dark py-4">
-    <small class="text-secondary">Copyright &copy; <script>document.write(new Date().getFullYear())</script>. Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></small class="text-secondary">
-  </div>
-
-	<div class="text-center bg-dark py-1">
-   <small> <p>Distributed By <a href="https://themewagon.com/">Themewagon</a></p></small class="text-secondary">
+  <div class="text-center bg-dark py-1">
+    <small class="text-secondary">Copyright &copy; <script>document.write(new Date().getFullYear())</script>. Designed &amp; Developed by <a href="https://themefisher.com/">SIJA SMKN 1 Cibinong</a></small class="text-secondary">
   </div>
 </footer>
 
