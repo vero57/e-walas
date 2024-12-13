@@ -7,6 +7,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logokampak.png') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         /* Kotak pesan */
         .alert {
@@ -74,14 +76,15 @@
                 @csrf
                 <img src="{{ asset('images/logologin.png') }}" alt="Logo" class="login__logo">
                 <h2>Login Form Admin</h2>
-                <div class="login__field">
-                    <i class="login__icon fas fa-user"></i>
-                    <input type="text" name="nama" class="login__input" placeholder="Nama" required>
-                </div>
-                <div class="login__field">
-                    <i class="login__icon fas fa-lock"></i>
-                    <input type="password" name="password" class="login__input" placeholder="Password" required>
-                </div>
+                <div class="login__field fas fa-user-circle">
+                        <i class="login__icon "></i> <!-- Ikon Nama -->
+                        <input type="text" name="nama" class="login__input" placeholder="Nama" required>
+                    </div>
+                    <div class="login__field fas fa-key">
+                        <i class="login__icon "></i> <!-- Ikon Password -->
+                        <input type="password" name="password" class="login__input" placeholder="Password" required>
+                    </div>
+                 </div>
                 <button type="submit" class="button login__submit">
                     <span class="button__text">Log In Now</span>
                     <i class="button__icon fas fa-chevron-right"></i>
