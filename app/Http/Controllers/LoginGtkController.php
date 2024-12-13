@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Walas;
 
 class LoginGtkController extends Controller
 {
@@ -14,18 +15,34 @@ class LoginGtkController extends Controller
         return view('logingtk.index');
     }
 
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'nama' => 'required',
+            'password' => 'required',
+        ]);
+
+        // Cari admin berdasarkan nama
+        $walas = Walas::where('nama', $request->nama)->first();
+
+        // Periksa apakah walas ditemukan dan password cocok
+        if ($walas && $request->password === $walas->password) {
+            // Simpan informasi login ke session
+            $request->session()->put('walas_id', $walas->id);
+
+            // Redirect ke halaman walas dengan pesan sukses
+            return redirect()->route('homepagegtk.index')->with('success', 'Login berhasil! Selamat datang di halaman Walas.');
+        }
+
+        // Jika gagal, kembali ke halaman login dengan pesan error
+        return redirect()->back()->with('error', 'Login gagal! Nama atau password salah.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
     {
         //
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kurikulum;
 
 class LoginKurikulumController extends Controller
 {
@@ -27,7 +28,26 @@ class LoginKurikulumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required',
+            'password' => 'required',
+        ]);
+
+        // Cari admin berdasarkan nama
+        $kurikulum = Kurikulum::where('nama', $request->nama)->first();
+
+        // Periksa apakah kurikulum ditemukan dan password cocok
+        if ($kurikulum && $request->password === $kurikulum->password) {
+            // Simpan informasi login ke session
+            $request->session()->put('kurikulum_id', $kurikulum->id);
+
+            // Redirect ke halaman kurikulum dengan pesan sukses
+            return redirect()->route('homepagekurikulum.index')->with('success', 'Login berhasil! Selamat datang di halaman kurikulum.');
+        }
+
+        // Jika gagal, kembali ke halaman login dengan pesan error
+        return redirect()->back()->with('error', 'Login gagal! Nama atau password salah.');
     }
 
     /**
