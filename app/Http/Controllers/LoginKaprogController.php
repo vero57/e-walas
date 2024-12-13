@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kakom;
 
 class LoginKaprogController extends Controller
 {
@@ -27,7 +28,26 @@ class LoginKaprogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required',
+            'password' => 'required',
+        ]);
+
+        // Cari admin berdasarkan nama
+        $kaprog = Kakom::where('nama', $request->nama)->first();
+
+        // Periksa apakah kaprog ditemukan dan password cocok
+        if ($kaprog && $request->password === $kaprog->password) {
+            // Simpan informasi login ke session
+            $request->session()->put('kaprog_id', $kaprog->id);
+
+            // Redirect ke halaman kaprog dengan pesan sukses
+            return redirect()->route('homepagekaprog.index')->with('success', 'Login berhasil! Selamat datang di halaman kepala program.');
+        }
+
+        // Jika gagal, kembali ke halaman login dengan pesan error
+        return redirect()->back()->with('error', 'Login gagal! Nama atau password salah.');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kepsek;
 
 class LoginKepsekController extends Controller
 {
@@ -26,10 +27,30 @@ class LoginKepsekController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+{
+    // Validasi input
+    $request->validate([
+        'nama' => 'required',
+        'password' => 'required',
+    ]);
+
+    // Cari admin berdasarkan nama
+    $kepsek = Kepsek::where('nama', $request->nama)->first();
+
+    // Periksa apakah kepsek ditemukan dan password cocok
+    if ($kepsek && $request->password === $kepsek->password) {
+        // Simpan informasi login ke session
+        $request->session()->put('kepsek_id', $kepsek->id);
+
+        // Redirect ke halaman kepsek dengan pesan sukses
+        return redirect()->route('homepagekepsek.index')->with('success', 'Login berhasil! Selamat datang di halaman kepala sekolah.');
     }
 
+    // Jika gagal, kembali ke halaman login dengan pesan error
+    return redirect()->back()->with('error', 'Login gagal! Nama atau password salah.');
+}
+
+    
     /**
      * Display the specified resource.
      */
