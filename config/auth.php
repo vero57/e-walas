@@ -36,6 +36,22 @@ return [
     */
 
     'guards' => [
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'walas' => [
+            'driver' => 'session',
+            'provider' => 'walas',
+        ],
+        'kakoms' => [
+            'driver' => 'session',
+            'provider' => 'kakoms',
+        ],
+        'kepseks' => [
+            'driver' => 'session',
+            'provider' => 'kepseks',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -60,6 +76,22 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'walas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Walas::class,
+        ],
+        'kakoms' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Kakom::class,
+        ],
+        'kepseks' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Kepsek::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),

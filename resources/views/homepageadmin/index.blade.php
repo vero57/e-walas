@@ -141,8 +141,11 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-      <a class="btn-getstarted" href="index.html#about">Logout</a>
+      <form action="{{ route('logoutadmin') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn-getstarted">Logout</button>
+                                </form>
+      
 
     </div>
   </header>

@@ -77,3 +77,40 @@ Route::get('/siswapage', function () {
     }
     return view('homepagesiswa.index'); // File di views/adminpage/index.blade.php
 })->name('homepagesiswa.index');
+
+
+// Logout admin
+Route::post('/homepageadmin/logout', function () {
+    Auth::guard('admins')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutadmin');
+
+
+// Logout admin
+Route::post('/homepageadmin/logout', function () {
+    Auth::guard('admins')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutadmin');
+
+// Logout walas
+Route::post('/homepagegtk/logout', function () {
+    Auth::guard('walas')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutwalas');
+
+// Logout kakom
+Route::post('/homepagekaprog/logout', function () {
+    Auth::guard('kakoms')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutkakom');
+
+// Logout kepsek
+Route::post('/homepagekepsek/logout', function () {
+    Auth::guard('kepseks')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutkepsek');
