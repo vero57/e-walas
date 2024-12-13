@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('persentase_sosial_ekonomis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('jenis_sosial_ekonomi');
             $table->foreign('jenis_sosial_ekonomi')->references('id')->on('biodata_siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->string('jumlah', 50);

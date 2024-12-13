@@ -8,6 +8,7 @@ class DaftarPesertaDidik extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
         'nis',
         'nisn',
         'nama_siswa',

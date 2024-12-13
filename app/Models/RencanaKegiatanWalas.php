@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DaftarSerahTerimaRapor extends Model
+class RencanaKegiatanWalas extends Model
 {
     use HasFactory;
     protected $fillable = [
         'walas_id',
-        'image_url'
+        'minggu_ke',
+        'kegiatan_bukti',
+        'keterangan',
     ];
 }

@@ -8,6 +8,8 @@ class CatatanKasusSiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
+                    
+
             'nama', 
             'kasus',
             'tindak_lanjut',

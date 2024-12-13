@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('jadwal_kbms', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->enum('hari1', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
             $table->unsignedBigInteger('mapel1_id');
             $table->foreign('mapel1_id')->references('id')->on('mapels')->onDelete('cascade')->onUpdate ('cascade');

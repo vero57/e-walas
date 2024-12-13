@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('buku_tamu_orangtuas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->string('image_url',255);
             $table->timestamps();
         });

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('rekapitulasi_jumlah_siswas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->enum('bulan', ['Juli', 'Agustus','September','Oktober', 'November','Desember', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'])->default('Juli');
             $table->unsignedInteger('jumlah_awal_siswa')->default(0);
             $table->unsignedInteger('jumlah_akhir_siswa')->default(0);

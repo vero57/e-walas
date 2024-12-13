@@ -8,6 +8,7 @@ class BiodataSiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
        'siswas_id',
        'jenis_kelamin',
        'tempat_lahir',

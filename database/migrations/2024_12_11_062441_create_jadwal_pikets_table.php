@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('jadwal_pikets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->enum('hari1', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
             $table->unsignedBigInteger('siswa1_id');
             $table->foreign('siswa1_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');

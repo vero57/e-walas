@@ -8,6 +8,7 @@ class IdentitasKelas extends Model
 {
     use HasFactory;
     protected $fillable = [
+           'walas_id',
            'program_keahlian', 
            'kompetensi_keahlian', 
            'walas_id_10',

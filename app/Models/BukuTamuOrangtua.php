@@ -8,6 +8,7 @@ class BukuTamuOrangtua extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
         'image_url'
     ];
 }

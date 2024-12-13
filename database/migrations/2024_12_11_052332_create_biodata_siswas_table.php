@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('biodata_siswas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('siswas_id');
             $table->foreign('siswas_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->enum('jenis_kelamin', ['Perempuan', 'Laki-laki'])->default('Laki-laki');

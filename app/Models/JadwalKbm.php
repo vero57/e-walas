@@ -22,6 +22,7 @@ class JadwalKbm extends Model
      * @var array
      */
     protected $fillable = [
+        'walas_id',
         'hari1', 'mapel1_id', 'guru1_id',
         'hari2', 'mapel2_id', 'guru2_id',
         'hari3', 'mapel3_id', 'guru3_id',

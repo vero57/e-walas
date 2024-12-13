@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('denah_tempat_kerja_kelompoks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->string('nama_kelompok');
             $table->timestamps();
         });

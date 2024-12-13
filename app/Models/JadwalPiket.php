@@ -22,6 +22,7 @@ class JadwalPiket extends Model
      * @var array
      */
     protected $fillable = [
+        'walas_id',
         'hari1', 'siswa1_id',
         'hari2', 'siswa2_id',
         'hari3', 'siswa3_id',

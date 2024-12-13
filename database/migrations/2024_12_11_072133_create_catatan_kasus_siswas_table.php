@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('catatan_kasus_siswas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nama');
-            $table->foreign('nama')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->unsignedBigInteger('siswas_id');
+            $table->foreign('siswas_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->string('kasus',255);
             $table->string('tindak_lanjut',255);
             $table->text('keterangan');

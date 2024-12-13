@@ -8,6 +8,7 @@ class StrukturOrganisasiKelas extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
         'kepala_sekolah',
         'walas',
         'ketuakelas',

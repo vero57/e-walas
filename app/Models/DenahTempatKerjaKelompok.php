@@ -8,6 +8,7 @@ class DenahTempatKerjaKelompok extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
         'nama_kelompok'
     ];
 }

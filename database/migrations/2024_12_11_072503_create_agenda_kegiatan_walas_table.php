@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('agenda_kegiatan_walas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
             $table->date('tanggal');
             $table->string('nama_kegiatan');

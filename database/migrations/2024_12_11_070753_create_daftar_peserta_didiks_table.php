@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('daftar_peserta_didiks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('nis');
             $table->foreign('nis')->references('id')->on('biodata_siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('nisn');

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('struktur_organisasi_kelas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('walas_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('kepala_sekolah');
             $table->foreign('kepala_sekolah')->references('id')->on('kepseks')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('walas');

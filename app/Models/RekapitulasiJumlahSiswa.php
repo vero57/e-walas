@@ -8,6 +8,7 @@ class RekapitulasiJumlahSiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
         'bulan',
         'jumlah_awal',
         'jumlah_akhir',
