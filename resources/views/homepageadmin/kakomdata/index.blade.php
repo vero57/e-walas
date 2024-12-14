@@ -23,6 +23,8 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -86,6 +88,8 @@
                 transform: translateY(-100%);
             }
         }
+
+        
     </style>
 </head>
 
@@ -115,10 +119,10 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/wargasekolah" class="active">Beranda</a></li>
-          <li><a href="/walas" >Wali Kelas</a></li>
+        <li><a href="/wargasekolah">Beranda</a></li>
+          <li><a href="/walas">Wali Kelas</a></li>
           <li><a href="/guru">Guru</a></li>
-          <li><a href="/kakom">Kepala Kompetensi</a></li>
+          <li><a href="/kakom"class="active">Kepala Kompetensi</a></li>
           <li><a href="/kurikulum">Kurikulum</a></li>
           <li><a href="/kepalasekolah">Kepala Sekolah</a></li>
         </ul>
@@ -133,54 +137,129 @@
     </div>
   </header>
 
-  <main class="main">
+<main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
+       <!-- Hero Section -->
+       <section id="hero" class="hero section">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Header dengan Title, Pencarian, dan Tombol -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold">Daftar Kepala Kompetensi</h2>
+            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
+            <div class="d-flex align-items-center justify-content-start">
+                <!-- Form Cari Kepala Kompetensi -->
+                <!-- Tombol Unggah Data -->
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <i class="bi bi-cloud-upload"></i> Unggah Data
+                </button>
+                <!-- Tombol Tambah Data -->
+                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
+                <div class="d-flex-container">
+                    <!-- Tombol Tambah Data -->
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                        <i class="bi bi-plus"></i> Tambah
+                    </button>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            
-             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div> 
-
-              <h1 class="mb-4">
-               Kelola Data Warga sekolah <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <!-- <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a> 
-            </div> -->
+                    <!-- Search Box -->
+                    <div class="searchBox">
+                        <input class="searchInput" type="text" name="" placeholder="  Cari Kepala Kompetensi">
+                        <button class="searchButton" href="#">
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
-          </div>
+        </div>
+        
+        <!-- Jumlah Total GTK -->
+        <div class="text-end mb-4">
+            <span class="text-muted">Jumlah Total: <strong>75 Kepala Kompetensi</strong></span>
         </div>
 
-<div class="row stats-row gy-7 mt-9 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-    <div class="col-lg-4 col-md-8">
-        <h1 class="mb-4 text-center">
-               Data Warga Sekolah <br>
-                <span class="accent-text">Update</span>
-        </h1>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Foto</th>
+                        <th>WhatsApp</th>
+                        <th>Informasi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data Kepala Kompetensi Akan Tampil Di Sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Unggah Data -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Kepala Kompetensi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
+                        <input type="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Unggah</button>
+            </div>
+        </div>
     </div>
 </div>
 
-    </section><!-- /Hero Section -->
+<!-- Modal Tambah Data -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Tambah Data Kepala Kompetensi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="teacherName" class="form-label">Nama Kepala Kompetensi</label>
+                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Kepala Kompetensi">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherPhoto" class="form-label">Foto Kepala Kompetensi</label>
+                        <input type="file" class="form-control" id="teacherPhoto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
+                        <input type="text" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherInfo" class="form-label">Informasi</label>
+                        <textarea class="form-control" id="teacherInfo" rows="3" placeholder="Masukkan informasi tambahan"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-success">Tambah Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    </div>
+</section>
+
 
 </main>
   

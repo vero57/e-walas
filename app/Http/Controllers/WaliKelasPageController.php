@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class WargaSekolahController extends Controller
+class WaliKelasPageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('homepageadmin.wargasekolah');
+        return view ("homepageadmin.walikelasdata.index");
     }
-
-    public function indexwalas()
-    {
-        return view('homepageadmin.walikelas');
-    }
-
 
     /**
      * Show the form for creating a new resource.

@@ -9,6 +9,11 @@ use App\Http\Controllers\LoginKurikulumController;
 use App\Http\Controllers\LoginSiswaController;
 use App\Http\Controllers\DashAdminController;
 use App\Http\Controllers\WargaSekolahController;
+use App\Http\Controllers\WaliKelasPageController;
+use App\Http\Controllers\KakomDataController;
+use App\Http\Controllers\KurikulumPageController;
+use App\Http\Controllers\KepsekPageController;
+use App\Http\Controllers\GuruPageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,16 +37,19 @@ Route::resource('loginsiswa', LoginSiswaController::class);
 // Halaman Utama Controller
 
 // Route halaman admin
-Route::middleware('auth:admins')->group(function () {
-    Route::get('/adminpage', function () {
-        return view('homepageadmin.index');
-    })->name('homepageadmin.index');
+Route::get('/adminpage', function () {
+    if (!session()->has('admin_id')) {
+        return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+    }
+    return view('homepageadmin.index'); // File di views/adminpage/index.blade.php
 
-    Route::resource('wargasekolah', WargaSekolahController::class);
-});
-
-
-
+})->name('homepageadmin.index');
+Route::resource('wargasekolah', WargaSekolahController::class);
+Route::resource('walas', WaliKelasPageController::class);
+Route::resource('kakom', KakomDataController::class);
+Route::resource('kurikulum', KurikulumPageController::class);
+Route::resource('kepalasekolah', KepsekPageController::class);
+Route::resource('guru', GuruPageController::class);
 
 // Route Halaman Walas
 Route::get('/walaspage', function () {
