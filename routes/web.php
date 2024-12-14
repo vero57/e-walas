@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginKepsekController;
 use App\Http\Controllers\LoginKurikulumController;
 use App\Http\Controllers\LoginSiswaController;
 use App\Http\Controllers\DashAdminController;
+use App\Http\Controllers\WargaSekolahController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,12 +32,16 @@ Route::resource('loginsiswa', LoginSiswaController::class);
 // Halaman Utama Controller
 
 // Route halaman admin
-Route::get('/adminpage', function () {
-    if (!session()->has('admin_id')) {
-        return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepageadmin.index'); // File di views/adminpage/index.blade.php
-})->name('homepageadmin.index');
+Route::middleware('auth:admins')->group(function () {
+    Route::get('/adminpage', function () {
+        return view('homepageadmin.index');
+    })->name('homepageadmin.index');
+
+    Route::resource('wargasekolah', WargaSekolahController::class);
+});
+
+
+
 
 // Route Halaman Walas
 Route::get('/walaspage', function () {
@@ -114,3 +119,17 @@ Route::post('/homepagekepsek/logout', function () {
     session()->flash('status', 'Logout Berhasil');
     return redirect('/');
 })->name('logoutkepsek');
+
+// Logout kurikullum
+Route::post('/homepagekurikulum/logout', function () {
+    Auth::guard('kurikulums')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutkurikulum');
+
+// Logout kurikullum
+Route::post('/homepagesiswa/logout', function () {
+    Auth::guard('siswas')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutsiswa');

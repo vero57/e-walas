@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Kurikulum</title>
+  <title>E Walas SMKN 1 Cibinong- Admin</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -141,7 +141,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutkurikulum') }}" method="POST">
+      <form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -152,7 +152,7 @@
 
   <main class="main">
 
-    <!-- Hero Section -->
+    <!-- Hero Section
     <section id="hero" class="hero section">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -166,7 +166,7 @@
               </div>
 
               <h1 class="mb-4">
-               Selamat datang Kurikulum <br>
+               Selamat datang Admin <br>
                 <span class="accent-text">SMK Negeri 1 Cibinong</span>
               </h1>
 
@@ -198,8 +198,8 @@
         <i class="bi bi-trophy"></i>
       </div>
       <div class="stat-content">
-        <h4>Tahun Akdemik</h4>
-        <p class="mb-0">Kelola Data Tahun Akademik di Sini</p>
+        <h4>Warga Sekolah</h4>
+        <p class="mb-0">Kelola Data Warga Sekolah di Sini</p>
       </div>
     </div>
   </div>
@@ -209,11 +209,11 @@
         <i class="bi bi-briefcase"></i>
       </div>
       <div class="stat-content">
-        <h4>Kinerja Walas</h4>
-        <p class="mb-0">Kelola data Kinerja Walas di Sini</p>
+        <h4>Tahun Akademik</h4>
+        <p class="mb-0">Kelola Tahun Akademik di Sini</p>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
       </div>

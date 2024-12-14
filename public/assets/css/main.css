@@ -2332,9 +2332,9 @@ section,
 .stat-item {
   padding: 20px; /* Memberikan padding pada kotak */
   background-color: #f8f9fa; /* Warna background kotak */
-  border: 1px solid #ddd; /* Border ringan */
+  border: 3px solid #ddd; /* Border ringan */
   border-radius: 8px; /* Membuat sudut membulat */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Memberikan bayangan */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Memberikan bayangan */
   transition: transform 0.3s ease; /* Animasi hover */
 }
 
@@ -2373,6 +2373,22 @@ section,
   border-color: #007bff; /* Border berubah menjadi biru */
 }
 
+.btn-getstarted {
+  background-color: transparent;
+  color: #007bff; /* Warna teks biru */
+  border: 4px solid #acd0f7; /* Border biru muda */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease; /* Efek transisi */
+}
+
+.btn-getstarted:hover {
+  background-color: #007bff; /* Ganti latar belakang jadi biru muda saat hover */
+  color: white; /* Ubah warna teks jadi putih saat hover */
+  transform: scale(1.05); /* Efek perbesaran sedikit saat hover */
+}
 
 /*--------------------------------------------------------------
 # Starter Section Section

@@ -201,3 +201,18 @@ body {
 	transform: scale(1.5);
 }
 
+.login__field {
+	position: relative;
+}
+
+.eye-icon {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.eye-icon i {
+	font-size: 18px;
+}

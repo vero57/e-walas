@@ -52,6 +52,14 @@ return [
             'driver' => 'session',
             'provider' => 'kepseks',
         ],
+        'kurikulums' => [
+            'driver' => 'session',
+            'provider' => 'kurikulums',
+        ],
+        'siswas' => [
+            'driver' => 'session',
+            'provider' => 'siswas',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -91,6 +99,14 @@ return [
         'kepseks' => [
             'driver' => 'eloquent',
             'model' => App\Models\Kepsek::class,
+        ],
+        'kurikulums' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Kurikulum::class,
+        ],
+        'siswas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Siswa::class,
         ],
         'users' => [
             'driver' => 'eloquent',
