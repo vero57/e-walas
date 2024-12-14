@@ -107,13 +107,23 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-
+      <nav id="navmenu" class="navmenu">
+        <ul>
+        <li><a href="/wargasekolah" class="active">Beranda</a></li>
+          <li><a href="/walas" >Wali Kelas</a></li>
+          <li><a href="/guru">Guru</a></li>
+          <li><a href="/kakom">Kepala Kompetensi</a></li>
+          <li><a href="/kurikulum">Kurikulum</a></li>
+          <li><a href="/kepalasekolah">Kepala Sekolah</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
       <form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
@@ -132,27 +142,24 @@
 
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            
+             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
               <div class="company-badge mb-4">
                 <i class="bi bi-gear-fill me-2"></i>
                     Aman, Tertib, Unggul, Religius
-              </div>
+              </div> 
 
               <h1 class="mb-4">
-               Selamat datang Admin <br>
+               Kelola Data Warga sekolah <br>
                 <span class="accent-text">SMK Negeri 1 Cibinong</span>
               </h1>
 
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
+              <!-- <div class="hero-buttons">
                 <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
-                </a>
-            </div>
+                </a> 
+            </div> -->
             </div>
           </div>
 
@@ -164,35 +171,14 @@
           </div>
         </div>
 
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-    <h4>Warga Sekolah</h4>
-    <p class="mb-0">
-        <a href="/wargasekolah">Kelola Data Warga Sekolah di Sini</a>
-    </p>
-</div>
-
+<div class="row stats-row gy-7 mt-9 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
+    <div class="col-lg-4 col-md-8">
+        <h1 class="mb-4 text-center">
+               Data Warga Sekolah <br>
+                <span class="accent-text">Update</span>
+        </h1>
     </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Tahun Akademik</h4>
-        <p class="mb-0">Kelola Tahun Akademik di Sini</p>
-      </div>
-    </div>
-  </div>
 </div>
-
-      </div>
 
     </section><!-- /Hero Section -->
 

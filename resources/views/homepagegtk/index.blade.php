@@ -208,8 +208,8 @@
         <i class="bi bi-briefcase"></i>
       </div>
       <div class="stat-content">
-        <h4>Administrasi Wali Kelas</h4>
-        <p class="mb-0">Kelola Administrasi Wali Kelas di Sini</p>
+        <h4>Administrasi Walas</h4>
+        <p class="mb-0">Kelola Administrasi Walas di Sini</p>
       </div>
     </div>
   </div>

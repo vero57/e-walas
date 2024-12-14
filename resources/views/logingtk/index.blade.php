@@ -84,7 +84,10 @@
                     </div>
                     <div class="login__field fas fa-key">
                         <i class="login__icon "></i> <!-- Ikon Password -->
-                        <input type="password" name="password" class="login__input" placeholder="Password" required>
+                        <input type="password" name="password" class="login__input" id="password" placeholder="Password" required>
+                        <span class="eye-icon" id="togglePassword">
+                            <i class="fas fa-eye"></i> <!-- Ikon Mata -->
+                        </span>
                     </div>
                  </div>
                 <button type="submit" class="button login__submit">
@@ -127,5 +130,20 @@
         }
     };
 </script>
+
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        // Cek tipe input, ganti antara password dan text
+        const type = passwordField.type === 'password' ? 'text' : 'password';
+        passwordField.type = type;
+
+        // Ganti ikon antara mata terbuka dan tertutup
+        this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+</script>
+
 </body>
 </html>

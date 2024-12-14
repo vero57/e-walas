@@ -8,6 +8,12 @@ use App\Http\Controllers\LoginKepsekController;
 use App\Http\Controllers\LoginKurikulumController;
 use App\Http\Controllers\LoginSiswaController;
 use App\Http\Controllers\DashAdminController;
+use App\Http\Controllers\WargaSekolahController;
+use App\Http\Controllers\WaliKelasPageController;
+use App\Http\Controllers\KakomDataController;
+use App\Http\Controllers\KurikulumPageController;
+use App\Http\Controllers\KepsekPageController;
+use App\Http\Controllers\GuruPageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,7 +42,14 @@ Route::get('/adminpage', function () {
         return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
     }
     return view('homepageadmin.index'); // File di views/adminpage/index.blade.php
+
 })->name('homepageadmin.index');
+Route::resource('wargasekolah', WargaSekolahController::class);
+Route::resource('walas', WaliKelasPageController::class);
+Route::resource('kakom', KakomDataController::class);
+Route::resource('kurikulum', KurikulumPageController::class);
+Route::resource('kepalasekolah', KepsekPageController::class);
+Route::resource('guru', GuruPageController::class);
 
 // Route Halaman Walas
 Route::get('/walaspage', function () {
@@ -114,3 +127,17 @@ Route::post('/homepagekepsek/logout', function () {
     session()->flash('status', 'Logout Berhasil');
     return redirect('/');
 })->name('logoutkepsek');
+
+// Logout kurikullum
+Route::post('/homepagekurikulum/logout', function () {
+    Auth::guard('kurikulums')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutkurikulum');
+
+// Logout kurikullum
+Route::post('/homepagesiswa/logout', function () {
+    Auth::guard('siswas')->logout();
+    session()->flash('status', 'Logout Berhasil');
+    return redirect('/');
+})->name('logoutsiswa');

@@ -2332,9 +2332,9 @@ section,
 .stat-item {
   padding: 20px; /* Memberikan padding pada kotak */
   background-color: #f8f9fa; /* Warna background kotak */
-  border: 1px solid #ddd; /* Border ringan */
+  border: 3px solid #ddd; /* Border ringan */
   border-radius: 8px; /* Membuat sudut membulat */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Memberikan bayangan */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Memberikan bayangan */
   transition: transform 0.3s ease; /* Animasi hover */
 }
 
@@ -2373,10 +2373,449 @@ section,
   border-color: #007bff; /* Border berubah menjadi biru */
 }
 
+.btn-getstarted {
+  background-color: transparent;
+  color: #007bff; /* Warna teks biru */
+  border: 4px solid #acd0f7; /* Border biru muda */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease; /* Efek transisi */
+}
+
+.btn-getstarted:hover {
+  background-color: #007bff; /* Ganti latar belakang jadi biru muda saat hover */
+  color: white; /* Ubah warna teks jadi putih saat hover */
+  transform: scale(1.05); /* Efek perbesaran sedikit saat hover */
+}
+
+/* Styling Kotak Tabel */
+.table-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+/* Tabel Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table thead th {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Foto Styling */
+.table tbody img {
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tombol Styling */
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+
 
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
-  /* Add your styles here */
+  /* Container dan Header */
+.hero.section {
+  padding: 30px 0;
+  background-color: #f7f9fc;
+}
+
+h2.font-weight-bold {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Form Cari Guru */
+.input-group {
+  width: 250px;
+}
+
+.input-group input {
+  border-radius: 50px;
+  padding-left: 15px;
+}
+
+.input-group-text {
+  border-radius: 50px;
+  background-color: #ffffff;
+}
+
+/* Tombol Unggah Data dan Tambah */
+.btn-outline-secondary {
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin-right: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #0062E6, #33AEFF);
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #0056b3, #0091e5);
+}
+
+/* Jumlah Total GTK */
+.text-end {
+  font-size: 20px;
+  color: #0f0d0d;
+  font-weight: bold;
+}
+
+/* Styling Tabel */
+.table-container {
+  margin-top: 30px;
+}
+
+.table {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #4fa3f7;  /* Menggunakan warna biru yang lebih kuat */
+  color: white;               /* Teks putih agar kontras dengan latar belakang */
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;          /* Menambah ketebalan font untuk keterbacaan yang lebih baik */
+}
+
+
+.table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 5px solid #f0f0f0;
+}
+
+.table td i {
+  font-size: 16px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.table td .btn {
+  border-radius: 50px;
+  font-size: 12px;
+  padding: 5px 10px;
+  text-transform: capitalize;
+}
+
+.table td .btn-info {
+  background-color: #17a2b8;
+}
+
+.table td .btn-danger {
+  background-color: #dc3545;
+}
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 8px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.modal-footer .btn {
+  border-radius: 50px;
+  font-size: 14px;
+  padding: 8px 15px;
+}
+
+.modal-body form input, 
+.modal-body form textarea, 
+.modal-body form select {
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+.modal-body form textarea {
+  resize: vertical;
+}
+
+input[type="file"] {
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* Hover Effect for Table Rows */
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Tombol Unggah Data Wali Kelas */
+.btn-outline-secondary {
+  font-family: 'Roboto', sans-serif;  /* Mengubah font */
+  font-weight: 600;                   /* Menambah ketebalan font */
+  color: #6c757d;                    /* Warna teks abu-abu */
+  border-color: #3c3f42;             /* Warna border abu-abu */
+  border-width: 2px;                 /* Ukuran border */
+  border-style: solid;               /* Jenis border */
+  border-radius: 50px;               /* Membuat tombol menjadi bulat */
+  padding: 10px 20px;                /* Padding untuk tombol */
+}
+
+/* Tombol saat di-hover */
+.btn-outline-secondary:hover {
+  color: white;                       /* Warna teks berubah menjadi putih */
+  background-color: #6c757d;          /* Latar belakang abu-abu saat hover */
+  border-color: #6c757d;              /* Warna border berubah saat hover */
+}
+
+
+.btn-outline-secondary i {
+  font-size: 18px;  /* Ukuran ikon */
+}
+
+/* Memperbesar ukuran tombol */
+.btn {
+  font-size: 1.2rem; /* Ukuran font lebih besar */
+  padding: 10px 20px; /* Menambah padding pada tombol */
+  border-radius: 50px; /* Tombol lebih bulat (opsional) */
+}
+
+/* Tombol Unggah Data dan Tambah Data */
+.btn-outline-secondary,
+.btn-primary {
+  font-size: 1.2rem;  /* Memperbesar ukuran font tombol */
+  padding: 12px 25px; /* Menambah padding tombol */
+}
+
+/* Memperpanjang form pencarian */
+.input-group .form-control {
+  width: 400px;  /* Menambah panjang form pencarian */
+  font-size: 1rem; /* Ukuran font input */
+}
+
+/* Responsif: Pastikan tombol dan form tetap menyesuaikan lebar container */
+@media (max-width: 768px) {
+  .input-group .form-control {
+      width: 100%;  /* Input menyesuaikan lebar container pada layar kecil */
+  }
+
+  .btn {
+      font-size: 1rem; /* Ukuran font tombol lebih kecil di layar kecil */
+  }
+}
+
+/* Memperbesar ukuran tombol */
+.btn {
+  font-size: 1.2rem;  /* Ukuran font lebih besar */
+  padding: 12px 25px; /* Menambah padding pada tombol */
+  border-radius: 50px; /* Tombol lebih bulat (opsional) */
+}
+
+/* Tombol Unggah Data dan Tambah Data */
+.btn-outline-secondary,
+.btn-primary {
+  font-size: 1.2rem;  /* Memperbesar ukuran font tombol */
+  padding: 12px 25px; /* Menambah padding tombol */
+}
+
+/* Memperpanjang dan menyamakan ukuran form pencarian dengan tombol */
+.input-group .form-control {
+  width: 350px;  /* Menambah panjang form pencarian agar lebih panjang dan sesuai dengan tombol */
+  font-size: 1.2rem; /* Ukuran font input yang sesuai dengan tombol */
+  padding: 12px 20px; /* Padding yang sama dengan tombol */
+  border-radius: 50px; /* Agar form input juga lebih bulat */
+}
+
+/* Responsif: Pastikan tombol dan form tetap menyesuaikan lebar container */
+@media (max-width: 768px) {
+  .input-group .form-control {
+      width: 100%;  /* Input menyesuaikan lebar container pada layar kecil */
+  }
+
+  .btn {
+      font-size: 1rem; /* Ukuran font tombol lebih kecil di layar kecil */
+      padding: 10px 20px; /* Padding lebih kecil di layar kecil */
+  }
+}
+
+/* Memperbesar ukuran font untuk "Daftar GTK" */
+h2.font-weight-bold {
+    font-size: 2rem;  /* Ukuran font lebih besar */
+    margin-bottom: 20px; /* Menambahkan ruang bawah untuk jarak dengan elemen lainnya */
+}
+
+/* Memperbaiki form pencarian dan tombol */
+.input-group .form-control {
+    width: 400px;  /* Menyesuaikan lebar input agar lebih serasi dengan tombol */
+    font-size: 1.2rem;  /* Ukuran font input lebih besar */
+    padding: 12px 20px; /* Padding lebih besar agar lebih nyaman dilihat */
+    border-radius: 30px; /* Menambah border radius agar lebih melengkung */
+    margin-right: 15px;  /* Memberikan jarak antara form pencarian dan tombol */
+}
+
+/* Tombol Unggah Data Wali Kelas */
+.btn-outline-secondary {
+    font-size: 1.2rem; /* Ukuran font lebih besar pada tombol */
+    padding: 12px 20px; /* Menambahkan padding agar tombol lebih besar */
+    border-radius: 30px; /* Membuat tombol lebih bulat */
+    border-color: #6c757d; /* Warna border abu-abu */
+    color: #6c757d; /* Warna teks abu-abu */
+}
+
+/* Tombol Tambah Data Wali Kelas */
+.btn-primary {
+    font-size: 1.2rem; /* Ukuran font lebih besar pada tombol */
+    padding: 12px 20px; /* Menambahkan padding agar tombol lebih besar */
+    border-radius: 30px; /* Membuat tombol lebih bulat */
+}
+
+/* Responsif: Pastikan form dan tombol tetap rapi di layar kecil */
+@media (max-width: 768px) {
+    .input-group .form-control {
+        width: 100%;  /* Input akan menyesuaikan lebar container pada layar kecil */
+        margin-bottom: 10px;  /* Menambahkan jarak antara input dan tombol */
+    }
+
+    .btn {
+        font-size: 1rem; /* Ukuran font tombol lebih kecil di layar kecil */
+        padding: 10px 20px; /* Padding lebih kecil pada tombol */
+    }
+
+    .d-flex {
+        flex-direction: column; /* Mengubah layout menjadi kolom di layar kecil */
+        align-items: flex-start; /* Menyesuaikan posisi elemen agar rata kiri */
+    }
+}
+
+/* Style untuk searchBox */
+.searchBox {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Membuat panjang search box mengikuti ukuran kontainer */
+  max-width: 500px; /* Maksimal panjang 500px, bisa disesuaikan */
+  border: 2px solid #5fbad8; /* Warna border biru muda */
+  border-radius: 30px; /* Membuat border lebih melengkung */
+  padding: 5px; /* Jarak dalam box */
+}
+
+/* Style untuk input pencarian */
+.searchInput {
+  border: none;
+  outline: none;
+  padding: 10px;
+  flex: 1; /* Membuat input mengambil sisa ruang */
+  border-radius: 30px;
+  font-size: 18px;
+}
+
+/* Membuat tombol dan search box berada sejajar dengan jarak */
+/* Membuat container lebih compact agar tidak terlalu panjang kebawah */
+.d-flex-container {
+  display: flex;
+  align-items: center; /* Menjaga elemen-elemen tetap sejajar secara vertikal */
+  gap: 20px; /* Menambahkan jarak antar elemen */
+  flex-wrap: nowrap; /* Menghindari pembungkusan elemen ke baris berikutnya */
+}
+
+/* Menyesuaikan tinggi tombol dan search box */
+.btn, .searchBox {
+  height: auto; /* Mengatur tinggi elemen agar otomatis dan tidak membesar */
+  line-height: 1.5; /* Mengatur tinggi baris agar lebih kompak */
+}
+
+/* Optional: Jika ingin mengatur input agar tidak terlalu tinggi */
+.searchInput {
+  height: 35px; /* Menyesuaikan tinggi input agar tidak terlalu besar */
+  padding: 5px;
+}
+
+/* Optional: Jika ingin menyesuaikan tombol pencarian */
+.searchButton {
+  height: 35px; /* Menyesuaikan tinggi tombol pencarian */
+  padding: 8px;
+}
+
+/* Memberikan jarak pada search box */
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Menambahkan jarak antar input dan tombol search */
+}
+
+/* Style untuk tombol pencarian */
+.searchButton {
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.searchButton i {
+  font-size: 24px;
+  color: #007bff; /* Warna biru untuk ikon */
+}
+
 }
