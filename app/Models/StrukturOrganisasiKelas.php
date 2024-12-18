@@ -18,6 +18,10 @@ class StrukturOrganisasiKelas extends Model
         'seksi_kebersihan',
         'seksi_perlengkapan',
         'seksi_keamanan',
-        'seksi_kerohanian'
+        'seksi_kerohanian',
+        'kurikulum_id',
+        'tanggal',
+        'ttdkurikulum_url',
+        'ttdwalas_url',
     ];
 }

@@ -12,5 +12,7 @@ class RencanaKegiatanWalasGenap extends Model
         'minggu_ke',
         'kegiatan_bukti',
         'keterangan',
+        'tanggal',
+        'ttdwalas_url',
     ];
 }

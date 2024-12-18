@@ -12,6 +12,8 @@ class PersentaseSosialEkonomi extends Model
         'jenis_sosial_ekonomi',
         'jumlah',
         'persentase',
-        'keterangan'
+        'keterangan',
+        'tanggal',
+        'ttdwalas_url',
     ];
 }

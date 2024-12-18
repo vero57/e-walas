@@ -12,6 +12,7 @@ class Kurikulum extends Model
         'nama',
         'no_wa',
         'password',
+        'nip',
         'image_url'
     ];
     

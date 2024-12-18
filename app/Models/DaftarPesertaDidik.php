@@ -12,6 +12,8 @@ class DaftarPesertaDidik extends Model
         'nis',
         'nisn',
         'nama_siswa',
-        'keterangan'
+        'keterangan',
+        'tanggal',
+        'ttdwalas_url',
     ];
 }

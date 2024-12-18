@@ -34,9 +34,14 @@ return new class extends Migration
                 'Membimbing remedial peserta didik - Daftar Remedial',
                 'Mengisi Leger - Ada Leger',
                 'Mengisi Buku Laporan - Ada buku Laporan',
-                'Membagi dokumen hasil pemelajaran - Daftar serah terima raport'
-            ])->default('Membagi dokumen hasil pemelajaran - Daftar serah terima raport');
+                'Membagi dokumen hasil pembelajaran - Daftar serah terima raport'
+            ])->default('Membagi dokumen hasil pembelajaran - Daftar serah terima raport');
             $table->enum('keterangan', ['true', 'false'])->default('false');
+            $table->unsignedBigInteger('kurikulum_id');
+            $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
+            $table->date('tanggalttd');
+            $table->string('ttdkurikulum_url',255)->nullable();
+            $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();
         });
     }

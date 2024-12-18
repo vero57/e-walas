@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('siswas_id');
             $table->foreign('siswas_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->string('nama_lengkap',255);
             $table->enum('jenis_kelamin', ['Perempuan', 'Laki-laki'])->default('Laki-laki');
             $table->string('tempat_lahir',255);
             $table->date('tanggal_lahir',255);

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('jumlah', 50);
             $table->string('persentase', 50);
             $table->string('keterangan', 255);
+            $table->date('tanggal');
+            $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();
         });
     }

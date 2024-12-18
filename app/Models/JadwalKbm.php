@@ -28,6 +28,10 @@ class JadwalKbm extends Model
         'hari3', 'mapel3_id', 'guru3_id',
         'hari4', 'mapel4_id', 'guru4_id',
         'hari5', 'mapel5_id', 'guru5_id',
+        'kurikulum_id',
+        'tanggal',
+        'ttdkurikulum_url',
+        'ttdwalas_url',
     ];
 
     /**

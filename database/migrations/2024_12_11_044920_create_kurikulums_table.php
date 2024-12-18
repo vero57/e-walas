@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama',255);
             $table->string('no_wa',15);
             $table->string('password',255);
+            $table->string('nip',50)->nullable();
             $table->string('image_url',255)->nullable();
             $table->timestamps();
         });

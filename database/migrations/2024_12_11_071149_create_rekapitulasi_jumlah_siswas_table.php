@@ -19,6 +19,11 @@ return new class extends Migration
             $table->unsignedInteger('jumlah_awal_siswa')->default(0);
             $table->unsignedInteger('jumlah_akhir_siswa')->default(0);
             $table->string('keterangan');
+            $table->unsignedBigInteger('kurikulum_id');
+            $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
+            $table->date('tanggal');
+            $table->string('ttdkurikulum_url',255)->nullable();
+            $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();
         });
     }

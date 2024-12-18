@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['Perempuan', 'Laki-laki'])->default('Laki-laki');
             $table->string('no_wa',15);
             $table->string('password',255);
+            $table->string('nip',50)->nullable();
             $table->string('image_url',255)->nullable();
             $table->timestamps();
         });

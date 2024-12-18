@@ -28,6 +28,10 @@ class JadwalPiket extends Model
         'hari3', 'siswa3_id',
         'hari4', 'siswa4_id',
         'hari5', 'siswa5_id',
+        'kurikulum_id',
+        'tanggal',
+        'ttdkurikulum_url',
+        'ttdwalas_url',
     ];
 
     /**
