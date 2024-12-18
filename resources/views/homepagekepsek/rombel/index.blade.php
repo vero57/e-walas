@@ -237,7 +237,7 @@
             <td>
                     <div class="d-flex px-2 py-1">
                     {{ $idx + 1 . '. ' }}
-                    </div>
+                    </div>                                                                  
             </td>
                 <td>
                 {{ $data->tingkat }}
