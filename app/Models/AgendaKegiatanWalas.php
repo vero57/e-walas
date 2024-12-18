@@ -14,6 +14,8 @@ class AgendaKegiatanWalas extends Model
             'nama_kegiatan',
             'hasil',
             'waktu',
-            'keterangan'
+            'keterangan',
+            'tanggal',
+            'ttdwalas_url',
     ];
 }

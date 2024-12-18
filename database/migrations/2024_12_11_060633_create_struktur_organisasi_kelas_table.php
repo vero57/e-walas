@@ -35,6 +35,11 @@ return new class extends Migration
             $table->foreign('seksi_keamanan')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('seksi_kerohanian');
             $table->foreign('seksi_kerohanian')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->unsignedBigInteger('kurikulum_id');
+            $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
+            $table->date('tanggal');
+            $table->string('ttdkurikulum_url',255)->nullable();
+            $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();
         });
     }

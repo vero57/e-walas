@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->string('nama',255);
+            $table->unsignedBigInteger('rombels_id');
+            $table->foreign('rombels_id')->references('id')->on('rombels')->onDelete('cascade')->onUpdate ('cascade');
             $table->enum('jenis_kelamin', ['Perempuan', 'Laki-laki'])->default('Laki-laki');
             $table->string('no_wa',15);
             $table->string('password',255);

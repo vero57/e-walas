@@ -14,6 +14,14 @@ use App\Http\Controllers\KakomDataController;
 use App\Http\Controllers\KurikulumPageController;
 use App\Http\Controllers\KepsekPageController;
 use App\Http\Controllers\GuruPageController;
+use App\Http\Controllers\DataSiswaWalasController;
+use App\Http\Controllers\AdministrasiWalasController;
+use App\Http\Controllers\KakomTAController;
+use App\Http\Controllers\KakomWalasController;
+use App\Http\Controllers\KepsekTAController;
+use App\Http\Controllers\KepsekWalasController;
+use App\Http\Controllers\KepsekRombelController;
+use App\Http\Controllers\KakomRombelController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\RombelPageController;
 use App\Http\Controllers\MapelPageController;
@@ -72,6 +80,10 @@ Route::get('/walaspage', function () {
     }
     return view('homepagegtk.index'); // File di views/adminpage/index.blade.php
 })->name('homepagegtk.index');
+Route::resource('siswadata', DataSiswaWalasController::class);
+Route::resource('adminwalas', AdministrasiWalasController::class);
+
+
 
 // Route Halaman Kepsek
 Route::get('/kepsekpage', function () {
@@ -80,6 +92,9 @@ Route::get('/kepsekpage', function () {
     }
     return view('homepagekepsek.index'); // File di views/adminpage/index.blade.php
 })->name('homepagekepsek.index');
+Route::resource('kepsekta', KepsekTAController::class);
+Route::resource('kepsekwalas', KepsekWalasController::class);
+Route::resource('kepsekrombel', KepsekRombelController::class);
 
 // Route Halaman Kaprog
 Route::get('/kaprogpage', function () {
@@ -88,6 +103,9 @@ Route::get('/kaprogpage', function () {
     }
     return view('homepagekaprog.index'); // File di views/adminpage/index.blade.php
 })->name('homepagekaprog.index');
+Route::resource('kakomta', KakomTAController::class);
+Route::resource('kakomwalas', KakomWalasController::class);
+Route::resource('kakomrombel', KakomRombelController::class);
 
 // Route Halaman Kurikulum
 Route::get('/kurikulumpage', function () {

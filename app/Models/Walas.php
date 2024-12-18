@@ -13,6 +13,7 @@ class Walas extends Model
         'jenis_kelamin',
         'no_wa',
         'password',
+        'nip',
         'image_url'
     ];
 }

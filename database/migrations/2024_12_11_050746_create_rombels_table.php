@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('tingkat', ['X','XI', 'XII', 'XIII' ])->default('X');
             $table->enum('kompetensi', ['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP','TFLM', 'TKR', 'TOI'])->default('SIJA');
-            $table->string('kode',255)->nullable();
+            $table->string('nama_kelas',255)->nullable();
             $table->unsignedBigInteger('walas_id');
             $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
             $table->timestamps();

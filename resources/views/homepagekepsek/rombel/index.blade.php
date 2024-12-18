@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Kepala Sekolah</title>
+  <title>E Walas SMKN 1 Cibinong- Kepala Kompetensi</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -23,6 +23,8 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -86,7 +88,73 @@
                 transform: translateY(-100%);
             }
         }
+
+        
     </style>
+
+    <!-- Style Tambahan -->
+<style>
+/* Search Box */
+.searchBox {
+    position: relative;
+}
+
+.searchInput {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 35px 5px 15px;
+    outline: none;
+}
+
+.searchButton {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #777;
+}
+
+/* Table Link Hover */
+.table-link-hover:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Table */
+.table-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.badge {
+    font-size: 0.9em;
+    padding: 5px 10px;
+}
+
+/* Button Hover */
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-outline-secondary:hover {
+    color: white;
+    background-color: #6c757d;
+}
+</style>
 </head>
 
 <body class="index-page">
@@ -107,7 +175,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kaprogpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -115,10 +183,11 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
+        
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutkepsek') }}" method="POST">
+      <form action="{{ route('logoutkakom') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -129,79 +198,72 @@
 
   <main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Header dengan Title, Pencarian, dan Tombol -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold">Daftar Rombel</h2>
+            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
+            <div class="d-flex align-items-center justify-content-start">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div>
-
-              <h1 class="mb-4">
-               Selamat datang Kepala Sekolah <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a>
+                <!-- Search Box -->
+                <div class="searchBox">
+                    <input class="searchInput" type="text" placeholder="  Cari Rombel">
+                    <button class="searchButton" href="#">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
             </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
-          </div>
         </div>
 
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Data Wali Kelas</h4>
-        <p class="mb-0">
-        <a href="/kepsekwalas">Kelola Data Walas di Sini</a>
-    </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Tahun Akademik</h4>
-        <p class="mb-0">
-        <a href="/kepsekta">Kelola Tahun Akademik di Sini</a>
-    </p>
-      </div>
-    </div>
-  </div>
+
+<!-- Table Daftar Kelas -->
+<div class="table-container">
+    <table class="table table-bordered text-center align-middle">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Tingkat</th>
+                <th scope="col">Kompetensi</th>
+                <th scope="col">Nama Kelas</th>
+                <th scope="col">Id Walas</th>
+                <th scope="col">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($rombels as $idx => $data)
+            <tr>
+            <td>
+                    <div class="d-flex px-2 py-1">
+                    {{ $idx + 1 . '. ' }}
+                    </div>
+            </td>
+                <td>
+                {{ $data->tingkat }}
+                </td>
+                <td>{{ $data->kompetensi }}</td>
+                <td>{{ $data->nama_kelas }}</td>
+                <td>{{ $data->walas_id }}</td>
+                <td>
+                    <!-- Aksi -->
+                    <div class="d-inline-flex gap-2">
+                        <button class="btn btn-sm btn-info text-white">
+                            <i class="bi bi-info-circle text-white"></i> Detail Kelas
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
-      </div>
 
-    </section><!-- /Hero Section -->
+</section>
 
 </main>
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>

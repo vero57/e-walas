@@ -12,6 +12,8 @@ class RekapitulasiJumlahSiswa extends Model
         'bulan',
         'jumlah_awal',
         'jumlah_akhir',
-        'keterangan'
+        'keterangan',
+        'tanggal',
+        'ttdwalas_url',
     ];
 }

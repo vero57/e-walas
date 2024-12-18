@@ -10,7 +10,7 @@ class Rombel extends Model
     protected $fillable = [
         'tingkat',
         'kompetensi',
-        'kode',
+        'nama_kelas',
         'walas_id'
     ];
 }

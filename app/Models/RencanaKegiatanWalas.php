@@ -12,5 +12,7 @@ class RencanaKegiatanWalas extends Model
         'minggu_ke',
         'kegiatan_bukti',
         'keterangan',
+        'tanggal',
+        'ttdwalas_url',
     ];
 }
