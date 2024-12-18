@@ -186,7 +186,9 @@
       </div>
       <div class="stat-content">
         <h4>Tahun Akademik</h4>
-        <p class="mb-0">Kelola Tahun Akademik di Sini</p>
+        <p class="mb-0">
+        <a href="/tahunajaran">Kelola Data Tahun Akademik di Sini</a>
+    </p>
       </div>
     </div>
   </div>

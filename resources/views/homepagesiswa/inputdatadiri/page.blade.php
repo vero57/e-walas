@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Siswa</title>
+  <title>E Walas SMKN 1 Cibinong - Siswa</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -86,7 +86,78 @@
                 transform: translateY(-100%);
             }
         }
+
+        /* Styling untuk tabel */
+.table {
+  width: 300%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.table .btn {
+  margin-right: 5px;
+}
+
     </style>
+
+<style>
+ table {
+    width: 310%;
+    border-collapse: collapse; /* Menghilangkan ruang antara sel */
+    border-radius: 8px; /* Sudut melengkung untuk tabel */
+    overflow: hidden; /* Untuk memastikan konten tidak melampaui sudut melengkung */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan di sekitar tabel */
+  }
+  th, td {
+    text-align: center; /* Menyelaraskan teks ke tengah */
+    padding: 12px; /* Memberikan ruang dalam sel tabel */
+    border: 1px solid #ddd; /* Menambahkan border di sekitar sel */
+  }
+  th {
+    background-color: #f4f4f4; /* Warna latar belakang untuk header tabel */
+    font-weight: bold; /* Membuat teks header lebih tebal */
+  }
+  td {
+    background-color: #fff; /* Warna latar belakang untuk baris data */
+  }
+  tr:nth-child(even) td {
+    background-color: #f9f9f9; /* Warna latar belakang untuk baris genap */
+  }
+  button {
+    border-radius: 5px; /* Menambahkan sudut melengkung pada tombol */
+  }
+
+  .btn {
+    border-radius: 10px; /* Membuat tombol melengkung */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
+    transition: all 0.3s ease; /* Transisi halus untuk efek hover */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Warna biru untuk tombol utama */
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #3399ff; /* Biru muda saat hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Warna merah untuk tombol batal */
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #ff6666; /* Merah muda saat hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
+}
+
+</style>
 </head>
 
 <body class="index-page">
@@ -107,16 +178,21 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
+        <ul>
+        <li><a href="/datadiri" >Beranda</a></li>
+        <li><a href="/datadiripage" class="active" >Data Diri</a></li>
+          <li><a href="/inputdatadiri" >Input Data Diri</a></li>
+        </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutsiswa') }}" method="POST">
+<form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -134,66 +210,53 @@
 
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            
+             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
               <div class="company-badge mb-4">
                 <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div>
+                     Data Diri
+              </div> 
 
-              <h1 class="mb-4">
-               Selamat datang Siswa <br>
+              <!-- <h1 class="mb-4">
+               Kelola Data Diri Siswa <br>
                 <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
+              </h1> -->
 
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
+              <!-- <div class="hero-buttons">
                 <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
-                </a>
-            </div>
+                </a> 
+            </div> -->
             </div>
           </div>
 
           <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+            <!-- <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
               <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
+            </div> -->
           </div>
         </div>
 
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Biodata Diri</h4>
-        <p class="mb-0">
-           <a href="/datadiri">Kelola Data Diri Disini</a>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Catatan Kasus</h4>
-        <p class="mb-0">Kelola data Catatan Kasus di Sini</p>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="row stats-row gy-100 mt-9 justify-content-start align-items-start" data-aos="fade-up" data-aos-delay="500">
+    <div class="col-lg-12">
+        <br>
+        <h1 class="mb-4 text-center">
+            Biodata Diri <br>
+            <span class="accent-text"></span>
+        </h1>
+        <br>
+        <div class="container">
+            <h5>Data Tidak Ditemukan</h5>
+   
+                </div>
+            </div>
+        </div>
 
-      </div>
+
+        
+    </div>
+</div>
 
     </section><!-- /Hero Section -->
 

@@ -14,6 +14,15 @@ use App\Http\Controllers\KakomDataController;
 use App\Http\Controllers\KurikulumPageController;
 use App\Http\Controllers\KepsekPageController;
 use App\Http\Controllers\GuruPageController;
+use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\RombelPageController;
+use App\Http\Controllers\MapelPageController;
+use App\Http\Controllers\TaDataController;
+use App\Http\Controllers\RombelDataController;
+use App\Http\Controllers\KinerjaGuruController;
+use App\Http\Controllers\DataDiriPageController;
+use App\Http\Controllers\InputDataDiriSiswaController;
+use App\Http\Controllers\DataDiriDataController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +60,11 @@ Route::resource('kurikulum', KurikulumPageController::class);
 Route::resource('kepalasekolah', KepsekPageController::class);
 Route::resource('guru', GuruPageController::class);
 
+Route::resource('tahunajaran', TahunAjaranController::class);
+Route::resource('rombel', RombelPageController::class);
+Route::resource('datamapel', MapelPageController::class);
+
+
 // Route Halaman Walas
 Route::get('/walaspage', function () {
     if (!session()->has('walas_id')) {
@@ -82,6 +96,11 @@ Route::get('/kurikulumpage', function () {
     }
     return view('homepagekurikulum.index'); // File di views/adminpage/index.blade.php
 })->name('homepagekurikulum.index');
+Route::resource('tahunajarandata', TaDataController::class);
+Route::resource('rombelpage', RombelDataController::class);
+Route::resource('kinerjaguru', KinerjaGuruController::class);
+
+
 
 // Route Halaman Siswa
 Route::get('/siswapage', function () {
@@ -90,6 +109,9 @@ Route::get('/siswapage', function () {
     }
     return view('homepagesiswa.index'); // File di views/adminpage/index.blade.php
 })->name('homepagesiswa.index');
+Route::resource('datadiri', DataDiriPageController::class);
+Route::resource('inputdatadiri', InputDataDiriSiswaController::class);
+Route::resource('datadiripage', DataDiriDataController::class);
 
 
 // Logout admin

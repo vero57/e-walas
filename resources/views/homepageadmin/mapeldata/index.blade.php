@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Siswa</title>
+  <title>E Walas SMKN 1 Cibinong- Admin</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -23,6 +23,8 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -86,6 +88,8 @@
                 transform: translateY(-100%);
             }
         }
+
+        
     </style>
 </head>
 
@@ -107,16 +111,21 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
+        <ul>
+        <li><a href="/tahunajaran" >Beranda</a></li>
+          <li><a href="/rombel">Rombel</a></li>
+          <li><a href="/datamapel" class="active">Mata Pelajaran</a></li>
+        </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutsiswa') }}" method="POST">
+      <form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -125,77 +134,109 @@
     </div>
   </header>
 
-  <main class="main">
+<main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
+       <!-- Hero Section -->
+       <section id="hero" class="hero section">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Header dengan Title, Pencarian, dan Tombol -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold">Mata Pelajaran Data</h2>
+            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
+            <div class="d-flex align-items-center justify-content-start">
+                <!-- Form Cari Kurikulum -->
+                <!-- Tombol Tambah Data -->
+                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
+                <div class="d-flex-container">
+                    <!-- Tombol Unggah Data -->
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <i class="bi bi-cloud-upload"></i> Unggah 
+                </button>
+                    <!-- Tombol Tambah Data -->
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                        <i class="bi bi-plus"></i> Tambah
+                    </button>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div>
-
-              <h1 class="mb-4">
-               Selamat datang Siswa <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a>
+                    <!-- Search Box -->
+                    <div class="searchBox">
+                        <input class="searchInput" type="text" name="" placeholder="  Cari Mata Pelajaran">
+                        <button class="searchButton" href="#">
+                        </button>
+                    </div>
+                </div>
             </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
-          </div>
         </div>
 
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Biodata Diri</h4>
-        <p class="mb-0">
-           <a href="/datadiri">Kelola Data Diri Disini</a>
-        </p>
-      </div>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data Kurikulum Akan Tampil Di Sini -->
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Catatan Kasus</h4>
-        <p class="mb-0">Kelola data Catatan Kasus di Sini</p>
-      </div>
+</section>
+
+<!-- Modal Unggah Data -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Mata Pelajaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
+                        <input type="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary">Unggah</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-      </div>
+<!-- Modal Tambah Data -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Tambah Data Mata Pelajaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="mapel" class="form-label">Mata Pelajaran</label>
+                        <input type="text" class="form-control" id="mapel" placeholder="Contoh : Platform Komputasi Awan">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-success">Tambah Data</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    </section><!-- /Hero Section -->
+
+
+    </div>
+</section>
+
 
 </main>
   

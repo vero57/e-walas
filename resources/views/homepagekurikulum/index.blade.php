@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Kurikulum</title>
+  <title>E Walas SMKN 1 Cibinong - Kurikulum</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -113,35 +113,8 @@
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-      <form action="{{ route('logoutkurikulum') }}" method="POST">
+
+      <form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -198,9 +171,12 @@
         <i class="bi bi-trophy"></i>
       </div>
       <div class="stat-content">
-        <h4>Tahun Akdemik</h4>
-        <p class="mb-0">Kelola Data Tahun Akademik di Sini</p>
-      </div>
+    <h4>Tahun Ajaran</h4>
+    <p class="mb-0">
+        <a href="/tahunajarandata">Lihat data Tahun Ajaran di Sini</a>
+    </p>
+</div>
+
     </div>
   </div>
   <div class="col-lg-3 col-md-6">
@@ -209,8 +185,10 @@
         <i class="bi bi-briefcase"></i>
       </div>
       <div class="stat-content">
-        <h4>Kinerja Walas</h4>
-        <p class="mb-0">Kelola data Kinerja Walas di Sini</p>
+        <h4>Kinerja Guru</h4>
+        <p class="mb-0">
+        <a href="/kinerjaguru">Kelola Data Kinerja Guru di Sini</a>
+    </p>
       </div>
     </div>
   </div>

@@ -25,6 +25,8 @@
   --accent-color: #0d83fd; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --danger-color: #be1f1f; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --hover-color: #ee3d3d; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -153,7 +155,7 @@ h6 {
 
 .header .header-container {
   background: var(--surface-color);
-  border-radius: 50px;
+  border-radius: 100px;
   padding: 5px 25px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
@@ -788,15 +790,36 @@ section,
   border-color: var(--accent-color);
   color: var(--contrast-color);
   padding: 0.75rem 2.5rem;
-  border-radius: 50px;
+  border-radius: 35px; /* Melengkung */
   font-weight: 500;
+  box-shadow: 0 100px 100px rgba(126, 188, 247, 0.1); /* Bayangan */
   transition: all 0.3s ease;
 }
 
 .hero .btn-primary:hover {
   background-color: color-mix(in srgb, var(--accent-color), black 20%);
   border-color: color-mix(in srgb, var(--accent-color), black 20%);
+  box-shadow: 0 100px 100px rgba(241, 133, 133, 0.2); /* Bayangan lebih besar */
 }
+
+.hero .btn-danger {
+  background-color: var(--danger-color); /* Warna dasar tombol */
+  border-color: var(--danger-color); /* Warna border sesuai dengan accent-color */
+  color: var(--contrast-color); /* Warna teks tombol */
+  padding: 0.75rem 2.5rem; /* Padding tombol */
+  border-radius: 35px; /* Sudut tombol melengkung */
+  font-weight: 500; /* Berat font */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Bayangan tombol */
+  transition: all 0.3s ease; /* Transisi halus */
+}
+
+.hero .btn-danger:hover {
+  background-color: color-mix(in srgb, var(--hover-color), black 20%); /* Efek warna lebih muda */
+  border-color: color-mix(in srgb, var(--hover-color), black 20%); /* Warna border ikut berubah */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
+}
+
+
 
 .hero .btn-link {
   color: var(--heading-color);
@@ -880,7 +903,7 @@ section,
 }
 
 .hero .stats-row {
-  position: relative;
+  position: start;
   z-index: 1;
   margin-top: 5rem;
   background-color: var(--surface-color);
@@ -2323,11 +2346,11 @@ section,
 }
 
 .stats-row {
-  min-height: 30vh; /* Agar div ini memenuhi tinggi layar */
-  display: flex; /* Untuk membuat item berada di tengah */
-  justify-content: center; /* Posisi horizontal */
-  align-items: center; /* Posisi vertikal */
+  display: flex; /* Mengaktifkan flexbox */
+  justify-content: flex-start; /* Posisi item secara horizontal di kiri */
+  align-items: flex-start; /* Posisi item secara vertikal di atas */
 }
+
 
 .stat-item {
   padding: 20px; /* Memberikan padding pada kotak */
@@ -2817,5 +2840,7 @@ h2.font-weight-bold {
   font-size: 24px;
   color: #007bff; /* Warna biru untuk ikon */
 }
+
+
 
 }

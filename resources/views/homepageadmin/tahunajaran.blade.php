@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Siswa</title>
+  <title>E Walas SMKN 1 Cibinong- Admin</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -86,6 +86,87 @@
                 transform: translateY(-100%);
             }
         }
+
+        /* Card styling */
+.tengah {
+    text-align: center;
+}
+
+.card {
+  background-color: #fff;
+  width: 1285px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin-right: 20px; /* Menambahkan jarak di kiri */
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.status {
+  background-color: #d1e8ff;
+  color: #2986cc;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dots {
+  color: #666;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.content h2 {
+  font-size: 24px;
+  color: #2f3542;
+}
+
+.content .bold {
+  font-weight: bold;
+}
+
+.teacher-link {
+  display: block;
+  margin: 10px 0;
+  color: #2986cc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.teacher-link:hover {
+  text-decoration: underline;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.info div {
+  flex: 1;
+  text: 'bold';
+}
+
+.title {
+  color: #999;
+  font-size: 14px;
+}
+
+.date {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2f3542;
+}
     </style>
 </head>
 
@@ -107,16 +188,21 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
+        <ul>
+        <li><a href="/tahunajaran" class="active">Beranda</a></li>
+          <li><a href="/rombel">Rombel</a></li>
+          <li><a href="/datamapel">Mata Pelajaran</a></li>
+        </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutsiswa') }}" method="POST">
+      <form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -134,27 +220,24 @@
 
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            
+             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
               <div class="company-badge mb-4">
                 <i class="bi bi-gear-fill me-2"></i>
                     Aman, Tertib, Unggul, Religius
-              </div>
+              </div> 
 
               <h1 class="mb-4">
-               Selamat datang Siswa <br>
+               Kelola Data Tahun Akademik <br>
                 <span class="accent-text">SMK Negeri 1 Cibinong</span>
               </h1>
 
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
+              <!-- <div class="hero-buttons">
                 <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
-                </a>
-            </div>
+                </a> 
+            </div> -->
             </div>
           </div>
 
@@ -165,35 +248,40 @@
             </div>
           </div>
         </div>
-
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Biodata Diri</h4>
-        <p class="mb-0">
-           <a href="/datadiri">Kelola Data Diri Disini</a>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Catatan Kasus</h4>
-        <p class="mb-0">Kelola data Catatan Kasus di Sini</p>
-      </div>
+        <div class="row stats-row gy-7 mt-9 justify-content-start align-items-start" data-aos="fade-up" data-aos-delay="500">
+    <div class="col-lg-4 col-md-8">
+        <br>
+        <h1 class="tengah">
+            Tahun Akademik Aktif <br>
+        </h1>
+        <br>
+    <!-- <div class="card">
+    <div class="header">
+      <button class="status">Aktif</button>
+    <hr> -->
+</div>
+<!-- <a href="/rombel" class="content">
+      <h2>2025 / 2026 - <span class="bold">Genap</span></h2>
+      <a href="#" class="teacher-link">Sugiyo S.Pd M.Pd - 197101162002121004</a>
+      <div class="info">
+        <div>
+          <p class="title">Tanggal Awal</p>
+          <p class="date">Sen, 15 Januari 2025</p>
+        </div>
+        <div>
+          <p class="title">Tanggal Akhir</p>
+          <p class="date">Sen, 30 Jun 2025</p>
+        </div>
+        <div>
+          <p class="title">Pembagian Rapor PTS</p>
+          <p class="date">Rab, 16 Okt 2024</p>
+        </div>
+      </div> -->
     </div>
   </div>
 </div>
-
-      </div>
+    </div>
+</div>
 
     </section><!-- /Hero Section -->
 
