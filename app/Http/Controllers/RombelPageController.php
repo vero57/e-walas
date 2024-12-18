@@ -13,7 +13,7 @@ class RombelPageController extends Controller
     public function index()
     {
         return view('homepageadmin.rombeldata.index', [
-            'rombels' => DB::table('rombels')->get()
+           'vwrombels' => DB::table('vwrombels')->get() 
         ]);
     }
 

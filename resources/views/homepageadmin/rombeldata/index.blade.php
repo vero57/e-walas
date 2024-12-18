@@ -178,12 +178,13 @@
             <th>Kompetensi</th>
             <th>Nama Kelas</th>
             <th>Wali Kelas</th>
+            <th>No WhatsApp</th>
             <th>Informasi</th>
             <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($rombels as $idx => $data)
+        @foreach ($vwrombels as $idx => $data)
             <tr>
                 <td>
                     <div class="d-flex px-2 py-1">
@@ -192,8 +193,9 @@
                 </td>
                 <td>{{ $data->tingkat }}</td>
                 <td>{{ $data->kompetensi }}</td>
-                <td>{{ $data->kode }}</td>
-                <td>{{ $data->walas_id }}</td> <!-- This can be updated to show name if needed -->
+                <td>{{ $data->nama_kelas }}</td>
+                <td>{{ $data->nama }}</td>
+                <td>{{ $data->no_wa }}</td> <!-- This can be updated to show name if needed -->
                 <td>
                     <!-- Aksi -->
                     <div class="d-inline-flex gap-2">
