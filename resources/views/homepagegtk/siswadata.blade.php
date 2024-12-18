@@ -156,11 +156,11 @@
                     </button>
 
                     <!-- Search Box -->
-                    <div class="searchBox">
-                        <input class="searchInput" type="text" name="" placeholder="  Cari Siswa">
-                        <button class="searchButton" href="#">
-                        </button>
-                    </div>
+                <div class="searchBox">
+                    <input class="searchInput" type="text" placeholder="  Cari Siswa">
+                    <button class="searchButton" href="#">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
             </div>
         </div>
