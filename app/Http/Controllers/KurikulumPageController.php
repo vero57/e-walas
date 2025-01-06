@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Kurikulum;
+use App\Imports\KurikulumImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KurikulumPageController extends Controller
 {
@@ -11,7 +15,19 @@ class KurikulumPageController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.kurikulumdata.index');
+        $kurikulum = Kurikulum::all();
+        return view('homepageadmin.kurikulumdata.index', compact('kurikulum'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new KurikulumImport, $request->file('file'));
+    return redirect('/kurikulum');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_kurikulum.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
     }
 
     /**

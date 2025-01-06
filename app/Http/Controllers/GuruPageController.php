@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Guru;
+use App\Imports\GuruImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuruPageController extends Controller
 {
@@ -11,7 +15,19 @@ class GuruPageController extends Controller
      */
     public function index()
     {
-        return view ('homepageadmin.gurudata.index');
+        $guru = Guru::all();
+        return view ('homepageadmin.gurudata.index', compact('guru'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new GuruImport, $request->file('file'));
+    return redirect('/guru');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_guru.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
     }
 
     /**

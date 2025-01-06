@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('no_wa',15);
             $table->string('password',255);
             $table->string('image_url',255)->nullable();
+            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
         });
     }

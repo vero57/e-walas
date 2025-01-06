@@ -14,6 +14,8 @@ class Siswa extends Model
         'jenis_kelamin',
         'no_wa',
         'password',
-        'image_url'
+        'image_url',
+        'status'
     ];
+    public $timestamps = false;
 }

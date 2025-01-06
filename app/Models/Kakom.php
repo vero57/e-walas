@@ -15,5 +15,5 @@ class Kakom extends Model
         'kompetensi',
         'image_url'
     ];
-    
+    public $timestamps = false;
 }

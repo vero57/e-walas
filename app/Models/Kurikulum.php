@@ -15,5 +15,5 @@ class Kurikulum extends Model
         'nip',
         'image_url'
     ];
-    
+    public $timestamps = false;
 }

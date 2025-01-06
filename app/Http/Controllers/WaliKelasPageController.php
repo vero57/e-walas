@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Walas;
+use App\Imports\WalasImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WaliKelasPageController extends Controller
 {
@@ -11,9 +15,21 @@ class WaliKelasPageController extends Controller
      */
     public function index()
     {
-        return view ("homepageadmin.walikelasdata.index");
+        $walas = Walas::all();
+        return view ("homepageadmin.walikelasdata.index", compact('walas'));
     }
 
+    public function import(Request $request){
+        //dd ($request->file('file'));
+        Excel::import(new WalasImport, $request->file('file'));
+    return redirect('/walas');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_walas.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
+    }
     /**
      * Show the form for creating a new resource.
      */

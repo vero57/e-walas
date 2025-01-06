@@ -13,7 +13,7 @@ class KepsekRombelController extends Controller
     public function index()
     {
         return view('homepagekepsek.rombel.index', [
-            'rombels' => DB::table('rombels')->get()
+            'vwrombels' => DB::table('vwrombels')->get()
         ]);
         
     }

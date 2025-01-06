@@ -165,51 +165,83 @@
             </div>
         </div>
         
-        <!-- Jumlah Total GTK -->
+        <!-- Jumlah Total Siswa -->
         <div class="text-end mb-4">
-            <span class="text-muted">Jumlah Total: <strong>0 Siswa</strong></span>
-        </div>
+    <span class="text-muted">
+        Jumlah Total: <strong>{{ $siswa->count() }} Siswa</strong>
+    </span>
+</div>
 
-        <div class="table-container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Foto</th>
-                        <th>WhatsApp</th>
-                        <th>Informasi</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data Siswa Akan Tampil Di Sini -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Jenis Kelamin</th>
+                <th>WhatsApp</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($siswa as $data)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $data->siswa_nama }}</td>
+                    <td>{{ $data->nama_kelas }}</td>
+                    <td>{{ $data->jenis_kelamin }}</td>
+                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
+                    <td>{{ $data->status }}</td>
+                    <td>
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ route('siswadata.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                        <form action="{{ route('siswadata.destroy', $data->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </div>
+                </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada data siswa.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 
 <!-- Modal Unggah Data -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Siswa</h5>
+                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Siswa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <!-- Tombol Download Template -->
+                <div class="mb-3">
+                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                </div>
+
+                <!-- Form Unggah Data -->
+                <form action="/siswa-import" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
+                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Unggah</button>
+                <button type="submit" class="btn btn-primary">Unggah</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

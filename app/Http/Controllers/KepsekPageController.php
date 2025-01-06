@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Kepsek;
+use App\Imports\KepsekImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KepsekPageController extends Controller
 {
@@ -11,7 +15,19 @@ class KepsekPageController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.kepsek.index');
+        $kepsek = Kepsek::all();
+        return view('homepageadmin.kepsek.index', compact('kepsek'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new KepsekImport, $request->file('file'));
+    return redirect('/kepalasekolah');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_kepsek.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
     }
 
     /**

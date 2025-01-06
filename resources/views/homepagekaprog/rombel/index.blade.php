@@ -218,33 +218,34 @@
         </div>
 
 
-<!-- Table Daftar Kelas -->
-<div class="table-container">
-    <table class="table table-bordered text-center align-middle">
-        <thead class="table-light">
+        <div class="table-container">
+            <table class="table">
+            <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th>Tingkat</th>
+            <th>Kompetensi</th>
+            <th>Nama Kelas</th>
+            <th>Wali Kelas</th>
+            <th>No WhatsApp</th>
+            <th>Informasi</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($vwrombels as $idx => $data)
             <tr>
-                <th scope="col">No</th>
-                <th scope="col">Tingkat</th>
-                <th scope="col">Kompetensi</th>
-                <th scope="col">Nama Kelas</th>
-                <th scope="col">Id Walas</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($rombels as $idx => $data)
-            <tr>
-            <td>
-                    <div class="d-flex px-2 py-1">
-                    {{ $idx + 1 . '. ' }}
-                    </div>
-            </td>
                 <td>
-                {{ $data->tingkat }}
+                    <div class="d-flex px-2 py-1">
+                        {{ $idx + 1 . '. ' }}
+                    </div>
                 </td>
+                <td>{{ $data->tingkat }}</td>
                 <td>{{ $data->kompetensi }}</td>
                 <td>{{ $data->nama_kelas }}</td>
-                <td>{{ $data->walas_id }}</td>
+                <td>{{ $data->nama }}</td>
+                <td>{{ $data->no_wa }}</td> <!-- This can be updated to show name if needed -->
                 <td>
                     <!-- Aksi -->
                     <div class="d-inline-flex gap-2">
@@ -253,11 +254,32 @@
                         </button>
                     </div>
                 </td>
+                <td class="text-center align-middle">
+                    <!-- Tombol Edit -->
+                    <button class="btn rounded-circle shadow-sm" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
+
+                    <!-- Tombol Download -->
+                    <button class="btn rounded-circle shadow-sm mx-1" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
+
+                    <!-- Tombol Delete -->
+                    <button class="btn rounded-circle shadow-sm" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
+                </td>
             </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+        @endforeach
+    </tbody>
+</table>
+
+        </div>
+    </div>
 
 
 </section>

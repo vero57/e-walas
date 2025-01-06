@@ -14,5 +14,5 @@ class Kepsek extends Model
         'password',
         'image_url'
     ];
-    
+    public $timestamps = false;
 }

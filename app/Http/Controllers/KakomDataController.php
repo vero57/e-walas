@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Kakom;
+use App\Imports\KakomImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KakomDataController extends Controller
 {
@@ -11,9 +15,20 @@ class KakomDataController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.kakomdata.index');
+        $kakom = Kakom::all();
+        return view('homepageadmin.kakomdata.index', compact('kakom'));
     }
 
+    public function import(Request $request){
+        Excel::import(new KakomImport, $request->file('file'));
+    return redirect('/kakom');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_kakom.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
+    }
     /**
      * Show the form for creating a new resource.
      */

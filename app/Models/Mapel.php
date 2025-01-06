@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mapel extends Model
 {
@@ -10,4 +11,5 @@ class Mapel extends Model
     protected $fillable = [
         'nama_mapel'
     ];
+    public $timestamps = false;
 }

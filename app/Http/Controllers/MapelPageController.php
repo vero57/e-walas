@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Mapel;
+use App\Imports\MapelImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MapelPageController extends Controller
 {
@@ -11,7 +15,19 @@ class MapelPageController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.mapeldata.index');
+        $mapel = Mapel::all();
+        return view('homepageadmin.mapeldata.index', compact('mapel'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new MapelImport, $request->file('file'));
+    return redirect('/datamapel');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_mapel.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
     }
 
     /**

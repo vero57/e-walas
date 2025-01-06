@@ -72,6 +72,20 @@ Route::resource('tahunajaran', TahunAjaranController::class);
 Route::resource('rombel', RombelPageController::class);
 Route::resource('datamapel', MapelPageController::class);
 
+Route::post('/walas-import', [WaliKelasPageController::class, 'import']);
+Route::get('/walas-download-template', [WaliKelasPageController::class, 'downloadTemplate'])->name('walas.download-template');
+Route::post('/guru-import', [GuruPageController::class, 'import']);
+Route::get('/guru-download-template', [GuruPageController::class, 'downloadTemplate'])->name('guru.download-template');
+Route::post('/kakom-import', [KakomDataController::class, 'import']);
+Route::get('/kakom-download-template', [KakomDataController::class, 'downloadTemplate'])->name('kakom.download-template');
+Route::post('/kurikulum-import', [KurikulumPageController::class, 'import']);
+Route::get('/kurikulum-download-template', [KurikulumPageController::class, 'downloadTemplate'])->name('kurikulum.download-template');
+Route::post('/kepsek-import', [KepsekPageController::class, 'import']);
+Route::get('/kepsek-download-template', [KepsekPageController::class, 'downloadTemplate'])->name('kepsek.download-template');
+Route::post('/mapel-import', [MapelPageController::class, 'import']);
+Route::get('/mapel-download-template', [MapelPageController::class, 'downloadTemplate'])->name('mapel.download-template');
+Route::post('/siswa-import', [DataSiswaWalasController::class, 'import']);
+Route::get('/siswa-download-template', [DataSiswaWalasController::class, 'downloadTemplate'])->name('siswa.download-template');
 
 // Route Halaman Walas
 Route::get('/walaspage', function () {

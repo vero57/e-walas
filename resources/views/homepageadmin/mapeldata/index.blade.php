@@ -167,46 +167,78 @@
             </div>
         </div>
 
-        <div class="table-container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data Kurikulum Akan Tampil Di Sini -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+        <div class="text-end mb-4">
+    <span class="text-muted">
+        Jumlah Total: <strong>{{ $mapel->count() }} Mata Pelajaran</strong>
+    </span>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Mata Pelajaran</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($mapel as $data)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $data->nama_mapel }}</td>
+                    <td>
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ route('datamapel.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                        <form action="{{ route('datamapel.destroy', $data->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </div>
+                </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada data Mata Pelajaran</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 
 <!-- Modal Unggah Data -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Mata Pelajaran</h5>
+                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Mapel</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <!-- Tombol Download Template -->
+                <div class="mb-3">
+                    <a href="{{ route('mapel.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                </div>
+
+                <!-- Form Unggah Data -->
+                <form action="/mapel-import" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
+                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Unggah</button>
+                <button type="submit" class="btn btn-primary">Unggah</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

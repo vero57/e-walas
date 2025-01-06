@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
+use App\Models\Siswa;
+use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class DataSiswaWalasController extends Controller
 {
@@ -11,7 +15,19 @@ class DataSiswaWalasController extends Controller
      */
     public function index()
     {
-        return view ("homepagegtk.siswadata");
+        $siswa = DB::table('vwsiswas')->get();
+        return view ("homepagegtk.siswadata", compact('siswa'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new SiswaImport, $request->file('file'));
+    return redirect('/siswadata');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_siswa.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
     }
 
     /**

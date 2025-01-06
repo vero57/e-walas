@@ -13,7 +13,7 @@ class KakomRombelController extends Controller
     public function index()
     {
         return view('homepagekaprog.rombel.index', [
-            'rombels' => DB::table('rombels')->get()
+            'vwrombels' => DB::table('vwrombels')->get()
         ]);
     }
 
