@@ -175,9 +175,9 @@
         <i class="bi bi-trophy"></i>
       </div>
       <div class="stat-content">
-        <h4>Data Wali Kelas</h4>
+        <h4>Data Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/kepsekwalas">Kelola Data Walas di Sini</a>
+        <a href="/kepsekwalas">Kelola Data Administrasi Walas di Sini</a>
     </p>
       </div>
     </div>
