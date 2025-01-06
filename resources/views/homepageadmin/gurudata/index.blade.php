@@ -24,6 +24,8 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Unicons CSS -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 
 
   <!-- Main CSS File -->
@@ -37,7 +39,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-  <style>
+<style>
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -89,8 +91,188 @@
             }
         }
 
-        
-    </style>
+        /* Style untuk modal */
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+    padding: 20px;
+}
+
+/* Style form dalam 2 kolom */
+.modal-body form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+    gap: 20px;
+}
+
+/* Mengatur elemen yang membentang penuh */
+.modal-body form .mb-3 {
+    grid-column: span 1;
+}
+
+.modal-body form .mb-3:last-child {
+    grid-column: span 2; /* Password dan NIP membentang 2 kolom */
+}
+
+/* Style untuk tombol secara umum */
+.modal-footer {
+    justify-content: flex-start; /* Posisi ke kiri */
+    padding-right: 100px;
+}
+
+.modal-footer button {
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Efek transisi halus */
+}
+
+/* Tombol Tutup */
+.modal-footer .btn-secondary {
+    background-color: #6c757d; /* Warna default */
+    border: none;
+}
+
+/* Hover Tombol Tutup */
+.modal-footer .btn-secondary:hover {
+    background-color: #adb5bd; /* Warna lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+}
+
+/* Tombol Tambah Data */
+.modal-footer .btn-success {
+    background-color: #0d6efd; /* Biru muda */
+    border: none;
+}
+
+/* Hover Tombol Tambah Data */
+.modal-footer .btn-success:hover {
+    background-color: #70b0ff; /* Biru yang lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.4); /* Bayangan biru saat hover */
+}
+
+/* Style input dan select */
+.modal-body input,
+.modal-body select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px;
+}
+
+/* Style untuk file upload */
+.modal-body input[type="file"] {
+    padding: 5px;
+}
+
+.modal-dialog {
+    max-width: 800px; /* Lebar maksimum modal */
+    width: 90%;       /* Lebar modal relatif */
+}
+
+.d-flex-container {
+    display: flex;
+    align-items: center;  /* Menjaga semua elemen dalam container sejajar secara vertikal */
+    gap: 10px;  /* Menambah jarak antar elemen */
+}
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+</style>
+
+<style>
+
+.input-box {
+  position: relative;
+  height: 55px;
+  max-width: 900px;
+  width: 100%;
+  background: #fff;
+  margin: 0 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.input-box i,
+.input-box .button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-box i {
+  left: 20px;
+  font-size: 30px;
+  color: #707070;
+}
+.input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  padding: 0 155px 0 65px;
+  background-color: transparent;
+}
+.input-box .button {
+  right: 25px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  background-color:  #0d83fd;
+  cursor: pointer;
+}
+.input-box .button:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.button {
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol menjadi putih */
+    font-weight: bold; /* Membuat teks menjadi tebal/bold */
+    border: 2px solid #007bff; /* Warna border yang sesuai dengan tombol */
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+    padding: 10px 20px; /* Menambahkan padding agar tombol lebih besar */
+    font-size: 16px; /* Ukuran font lebih besar */
+    cursor: pointer; /* Menampilkan kursor pointer ketika dihover */
+    transition: background-color 0.3s ease; /* Efek transisi pada background saat hover */
+}
+
+/* Efek hover */
+.button:hover {
+    background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
+    border-color: #0056b3; /* Mengubah warna border saat hover */
+}
+
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .input-box {
+    height: 66px;
+    margin: 0 8px;
+  }
+  .input-box i {
+    left: 12px;
+    font-size: 25px;
+  }
+  .input-box input {
+    padding: 0 112px 0 50px;
+  }
+  .input-box .button {
+    right: 12px;
+    font-size: 14px;
+    padding: 8px 18px;
+  }
+}
+
+</style>
+
 </head>
 
 <body class="index-page">
@@ -160,57 +342,64 @@
                         <i class="bi bi-plus"></i> Tambah
                     </button>
 
-                    <!-- Search Box -->
-                    <div class="searchBox">
-                        <input class="searchInput" type="text" name="" placeholder="  Cari Guru">
-                        <button class="searchButton" href="#">
-                        </button>
-                    </div>
+                    <form action="{{ url('guru_search') }}" method="GET">
+                        <div class="input-box">
+                            <i class="uil uil-search"></i>
+                                <input type="text" name="keyword" placeholder="Cari Guru..." value="{{ old('keyword', $keyword ?? '') }}" required />
+                                <button class="button" type="submit">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
         
-        <!-- Jumlah Total GTK -->
-<div class="text-end mb-4">
-    <span class="text-muted">
-        Jumlah Total: <strong>{{ $guru->count() }} Guru</strong>
-    </span>
-</div>
+       <!-- Jumlah Total GTK -->
+       <div class="text-end mb-4">
+            <span class="text-muted">Jumlah Total: <strong>75 Guru</strong></span>
+        </div>
 
-<div class="table-container">
-    <table class="table">
-        <thead>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Guru</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($gurudata as $idx => $data)
             <tr>
-                <th>No</th>
-                <th>Nama Guru</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($guru as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('guru.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('guru.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        {{ $idx + 1 . '. ' }}
                     </div>
                 </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data guru.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+                <td>{{ $data->nama }}</td>
+                <td class="text-center align-middle">
+                   <!-- Tombol Edit -->
+                   <a href="{{ route('guru.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
+                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                    </a>
+                    <!-- Tombol Download -->
+                    <button class="btn rounded-circle shadow-sm mx-1" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
 
+                    <!-- Tombol Delete -->
+                    <a href="/hapusguru/{{$data->id}}" class="btn rounded-circle shadow-sm" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
 <!-- Modal Unggah Data -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -253,37 +442,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="teacherName" class="form-label">Nama Guru</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Guru">
+                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Guru" name="nama" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="teacherPhoto" class="form-label">Foto Guru</label>
-                        <input type="file" class="form-control" id="teacherPhoto">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="text" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherInfo" class="form-label">Informasi</label>
-                        <textarea class="form-control" id="teacherInfo" rows="3" placeholder="Masukkan informasi tambahan"></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Tambah</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-success">Tambah Data</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-    </div>
-</section>
 
 
 </main>

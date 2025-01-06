@@ -62,15 +62,50 @@ Route::get('/adminpage', function () {
 
 })->name('homepageadmin.index');
 Route::resource('wargasekolah', WargaSekolahController::class);
+
+// CRUD WALAS
 Route::resource('walas', WaliKelasPageController::class);
+Route::get('/hapuswalas/{id}', [WaliKelasPageController::class, 'hapuswalas'])->name('hapuswalas');
+Route::get('/walas/hapuswalas/{id}', [WaliKelasPageController::class, 'hapuswalas']);
+Route::put('/walas/{id}', [WaliKelasPageController::class, 'update'])->name('walas.update');
+Route::get('/walas/{id}/edit', [WaliKelasPageController::class, 'edit'])->name('walas.edit');
+Route::get ('/walas_search', [WaliKelasPageController::class,'walas_search']);
+
+// CRUD KAKOM
 Route::resource('kakom', KakomDataController::class);
+Route::get('/hapuskakom/{id}', [KakomDataController::class, 'hapuskakom'])->name('hapuskakom');
+Route::get('/kakom/hapuskakom/{id}', [KakomDataController::class, 'hapuskakom']);
+Route::put('/kakom/{id}', [KakomDataController::class, 'update'])->name('kakom.update');
+Route::get('/kakom/{id}/edit', [KakomDataController::class, 'edit'])->name('kakom.edit');
+Route::get ('/kakom_search', [KakomDataController::class,'kakom_search']);
+
+// CRUD KURIKULUM
 Route::resource('kurikulum', KurikulumPageController::class);
+Route::get('/hapuskurikulum/{id}', [KurikulumPageController::class, 'hapuskurikulum'])->name('hapuskurikulum');
+Route::get('/kurikulum/hapuskurikulum/{id}', [KurikulumPageController::class, 'hapuskurikulum']);
+Route::put('/kurikulum/{id}', [KurikulumPageController::class, 'update'])->name('kurikulum.update');
+Route::get('/kurikulum/{id}/edit', [KurikulumPageController::class, 'edit'])->name('kurikulum.edit');
+Route::get ('/kurikulum_search', [KurikulumPageController::class,'kurikulum_search']);
+
+// CRUD KEPSEK
 Route::resource('kepalasekolah', KepsekPageController::class);
+Route::get('/hapuskepsek/{id}', [KepsekPageController::class, 'hapuskepsek'])->name('hapuskepsek');
+Route::get('/kepsek/hapuskepsek/{id}', [KepsekPageController::class, 'hapuskepsek']);
+Route::put('/kepsek/{id}', [KepsekPageController::class, 'update'])->name('kepsek.update');
+Route::get('/kepsek/{id}/edit', [KepsekPageController::class, 'edit'])->name('kepsek.edit');
+Route::post('/kepsek/rombel/store', [KepsekPageController::class, 'store'])->name('kepsek.store');
+Route::get ('/kepsek_search', [KepsekPageController::class,'kepsek_search']);
+
+// CRUD GURU
 Route::resource('guru', GuruPageController::class);
+Route::get('/hapusguru/{id}', [GuruPageController::class, 'hapusguru'])->name('hapusguru');
+Route::get('/guru/hapusguru/{id}', [GuruPageController::class, 'hapusguru']);
+Route::put('/guru/{id}', [GuruPageController::class, 'update'])->name('guru.update');
+Route::get('/guru/{id}/edit', [GuruPageController::class, 'edit'])->name('guru.edit');
+Route::get ('/guru_search', [GuruPageController::class,'guru_search']);
+
 
 Route::resource('tahunajaran', TahunAjaranController::class);
-Route::resource('rombel', RombelPageController::class);
-Route::resource('datamapel', MapelPageController::class);
 
 Route::post('/walas-import', [WaliKelasPageController::class, 'import']);
 Route::get('/walas-download-template', [WaliKelasPageController::class, 'downloadTemplate'])->name('walas.download-template');
@@ -86,6 +121,24 @@ Route::post('/mapel-import', [MapelPageController::class, 'import']);
 Route::get('/mapel-download-template', [MapelPageController::class, 'downloadTemplate'])->name('mapel.download-template');
 Route::post('/siswa-import', [DataSiswaWalasController::class, 'import']);
 Route::get('/siswa-download-template', [DataSiswaWalasController::class, 'downloadTemplate'])->name('siswa.download-template');
+// CRUD ROMBEL
+Route::resource('rombel', RombelPageController::class); // Ini sudah mencakup semua route CRUD, termasuk edit
+Route::post('/rombel/store', [RombelPageController::class, 'store'])->name('rombels.store');
+Route::put('/rombels/{id}', [RombelPageController::class, 'update'])->name('rombels.update');
+Route::get('/rombels/{id}/edit', [RombelPageController::class, 'edit'])->name('rombels.edit'); // Pastikan edit menggunakan GET
+Route::get('/hapusrombel/{id}', [RombelPageController::class, 'hapusrombel'])->name('hapusrombel');
+Route::get('/rombel/hapusrombel/{id}', [RombelPageController::class, 'hapusrombel']);
+Route::get ('/rombel_search', [RombelPageController::class,'rombel_search']);
+
+
+// CRUD MAPEL
+Route::resource('datamapel', MapelPageController::class);
+Route::get('/hapusmapel/{id}', [MapelPageController::class, 'hapusmapel'])->name('hapusmapel');
+Route::get('/mapel/hapusmapel/{id}', [MapelPageController::class, 'hapusmapel']);
+Route::put('/mapel/{id}', [MapelPageController::class, 'update'])->name('mapel.update');
+Route::get('/mapel/{id}/edit', [MapelPageController::class, 'edit'])->name('mapel.edit');
+Route::post('/mapel/tambah/store', [MapelPageController::class, 'store'])->name('mapel.store');
+Route::get ('/mapel_search', [MapelPageController::class,'mapel_search']);
 
 // Route Halaman Walas
 Route::get('/walaspage', function () {
@@ -96,8 +149,6 @@ Route::get('/walaspage', function () {
 })->name('homepagegtk.index');
 Route::resource('siswadata', DataSiswaWalasController::class);
 Route::resource('adminwalas', AdministrasiWalasController::class);
-
-
 
 // Route Halaman Kepsek
 Route::get('/kepsekpage', function () {

@@ -25,6 +25,9 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+  <!-- Unicons CSS -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -89,8 +92,187 @@
             }
         }
 
-        
-    </style>
+        /* Style untuk modal */
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+    padding: 20px;
+}
+
+/* Style form dalam 2 kolom */
+.modal-body form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+    gap: 20px;
+}
+
+/* Mengatur elemen yang membentang penuh */
+.modal-body form .mb-3 {
+    grid-column: span 1;
+}
+
+.modal-body form .mb-3:last-child {
+    grid-column: span 2; /* Password dan NIP membentang 2 kolom */
+}
+
+/* Style untuk tombol secara umum */
+.modal-footer {
+    justify-content: flex-start; /* Posisi ke kiri */
+    padding-right: 100px;
+}
+
+.modal-footer button {
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Efek transisi halus */
+}
+
+/* Tombol Tutup */
+.modal-footer .btn-secondary {
+    background-color: #6c757d; /* Warna default */
+    border: none;
+}
+
+/* Hover Tombol Tutup */
+.modal-footer .btn-secondary:hover {
+    background-color: #adb5bd; /* Warna lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+}
+
+/* Tombol Tambah Data */
+.modal-footer .btn-success {
+    background-color: #0d6efd; /* Biru muda */
+    border: none;
+}
+
+/* Hover Tombol Tambah Data */
+.modal-footer .btn-success:hover {
+    background-color: #70b0ff; /* Biru yang lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.4); /* Bayangan biru saat hover */
+}
+
+/* Style input dan select */
+.modal-body input,
+.modal-body select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px;
+}
+
+/* Style untuk file upload */
+.modal-body input[type="file"] {
+    padding: 5px;
+}
+
+.modal-dialog {
+    max-width: 800px; /* Lebar maksimum modal */
+    width: 90%;       /* Lebar modal relatif */
+}
+
+.d-flex-container {
+    display: flex;
+    align-items: center;  /* Menjaga semua elemen dalam container sejajar secara vertikal */
+    gap: 10px;  /* Menambah jarak antar elemen */
+}
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+</style>
+
+<style>
+
+.input-box {
+  position: relative;
+  height: 55px;
+  max-width: 900px;
+  width: 100%;
+  background: #fff;
+  margin: 0 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.input-box i,
+.input-box .button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-box i {
+  left: 20px;
+  font-size: 30px;
+  color: #707070;
+}
+.input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  padding: 0 155px 0 65px;
+  background-color: transparent;
+}
+.input-box .button {
+  right: 25px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  background-color:  #0d83fd;
+  cursor: pointer;
+}
+.input-box .button:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.button {
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol menjadi putih */
+    font-weight: bold; /* Membuat teks menjadi tebal/bold */
+    border: 2px solid #007bff; /* Warna border yang sesuai dengan tombol */
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+    padding: 10px 20px; /* Menambahkan padding agar tombol lebih besar */
+    font-size: 16px; /* Ukuran font lebih besar */
+    cursor: pointer; /* Menampilkan kursor pointer ketika dihover */
+    transition: background-color 0.3s ease; /* Efek transisi pada background saat hover */
+}
+
+/* Efek hover */
+.button:hover {
+    background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
+    border-color: #0056b3; /* Mengubah warna border saat hover */
+}
+
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .input-box {
+    height: 66px;
+    margin: 0 8px;
+  }
+  .input-box i {
+    left: 12px;
+    font-size: 25px;
+  }
+  .input-box input {
+    padding: 0 112px 0 50px;
+  }
+  .input-box .button {
+    right: 12px;
+    font-size: 14px;
+    padding: 8px 18px;
+  }
+}
+
+</style>
 </head>
 
 <body class="index-page">
@@ -158,12 +340,13 @@
                         <i class="bi bi-plus"></i> Tambah
                     </button>
 
-                    <!-- Search Box -->
-                    <div class="searchBox">
-                        <input class="searchInput" type="text" name="" placeholder="  Cari Rombel">
-                        <button class="searchButton" href="#">
-                        </button>
-                    </div>
+                    <form action="{{ url('rombel_search') }}" method="GET">
+                        <div class="input-box">
+                            <i class="uil uil-search"></i>
+                                <input type="text" name="keyword" placeholder="Cari Rombel..." value="{{ old('keyword', $keyword ?? '') }}" required />
+                                <button class="button" type="submit">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -194,7 +377,7 @@
                 <td>{{ $data->tingkat }}</td>
                 <td>{{ $data->kompetensi }}</td>
                 <td>{{ $data->nama_kelas }}</td>
-                <td>{{ $data->nama }}</td>
+                <td>{{ $data->walas_nama }}</td>
                 <td>{{ $data->no_wa }}</td> <!-- This can be updated to show name if needed -->
                 <td>
                     <!-- Aksi -->
@@ -206,11 +389,9 @@
                 </td>
                 <td class="text-center align-middle">
                     <!-- Tombol Edit -->
-                    <button class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                    <a href="{{ route('rombels.edit', $data->rombel_id) }}" class="btn rounded-circle shadow-sm edit-btn">
                         <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
+                    </a>
                     <!-- Tombol Download -->
                     <button class="btn rounded-circle shadow-sm mx-1" 
                             style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
@@ -218,10 +399,10 @@
                     </button>
 
                     <!-- Tombol Delete -->
-                    <button class="btn rounded-circle shadow-sm" 
+                    <a href="/hapusrombel/{{$data->rombel_id}}" class="btn rounded-circle shadow-sm" 
                             style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
                         <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
+                    </a>
                 </td>
             </tr>
         @endforeach
@@ -231,6 +412,7 @@
         </div>
     </div>
 </section>
+
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -240,10 +422,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('rombels.store') }}">
+                    @csrf <!-- Token keamanan -->
                     <div class="mb-3">
                         <label for="gradeLevel" class="form-label">Pilih Tingkat</label>
-                        <select class="form-select" id="gradeLevel" aria-label="Pilih Tingkat">
+                        <select class="form-select" id="gradeLevel" aria-label="Pilih Tingkat" name="tingkat" required>
                             <option selected disabled>Pilih Tingkat</option>
                             <option value="X">X</option>
                             <option value="XI">XI</option>
@@ -252,8 +435,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                    <label for="jurusan" class="form-label">Pilih Jurusan</label>
-                        <select class="form-select" id="jurusan" aria-label="Pilih Jurusan">
+                        <label for="jurusan" class="form-label">Pilih Jurusan</label>
+                        <select class="form-select" id="jurusan" aria-label="Pilih Jurusan" name="kompetensi" required>
                             <option selected disabled>Pilih Jurusan</option>
                             <option value="SIJA">SIJA</option>
                             <option value="TKJ">TKJ</option>
@@ -269,29 +452,27 @@
                     </div>
                     <div class="mb-3">
                         <label for="kode" class="form-label">Kode</label>
-                        <input type="text" class="form-control" id="kode" placeholder="Contoh : Kode 1 Untuk X JURUSAN 1">
+                        <input type="text" class="form-control" id="kode" placeholder="Contoh : Kode 1 Untuk X JURUSAN 1" name="nama_kelas" required>
                     </div>
                     <div class="mb-3">
-                    <label for="walas" class="form-label">Wali Kelas</label>
-                        <select class="form-select" id="walas" aria-label="Pilih Wali Kelas">
+                        <label for="walas" class="form-label">Wali Kelas</label>
+                        <select class="form-select" id="walas" name="walas_id" required>
                             <option selected disabled>Pilih Wali Kelas</option>
+                            @foreach ($walas as $wali)
+                                <option value="{{ $wali->id }}">{{ $wali->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Tambah</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-success">Tambah Data</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-    </div>
 </section>
-
 
 </main>
   
@@ -347,6 +528,29 @@
                 }, 2000); // Tunda selama 2 detik sebelum animasi
             }
         };
+
+        document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-btn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Mengambil data dari atribut data-*
+            const id = button.getAttribute('data-id');
+            const tingkat = button.getAttribute('data-tingkat');
+            const kompetensi = button.getAttribute('data-kompetensi');
+            const nama_kelas = button.getAttribute('data-nama_kelas');
+            const walas_id = button.getAttribute('data-walas_id');
+
+            // Mengisi data ke dalam modal
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-tingkat').value = tingkat;
+            document.getElementById('edit-kompetensi').value = kompetensi;
+            document.getElementById('edit-nama_kelas').value = nama_kelas;
+            document.getElementById('edit-walas_id').value = walas_id;
+        });
+    });
+});
+
     </script>
 
 </body>

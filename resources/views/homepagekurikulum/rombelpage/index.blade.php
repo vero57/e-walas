@@ -208,12 +208,11 @@
         </li>
     </ul>
 </div>
-
-
                     <!-- Search Box -->
                     <div class="searchBox">
                         <input class="searchInput" type="text" name="" placeholder="  Cari Rombel">
-                        <button class="searchButton" href="#">
+                        <button class="searchButton">
+                            <i class="bi bi-search"></i>
                         </button>
                     </div>
                 </div>
@@ -225,85 +224,60 @@
             <table class="table">
     <thead>
         <tr>
-            <th>No</th>
-            <th>Kelas</th>
+            <th scope="col">No</th>
+            <th>Tingkat</th>
             <th>Kompetensi</th>
+            <th>Nama Kelas</th>
             <th>Wali Kelas</th>
-            <th>WhatsApp</th>
+            <th>No WhatsApp</th>
             <th>Informasi</th>
             <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Baris 1 -->
-        <tr>
-            <td>1</td>
-            <td>X</td>
-            <td>Rekayasa Perangkat Lunak</td>
-            <td>Asma</td>
-            <td>081234567890</td>
-            <td class="text-center align-middle">
-                <button class="btn btn-primary rounded shadow" 
-                        style="background-color: blue; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">
-                    Detail
-                </button>
-            </td>
-            <td class="text-center align-middle">
-                <!-- Tombol Edit -->
-                <button class="btn rounded-circle shadow-sm" 
-                        style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                    <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
-                </button>
+        @foreach ($vwrombels as $idx => $data)
+            <tr>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        {{ $idx + 1 . '. ' }}
+                    </div>
+                </td>
+                <td>{{ $data->tingkat }}</td>
+                <td>{{ $data->kompetensi }}</td>
+                <td>{{ $data->nama_kelas }}</td>
+                <td>{{ $data->nama }}</td>
+                <td>{{ $data->no_wa }}</td> <!-- This can be updated to show name if needed -->
+                <td>
+                    <!-- Aksi -->
+                    <div class="d-inline-flex gap-2">
+                        <button class="btn btn-sm btn-info text-white">
+                            <i class="bi bi-info-circle text-white"></i> Detail Kelas
+                        </button>
+                    </div>
+                </td>
+                <td class="text-center align-middle">
+                    <!-- Tombol Edit -->
+                    <button class="btn rounded-circle shadow-sm" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
 
-                <!-- Tombol Download -->
-                <button class="btn rounded-circle shadow-sm mx-1" 
-                        style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                    <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                </button>
+                    <!-- Tombol Download -->
+                    <button class="btn rounded-circle shadow-sm mx-1" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
 
-                <!-- Tombol Delete -->
-                <button class="btn rounded-circle shadow-sm" 
-                        style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                    <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
-                </button>
-            </td>
-        </tr>
-        <!-- Baris 2 -->
-        <tr>
-            <td>2</td>
-            <td>XI</td>
-            <td>Teknik Jaringan Komputer</td>
-            <td>Hana</td>
-            <td>082345678901</td>
-            <td class="text-center align-middle">
-                <button class="btn btn-primary rounded shadow" 
-                        style="background-color: blue; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">
-                    Detail
-                </button>
-            </td>
-            <td class="text-center align-middle">
-                <!-- Tombol Edit -->
-                <button class="btn rounded-circle shadow-sm" 
-                        style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                    <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
-                </button>
-
-                <!-- Tombol Download -->
-                <button class="btn rounded-circle shadow-sm mx-1" 
-                        style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                    <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                </button>
-
-                <!-- Tombol Delete -->
-                <button class="btn rounded-circle shadow-sm" 
-                        style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                    <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
-                </button>
-            </td>
-        </tr>
+                    <!-- Tombol Delete -->
+                    <button class="btn rounded-circle shadow-sm" 
+                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    </button>
+                </td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
-
         </div>
     </div>
 </section>

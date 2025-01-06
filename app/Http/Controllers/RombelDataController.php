@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RombelDataController extends Controller
 {
@@ -11,7 +12,9 @@ class RombelDataController extends Controller
      */
     public function index()
     {
-        return view('homepagekurikulum.rombelpage.index');
+        return view('homepagekurikulum.rombelpage.index', [
+            'vwrombels' => DB::table('vwrombels')->get() 
+         ]);
     }
 
     /**
