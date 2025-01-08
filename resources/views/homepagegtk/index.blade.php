@@ -104,27 +104,42 @@
         </div>
     @endif
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+ <header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">E - Walas</h1>
-      </a>
+    <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <!-- <img src="assets/img/logo.png" alt=""> -->
+      <h1 class="sitename">E - Walas</h1>
+    </a>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
+    <nav id="navmenu" class="navmenu">
+      <ul>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+
+   <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+<div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+    <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+        @csrf
+        <button type="submit" class="btn-getstarted">Logout</button>
+    </form>
+</div>
 
     </div>
-  </header>
+
+  </div>
+</header>
+
 
   <main class="main">
 
@@ -173,12 +188,15 @@
       <div class="stat-icon">
         <i class="bi bi-trophy"></i>
       </div>
-      <div class="stat-content">
+    <div class="stat-content">
         <h4>Siswa</h4>
         <p class="mb-0">
-        <a href="/siswadata">Kelola Data Siswa di Sini</a>
-    </p>
-      </div>
+            <a href="/siswadata">
+                Kelola Data Siswa di Sini
+            </a>
+        </p>
+    </div>
+
     </div>
   </div>
   <div class="col-lg-3 col-md-6">

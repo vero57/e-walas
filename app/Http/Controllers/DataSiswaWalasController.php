@@ -7,6 +7,9 @@ use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use App\Models\Rombel;
+use App\Models\Walas;
+use Illuminate\Support\Facades\Auth;
 
 class DataSiswaWalasController extends Controller
 {
@@ -14,10 +17,43 @@ class DataSiswaWalasController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $siswa = DB::table('vwsiswas')->get();
-        return view ("homepagegtk.siswadata", compact('siswa'));
+{
+     // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+     $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+     // Periksa apakah session 'walas_id' ada
+     if (!session()->has('walas_id')) {
+         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+     }
+
+     // Ambil data walas berdasarkan 'walas_id' yang ada di session
+     $walas = Walas::find(session('walas_id'));
+     
+     // Periksa apakah data walas ditemukan
+     if (!$walas) {
+         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+     }
+
+    // Ambil data rombel yang dimiliki walas yang sedang login
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
     }
+
+    // Ambil data siswa berdasarkan rombel yang terkait dengan walas
+    $siswa = DB::table('vwsiswas')
+                ->where('id', $rombel->id)  // Pastikan kolom yang digunakan sesuai dengan relasi rombel
+                ->get();
+
+    // Ambil semua data rombels
+    $rombels = Rombel::all();
+
+    // Kirim data siswa, rombels, dan walas ke view
+    return view("homepagegtk.siswadata", compact('siswa', 'rombels', 'rombel', 'walas'));
+}
+
 
     public function import(Request $request){
         Excel::import(new SiswaImport, $request->file('file'));
@@ -43,7 +79,35 @@ class DataSiswaWalasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'rombels_id' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_wa' => 'required|numeric',
+            'image_url' => 'nullable|image|max:5000',
+            'password' => 'required|string|min:2',
+            'status' => 'required',
+        ]);
+    
+        // Proses penyimpanan file gambar di folder walasfoto/Photos
+        $imagePath = $request->file('image_url')->store('siswafoto/Photos', 'public'); // Simpan gambar di folder yang diinginkan
+    
+        // Simpan data ke database, termasuk path gambar
+        Siswa::create([
+            'nama' => $request->nama,
+            'rombels_id' => $request->rombels_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'no_wa' => $request->no_wa,
+            'password' => ($request->password),
+            'status' => $request->status,
+            'image_url' => $imagePath, // Simpan path gambar di database
+        ]);
+    
+        /// Redirect kembali dengan data terbaru
+        return redirect()->back()->with([
+            'success' => 'Data Siswa berhasil ditambahkan!',
+        ]);
     }
 
     /**
@@ -57,24 +121,129 @@ class DataSiswaWalasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit($id)
+{
+   // Ambil data produk berdasarkan ID
+    $siswa = DB::table('vwsiswas')->where('siswa_id', $id)->first();
+    $rombels = Rombel::all(); // Ambil semua data rombel
+
+    // Kirim data ke view edit
+    return view('homepagegtk.editsiswa', compact('siswa', 'rombels'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'rombels_id' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_wa' => 'required|numeric',
+            'image_url' => 'nullable|image|max:5000',
+            'password' => 'required|string|min:2',
+            'status' => 'required',
+        ]);
+    
+        $siswa = Siswa::findOrFail($id); // Mengambil data dari tabel asli
 
+        // Simpan foto jika ada file baru yang diunggah
+        if ($request->hasFile('image_url')) {
+            // Hapus foto lama jika ada
+            if ($siswa->image_url) {
+                Storage::delete('public/' . $siswa->image_url);
+            }
+            
+            // Simpan foto baru
+            $imagePath = $request->file('image_url')->store('siswafoto/Photos', 'public');
+            $siswa->image_url = $imagePath; // Update dengan path foto yang baru
+        }
+    
+        // Update data Siswa
+        $siswa->nama = $request->nama;
+        $siswa->rombels_id = $request->rombels_id;
+        $siswa->jenis_kelamin = $request->jenis_kelamin;
+        $siswa->no_wa = $request->no_wa;
+        $siswa->status = $request->status;
+    
+        // Update password jika diisi (jika tidak, biarkan yang lama)
+        if ($request->filled('password')) {
+            $siswa->password = ($request->password);
+        }
+    
+        // Simpan perubahan ke database
+        $siswa->save();
+    
+        // Redirect dengan pesan sukses
+        return redirect('/siswadata')->with('success', 'Data siswa Berhasil di Edit');
+    }
+    
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function hapussiswa(string $id)
     {
-        //
+        $siswa = Siswa::find($id);
+        if ($siswa) {
+            $siswa->delete();
+            return redirect('/siswadata')->with('success', 'siswa data Berhasil Dihapus ');
+        }
+        return redirect('/siswadata')->with('error', 'siswa not found!');
     }
+
+    public function siswadata_search(Request $request)
+    {
+        $search_text = $request->keyword;
+        $keywords = explode(' ', $search_text); 
+        $siswaQuery = Siswa::query();
+    
+        // Tambahkan pencarian berdasarkan nama siswa
+        foreach ($keywords as $keyword) {
+            $siswaQuery->where('nama', 'LIKE', '%' . $keyword . '%');
+        }
+    
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $walas = Auth::guard('walas')->user(); // ini akan mendapatkan data walas yang sedang login
+    
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
+    
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walas = Walas::find(session('walas_id'));
+        
+        // Periksa apakah data walas ditemukan
+        if (!$walas) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+    
+        // Ambil data rombel yang dimiliki walas yang sedang login
+        $rombel = Rombel::where('walas_id', $walas->id)->first();
+    
+        // Periksa apakah rombel ditemukan
+        if (!$rombel) {
+            return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+        }
+    
+        // Ambil data siswa berdasarkan rombel yang terkait dengan walas
+        // Pastikan query hanya mengembalikan siswa yang ada di rombel tersebut
+        $siswa = DB::table('vwsiswas')
+                    ->where('id', $rombel->id) // Sesuaikan dengan relasi kolom rombel_id
+                    ->where(function ($query) use ($keywords) {
+                        foreach ($keywords as $keyword) {
+                            $query->where('siswa_nama', 'LIKE', '%' . $keyword . '%');
+                        }
+                    })
+                    ->get();
+    
+        // Ambil data rombel untuk ditampilkan di view (opsional)
+        $rombels = Rombel::all();
+    
+        // Kirim data siswa hasil pencarian dan data lainnya ke view
+        return view('homepagegtk.siswadata', compact( 'walas', 'rombels', 'rombel', 'siswa'));
+    }
+    
 }

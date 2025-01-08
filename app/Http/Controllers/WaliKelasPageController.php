@@ -90,7 +90,7 @@ class WaliKelasPageController extends Controller
     public function edit($id)
     {
         // Ambil data produk berdasarkan ID
-        $walas = Walas::findOrFail($id);
+        $walasdata = Walas::findOrFail($id);
 
         // Kirim data ke view edit
         return view('homepageadmin.walikelasdata.edit', compact('walas'));

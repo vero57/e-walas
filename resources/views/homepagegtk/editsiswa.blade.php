@@ -227,45 +227,76 @@
 
   <div class="container mt-5">
     <div class="form-container">
-    <h3>Form Edit Wali Kelas </h3>
-    <br>
-        <!-- Form Edit Data Wali Kelas -->
-<form action="{{ route('kurikulum.update', $kurikulum->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT') <!-- Menyatakan bahwa ini adalah request PUT untuk update -->
-    <div class="mb-3">
-        <label for="teacherName" class="form-label">Nama Wali Kelas</label>
-        <input type="text" class="form-control" id="teacherName" name="nama" value="{{ old('nama', $kurikulum->nama) }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="teacherPhoto" class="form-label">Foto Kurikulum</label>
-        <input type="file" class="form-control" id="teacherPhoto" name="image_url">
-        @if($kurikulum->image_url)
-            <div class="mt-2">
-                <img src="{{ asset('storage/' . $kurikulum->image_url) }}" alt="Foto Wali Kelas" class="img-thumbnail" style="width: 150px;">
+        <h3>Form Edit Siswa</h3>
+        <br>
+        <form action="{{ route('siswa.update', $siswa->siswa_id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT') <!-- Menyatakan bahwa ini adalah request PUT untuk update -->
+            
+            <!-- Nama Siswa -->
+            <div class="mb-3">
+                <label for="studentName" class="form-label">Nama Siswa</label>
+                <input type="text" class="form-control" id="studentName" name="nama" value="{{ old('nama', $siswa->siswa_nama) }}" required>
             </div>
-        @endif
-    </div>
-    <div class="mb-3">
-        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-        <input type="number" class="form-control" id="teacherWhatsApp" name="no_wa" value="{{ old('no_wa', $kurikulum->no_wa) }}" required>
-    </div>
-    <div class="mb-3">
-        <label for="teacherPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="teacherPassword" placeholder="Masukkan Password (Kosongkan jika tidak ingin diubah)" name="password">
-    </div>
-    <div class="mb-3">
-        <label for="teacherNip" class="form-label">NIP</label>
-        <input type="number" class="form-control" id="teacherNip" name="nip" value="{{ old('nip', $kurikulum->nip) }}" required>
-    </div>
-    <div class="mb-3">
-        <button type="submit" class="btn btn-success">Update Data</button>
-    </div>
-</form>
 
-    </div>
-  </div>
+            <!-- Rombel -->
+            <div class="mb-3">
+                <label for="rombelsId" class="form-label">Rombel</label>
+                <select class="form-select" id="rombelsId" name="rombels_id" required>
+                    <option selected disabled>Pilih Rombel</option>
+                    @foreach ($rombels as $rombel)
+                        <option value="{{ $rombel->id }}" {{ $siswa->id == $rombel->id ? 'selected' : '' }}>{{ $rombel->nama_kelas }}</option>
+                    @endforeach
+                </select>
+            </div>
 
+            <!-- Jenis Kelamin -->
+            <div class="mb-3">
+                <label for="gender" class="form-label">Jenis Kelamin</label>
+                <select class="form-select" id="gender" name="jenis_kelamin" required>
+                    <option value="Laki-laki" {{ $siswa->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                    <option value="Perempuan" {{ $siswa->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                </select>
+            </div>
+
+            <!-- Nomor WhatsApp -->
+            <div class="mb-3">
+                <label for="whatsapp" class="form-label">WhatsApp</label>
+                <input type="number" class="form-control" id="whatsapp" name="no_wa" value="{{ old('no_wa', $siswa->no_wa) }}" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password (Kosongkan jika tidak ingin diubah)">
+            </div>
+
+            <!-- Foto Siswa -->
+            <div class="mb-3">
+                <label for="photo" class="form-label">Foto Siswa</label>
+                <input type="file" class="form-control" id="photo" name="image_url">
+                @if($siswa->image_url)
+                    <div class="mt-2">
+                        <img src="{{ asset('storage/' . $siswa->image_url) }}" alt="Foto Siswa" class="img-thumbnail" style="width: 150px;">
+                    </div>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="Status" class="form-label">Status</label>
+                <select class="form-select" id="Status" name="status" required>
+                    <option value="aktif" {{ $siswa->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                    <option value="nonaktif" {{ $siswa->status == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                </select>
+            </div>
+
+            <!-- Tombol Submit -->
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Update Data</button>
+            </div>
+        </form>
+    </div>
+</div>
   <script>
     // JavaScript untuk menutup alert
     setTimeout(function() {

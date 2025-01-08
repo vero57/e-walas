@@ -424,7 +424,6 @@
                         <th>WhatsApp</th>
                         <th>NIP</th>
                         <th>Foto</th>
-                        <th>Informasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -451,29 +450,16 @@
                     @endif
                 </td>
                 <td>
-                    <!-- Aksi -->
-                    <div class="d-inline-flex gap-2">
-                        <button class="btn btn-sm btn-info text-white">
-                            <i class="bi bi-info-circle text-white"></i> Detail Kelas
-                        </button>
-                    </div>
-                </td>
-                <td class="text-center align-middle">
+                <div class="d-flex justify-content-center">
                    <!-- Tombol Edit -->
-                   <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                   <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
+                        Edit
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
                     <!-- Tombol Delete -->
-                    <a href="/hapuskurikulum/{{$data->id}}" class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    <a href="/hapuskurikulum/{{$data->id}}" class="btn btn-danger btn-sm">
+                            Hapus
                     </a>
+                </div>
                 </td>
             </tr>
         @endforeach

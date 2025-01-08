@@ -15,4 +15,12 @@ class Rombel extends Model
         'walas_id'
     ];
     public $timestamps = false;
+
+    // app/Models/Rombel.php
+
+public function siswas()
+{
+    return $this->hasMany(Siswa::class, 'rombels_id', 'id');
+}
+
 }
