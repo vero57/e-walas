@@ -332,9 +332,12 @@
                 <!-- Form Cari Guru -->
                 <!-- Tombol Unggah Data -->
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
+                    <i class="bi bi-cloud-upload"></i> Unggah
                 </button>
-                <!-- Tombol Tambah Data -->
+                <!-- Tombol Unduh Data -->
+                <a href="/guru-export" class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i> Unduh
+                    </a>
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
                     <!-- Tombol Tambah Data -->
@@ -353,11 +356,12 @@
             </div>
         </div>
         
-       <!-- Jumlah Total GTK -->
-       <div class="text-end mb-4">
-            <span class="text-muted">Jumlah Total: <strong>75 Guru</strong></span>
-        </div>
-
+       <!-- Jumlah Total Kakom -->
+<div class="text-end mb-4">
+    <span class="text-muted">
+        Jumlah Total: <strong>{{ $gurudata->count() }} Guru</strong>
+    </span>
+</div>
         <div class="table-container">
             <table class="table">
                 <thead>
@@ -406,7 +410,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title-white" id="uploadModalLabel" style="color: white;">Unggah Data Guru</h5>
+                <h5 class="modal-title-white" id="uploadModalLabel">Unggah Data Guru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

@@ -335,11 +335,14 @@
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah 
                 </button>
+                <!-- Tombol Unduh Data -->
+                <a href="/mapel-export" class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i> Unduh
+                    </a>
                     <!-- Tombol Tambah Data -->
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
-
                     <form action="{{ url('mapel_search') }}" method="GET">
                         <div class="input-box">
                             <i class="uil uil-search"></i>
@@ -350,6 +353,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="text-end mb-4">
+    <span class="text-muted">
+        Jumlah Total: <strong>{{ $mapeldata->count() }} Mapel</strong>
+    </span>
+</div>
 
         <div class="table-container">
             <table class="table">
@@ -399,7 +408,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Mapel</h5>
+                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Mapel</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

@@ -92,18 +92,17 @@
         }
 
         /* Style untuk modal */
-.modal-content {
-    border-radius: 15px;
-    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
-    padding: 20px;
+        .modal-content {
+    border-radius: 15px !important;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2) !important;
 }
 
 /* Style form dalam 2 kolom */
 .modal-body form {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
 }
+
 
 /* Mengatur elemen yang membentang penuh */
 .modal-body form .mb-3 {
@@ -355,7 +354,7 @@
         <!-- Jumlah Total GTK -->
         <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $kepsek->count() }} Kepala Sekolah</strong>
+        Jumlah Total: <strong>{{ $kepsekdata->count() }} Kepala Sekolah</strong>
     </span>
 </div>
 
@@ -370,7 +369,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($kepsek as $data)
+            @forelse ($kepsekdata as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama }}</td>
@@ -466,7 +465,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Kepala Sekolah</h5>
+                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Kepala Sekolah</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -553,6 +552,9 @@
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <!-- bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-QFHYUXV3HSFfuEG6Vz8Kgygmkpdm42sGB8HhlNAmKXr6TOXrKqCyqHKTKLpvlPX7" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-tGlaOYxmi90Nf9A5jcM13CAdE4TT2ZmfdBG8e7eVsHO18TVAdu4iixCWjuf2NKaG" crossorigin="anonymous"></script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>

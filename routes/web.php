@@ -2,35 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TaDataController;
+use App\Http\Controllers\KakomTAController;
+use App\Http\Controllers\GuruPageController;
+use App\Http\Controllers\KepsekTAController;
 use App\Http\Controllers\LoginGtkController;
+use App\Http\Controllers\DashAdminController;
+use App\Http\Controllers\KakomDataController;
+use App\Http\Controllers\MapelPageController;
+use App\Http\Controllers\KakomWalasController;
+use App\Http\Controllers\KepsekPageController;
+use App\Http\Controllers\LoginSiswaController;
+use App\Http\Controllers\RombelDataController;
+use App\Http\Controllers\RombelPageController;
+use App\Http\Controllers\KakomRombelController;
+use App\Http\Controllers\KepsekWalasController;
+use App\Http\Controllers\KinerjaGuruController;
 use App\Http\Controllers\LoginKaprogController;
 use App\Http\Controllers\LoginKepsekController;
-use App\Http\Controllers\LoginKurikulumController;
-use App\Http\Controllers\LoginSiswaController;
-use App\Http\Controllers\DashAdminController;
-use App\Http\Controllers\WargaSekolahController;
-use App\Http\Controllers\WaliKelasPageController;
-use App\Http\Controllers\KakomDataController;
-use App\Http\Controllers\KurikulumPageController;
-use App\Http\Controllers\KepsekPageController;
-use App\Http\Controllers\GuruPageController;
-use App\Http\Controllers\DataSiswaWalasController;
-use App\Http\Controllers\AdministrasiWalasController;
-use App\Http\Controllers\KakomTAController;
-use App\Http\Controllers\KakomWalasController;
-use App\Http\Controllers\KepsekTAController;
-use App\Http\Controllers\KepsekWalasController;
-use App\Http\Controllers\KepsekRombelController;
-use App\Http\Controllers\KakomRombelController;
 use App\Http\Controllers\TahunAjaranController;
-use App\Http\Controllers\RombelPageController;
-use App\Http\Controllers\MapelPageController;
-use App\Http\Controllers\TaDataController;
-use App\Http\Controllers\RombelDataController;
-use App\Http\Controllers\KinerjaGuruController;
-use App\Http\Controllers\DataDiriPageController;
-use App\Http\Controllers\InputDataDiriSiswaController;
 use App\Http\Controllers\DataDiriDataController;
+use App\Http\Controllers\DataDiriPageController;
+use App\Http\Controllers\KepsekRombelController;
+use App\Http\Controllers\WargaSekolahController;
+use App\Http\Controllers\KurikulumPageController;
+use App\Http\Controllers\WaliKelasPageController;
+use App\Http\Controllers\DataSiswaWalasController;
+use App\Http\Controllers\IdentitasKelasController;
+use App\Http\Controllers\LoginKurikulumController;
+use App\Http\Controllers\AdministrasiWalasController;
+use App\Http\Controllers\InputDataDiriSiswaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -107,6 +108,8 @@ Route::get ('/guru_search', [GuruPageController::class,'guru_search']);
 
 Route::resource('tahunajaran', TahunAjaranController::class);
 
+Route::post('/siswa-import', [DataSiswaWalasController::class, 'import']);
+Route::get('/siswa-download-template', [DataSiswaWalasController::class, 'downloadTemplate'])->name('siswa.download-template');
 Route::post('/walas-import', [WaliKelasPageController::class, 'import']);
 Route::get('/walas-download-template', [WaliKelasPageController::class, 'downloadTemplate'])->name('walas.download-template');
 Route::post('/guru-import', [GuruPageController::class, 'import']);
@@ -119,8 +122,12 @@ Route::post('/kepsek-import', [KepsekPageController::class, 'import']);
 Route::get('/kepsek-download-template', [KepsekPageController::class, 'downloadTemplate'])->name('kepsek.download-template');
 Route::post('/mapel-import', [MapelPageController::class, 'import']);
 Route::get('/mapel-download-template', [MapelPageController::class, 'downloadTemplate'])->name('mapel.download-template');
-Route::post('/siswa-import', [DataSiswaWalasController::class, 'import']);
-Route::get('/siswa-download-template', [DataSiswaWalasController::class, 'downloadTemplate'])->name('siswa.download-template');
+Route::post('/rombel-import', [RombelPageController::class, 'import']);
+Route::get('/rombel-download-template', [RombelPageController::class, 'downloadTemplate'])->name('rombel.download-template');
+
+Route::get('/mapel-export', [MapelPageController::class, 'export']);
+Route::get('/guru-export', [GuruPageController::class, 'export']);
+
 // CRUD ROMBEL
 Route::resource('rombel', RombelPageController::class); // Ini sudah mencakup semua route CRUD, termasuk edit
 Route::post('/rombel/store', [RombelPageController::class, 'store'])->name('rombels.store');
@@ -149,6 +156,14 @@ Route::get('/walaspage', function () {
 })->name('homepagegtk.index');
 Route::resource('siswadata', DataSiswaWalasController::class);
 Route::resource('adminwalas', AdministrasiWalasController::class);
+
+//administrasi walas
+Route::resource('identitaskelas', IdentitasKelasController::class);
+Route::get('/identitaskelas/create', [IdentitasKelasController::class, 'create'])->name('identitaskelas.create');
+Route::get('/identitaskelas/{identitas_kelas_id}/edit', [IdentitasKelasController::class, 'edit'])->name('identitaskelas.edit');
+Route::put('identitaskelas/{identitas_kelas_id}', [IdentitasKelasController::class, 'update'])->name('identitaskelas.update');
+
+
 
 // Route Halaman Kepsek
 Route::get('/kepsekpage', function () {

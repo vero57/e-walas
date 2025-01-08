@@ -357,46 +357,8 @@
 <!-- Jumlah Total Kakom -->
 <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $kakom->count() }} Kepala Kompetensi</strong>
+        Jumlah Total: <strong>{{ $kakomdata->count() }} Kepala Kompetensi</strong>
     </span>
-</div>
-
-<div class="table-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>WhatsApp</th>
-                <th>Kompetensi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($kakom as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
-                    <td>{{ $data->kompetensi }}</td>
-                    <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('kakom.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('kakom.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
-                </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data wali kelas.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
 </div>
 
         <div class="table-container">
@@ -463,7 +425,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title-white" id="uploadModalLabel" style="color: white;">Unggah Data Kepala Kompetensi</h5>
+                <h5 class="modal-title-white" id="uploadModalLabel">Unggah Data Kepala Kompetensi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

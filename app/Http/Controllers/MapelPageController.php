@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Mapel;
+use App\Exports\MapelExport;
+use App\Imports\MapelImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class MapelPageController extends Controller
 {
@@ -13,10 +17,25 @@ class MapelPageController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.mapeldata.index', [
-            'mapeldata' =>  Mapel::all(),
-        ]);
-        }
+        $mapeldata = Mapel::all();
+        return view('homepageadmin.mapeldata.index', compact('mapeldata'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new MapelImport, $request->file('file'));
+    return redirect('/datamapel');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_mapel.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new MapelExport, 'mapel-'.Carbon::now()->timestamp.'.xlsx');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -65,7 +84,7 @@ class MapelPageController extends Controller
             $mapel = Mapel::findOrFail($id);
     
             // Kirim data ke view edit
-            return view('homepageadmin.mapeldata.edit', compact('mapel'));
+            return view('homepageadmin.mapeldata.edit', compact('mapeldata'));
         }
     }
     /**

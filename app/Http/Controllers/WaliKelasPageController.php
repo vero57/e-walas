@@ -7,6 +7,7 @@ use App\Models\Walas;
 use App\Imports\WalasImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WaliKelasPageController extends Controller
 {
@@ -18,7 +19,6 @@ class WaliKelasPageController extends Controller
         // Mengirim data ke view
     return view('homepageadmin.walikelasdata.index', [
         'walasdata' =>  Walas::all(),
-        'walas' =>  Walas::all(),
     ]);
     }
 

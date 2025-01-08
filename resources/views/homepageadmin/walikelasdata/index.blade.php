@@ -356,54 +356,12 @@
             </div>
         </div>
 
-        
-<!-- Jumlah Total GTK -->
-<div class="text-end mb-4">
+        <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $walas->count() }} Wali Kelas</strong>
+        Jumlah Total: <strong>{{ $walasdata->count() }} Wali Kelas</strong>
     </span>
 </div>
-
-<div class="table-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>NIP</th>
-                <th>WhatsApp</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($walas as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td>{{ $data->jenis_kelamin }}</td>
-                    <td>{{ $data->nip }}</td>
-                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
-                    <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('walas.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('walas.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
-                </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data wali kelas.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
-
+        
         <div class="table-container">
             <table class="table">
                 <thead>
@@ -479,7 +437,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Wali Kelas</h5>
+                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Wali Kelas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

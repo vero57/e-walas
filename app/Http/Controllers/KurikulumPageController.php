@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Kurikulum;
 use App\Imports\KurikulumImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class KurikulumPageController extends Controller
@@ -15,6 +16,19 @@ class KurikulumPageController extends Controller
      */
     public function index()
     {
+        $kurikulumdata = Kurikulum::all();
+        return view('homepageadmin.kurikulumdata.index', compact('kurikulumdata'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new KurikulumImport, $request->file('file'));
+    return redirect('/kurikulum');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_kurikulum.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
         // Mengirim data ke view
     return view('homepageadmin.kurikulumdata.index', [
         'kurikulumdata' =>  Kurikulum::all(),
@@ -77,7 +91,7 @@ class KurikulumPageController extends Controller
         $kurikulum = Kurikulum::findOrFail($id);
 
         // Kirim data ke view edit
-        return view('homepageadmin.kurikulumdata.edit', compact('kurikulum'));
+        return view('homepageadmin.kurikulumdata.edit', compact('kurikulumdata'));
     }
     /**
      * Update the specified resource in storage.

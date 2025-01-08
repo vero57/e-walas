@@ -17,19 +17,19 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Vendor CSS Files -->
+   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+  
   <!-- Unicons CSS -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="../../assets/css/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: iLanding
@@ -273,6 +273,61 @@
 
 </style>
 
+<style>
+        /* Kotak pesan */
+        .alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            z-index: 9999;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+            box-sizing: border-box;
+            max-height: 60px; /* Menentukan tinggi kotak pesan agar tidak terlalu panjang */
+            overflow: hidden;
+            
+            /* Flexbox untuk menyejajarkan teks di tengah */
+            display: flex;
+            justify-content: center; /* Mengatur teks ke tengah secara horizontal */
+            align-items: center; /* Mengatur teks ke tengah secara vertikal */
+        }
+
+        .alert-danger {
+            background-color: #e74c3c; /* Merah */
+        }
+
+        .alert-success {
+            background-color: #2ecc71; /* Hijau */
+        }
+
+        /* Animasi slide down */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animasi slide up untuk saat pesan hilang */
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        
+    </style>
+
 </head>
 
 <body class="index-page">
@@ -356,46 +411,8 @@
         <!-- Jumlah Total Kurikulum -->
         <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $kurikulum->count() }} Kurikulum</strong>
+        Jumlah Total: <strong>{{ $kurikulumdata->count() }} Kurikulum</strong>
     </span>
-</div>
-
-<div class="table-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>WhatsApp</th>
-                <th>NIP</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($kurikulum as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
-                    <td>{{ $data->nip }}</td>
-                    <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('kurikulum.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
-                </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data kurikulum.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
 </div>
 
         <div class="table-container">
@@ -471,7 +488,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Kurikulum</h5>
+                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Kurikulum</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

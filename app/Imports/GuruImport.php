@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Guru;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Log;
 
 
 class GuruImport implements ToModel, WithHeadingRow
@@ -14,10 +15,17 @@ class GuruImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
+   public function model(array $row)
     {
-        return new Guru([
-            'nama' => $row['nama_lengkap_guru'],
-        ]);
+        if (isset($row['nama_lengkap_guru']) && !empty($row['nama_lengkap_guru'])) {
+            return new Guru([
+                'nama' => $row['nama_lengkap_guru'],
+            ]);
+        }
+
+        // log data yang gagal
+        Log::warning('Data kosong atau tidak valid di file excel', $row);
+
+        return null;
     }
 }

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Rombel;
 use App\Models\Walas;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Imports\RombelImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class RombelPageController extends Controller
 {
@@ -22,6 +26,17 @@ class RombelPageController extends Controller
         'vwrombels' => DB::table('vwrombels')->get(),
         'walas' => $walas // Kirim data wali kelas ke view
     ]);
+}
+
+public function import(Request $request){
+    Excel::import(new RombelImport, $request->file('file'));
+return redirect('/rombel');
+}
+
+public function downloadTemplate()
+{
+    $pathToFile = storage_path('app/public/template_rombel.xlsx'); // Sesuaikan dengan lokasi file template Excel
+    return response()->download($pathToFile);
 }
 
     /**

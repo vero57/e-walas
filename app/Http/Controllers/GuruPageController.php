@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Guru;
+use App\Exports\GuruExport;
 use App\Imports\GuruImport;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class GuruPageController extends Controller
 {
@@ -15,10 +17,26 @@ class GuruPageController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.gurudata.index', [
-            'gurudata' =>  Guru::all(),
-        ]);
-        }
+        $gurudata = Guru::all();
+        return view ('homepageadmin.gurudata.index', compact('gurudata'));
+    }
+
+    public function import(Request $request){
+        Excel::import(new GuruImport, $request->file('file'));
+    return redirect('/guru');
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_guru.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new GuruExport, 'Guru.xlsx');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -66,7 +84,7 @@ class GuruPageController extends Controller
             $guru = Guru::findOrFail($id);
     
             // Kirim data ke view edit
-            return view('homepageadmin.gurudata.edit', compact('guru'));
+            return view('homepageadmin.gurudata.edit', compact('gurudata'));
         }
     }
 

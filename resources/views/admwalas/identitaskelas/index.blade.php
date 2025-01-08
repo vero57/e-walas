@@ -40,45 +40,6 @@
   ======================================================== -->
 
   <style>
-
-
-    
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.edit-icon,
-.isi-icon {
-  font-size: 18px;
-  cursor: pointer;
-  margin: 0 5px;
-}
-
-.edit-icon {
-  color: #ffc107; /* kuning */
-}
-
-.edit-icon:hover {
-  color: #e0a800;
-}
-
-.isi-icon {
-  color: #007bff; /* biru */
-}
-
-.isi-icon:hover {
-  color: #0056b3;
-}
-
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -192,10 +153,10 @@ table td {
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
+                <a href="{{ route('identitaskelas.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus"></i> Tambah
+                </a>
+
 
                     <!-- Search Box -->
                 <div class="searchBox">
@@ -212,222 +173,42 @@ table td {
             <span class="text-muted">Jumlah Total: <strong>0 Administrasi</strong></span>
         </div>
 
-        <div class="container mt-4">
-    <h3 class="text-center">Administrasi Walas</h3>
-    <table class="table table-striped table-bordered mt-3">
-        <thead>
+        <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Program Keahlian</th>
+            <th>Kompetensi Keahlian</th>
+            <th>Walas Kelas 10</th>
+            <th>Walas Kelas 11</th>
+            <th>Walas Kelas 12</th>
+            <th>Walas Kelas 13</th>
+            <th>Ketua Kelas 10</th>
+            <th>Ketua Kelas 11</th>
+            <th>Ketua Kelas 12</th>
+            <th>Ketua Kelas 13</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($identitaskelas as $index => $identitas)
             <tr>
-                <th>No</th>
-                <th>Poin Administrasi</th>
-                <th>Aksi</th>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $identitas->program_keahlian }}</td>
+                <td>{{ $identitas->kompetensi_keahlian }}</td>
+                <td>{{ $identitas->walas_10 }}</td>
+                <td>{{ $identitas->walas_11 }}</td>
+                <td>{{ $identitas->walas_12 }}</td>
+                <td>{{ $identitas->walas_13 }}</td>
+                <td>{{ $identitas->siswa_10 }}</td>
+                <td>{{ $identitas->siswa_11 }}</td>
+                <td>{{ $identitas->siswa_12 }}</td>
+                <td>{{ $identitas->siswa_13 }}</td>
+                <td><a href="{{ route('identitaskelas.edit', $identitas->identitas_kelas_id) }}" class="btn btn-warning btn-sm">Edit</a></td>
             </tr>
-        </thead>
-        <tbody>
-            <!-- Looping Data -->
-            <tr>
-                <td>1</td>
-                <td>Identitas Kelas</td>
-                <td>
-                <a href="{{ route('identitaskelas.index') }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Lembar Pengesahan</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Struktur Organisasi Kelas</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Jadwal KBM</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Jadwal Kegiatan Piket Kelas</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Rencana Kegiatan Walas (2 Semester)</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Rekap Kehadiran Peserta Didik (2 Semester)</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Denah Tempat Kerja Kelompok Siswa</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>Daftar Penyerahan/Pengembalian Rapor Siswa</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>Catatan Kasus Peserta Didik</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>Agenda Kegiatan Walas</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>Daftar Peserta Didik</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>13</td>
-                <td>Rekapitulasi Jumlah Peserta Didik</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>14</td>
-                <td>Home Visit</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>15</td>
-                <td>Buku Tamu Orang Tua/Wali Peserta Didik</td>
-                <td>
-                    <a href="#">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</section>
-
-<!-- Modal Unggah Data -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Administrasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Unggah</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Data Administrasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="teacherName" class="form-label">Nama Administrasi</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Administrasi">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherPhoto" class="form-label">Foto Administrasi</label>
-                        <input type="file" class="form-control" id="teacherPhoto">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="text" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherInfo" class="form-label">Informasi</label>
-                        <textarea class="form-control" id="teacherInfo" rows="3" placeholder="Masukkan informasi tambahan"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-success">Tambah Data</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-    </div>
-</section>
+        @endforeach
+    </tbody>
+</table>
 
 
 </main>
