@@ -25,6 +25,9 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+   <!-- Unicons CSS -->
+   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -91,6 +94,218 @@
 
         
     </style>
+
+<style>
+        /* Kotak pesan */
+        .alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            z-index: 9999;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+            box-sizing: border-box;
+            max-height: 60px; /* Menentukan tinggi kotak pesan agar tidak terlalu panjang */
+            overflow: hidden;
+            
+            /* Flexbox untuk menyejajarkan teks di tengah */
+            display: flex;
+            justify-content: center; /* Mengatur teks ke tengah secara horizontal */
+            align-items: center; /* Mengatur teks ke tengah secara vertikal */
+        }
+
+        .alert-danger {
+            background-color: #e74c3c; /* Merah */
+        }
+
+        .alert-success {
+            background-color: #2ecc71; /* Hijau */
+        }
+
+        /* Animasi slide down */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animasi slide up untuk saat pesan hilang */
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        /* Style untuk modal */
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+    padding: 20px;
+}
+
+/* Style form dalam 2 kolom */
+.modal-body form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+    gap: 20px;
+}
+
+/* Mengatur elemen yang membentang penuh */
+.modal-body form .mb-3 {
+    grid-column: span 1;
+}
+
+.modal-body form .mb-3:last-child {
+    grid-column: span 2; /* Password dan NIP membentang 2 kolom */
+}
+
+/* Style untuk tombol secara umum */
+.modal-footer {
+    justify-content: flex-start; /* Posisi ke kiri */
+    padding-right: 100px;
+}
+
+.modal-footer button {
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Efek transisi halus */
+}
+
+/* Tombol Tutup */
+.modal-footer .btn-secondary {
+    background-color: #6c757d; /* Warna default */
+    border: none;
+}
+
+/* Hover Tombol Tutup */
+.modal-footer .btn-secondary:hover {
+    background-color: #adb5bd; /* Warna lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+}
+
+/* Tombol Tambah Data */
+.modal-footer .btn-success {
+    background-color: #0d6efd; /* Biru muda */
+    border: none;
+}
+
+/* Hover Tombol Tambah Data */
+.modal-footer .btn-success:hover {
+    background-color: #70b0ff; /* Biru yang lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.4); /* Bayangan biru saat hover */
+}
+
+/* Style input dan select */
+.modal-body input,
+.modal-body select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px;
+}
+
+/* Style untuk file upload */
+.modal-body input[type="file"] {
+    padding: 5px;
+}
+
+.modal-dialog {
+    max-width: 800px; /* Lebar maksimum modal */
+    width: 90%;       /* Lebar modal relatif */
+}
+
+.d-flex-container {
+    display: flex;
+    align-items: center;  /* Menjaga semua elemen dalam container sejajar secara vertikal */
+    gap: 10px;  /* Menambah jarak antar elemen */
+}
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+</style>
+
+<style>
+
+.input-box {
+  position: relative;
+  height: 55px;
+  max-width: 900px;
+  width: 100%;
+  background: #fff;
+  margin: 0 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.input-box i,
+.input-box .button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-box i {
+  left: 20px;
+  font-size: 30px;
+  color: #707070;
+}
+.input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  padding: 0 155px 0 65px;
+  background-color: transparent;
+}
+.input-box .button {
+  right: 25px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  background-color:  #0d83fd;
+  cursor: pointer;
+}
+.input-box .button:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.button {
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol menjadi putih */
+    font-weight: bold; /* Membuat teks menjadi tebal/bold */
+    border: 2px solid #007bff; /* Warna border yang sesuai dengan tombol */
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+    padding: 10px 20px; /* Menambahkan padding agar tombol lebih besar */
+    font-size: 16px; /* Ukuran font lebih besar */
+    cursor: pointer; /* Menampilkan kursor pointer ketika dihover */
+    transition: background-color 0.3s ease; /* Efek transisi pada background saat hover */
+}
+
+/* Efek hover */
+.button:hover {
+    background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
+    border-color: #0056b3; /* Mengubah warna border saat hover */
+}
+</style>
 </head>
 
 <body class="index-page">
@@ -123,12 +338,22 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
 
+     <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+     <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -156,12 +381,13 @@
                     </button>
 
                     <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Siswa">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
+                    <form action="{{ url('siswadata_search') }}" method="GET">
+                        <div class="input-box">
+                            <i class="uil uil-search"></i>
+                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
+                                <button class="button" type="submit">Cari</button>
+                        </div>
+                    </form>
             </div>
         </div>
         
@@ -181,6 +407,7 @@
                 <th>Kelas</th>
                 <th>Jenis Kelamin</th>
                 <th>WhatsApp</th>
+                <th>Foto</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -193,16 +420,29 @@
                     <td>{{ $data->nama_kelas }}</td>
                     <td>{{ $data->jenis_kelamin }}</td>
                     <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
+                    <td>
+                    @if(!empty($data->image_url) && $data->image_url != null)
+                    <img src="{{ asset('storage/'.$data->image_url) }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                    @else
+                        <!-- Tampilkan nama jika tidak ada gambar -->
+                        <div class="rounded-circle d-flex justify-content-center align-items-center" 
+                            style="width: 50px; height: 50px; background-color: #E86E7A; color: white; font-size: 20px;">
+                            {{ strtoupper(substr($data->siswa_nama, 0, 2)) }}
+                        </div>
+                    @endif
+                </td>
                     <td>{{ $data->status }}</td>
                     <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('siswadata.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('siswadata.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
+                <div class="d-flex justify-content-center">
+                <a href="{{ route('siswa.edit', $data->siswa_id) }}" class="btn btn-primary btn-sm me-2">
+                    Edit 
+                </a>
+
+                    <!-- Tombol Delete -->
+                    <a href="/hapussiswa/{{$data->siswa_id}}" class="btn btn-danger btn-sm">
+                            Hapus
+                    </a>
+                </div>
                 </td>
                 </tr>
             @empty
@@ -255,28 +495,54 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
-                        <label for="teacherName" class="form-label">Nama Siswa</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Siswa">
+                        <label for="studentName" class="form-label">Nama Siswa</label>
+                        <input type="text" class="form-control" id="teacherName" placeholder="Masukan Nama Siswa" name="nama" required>
                     </div>
                     <div class="mb-3">
-                        <label for="teacherPhoto" class="form-label">Foto Siswa</label>
-                        <input type="file" class="form-control" id="teacherPhoto">
+                        <label for="rombelsId" class="form-label">Rombels</label>
+                        <select class="form-select" id="rombelsId" name="rombels_id" required>
+                            <option selected disabled>Pilih Rombel</option>
+                            @foreach ($rombels as $rombel)
+                                <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="text" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp">
+                        <label for="studentWhatsApp" class="form-label">WhatsApp</label>
+                        <input type="number" class="form-control" id="studentWhatsApp" placeholder="Masukkan nomor WhatsApp" name="no_wa" required>
                     </div>
                     <div class="mb-3">
-                        <label for="teacherInfo" class="form-label">Informasi</label>
-                        <textarea class="form-control" id="teacherInfo" rows="3" placeholder="Masukkan informasi tambahan"></textarea>
+                        <label for="password" class="form-label">Password</label>
+                        <input type="passwowrd" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Foto Siswa</label>
+                        <input type="file" class="form-control" id="teacherPhoto" name="image_url" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" aria-label="Pilih Gender" name="status" required>
+                            <option selected disabled>Pilih Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="nonaktif">Non Aktif</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherGender" class="form-label">Pilih Gender</label>
+                        <select class="form-select" id="teacherGender" aria-label="Pilih Gender" name="jenis_kelamin" required>
+                            <option selected disabled>Pilih Gender</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Tambah</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-success">Tambah Data</button>
             </div>
         </div>
     </div>

@@ -7,6 +7,8 @@ use App\Models\Walas;
 
 class LoginGtkController extends Controller
 {
+    protected $redirectTo = '/logingtk';
+
     /**
      * Display a listing of the resource.
      */

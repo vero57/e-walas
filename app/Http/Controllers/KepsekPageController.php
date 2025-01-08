@@ -7,6 +7,7 @@ use App\Models\Kepsek;
 use App\Imports\KepsekImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KepsekPageController extends Controller
 {

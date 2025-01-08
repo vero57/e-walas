@@ -31,6 +31,11 @@ use App\Http\Controllers\KinerjaGuruController;
 use App\Http\Controllers\DataDiriPageController;
 use App\Http\Controllers\InputDataDiriSiswaController;
 use App\Http\Controllers\DataDiriDataController;
+use App\Http\Controllers\HomePageWalasController;
+use App\Http\Controllers\ProfilePageWalasController;
+use App\Http\Controllers\ProfilePageController;
+use App\Http\Controllers\SiswaPageController;
+use App\Http\Middleware\SiswaMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,7 +44,7 @@ Route::get('/', function () {
 Route::resource('loginadmin', LoginController::class);
 Route::post('/loginadmin', [LoginController::class, 'store'])->name('login.store');
 
-Route::resource('logingtk', LoginGtkController::class);
+Route::get('/logingtk', [LoginGtkController::class, 'index'])->name('logingtk.index');
 Route::post('/logingtk', [LoginGtkController::class, 'store'])->name('logingtk.store');
 
 Route::resource('loginkepsek', LoginKepsekController::class);
@@ -49,7 +54,12 @@ Route::resource('logingtk', LoginGtkController::class);
 Route::resource('loginkepsek', LoginKepsekController::class);
 Route::resource('loginkaprog', LoginKaprogController::class);
 Route::resource('loginkurikulum', LoginKurikulumController::class);
-Route::resource('loginsiswa', LoginSiswaController::class);
+// Route untuk menampilkan form login siswa
+Route::get('/loginsiswa', [LoginSiswaController::class, 'index'])->name('loginsiswa');
+
+// Route untuk menangani proses login siswa
+Route::post('/loginsiswa', [LoginSiswaController::class, 'store'])->name('loginsiswa.store');
+
 
 // Halaman Utama Controller
 
@@ -140,14 +150,31 @@ Route::get('/mapel/{id}/edit', [MapelPageController::class, 'edit'])->name('mape
 Route::post('/mapel/tambah/store', [MapelPageController::class, 'store'])->name('mapel.store');
 Route::get ('/mapel_search', [MapelPageController::class,'mapel_search']);
 
-// Route Halaman Walas
-Route::get('/walaspage', function () {
-    if (!session()->has('walas_id')) {
-        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepagegtk.index'); // File di views/adminpage/index.blade.php
-})->name('homepagegtk.index');
+Route::get('/walaspage', [HomePageWalasController::class, 'index'])->name('homepagegtk.index');
+
 Route::resource('siswadata', DataSiswaWalasController::class);
+
+Route::resource('profilewalas', ProfilePageWalasController::class);
+Route::resource('profilesiswa', ProfilePageController::class);
+
+
+Route::get ('/siswadata_search', [DataSiswaWalasController::class,'siswadata_search']);
+
+Route::post('/siswadata/tambah/store', [DataSiswaWalasController::class, 'store'])
+// Menambahkan middleware auth:walas
+    ->name('siswa.store');
+
+Route::get('/hapussiswa/{id}', [DataSiswaWalasController::class, 'hapussiswa'])
+// Menambahkan middleware auth:walas
+    ->name('hapussiswa');
+
+Route::get('/siswa/{id}/edit', [DataSiswaWalasController::class, 'edit'])
+// Menambahkan middleware auth:walas
+    ->name('siswa.edit');
+
+Route::put('/siswa/{id}', [DataSiswaWalasController::class, 'update'])
+// Menambahkan middleware auth:walas
+    ->name('siswa.update');
 Route::resource('adminwalas', AdministrasiWalasController::class);
 
 // Route Halaman Kepsek
@@ -183,18 +210,13 @@ Route::resource('tahunajarandata', TaDataController::class);
 Route::resource('rombelpage', RombelDataController::class);
 Route::resource('kinerjaguru', KinerjaGuruController::class);
 
+// Route Siswa Halaman
+ 
 
-
-// Route Halaman Siswa
-Route::get('/siswapage', function () {
-    if (!session()->has('siswa_id')) {
-        return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepagesiswa.index'); // File di views/adminpage/index.blade.php
-})->name('homepagesiswa.index');
-Route::resource('datadiri', DataDiriPageController::class);
-Route::resource('inputdatadiri', InputDataDiriSiswaController::class);
-Route::resource('datadiripage', DataDiriDataController::class);
+    Route::get('/siswapage', [SiswaPageController::class, 'index'])->name('homepagesiswa.index');
+    Route::resource('datadiri', DataDiriPageController::class);
+    Route::resource('inputdatadiri', InputDataDiriSiswaController::class);
+    Route::resource('datadiripage', DataDiriDataController::class);
 
 
 // Logout admin

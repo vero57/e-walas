@@ -357,48 +357,9 @@
 <!-- Jumlah Total Kakom -->
 <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $kakom->count() }} Kepala Kompetensi</strong>
+        Jumlah Total: <strong>{{ $kakomdata->count() }} Kepala Kompetensi</strong>
     </span>
 </div>
-
-<div class="table-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>WhatsApp</th>
-                <th>Kompetensi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($kakom as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
-                    <td>{{ $data->kompetensi }}</td>
-                    <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('kakom.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('kakom.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
-                </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data wali kelas.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
-
         <div class="table-container">
             <table class="table">
                 <thead>
@@ -433,23 +394,16 @@
                         </div>
                     @endif
                 </td>
-                <td class="text-center align-middle">
+                <td>
+                <div class="d-flex justify-content-center">
                    <!-- Tombol Edit -->
-                   <a href="{{ route('kakom.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                   <a href="{{ route('kakom.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
+                        Edit
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
                     <!-- Tombol Delete -->
-                    <a href="/hapuskakom/{{$data->id}}" class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
-                    </a>
+                    <a href="/hapuskakom/{{$data->id}}" class="btn btn-danger btn-sm">Hapus</a> 
                 </td>
+                </div>
             </tr>
         @endforeach
                 </tbody>

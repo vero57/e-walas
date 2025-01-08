@@ -360,7 +360,7 @@
 <!-- Jumlah Total GTK -->
 <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $walas->count() }} Wali Kelas</strong>
+        Jumlah Total: <strong>{{ $walasdata->count() }} Wali Kelas</strong>
     </span>
 </div>
 
@@ -373,11 +373,13 @@
                 <th>Jenis Kelamin</th>
                 <th>NIP</th>
                 <th>WhatsApp</th>
+                <th>Foto</th>
+                <th>Informasi</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($walas as $data)
+            @forelse ($walasdata as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama }}</td>
@@ -385,52 +387,6 @@
                     <td>{{ $data->nip }}</td>
                     <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
                     <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('walas.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('walas.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
-                </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data wali kelas.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
-
-        <div class="table-container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Jenis Kelamin</th>
-                        <th>WhatsApp</th>
-                        <th>NIP</th>
-                        <th>Foto</th>
-                        <th>Detail</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($walasdata as $idx => $data)
-            <tr>
-                <td>
-                    <div class="d-flex px-2 py-1">
-                        {{ $idx + 1 . '. ' }}
-                    </div>
-                </td>
-                <td>{{ $data->nama }}</td>
-                <td>{{ $data->jenis_kelamin }}</td>
-                <td>{{ $data->no_wa }}</td>
-                <td>{{ $data->nip }}</td>
-                <td>
                     @if(!empty($data->image_url) && $data->image_url != null)
                     <img src="{{ asset('storage/'.$data->image_url) }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                     @else
@@ -449,29 +405,27 @@
                         </button>
                     </div>
                 </td>
-                <td class="text-center align-middle">
+                <td>
+                <div class="d-flex justify-content-center">
                    <!-- Tombol Edit -->
-                   <a href="{{ route('walas.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                   <a href="{{ route('walas.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
+                        Edit
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
                     <!-- Tombol Delete -->
-                    <a href="/hapuswalas/{{$data->id}}" class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    <a href="/hapuswalas/{{$data->id}}" class="btn btn-danger btn-sm">
+                            Hapus
                     </a>
+                </div>
                 </td>
-            </tr>
-        @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada data wali kelas.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 </section>
 
 <!-- Modal Unggah Data -->

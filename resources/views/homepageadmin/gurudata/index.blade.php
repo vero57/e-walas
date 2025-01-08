@@ -353,10 +353,12 @@
             </div>
         </div>
         
-       <!-- Jumlah Total GTK -->
-       <div class="text-end mb-4">
-            <span class="text-muted">Jumlah Total: <strong>75 Guru</strong></span>
-        </div>
+        <div class="text-end mb-4">
+    <span class="text-muted">
+        Jumlah Total: <strong>{{ $gurudata->count() }} Guru</strong>
+    </span>
+</div>
+
 
         <div class="table-container">
             <table class="table">
@@ -376,22 +378,17 @@
                     </div>
                 </td>
                 <td>{{ $data->nama }}</td>
-                <td class="text-center align-middle">
+                <td>
+                <div class="d-flex justify-content-center">
                    <!-- Tombol Edit -->
-                   <a href="{{ route('guru.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                   <a href="{{ route('guru.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
+                        Edit
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
                     <!-- Tombol Delete -->
-                    <a href="/hapusguru/{{$data->id}}" class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    <a href="/hapusguru/{{$data->id}}" class="btn btn-danger btn-sm">
+                           Hapus
                     </a>
+                </div>
                 </td>
             </tr>
         @endforeach
@@ -457,6 +454,7 @@
         </div>
     </div>
 </div>
+
 
 
 </main>

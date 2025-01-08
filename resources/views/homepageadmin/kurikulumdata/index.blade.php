@@ -356,46 +356,8 @@
         <!-- Jumlah Total Kurikulum -->
         <div class="text-end mb-4">
     <span class="text-muted">
-        Jumlah Total: <strong>{{ $kurikulum->count() }} Kurikulum</strong>
+        Jumlah Total: <strong>{{ $kurikulumdata->count() }} Kurikulum</strong>
     </span>
-</div>
-
-<div class="table-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>WhatsApp</th>
-                <th>NIP</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($kurikulum as $data)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->nama }}</td>
-                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
-                    <td>{{ $data->nip }}</td>
-                    <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <form action="{{ route('kurikulum.destroy', $data->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </div>
-                </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data kurikulum.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
 </div>
 
         <div class="table-container">
@@ -407,7 +369,6 @@
                         <th>WhatsApp</th>
                         <th>NIP</th>
                         <th>Foto</th>
-                        <th>Informasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -434,29 +395,16 @@
                     @endif
                 </td>
                 <td>
-                    <!-- Aksi -->
-                    <div class="d-inline-flex gap-2">
-                        <button class="btn btn-sm btn-info text-white">
-                            <i class="bi bi-info-circle text-white"></i> Detail Kelas
-                        </button>
-                    </div>
-                </td>
-                <td class="text-center align-middle">
+                <div class="d-flex justify-content-center">
                    <!-- Tombol Edit -->
-                   <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                   <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
+                        Edit
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
                     <!-- Tombol Delete -->
-                    <a href="/hapuskurikulum/{{$data->id}}" class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                    <a href="/hapuskurikulum/{{$data->id}}" class="btn btn-danger btn-sm">
+                            Hapus
                     </a>
+                </div>
                 </td>
             </tr>
         @endforeach

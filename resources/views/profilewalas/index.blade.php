@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong - Siswa</title>
+  <title>E Walas SMKN 1 Cibinong- Profile Walas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -36,6 +36,67 @@
   ======================================================== -->
 
   <style>
+
+    /* Kontainer utama */
+.walas-info-container {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Ruang antara foto dan informasi */
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Styling foto */
+.walas-photo-container {
+    position: relative;
+}
+
+.walas-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.walas-photo:hover {
+    transform: scale(1.1); /* Membesarkan foto saat di-hover */
+}
+
+/* Styling ikon edit */
+.edit-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    display: none;
+    cursor: pointer;
+}
+
+.walas-photo-container:hover .edit-icon {
+    display: block;
+}
+
+/* Styling untuk informasi profile */
+.profile-info-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px; /* Sudut sedikit melengkung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.profile-info-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -87,50 +148,56 @@
             }
         }
 
-        /* Styling untuk tabel */
-.table {
-  width: 300%;
-  border-collapse: collapse;
+        /* Styling untuk judul */
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.table th, .table td {
-  padding: 8px;
-  text-align: left;
+/* Styling untuk teks deskripsi yang lebih kecil */
+h1 .accent-text {
+    font-size: 18px; /* Ukuran font lebih kecil */
+    color: black; /* Warna biru untuk memberi aksen */
+    display: block; /* Agar teks berada di baris baru */
+    margin-top: 10px;
+    font-weight: 500;
+}  
+
+/* Styling untuk tombol Edit */
+.edit-button {
+    background-color: #00bcd4; /* Biru muda */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Memberikan jarak di atas tombol */
 }
 
-.table .btn {
-  margin-right: 5px;
+.edit-button:hover {
+    background-color: #95E8F0; /* Warna biru lebih gelap saat hover */
+}
+
+.kembali-button {
+    background-color: #8E8989; /* Biru muda */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Memberikan jarak di atas tombol */
+}
+
+.kembali-button:hover {
+    background-color: #E7DDFF; /* Warna biru lebih gelap saat hover */
 }
 
     </style>
-
-<style>
- table {
-    width: 310%;
-    border-collapse: collapse; /* Menghilangkan ruang antara sel */
-    border-radius: 8px; /* Sudut melengkung untuk tabel */
-    overflow: hidden; /* Untuk memastikan konten tidak melampaui sudut melengkung */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan di sekitar tabel */
-  }
-  th, td {
-    text-align: center; /* Menyelaraskan teks ke tengah */
-    padding: 12px; /* Memberikan ruang dalam sel tabel */
-    border: 1px solid #ddd; /* Menambahkan border di sekitar sel */
-  }
-  th {
-    background-color: #f4f4f4; /* Warna latar belakang untuk header tabel */
-    font-weight: bold; /* Membuat teks header lebih tebal */
-  }
-  td {
-    background-color: #fff; /* Warna latar belakang untuk baris data */
-  }
-  tr:nth-child(even) td {
-    background-color: #f9f9f9; /* Warna latar belakang untuk baris genap */
-  }
-  button {
-    border-radius: 5px; /* Menambahkan sudut melengkung pada tombol */
-  }
-</style>
 </head>
 
 <body class="index-page">
@@ -151,35 +218,18 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-        <li><a href="/datadiri" class="active">Beranda</a></li>
-        <li><a href="/datadiripage" >Data Diri</a></li>
-          <li><a href="/inputdatadiri" >Input Data Diri</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-      <div class="user-info d-flex align-items-center">
-            @if(session()->has('siswa_id'))
-                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
-                
-                <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilesiswa" class="text-decoration-none">
-                    <span>{{ $siswa->nama }}</span>  <!-- Nama Walas yang sedang login -->
-                </a>
-            @endif
-            <form action="{{ route('logoutsiswa') }}" method="POST" class="ms-3">
-                @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
-            </form>
-        </div>
-    </div>
+
+      <form action="{{ route('logoutwalas') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn-getstarted">Logout</button>
+                                </form>
+      
 
     </div>
   </header>
@@ -188,74 +238,41 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            
-             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div> 
-
-              <h1 class="mb-4">
-               Kelola Data Diri Siswa <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <!-- <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a> 
-            </div> -->
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
-          </div>
-        </div>
-
-        <div class="row stats-row gy-7 mt-9 justify-content-start align-items-start" data-aos="fade-up" data-aos-delay="500">
-    <div class="col-lg-4 col-md-8">
-        <br>
         <h1 class="mb-4 text-center">
-               Biodata Diri <br>
-                <span class="accent-text"></span>
+            Profile Wali Kelas <br>
+            <span class="accent-text">Berikut adalah Profile dari Wali kelas</span>
         </h1>
-        <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>No</th>
-      <th>Nama</th>
-      <th>Keterangan</th>
-      <th>Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr>
-                <td>1</td>
-                <td>{{ $siswa ? $siswa->nama : 'Nama Tidak Ada' }}</td>
-                <td>{{ $status }}</td>
-                <td>
-        <a href="/datadiripage" class="btn btn-info">Lihat Data</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
+        <div class="walas-info-container">
+    <!-- Foto Besar dan Icon Edit -->
+    <div class="walas-photo-container position-relative">
+        <img src="{{ asset('storage/'.$walas->image_url) }}" alt="Image" class="walas-photo">
+        <div class="edit-icon">
+            <i class="bi bi-pencil"></i>
+        </div>
     </div>
+
+   <!-- Informasi Profile -->
+    <div class="profile-info-container">
+        <p><strong>Name:</strong> {{ $walas->nama }}</p>
+        <p><strong>Jenis Kelamin:</strong> {{ $walas->jenis_kelamin }}</p>
+        <p><strong>Phone:</strong> {{ $walas->no_wa }}</p>
+        <p><strong>NIP:</strong> {{ $walas->nip }}</p>
+        <p><strong>Password:</strong> {{ $walas->password }}</p>
+
+        <!-- Tombol Edit -->
+        <button class="edit-button">Edit Data</button>
+        <a href="/walaspage" class="kembali-button">Kembali</a>
+    </div>
+
 </div>
+
+        </div>
 
     </section><!-- /Hero Section -->
 
 </main>
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>
