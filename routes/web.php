@@ -1,6 +1,8 @@
 <?php
 
+use RencanaKegiatanWalasController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\SiswaMiddleware;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TaDataController;
 use App\Http\Controllers\KakomTAController;
@@ -8,35 +10,38 @@ use App\Http\Controllers\GuruPageController;
 use App\Http\Controllers\KepsekTAController;
 use App\Http\Controllers\LoginGtkController;
 use App\Http\Controllers\DashAdminController;
+use App\Http\Controllers\JadwalKBMController;
 use App\Http\Controllers\KakomDataController;
 use App\Http\Controllers\MapelPageController;
+use App\Http\Controllers\SiswaPageController;
 use App\Http\Controllers\KakomWalasController;
 use App\Http\Controllers\KepsekPageController;
 use App\Http\Controllers\LoginSiswaController;
 use App\Http\Controllers\RombelDataController;
 use App\Http\Controllers\RombelPageController;
+use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\KakomRombelController;
 use App\Http\Controllers\KepsekWalasController;
 use App\Http\Controllers\KinerjaGuruController;
 use App\Http\Controllers\LoginKaprogController;
 use App\Http\Controllers\LoginKepsekController;
+use App\Http\Controllers\ProfilePageController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\DataDiriDataController;
 use App\Http\Controllers\DataDiriPageController;
 use App\Http\Controllers\KepsekRombelController;
 use App\Http\Controllers\WargaSekolahController;
+use App\Http\Controllers\HomePageWalasController;
 use App\Http\Controllers\KurikulumPageController;
 use App\Http\Controllers\WaliKelasPageController;
 use App\Http\Controllers\DataSiswaWalasController;
 use App\Http\Controllers\IdentitasKelasController;
 use App\Http\Controllers\LoginKurikulumController;
+use App\Http\Controllers\LembarPengesahanController;
+use App\Http\Controllers\ProfilePageWalasController;
 use App\Http\Controllers\AdministrasiWalasController;
 use App\Http\Controllers\InputDataDiriSiswaController;
-use App\Http\Controllers\HomePageWalasController;
-use App\Http\Controllers\ProfilePageWalasController;
-use App\Http\Controllers\ProfilePageController;
-use App\Http\Controllers\SiswaPageController;
-use App\Http\Middleware\SiswaMiddleware;
+use App\Http\Controllers\StrukturOrganisasiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -186,10 +191,12 @@ Route::resource('adminwalas', AdministrasiWalasController::class);
 
 //administrasi walas
 Route::resource('identitaskelas', IdentitasKelasController::class);
-Route::get('/identitaskelas/create', [IdentitasKelasController::class, 'create'])->name('identitaskelas.create');
-Route::get('/identitaskelas/{identitas_kelas_id}/edit', [IdentitasKelasController::class, 'edit'])->name('identitaskelas.edit');
-Route::put('identitaskelas/{identitas_kelas_id}', [IdentitasKelasController::class, 'update'])->name('identitaskelas.update');
-
+Route::resource('lembarpengesahan', LembarPengesahanController::class);
+Route::resource('strukturorganisasi', StrukturOrganisasiController::class);
+Route::resource('jadwalkbm', JadwalKBMController::class);
+Route::resource('jadwalpiket', JadwalPiketController::class);
+Route::resource('rencana_kegiatan_walas', RencanaKegiatanWalasController::class)->except(['index']);
+Route::get('/rencana_kegiatan/{semester}', [RencanaKegiatanWalasController::class, 'index'])->name('rencana_kegiatan_walas.index');
 
 
 // Route Halaman Kepsek

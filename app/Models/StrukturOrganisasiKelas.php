@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StrukturOrganisasiKelas extends Model
 {
@@ -14,7 +15,7 @@ class StrukturOrganisasiKelas extends Model
         'ketuakelas',
         'waketuakelas',
         'bendahara',
-        'seketaris',
+        'sekretaris',
         'seksi_kebersihan',
         'seksi_perlengkapan',
         'seksi_keamanan',

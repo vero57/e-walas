@@ -139,94 +139,143 @@
 
        <!-- Hero Section -->
        <section id="hero" class="hero section">
-    <div class="starter-section container" >
+    <div class="starter-section container">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Administrasi</h2>
+            <h2 class="font-weight-bold">Form Struktur Organisasi Kelas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
 
-
-        <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3>Edit Identitas Kelas</h3>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('identitaskelas.update', $identitaskelas->id) }}" method="POST">
-                @csrf
-                @method('PUT') <!-- Menandakan bahwa ini adalah update -->
-
-                <!-- Wali Kelas -->
-                <div class="mb-3">
-                    <label for="walas_id" class="form-label">Wali Kelas:</label>
-                    <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->walas_id ? 'selected' : '' }}>
-                                {{ $walas_item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Program Keahlian -->
-                <div class="mb-3">
-                    <label for="program_keahlian" class="form-label">Program Keahlian:</label>
-                    <select name="program_keahlian" id="program_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $program)
-                            <option value="{{ $program }}" {{ $program == $identitaskelas->program_keahlian ? 'selected' : '' }}>
-                                {{ $program }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Kompetensi Keahlian -->
-                <div class="mb-3">
-                    <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian:</label>
-                    <select name="kompetensi_keahlian" id="kompetensi_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $kompetensi)
-                            <option value="{{ $kompetensi }}" {{ $kompetensi == $identitaskelas->kompetensi_keahlian ? 'selected' : '' }}>
-                                {{ $kompetensi }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Wali Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
-                        <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                            @foreach($walas as $walas_item)
-                                <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->{'walas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $walas_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+            <div class="container">
+    <form action="{{ route('strukturorganisasi.update', $struktur->id) }}" method="POST">
+        @csrf
+        @method('PUT') 
+        <div class="mb-3">
+        <div class="mb-3">
+            <label for="walas_id" class="form-label">Wali Kelas Yang Login</label>
+            <select name="walas_id" id="walas_id" class="form-select" required>
+                <option value="" disabled selected>Pilih Wali Kelas</option>
+                @foreach($walas as $item)
+                <option value="{{ $item->id }}" {{ $struktur->walas_id == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
                 @endforeach
-
-                <!-- Ketua Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
-                        <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                            @foreach($siswas as $siswa_item)
-                                <option value="{{ $siswa_item->id }}" {{ $siswa_item->id == $identitaskelas->{'siswas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $siswa_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endforeach
-
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+            </select>
         </div>
-    </div>
+            <label for="kepala_sekolah" class="form-label">Kepala Sekolah</label>
+            <select name="kepala_sekolah" id="kepala_sekolah" class="form-select" required>
+                <option value="" disabled selected>Pilih Kepala Sekolah</option>
+                @foreach($kepsek as $item)
+                <option value="{{ $item->id }}" {{ $struktur->kepala_sekolah == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="walas" class="form-label">Wali Kelas</label>
+            <select name="walas" id="walas" class="form-select" required>
+                <option value="" disabled selected>Pilih Wali Kelas</option>
+                @foreach($walas as $item)
+                <option value="{{ $item->id }}" {{ $struktur->walas == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="ketuakelas" class="form-label">Ketua Kelas</label>
+            <select name="ketuakelas" id="ketuakelas" class="form-select" required>
+                <option value="" disabled selected>Pilih Ketua Kelas</option>
+                @foreach($siswa as $item)
+                <option value="{{ $item->id }}" {{ $struktur->ketuakelas == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="waketuakelas" class="form-label">Wakil Ketua Kelas</label>
+            <select name="waketuakelas" id="waketuakelas" class="form-select" required>
+                <option value="" disabled selected>Pilih Wakil Ketua Kelas</option>
+                @foreach($siswa as $item)
+                <option value="{{ $item->id }}" {{ $struktur->waketuakelas == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="bendahara" class="form-label">Bendahara</label>
+            <select name="bendahara" id="bendahara" class="form-select" required>
+                <option value="" disabled selected>Pilih Bendahara</option>
+                @foreach($siswa as $item)
+                <option value="{{ $item->id }}" {{ $struktur->bendahara == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="sekretaris" class="form-label">Sekretaris</label>
+            <select name="sekretaris" id="sekretaris" class="form-select" required>
+                <option value="" disabled selected>Pilih Sekretaris</option>
+                @foreach($siswa as $item)
+                <option value="{{ $item->id }}" {{ $struktur->sekretaris == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="seksi_kebersihan" class="form-label">Seksi Kebersihan</label>
+            <select name="seksi_kebersihan" id="seksi_kebersihan" class="form-select" required>
+                <option value="" disabled selected>Pilih Seksi Kebersihan</option>
+                @foreach($siswa as $item)
+                    <option value="{{ $item->id }}" {{ $struktur->seksi_kebersihan == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="seksi_perlengkapan" class="form-label">Seksi Perlengkapan</label>
+            <select name="seksi_perlengkapan" id="seksi_perlengkapan" class="form-select" required>
+                <option value="" disabled selected>Pilih Seksi Perlengkapan</option>
+                @foreach($siswa as $item)
+                    <option value="{{ $item->id }}" {{ $struktur->seksi_perlengkapan == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="seksi_keamanan" class="form-label">Seksi Keamanan</label>
+            <select name="seksi_keamanan" id="seksi_keamanan" class="form-select" required>
+                <option value="" disabled selected>Pilih Seksi Keamanan</option>
+                @foreach($siswa as $item)
+                    <option value="{{ $item->id }}" {{ $struktur->seksi_keamanan == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="seksi_kerohanian" class="form-label">Seksi kerohanian</label>
+            <select name="seksi_kerohanian" id="seksi_kerohanian" class="form-select" required>
+                <option value="" disabled selected>Pilih Seksi kerohanian</option>
+                @foreach($siswa as $item)
+                    <option value="{{ $item->id }}" {{ $struktur->seksi_kerohanian == $item->id ? 'selected' : '' }}>
+                        {{ $item->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
 </div>
 
+        </div>
     </section>
 
 </main>

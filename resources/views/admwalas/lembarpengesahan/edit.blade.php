@@ -130,8 +130,6 @@
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
-      
-
     </div>
   </header>
 
@@ -139,94 +137,49 @@
 
        <!-- Hero Section -->
        <section id="hero" class="hero section">
-    <div class="starter-section container" >
+    <div class="starter-section container">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
             <h2 class="font-weight-bold">Daftar Administrasi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
+            
+        
+            <div class="container mt-4">
+            <div class="card">
+    <div class="card-header">Edit Lembar Pengesahan</div>
+    <div class="card-body">
+        <form action="{{ route('lembarpengesahan.update', $lembarpengesahan->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
+            <!-- Wali Kelas -->
+            <div class="mb-3">
+                <label for="walas_id" class="form-label">Wali Kelas:</label>
+                <select name="walas_id" id="walas_id" class="form-select" required>
+                    @foreach($walas as $walas_item)
+                        <option value="{{ $walas_item->id }}" 
+                                {{ $lembarpengesahan->walas_id == $walas_item->id ? 'selected' : '' }}>
+                            {{ $walas_item->nama }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3>Edit Identitas Kelas</h3>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('identitaskelas.update', $identitaskelas->id) }}" method="POST">
-                @csrf
-                @method('PUT') <!-- Menandakan bahwa ini adalah update -->
+            <!-- Foto -->
+            <div class="mb-3">
+                <label for="image_url" class="form-label">Foto Dokumen:</label>
+                <input type="file" name="image_url" id="image_url" class="form-control" accept="image/*">
+                @if($lembarpengesahan->image_url)
+                    <img src="{{ asset('storage/'.$lembarpengesahan->image_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
+                @endif
+            </div>
 
-                <!-- Wali Kelas -->
-                <div class="mb-3">
-                    <label for="walas_id" class="form-label">Wali Kelas:</label>
-                    <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->walas_id ? 'selected' : '' }}>
-                                {{ $walas_item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Program Keahlian -->
-                <div class="mb-3">
-                    <label for="program_keahlian" class="form-label">Program Keahlian:</label>
-                    <select name="program_keahlian" id="program_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $program)
-                            <option value="{{ $program }}" {{ $program == $identitaskelas->program_keahlian ? 'selected' : '' }}>
-                                {{ $program }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Kompetensi Keahlian -->
-                <div class="mb-3">
-                    <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian:</label>
-                    <select name="kompetensi_keahlian" id="kompetensi_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $kompetensi)
-                            <option value="{{ $kompetensi }}" {{ $kompetensi == $identitaskelas->kompetensi_keahlian ? 'selected' : '' }}>
-                                {{ $kompetensi }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Wali Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
-                        <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                            @foreach($walas as $walas_item)
-                                <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->{'walas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $walas_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endforeach
-
-                <!-- Ketua Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
-                        <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                            @foreach($siswas as $siswa_item)
-                                <option value="{{ $siswa_item->id }}" {{ $siswa_item->id == $identitaskelas->{'siswas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $siswa_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endforeach
-
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
     </div>
 </div>
-
+</div>
     </section>
 
 </main>

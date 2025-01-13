@@ -40,6 +40,7 @@
   ======================================================== -->
 
   <style>
+   
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -139,92 +140,156 @@
 
        <!-- Hero Section -->
        <section id="hero" class="hero section">
-    <div class="starter-section container" >
+    <div class="starter-section container">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Administrasi</h2>
+            <h2 class="font-weight-bold">Jadwal Piket</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
 
-
-        <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3>Edit Identitas Kelas</h3>
+            </div>
         </div>
-        <div class="card-body">
-            <form action="{{ route('identitaskelas.update', $identitaskelas->id) }}" method="POST">
-                @csrf
-                @method('PUT') <!-- Menandakan bahwa ini adalah update -->
 
-                <!-- Wali Kelas -->
-                <div class="mb-3">
-                    <label for="walas_id" class="form-label">Wali Kelas:</label>
-                    <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->walas_id ? 'selected' : '' }}>
-                                {{ $walas_item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+        <div class="container">
+    <h1 class="mb-4">Tambah Jadwal Piket</h1>
+    <form action="{{ route('jadwalpiket.store') }}" method="POST">
+        @csrf
 
-                <!-- Program Keahlian -->
-                <div class="mb-3">
-                    <label for="program_keahlian" class="form-label">Program Keahlian:</label>
-                    <select name="program_keahlian" id="program_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $program)
-                            <option value="{{ $program }}" {{ $program == $identitaskelas->program_keahlian ? 'selected' : '' }}>
-                                {{ $program }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Kompetensi Keahlian -->
-                <div class="mb-3">
-                    <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian:</label>
-                    <select name="kompetensi_keahlian" id="kompetensi_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $kompetensi)
-                            <option value="{{ $kompetensi }}" {{ $kompetensi == $identitaskelas->kompetensi_keahlian ? 'selected' : '' }}>
-                                {{ $kompetensi }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Wali Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
-                        <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                            @foreach($walas as $walas_item)
-                                <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->{'walas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $walas_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+        <div class="form-group">
+            <label for="walas_id">Wali Kelas</label>
+            <select name="walas_id" class="form-control" id="walas_id" required>
+            <option value="" disabled selected>Pilih Wali Kelas</option>    
+            @foreach($walas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
                 @endforeach
-
-                <!-- Ketua Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
-                        <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                            @foreach($siswas as $siswa_item)
-                                <option value="{{ $siswa_item->id }}" {{ $siswa_item->id == $identitaskelas->{'siswas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $siswa_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endforeach
-
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+            </select>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label for="hari1">Hari 1</label>
+            <select name="hari1" class="form-control" id="hari1" required>
+                <option value="senin">Senin</option>
+                <option value="selasa">Selasa</option>
+                <option value="rabu">Rabu</option>
+                <option value="kamis">Kamis</option>
+                <option value="jumat">Jumat</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="siswa1_id">Siswa 1</label>
+            <select name="siswa1_id" class="form-control" id="siswa1_id" required>
+            <option value="" disabled selected>Pilih Siswa</option>
+            @foreach($siswas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Repeat for other Hari and Siswa fields -->
+        
+        <div class="form-group">
+            <label for="hari2">Hari 2</label>
+            <select name="hari2" class="form-control" id="hari2" required>
+                <option value="selasa">Selasa</option>
+                <option value="rabu">Rabu</option>
+                <option value="kamis">Kamis</option>
+                <option value="jumat">Jumat</option>
+                <option value="senin">Senin</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="siswa2_id">Siswa 2</label>
+            <select name="siswa2_id" class="form-control" id="siswa2_id" required>
+                <option value="" disabled selected>Pilih Siswa</option>
+            @foreach($siswas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="hari3">Hari 3</label>
+            <select name="hari3" class="form-control" id="hari3" required>
+                <option value="rabu">Rabu</option>
+                <option value="kamis">Kamis</option>
+                <option value="jumat">Jumat</option>
+                <option value="senin">Senin</option>
+                <option value="selasa">Selasa</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="siswa3_id">Siswa 3</label>
+            <select name="siswa3_id" class="form-control" id="siswa3_id" required>
+                <option value="" disabled selected>Pilih Siswa</option>
+            @foreach($siswas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="hari4">Hari 4</label>
+            <select name="hari4" class="form-control" id="hari4" required>
+                <option value="kamis">Kamis</option>
+                <option value="jumat">Jumat</option>
+                <option value="senin">Senin</option>
+                <option value="selasa">Selasa</option>
+                <option value="rabu">Rabu</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="siswa4_id">Siswa 4</label>
+            <select name="siswa4_id" class="form-control" id="siswa4_id" required>
+                <option value="" disabled selected>Pilih Siswa</option>
+            @foreach($siswas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="hari5">Hari 5</label>
+            <select name="hari5" class="form-control" id="hari5" required>
+                <option value="jumat">Jumat</option>
+                <option value="senin">Senin</option>
+                <option value="selasa">Selasa</option>
+                <option value="rabu">Rabu</option>
+                <option value="kamis">Kamis</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="siswa5_id">Siswa 5</label>
+            <select name="siswa5_id" class="form-control" id="siswa5_id" required>
+                <option value="" disabled selected>Pilih Siswa</option>
+            @foreach($siswas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="kurikulum_id">Kurikulum</label>
+            <select name="kurikulum_id" class="form-control" id="kurikulum_id">
+            <option value="" disabled selected>Pilih Kurikulum</option>
+            @foreach($kurikulum as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" name="tanggal" class="form-control" id="tanggal">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
 </div>
 
     </section>
@@ -247,15 +312,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <script>
         window.onload = function() {
@@ -288,3 +353,4 @@
 </body>
 
 </html>
+
