@@ -17,4 +17,10 @@ class Walas extends Model
         'image_url'
     ];
     public $timestamps = false;
+
+    public function rombel()
+    {
+        return $this->hasMany(Rombel::class, 'walas_id', 'id');
+    }
+
 }

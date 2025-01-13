@@ -158,6 +158,107 @@
 }
 
 </style>
+
+<!-- Tambahkan link font Roboto dari Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto */
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 10px 10px 0 0;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px; /* Memberikan jarak antar elemen */
+    }
+
+    .form-group label {
+        font-weight: 500; /* Bold sedang */
+        margin-bottom: 5px;
+        display: block; /* Mengatur label berada di atas input */
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%; /* Input field akan memenuhi lebar container */
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efek fokus */
+    }
+
+    .card-footer {
+        background-color: #f1f1f1;
+        border-top: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        text-align: right;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #333;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+</style>
+
+
 </head>
 
 <body class="index-page">
@@ -216,46 +317,127 @@
                 <i class="bi bi-gear-fill me-2"></i>
                      Data Diri
               </div> 
-
-              <!-- <h1 class="mb-4">
-               Kelola Data Diri Siswa <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1> -->
-
-              <!-- <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a> 
-            </div> -->
             </div>
           </div>
 
           <div class="col-lg-6">
-            <!-- <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-            </div> -->
           </div>
         </div>
 
         <div class="row stats-row gy-100 mt-9 justify-content-start align-items-start" data-aos="fade-up" data-aos-delay="500">
-    <div class="col-lg-12">
-        <br>
-        <h1 class="mb-4 text-center">
-            Biodata Diri <br>
-            <span class="accent-text"></span>
-        </h1>
-        <br>
-        <div class="container">
+        <div class="col-lg-12">
+    <br>
+    <h1 class="mb-4 text-center">
+        Biodata Diri <br>
+        <span class="accent-text"></span>
+    </h1>
+    <br>
+    <div class="container">
+        @if($biodatas->isEmpty())
+            <!-- Jika data kosong -->
             <h5>Data Tidak Ditemukan</h5>
-   
+        @else
+            <!-- Jika data ditemukan -->
+            @foreach($biodatas as $biodata)
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>{{ $biodata->nama_lengkap }}</h5>
+                    </div>
+                    <div class="card-body">
+                          <div class="row">
+                              <!-- Kolom Pertama -->
+                              <div class="col-md-6">
+                                  <p><strong>Jenis Kelamin:</strong> {{ $biodata->jenis_kelamin }}</p>
+                                  <p><strong>Tempat, Tanggal Lahir:</strong> {{ $biodata->tempat_lahir }}, {{ $biodata->tanggal_lahir }}</p>
+                                  <p><strong>Alamat:</strong> {{ $biodata->alamat }}</p>
+                                  <p><strong>Jalur Masuk:</strong> {{ $biodata->jalur_masuk }}</p>
+                                  <p><strong>Jarak Rumah:</strong> {{ $biodata->jarak_rumah }}</p>
+                                  <p><strong>Transportasi Sekolah:</strong> {{ $biodata->transportasi_sekolah }}</p>
+                                  <p><strong>Transportasi Rumah:</strong> {{ $biodata->transportasi_rumah }}</p>
+                                  <p><strong>Agama:</strong> {{ $biodata->agama }}</p>
+                                  <p><strong>Kewarganaan:</strong> {{ $biodata->kewarganegaraan }}</p>
+                              </div>
+
+                              <!-- Kolom Kedua -->
+                              <div class="col-md-6">
+                                  <p><strong>Anak Ke:</strong> {{ $biodata->anak_ke }}</p>
+                                  <p><strong>Jumlah Saudara:</strong> {{ $biodata->jumlah_saudara }}</p>
+                                  <p><strong>No WA:</strong> {{ $biodata->no_wa }}</p>
+                                  <p><strong>Email:</strong> {{ $biodata->email }}</p>
+                                  <p><strong>NIS:</strong> {{ $biodata->nis }}</p>
+                                  <p><strong>NISN:</strong> {{ $biodata->nisn }}</p>
+                                  <p><strong>Kelas:</strong> {{ $biodata->kelas }}</p>
+                                  <p><strong>Kompetensi:</strong> {{ $biodata->kompetensi }}</p>
+                                  <p><strong>Tahun Masuk:</strong> {{ $biodata->tahun_masuk }}</p>
+                              </div>
+                          </div>
+                         <!-- Google Maps -->
+                          <div class="mt-4">
+                              <h5>Lokasi Alamat</h5>
+                              <iframe
+                                  src="{{ $biodata->alamat_maps }}"
+                                  width="100%"
+                                  height="300"
+                                  style="border:0;"
+                                  allowfullscreen=""
+                                  loading="lazy">
+                              </iframe>
+                          </div>
+                          <!-- Google Maps - Tampak Depan -->
+                          <!-- <div class="mt-4">
+                              <h5>Tampak Depan</h5>
+                              <iframe>
+                                  src="https://www.google.com/maps/embed?pb={{ $biodata->alamat_maps }}&output=svembed"
+                                  width="100%"
+                                  height="300"
+                                  style="border:0;"
+                                  allowfullscreen=""
+                                  loading="lazy">
+                              </iframe>
+                          </div> -->
+                          <br>
+                    <div class="card-header">
+                        <h5>Data Orang Tua</h5>
+                    </div>
+                    <div class="card-body">
+                      <h5>Data Ayah</h5>
+                        <p><strong>Nama Ayah:</strong> {{ $biodata->nama_ayah }}</p>
+                        <p><strong>Pekerjaan Ayah:</strong> {{ $biodata->pekerjaan_ayah }}</p>
+                        <p><strong>Tempat, Tanggal Lahir:</strong> {{ $biodata->tempat_lahir_ayah }}, {{ $biodata->tanggal_lahir_ayah }}</p>
+                        <p><strong>Alamat Ayah :</strong> {{ $biodata->alamat_ayah }}</p>
+                        <p><strong>No WA Ayah:</strong> {{ $biodata->no_wa_ayah }}</p>
+                        <br>
+                      <h5>Data Ibu</h5>
+                        <p><strong>Nama ibu:</strong> {{ $biodata->nama_ibu }}</p>
+                        <p><strong>Pekerjaan ibu:</strong> {{ $biodata->pekerjaan_ibu }}</p>
+                        <p><strong>Tempat, Tanggal Lahir:</strong> {{ $biodata->tempat_lahir_ibu }}, {{ $biodata->tanggal_lahir_ibu }}</p>
+                        <p><strong>Alamat ibu :</strong> {{ $biodata->alamat_ibu }}</p>
+                        <p><strong>No WA ibu:</strong> {{ $biodata->no_wa_ibu }}</p>
+                    </div>
+  
+                    <div class="card-header">
+                        <h5>Data Pelengkap</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Nama Sekolah Asal:</strong> {{ $biodata->namasekolah_asal }}</p>
+                        <p><strong>Alamat Sekolah:</strong> {{ $biodata->alamat_sekolah }}</p>
+                        <p><strong>Tahun Lulus:</strong> {{ $biodata->tahun_lulus }}</p>
+                        <p><strong>Riwayat Penyakit:</strong> {{ $biodata->riwayat_penyakit }}</p>
+                        <p><strong>Alergi:</strong> {{ $biodata->alergi }}</p>
+                        <p><strong>Prestasi Akademik:</strong> {{ $biodata->prestasi_akademik }}</p>
+                        <p><strong>Prestasi Non Akademik:</strong> {{ $biodata->prestasi_non_akademik }}</p>
+                        <p><strong>Pengalaman Eskul:</strong> {{ $biodata->pengalaman_eskul }}</p>
+                        <p><strong>Kepribadian:</strong> {{ $biodata->kepribadian }}</p>
+                       
+                    <div class="card-footer text-end">
+                        <a href="{{ route('datadiri.edit', $biodata->id) }}" class="btn btn-danger btn-sm">Edit</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-
-        
+            @endforeach
+        @endif
     </div>
+</div>
+
 </div>
 
     </section><!-- /Hero Section -->

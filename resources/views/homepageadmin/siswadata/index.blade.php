@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Admin</title>
+  <title>E Walas SMKN 1 Cibinong - Admin</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -25,8 +25,9 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Unicons CSS -->
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+   <!-- Unicons CSS -->
+   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -91,18 +92,74 @@
             }
         }
 
+        
+    </style>
+
+<style>
+        /* Kotak pesan */
+        .alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            z-index: 9999;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+            box-sizing: border-box;
+            max-height: 60px; /* Menentukan tinggi kotak pesan agar tidak terlalu panjang */
+            overflow: hidden;
+            
+            /* Flexbox untuk menyejajarkan teks di tengah */
+            display: flex;
+            justify-content: center; /* Mengatur teks ke tengah secara horizontal */
+            align-items: center; /* Mengatur teks ke tengah secara vertikal */
+        }
+
+        .alert-danger {
+            background-color: #e74c3c; /* Merah */
+        }
+
+        .alert-success {
+            background-color: #2ecc71; /* Hijau */
+        }
+
+        /* Animasi slide down */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animasi slide up untuk saat pesan hilang */
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
         /* Style untuk modal */
-        .modal-content {
-    border-radius: 15px !important;
-    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2) !important;
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+    padding: 20px;
 }
 
 /* Style form dalam 2 kolom */
 .modal-body form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+    gap: 20px;
 }
-
 
 /* Mengatur elemen yang membentang penuh */
 .modal-body form .mb-3 {
@@ -248,28 +305,6 @@
     background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
     border-color: #0056b3; /* Mengubah warna border saat hover */
 }
-
-
-/* Responsive */
-@media screen and (max-width: 500px) {
-  .input-box {
-    height: 66px;
-    margin: 0 8px;
-  }
-  .input-box i {
-    left: 12px;
-    font-size: 25px;
-  }
-  .input-box input {
-    padding: 0 112px 0 50px;
-  }
-  .input-box .button {
-    right: 12px;
-    font-size: 14px;
-    padding: 8px 18px;
-  }
-}
-
 </style>
 </head>
 
@@ -299,21 +334,18 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/wargasekolah">Beranda</a></li>
-          <li><a href="/walas">Wali Kelas</a></li>
-          <li><a href="/guru">Guru</a></li>
-          <li><a href="/kakom">Kepala Kompetensi</a></li>
-          <li><a href="/kurikulum">Kurikulum</a></li>
-          <li><a href="/kepalasekolah" class="active">Kepala Sekolah</a></li>
+        
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
 
+     <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+     <div class="user-info d-flex align-items-center">
+            <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -324,10 +356,10 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Kepala Sekolah</h2>
+            <h2 class="font-weight-bold">Daftar Siswa</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kepala Sekolah -->
+                <!-- Form Cari Siswa -->
                 <!-- Tombol Unggah Data -->
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
@@ -340,45 +372,46 @@
                         <i class="bi bi-plus"></i> Tambah
                     </button>
 
-                    <form action="{{ url('kepsek_search') }}" method="GET">
+                    <!-- Search Box -->
+                    <form action="{{ url('siswadata_search') }}" method="GET">
                         <div class="input-box">
                             <i class="uil uil-search"></i>
-                                <input type="text" name="keyword" placeholder="Cari Kepala Sekolah..." value="{{ old('keyword', $keyword ?? '') }}" required />
+                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
                                 <button class="button" type="submit">Cari</button>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
-        
-        <!-- Jumlah Total GTK -->
-        <div class="text-end mb-4">
-    <span class="text-muted">
-        Jumlah Total: <strong>{{ $kepsekdata->count() }} Kepala Sekolah</strong>
-    </span>
-</div>
-        <div class="table-container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>WhatsApp</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($kepsekdata as $idx => $data)
+           <!-- Jumlah Total Siswa -->
+           <div class="text-end mb-4">
+            <span class="text-muted">
+                Jumlah Total: <strong>{{ $siswas->count() }} Siswa</strong>
+            </span>
+        </div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    <div class="d-flex px-2 py-1">
-                        {{ $idx + 1 . '. ' }}
-                    </div>
-                </td>
-                <td>{{ $data->nama }}</td>
-                <td>{{ $data->no_wa }}</td>
-                <td>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Jenis Kelamin</th>
+                <th>WhatsApp</th>
+                <th>Foto</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($siswas as $data)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $data->nama }}</td>
+                    <td>{{ $data->rombel ? $data->rombel->nama_kelas : 'Tidak ada rombel' }}</td>
+                    <td>{{ $data->jenis_kelamin }}</td>
+                    <td><a href="https://wa.me/{{ $data->no_wa }}" target="_blank">{{ $data->no_wa }}</a></td>
+                    <td>
                     @if(!empty($data->image_url) && $data->image_url != null)
                     <img src="{{ asset('storage/'.$data->image_url) }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                     @else
@@ -389,42 +422,36 @@
                         </div>
                     @endif
                 </td>
-                <td>
-                <div class="d-flex justify-content-center">
-                   <!-- Tombol Edit -->
-                   <a href="{{ route('kepsek.edit', $data->id) }}" class="btn btn-primary btn-sm me-2"">
-                       Edit
-                    </a>
-                    <!-- Tombol Delete -->
-                    <a href="/hapuskepsek/{{$data->id}}" class="btn btn-danger btn-sm">
-                           Hapus
-                </a>
-                </div>
+                    <td>{{ $data->status }}</td>
+                    <td>
+               
                 </td>
-            </tr>
-        @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada data siswa.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 
 <!-- Modal Unggah Data -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Kepala Sekolah</h5>
+                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Siswa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
-                    <a href="{{ route('kepsek.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                 </div>
 
                 <!-- Form Unggah Data -->
-                <form action="/kepsek-import" method="post" enctype="multipart/form-data">
+                <form action="/siswa-import" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
@@ -440,43 +467,9 @@
         </div>
     </div>
 </div>
+
 <!-- Modal Tambah Data -->
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Data Kepala Sekolah</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('kepsek.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="teacherName" class="form-label">Nama Kepala Sekolah</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Kepala Sekolah" name="nama" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherPhoto" class="form-label">Foto Kepala Sekolah</label>
-                        <input type="file" class="form-control" id="teacherPhoto" name="image_url" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="number" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp" name="no_wa" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="teacherPassword" placeholder="Masukkan Password" name="password" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-success">Tambah</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
@@ -501,9 +494,6 @@
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- bootstrap js -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-QFHYUXV3HSFfuEG6Vz8Kgygmkpdm42sGB8HhlNAmKXr6TOXrKqCyqHKTKLpvlPX7" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-tGlaOYxmi90Nf9A5jcM13CAdE4TT2ZmfdBG8e7eVsHO18TVAdu4iixCWjuf2NKaG" crossorigin="anonymous"></script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>

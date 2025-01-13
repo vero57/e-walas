@@ -36,6 +36,8 @@ use App\Http\Controllers\HomePageWalasController;
 use App\Http\Controllers\ProfilePageWalasController;
 use App\Http\Controllers\ProfilePageController;
 use App\Http\Controllers\SiswaPageController;
+use App\Http\Controllers\SiswaDataPageAdminController;
+use App\Http\Controllers\ShowDetailRombelController;
 use App\Http\Middleware\SiswaMiddleware;
 
 Route::get('/', function () {
@@ -73,6 +75,9 @@ Route::get('/adminpage', function () {
 
 })->name('homepageadmin.index');
 Route::resource('wargasekolah', WargaSekolahController::class);
+Route::resource('detailkelas', SiswaDataPageAdminController::class);
+Route::get('/rombeldetail/{walas_id}', [ShowDetailRombelController::class, 'showDetail'])->name('detail.kelas');
+
 
 // CRUD WALAS
 Route::resource('walas', WaliKelasPageController::class);
@@ -231,7 +236,10 @@ Route::resource('kinerjaguru', KinerjaGuruController::class);
     Route::get('/siswapage', [SiswaPageController::class, 'index'])->name('homepagesiswa.index');
     Route::resource('datadiri', DataDiriPageController::class);
     Route::resource('inputdatadiri', InputDataDiriSiswaController::class);
+    Route::post('/biodatasiswa/store', [InputDataDiriSiswaController::class, 'store'])->name('biodatasiswa.store');
     Route::resource('datadiripage', DataDiriDataController::class);
+    Route::get('/biodatasiswa/{id}/edit', [InputDataDiriSiswaController::class, 'edit'])->name('datadiri.edit');
+    Route::put('/biodatasiswaupdate/{id}', [InputDataDiriSiswaController::class, 'update'])->name('biodatasiswa.update');
 
 
 // Logout admin

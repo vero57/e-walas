@@ -149,5 +149,4 @@ public function downloadTemplate()
     return view('homepageadmin.rombeldata.index', compact('vwrombels', 'walas'));
 }
 
-    
 }

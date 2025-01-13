@@ -192,16 +192,28 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('siswa_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilesiswa" class="text-decoration-none">
+                    <span>{{ $siswa->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+
+            <form action="{{ route('logoutsiswa') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
       
 
     </div>
   </header>
 
   <main class="main">
+    
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
@@ -247,7 +259,7 @@
         </h1>
         <br>
         <div class="container">
-            <form action="/biodata_siswas/store" method="POST">
+            <form action="{{ route('biodatasiswa.store') }}" method="POST">
                 @csrf
         <h4 class="text-bold">Data Pribadi</h4>
                 <div class="row mb-3">
@@ -265,7 +277,15 @@
                         </select>
                     </div>
                 </div>
-                
+                <div class="mb-3">
+                        <label for="walas" class="form-label">Wali Kelas</label>
+                        <select class="form-select" id="walas" name="walas_id" required>
+                            <option selected disabled>Pilih Wali Kelas</option>
+                            @foreach ($walas as $wali)
+                                <option value="{{ $wali->id }}">{{ $wali->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
@@ -350,10 +370,10 @@
                         <input type="number" name="jumlah_saudara" id="jumlah_saudara" class="form-control" maxlength="5" required>
                     </div>
                 </div>
-                <div class="row mb-3">
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="no_wa" class="form-label">Nomor WhatsApp</label>
-                    <input type="text" name="no_wa" id="no_wa" class="form-control" maxlength="14" placeholder="Contoh: 081234567890" required>
+                    <input type="text" name="no_wa" id="no_wa" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" required>
                 </div>
                 <div class="col-md-6">
                     <label for="email" class="form-label">Email</label>
@@ -370,22 +390,14 @@
                         <input type="text" name="nisn" id="nisn" class="form-control" required>
                     </div>
                 </div>
-
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="no_wa" class="form-label">No. WA</label>
-                        <input type="tel" name="no_wa" id="no_wa" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                      <div class="col-md-6">
                         <label for="kelas" class="form-label">Kelas</label>
-                        <input type="text" name="kelas" id="kelas" class="form-control" required>
+                        <select name="kelas" id="kelas" class="form-control" required>
+                            <option value="X">X</option>
+                            <option value="XI">XI</option>
+                            <option value="XII">XII</option>
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="kompetensi" class="form-label">Kompetensi</label>
@@ -528,8 +540,8 @@
                         <textarea name="kepribadian" id="kepribadian" class="form-control" rows="3"></textarea>
                     </div>
                 </div>
-                <div>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+              
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                             Kirim
                         </button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addModal">

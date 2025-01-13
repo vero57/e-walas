@@ -39,8 +39,8 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-<style>
-        /* Kotak pesan */
+  <style>
+        /* Kotak Pesan */
         .alert {
             position: fixed;
             top: 0;
@@ -54,13 +54,13 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             animation: slideDown 0.5s ease-out;
             box-sizing: border-box;
-            max-height: 60px; /* Menentukan tinggi kotak pesan agar tidak terlalu panjang */
+            max-height: 60px;
             overflow: hidden;
-            
+
             /* Flexbox untuk menyejajarkan teks di tengah */
             display: flex;
-            justify-content: center; /* Mengatur teks ke tengah secara horizontal */
-            align-items: center; /* Mengatur teks ke tengah secara vertikal */
+            justify-content: center;
+            align-items: center;
         }
 
         .alert-danger {
@@ -92,185 +92,190 @@
         }
 
         /* Style untuk modal */
-.modal-content {
-    border-radius: 15px;
-    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
-    padding: 20px;
-}
+        .modal-content {
+            border-radius: 15px;
+            box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+            padding: 20px;
+        }
 
-/* Style form dalam 2 kolom */
-.modal-body form {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
-    gap: 20px;
-}
+        /* Style form dalam 2 kolom */
+        .modal-body form {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+            gap: 20px;
+        }
 
-/* Mengatur elemen yang membentang penuh */
-.modal-body form .mb-3 {
-    grid-column: span 1;
-}
+        .modal-body form .mb-3 {
+            grid-column: span 1;
+        }
 
-.modal-body form .mb-3:last-child {
-    grid-column: span 2; /* Password dan NIP membentang 2 kolom */
-}
+        .modal-body form .mb-3:last-child {
+            grid-column: span 2; /* Password dan NIP membentang 2 kolom */
+        }
 
-/* Style untuk tombol secara umum */
-.modal-footer {
-    justify-content: flex-start; /* Posisi ke kiri */
-    padding-right: 100px;
-}
+        /* Style untuk tombol secara umum */
+        .modal-footer {
+            justify-content: flex-start;
+            padding-right: 100px;
+        }
 
-.modal-footer button {
-    width: 100px;
-    border-radius: 8px;
-    transition: all 0.3s ease; /* Efek transisi halus */
-}
+        .modal-footer button {
+            width: 100px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
 
-/* Tombol Tutup */
-.modal-footer .btn-secondary {
-    background-color: #6c757d; /* Warna default */
-    border: none;
-}
+        /* Tombol Tutup */
+        .modal-footer .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
 
-/* Hover Tombol Tutup */
-.modal-footer .btn-secondary:hover {
-    background-color: #adb5bd; /* Warna lebih muda saat hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
-}
+        /* Hover Tombol Tutup */
+        .modal-footer .btn-secondary:hover {
+            background-color: #adb5bd;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-/* Tombol Tambah Data */
-.modal-footer .btn-success {
-    background-color: #0d6efd; /* Biru muda */
-    border: none;
-}
+        /* Tombol Tambah Data */
+        .modal-footer .btn-success {
+            background-color: #0d6efd;
+            border: none;
+        }
 
-/* Hover Tombol Tambah Data */
-.modal-footer .btn-success:hover {
-    background-color: #70b0ff; /* Biru yang lebih muda saat hover */
-    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.4); /* Bayangan biru saat hover */
-}
+        /* Hover Tombol Tambah Data */
+        .modal-footer .btn-success:hover {
+            background-color: #70b0ff;
+            box-shadow: 0 8px 16px rgba(13, 110, 253, 0.4);
+        }
 
-/* Style input dan select */
-.modal-body input,
-.modal-body select {
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    padding: 8px;
-}
+        /* Style input dan select */
+        .modal-body input,
+        .modal-body select {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            padding: 8px;
+        }
 
-/* Style untuk file upload */
-.modal-body input[type="file"] {
-    padding: 5px;
-}
+        /* Style untuk file upload */
+        .modal-body input[type="file"] {
+            padding: 5px;
+        }
 
-.modal-dialog {
-    max-width: 800px; /* Lebar maksimum modal */
-    width: 90%;       /* Lebar modal relatif */
-}
+        /* Modal dialog */
+        .modal-dialog {
+            max-width: 800px;
+            width: 90%;
+        }
 
-.d-flex-container {
-    display: flex;
-    align-items: center;  /* Menjaga semua elemen dalam container sejajar secara vertikal */
-    gap: 10px;  /* Menambah jarak antar elemen */
-}
+        /* Flex container */
+        .d-flex-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.ms-3 {
-    margin-left: 1rem;
-}
+        .ms-3 {
+            margin-left: 1rem;
+        }
 
-.me-2 {
-    margin-right: 0.5rem;
-}
+        .me-2 {
+            margin-right: 0.5rem;
+        }
 
-</style>
+        /* Input box */
+        .input-box {
+            position: relative;
+            height: 55px;
+            max-width: 900px;
+            width: 100%;
+            background: #fff;
+            margin: 0 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
 
-<style>
+        .input-box i,
+        .input-box .button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-.input-box {
-  position: relative;
-  height: 55px;
-  max-width: 900px;
-  width: 100%;
-  background: #fff;
-  margin: 0 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-.input-box i,
-.input-box .button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.input-box i {
-  left: 20px;
-  font-size: 30px;
-  color: #707070;
-}
-.input-box input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  font-size: 18px;
-  font-weight: 400;
-  border: none;
-  padding: 0 155px 0 65px;
-  background-color: transparent;
-}
-.input-box .button {
-  right: 25px;
-  font-size: 15px;
-  font-weight: 300;
-  color: #fff;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 6px;
-  background-color:  #0d83fd;
-  cursor: pointer;
-}
-.input-box .button:active {
-  transform: translateY(-50%) scale(0.98);
-}
+        .input-box i {
+            left: 20px;
+            font-size: 30px;
+            color: #707070;
+        }
 
-.button {
-    background-color: #007bff; /* Warna latar belakang tombol */
-    color: white; /* Warna teks tombol menjadi putih */
-    font-weight: bold; /* Membuat teks menjadi tebal/bold */
-    border: 2px solid #007bff; /* Warna border yang sesuai dengan tombol */
-    border-radius: 5px; /* Membuat sudut tombol melengkung */
-    padding: 10px 20px; /* Menambahkan padding agar tombol lebih besar */
-    font-size: 16px; /* Ukuran font lebih besar */
-    cursor: pointer; /* Menampilkan kursor pointer ketika dihover */
-    transition: background-color 0.3s ease; /* Efek transisi pada background saat hover */
-}
+        .input-box input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            font-size: 18px;
+            font-weight: 400;
+            border: none;
+            padding: 0 155px 0 65px;
+            background-color: transparent;
+        }
 
-/* Efek hover */
-.button:hover {
-    background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
-    border-color: #0056b3; /* Mengubah warna border saat hover */
-}
+        .input-box .button {
+            right: 25px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            background-color: #0d83fd;
+            cursor: pointer;
+        }
 
+        .input-box .button:active {
+            transform: translateY(-50%) scale(0.98);
+        }
 
-/* Responsive */
-@media screen and (max-width: 500px) {
-  .input-box {
-    height: 66px;
-    margin: 0 8px;
-  }
-  .input-box i {
-    left: 12px;
-    font-size: 25px;
-  }
-  .input-box input {
-    padding: 0 112px 0 50px;
-  }
-  .input-box .button {
-    right: 12px;
-    font-size: 14px;
-    padding: 8px 18px;
-  }
-}
+        /* Tombol umum */
+        .button {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
+        /* Efek hover */
+        .button:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Responsif */
+        @media screen and (max-width: 500px) {
+            .input-box {
+                height: 66px;
+                margin: 0 8px;
+            }
+
+            .input-box i {
+                left: 12px;
+                font-size: 25px;
+            }
+
+            .input-box input {
+                padding: 0 112px 0 50px;
+            }
+
+            .input-box .button {
+                right: 12px;
+                font-size: 14px;
+                padding: 8px 18px;
+            }
+        }
 </style>
 
 </head>

@@ -393,10 +393,10 @@
         
         <!-- Jumlah Total Siswa -->
         <div class="text-end mb-4">
-    <span class="text-muted">
-        Jumlah Total: <strong>{{ $siswa->count() }} Siswa</strong>
-    </span>
-</div>
+            <span class="text-muted">
+                Jumlah Total: <strong>{{ $siswa->count() }} Siswa</strong>
+            </span>
+        </div>
 
 <div class="table-container">
     <table class="table">

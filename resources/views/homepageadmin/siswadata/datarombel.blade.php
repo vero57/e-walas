@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Admin</title>
+  <title>E Walas SMKN 1 Cibinong - Admin</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="images/logokampak.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../../images/logokampak.png" rel="icon">
+  <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -18,18 +18,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/../../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Unicons CSS -->
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+   <!-- Unicons CSS -->
+   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="/../../assets/css/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: iLanding
@@ -91,18 +92,74 @@
             }
         }
 
+        
+    </style>
+
+<style>
+        /* Kotak pesan */
+        .alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            z-index: 9999;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+            box-sizing: border-box;
+            max-height: 60px; /* Menentukan tinggi kotak pesan agar tidak terlalu panjang */
+            overflow: hidden;
+            
+            /* Flexbox untuk menyejajarkan teks di tengah */
+            display: flex;
+            justify-content: center; /* Mengatur teks ke tengah secara horizontal */
+            align-items: center; /* Mengatur teks ke tengah secara vertikal */
+        }
+
+        .alert-danger {
+            background-color: #e74c3c; /* Merah */
+        }
+
+        .alert-success {
+            background-color: #2ecc71; /* Hijau */
+        }
+
+        /* Animasi slide down */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Animasi slide up untuk saat pesan hilang */
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
         /* Style untuk modal */
-        .modal-content {
-    border-radius: 15px !important;
-    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2) !important;
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+    padding: 20px;
 }
 
 /* Style form dalam 2 kolom */
 .modal-body form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+    gap: 20px;
 }
-
 
 /* Mengatur elemen yang membentang penuh */
 .modal-body form .mb-3 {
@@ -249,26 +306,31 @@
     border-color: #0056b3; /* Mengubah warna border saat hover */
 }
 
+/* Css Biar table navigation nempel dengan table utama */
 
-/* Responsive */
-@media screen and (max-width: 500px) {
-  .input-box {
-    height: 66px;
-    margin: 0 8px;
-  }
-  .input-box i {
-    left: 12px;
-    font-size: 25px;
-  }
-  .input-box input {
-    padding: 0 112px 0 50px;
-  }
-  .input-box .button {
-    right: 12px;
-    font-size: 14px;
-    padding: 8px 18px;
-  }
+.nav-tabs {
+    margin-bottom: 0; /* Hilangkan margin bawah */
+    border-bottom: 1px solid #dee2e6; /* Tambahkan border untuk memisahkan tab dengan konten */
 }
+
+.nav-tabs .nav-link {
+    border: 1px solid #dee2e6; /* Tambahkan border di sekitar tombol */
+    border-bottom: none; /* Hilangkan border bawah pada semua tombol */
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #fff; /* Warna background untuk tab aktif */
+    color: #495057; /* Warna teks tab aktif */
+    border-color: #dee2e6 #dee2e6 #fff; /* Pastikan border terlihat menyatu */
+}
+
+.tab-content {
+    border: 1px solid #dee2e6; /* Tambahkan border di sekitar konten */
+    border-top: none; /* Hilangkan border atas agar menyatu dengan tab navigation */
+    background-color: #fff; /* Pastikan latar belakang putih */
+    padding: 15px; /* Tambahkan padding untuk konten */
+}
+
 
 </style>
 </head>
@@ -299,21 +361,18 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/wargasekolah">Beranda</a></li>
-          <li><a href="/walas">Wali Kelas</a></li>
-          <li><a href="/guru">Guru</a></li>
-          <li><a href="/kakom">Kepala Kompetensi</a></li>
-          <li><a href="/kurikulum">Kurikulum</a></li>
-          <li><a href="/kepalasekolah" class="active">Kepala Sekolah</a></li>
+        
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
 
+     <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+     <div class="user-info d-flex align-items-center">
+            <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -324,10 +383,10 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Kepala Sekolah</h2>
+            <h2 class="font-weight-bold">Daftar Siswa Kelas : {{ $rombel->nama_kelas }}</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kepala Sekolah -->
+                <!-- Form Cari Siswa -->
                 <!-- Tombol Unggah Data -->
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
@@ -340,91 +399,141 @@
                         <i class="bi bi-plus"></i> Tambah
                     </button>
 
-                    <form action="{{ url('kepsek_search') }}" method="GET">
+                    <!-- Search Box -->
+                    <form action="{{ url('siswadata_search') }}" method="GET">
                         <div class="input-box">
                             <i class="uil uil-search"></i>
-                                <input type="text" name="keyword" placeholder="Cari Kepala Sekolah..." value="{{ old('keyword', $keyword ?? '') }}" required />
+                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
                                 <button class="button" type="submit">Cari</button>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
-        
-        <!-- Jumlah Total GTK -->
-        <div class="text-end mb-4">
-    <span class="text-muted">
-        Jumlah Total: <strong>{{ $kepsekdata->count() }} Kepala Sekolah</strong>
-    </span>
-</div>
+           <!-- Jumlah Total Siswa -->
+           <div class="text-end mb-4">
+            <span class="text-muted">
+                Jumlah Total: <strong>{{ $siswas->count() }} Siswa</strong>
+            </span>
+        </div>
+
+        <div class="container mt-4">
+   <!-- Tab Navigation -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="anggota-tab" data-bs-toggle="tab" data-bs-target="#anggota" type="button" role="tab" aria-controls="anggota" aria-selected="true">
+            Anggota Kelas
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="walas-tab" data-bs-toggle="tab" data-bs-target="#walas" type="button" role="tab" aria-controls="walas" aria-selected="false">
+            Wali Kelas
+        </button>
+    </li>
+</ul>
+
+<!-- Tab Content -->
+<div class="tab-content" id="myTabContent">
+    <!-- Tab 1: Data Anggota Kelas -->
+    <div class="tab-pane fade show active" id="anggota" role="tabpanel" aria-labelledby="anggota-tab">
         <div class="table-container">
             <table class="table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>WhatsApp</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($kepsekdata as $idx => $data)
-            <tr>
-                <td>
-                    <div class="d-flex px-2 py-1">
-                        {{ $idx + 1 . '. ' }}
-                    </div>
-                </td>
-                <td>{{ $data->nama }}</td>
-                <td>{{ $data->no_wa }}</td>
-                <td>
-                    @if(!empty($data->image_url) && $data->image_url != null)
-                    <img src="{{ asset('storage/'.$data->image_url) }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
-                    @else
-                        <!-- Tampilkan nama jika tidak ada gambar -->
-                        <div class="rounded-circle d-flex justify-content-center align-items-center" 
-                            style="width: 50px; height: 50px; background-color: #E86E7A; color: white; font-size: 20px;">
-                            {{ strtoupper(substr($data->nama, 0, 2)) }}
-                        </div>
-                    @endif
-                </td>
-                <td>
-                <div class="d-flex justify-content-center">
-                   <!-- Tombol Edit -->
-                   <a href="{{ route('kepsek.edit', $data->id) }}" class="btn btn-primary btn-sm me-2"">
-                       Edit
-                    </a>
-                    <!-- Tombol Delete -->
-                    <a href="/hapuskepsek/{{$data->id}}" class="btn btn-danger btn-sm">
-                           Hapus
-                </a>
-                </div>
-                </td>
-            </tr>
-        @endforeach
-                </tbody>
-            </table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jenis Kelamin</th>
+                            <th>WhatsApp</th>
+                            <th>Foto</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($siswas as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->nama }}</td>
+                                <td>{{ $data->rombel ? $data->rombel->nama_kelas : 'Tidak ada rombel' }}</td>
+                                <td>{{ $data->jenis_kelamin }}</td>
+                                <td>
+                                    <a href="https://wa.me/{{ $data->no_wa }}" target="_blank">
+                                        <i class="bi bi-whatsapp" style="font-size: 20px; color: green;"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    @if(!empty($data->image_url) && $data->image_url != null)
+                                        <img src="{{ asset('storage/'.$data->image_url) }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                    @else
+                                        <div class="rounded-circle d-flex justify-content-center align-items-center" 
+                                            style="width: 50px; height: 50px; background-color: #E86E7A; color: white; font-size: 20px;">
+                                            {{ strtoupper(substr($data->nama, 0, 2)) }}
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>{{ $data->status }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center">Tidak ada data siswa.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab 2: Data Wali Kelas -->
+        <div class="tab-pane fade" id="walas" role="tabpanel" aria-labelledby="walas-tab">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Wali Kelas</th>
+                            <th>No WhatsApp</th>
+                            <th>Kelas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($walas as $index => $data)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $data->walas->nama ?? 'Tidak ada wali kelas' }}</td>
+                                <td>
+                                    <a href="https://wa.me/{{ $data->no_wa }}" target="_blank">
+                                        <i class="bi bi-whatsapp" style="font-size: 20px; color: green;"></i>
+                                    </a>
+                                </td>
+                                <td>{{ $data->nama_kelas }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">Tidak ada data wali kelas.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Modal Unggah Data -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Kepala Sekolah</h5>
+                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Siswa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
-                    <a href="{{ route('kepsek.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                 </div>
 
                 <!-- Form Unggah Data -->
-                <form action="/kepsek-import" method="post" enctype="multipart/form-data">
+                <form action="/siswa-import" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
@@ -440,33 +549,58 @@
         </div>
     </div>
 </div>
-<!-- Modal Tambah Data -->
+
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Data Kepala Sekolah</h5>
+                <h5 class="modal-title" id="addModalLabel">Tambah Data Siswa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('kepsek.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="teacherName" class="form-label">Nama Kepala Sekolah</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Kepala Sekolah" name="nama" required>
+                        <label for="studentName" class="form-label">Nama Siswa</label>
+                        <input type="text" class="form-control" id="teacherName" placeholder="Masukan Nama Siswa" name="nama" required>
                     </div>
                     <div class="mb-3">
-                        <label for="teacherPhoto" class="form-label">Foto Kepala Sekolah</label>
+                        <label for="rombelsId" class="form-label">Rombels</label>
+                        <select class="form-select" id="rombelsId" name="rombels_id" required>
+                            <option selected disabled>Pilih Rombel</option>
+                            @foreach ($rombels as $rombel)
+                                <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentWhatsApp" class="form-label">WhatsApp</label>
+                        <input type="number" class="form-control" id="studentWhatsApp" placeholder="Masukkan nomor WhatsApp" name="no_wa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="passwowrd" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Foto Siswa</label>
                         <input type="file" class="form-control" id="teacherPhoto" name="image_url" required>
                     </div>
                     <div class="mb-3">
-                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="number" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp" name="no_wa" required>
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" aria-label="Pilih Gender" name="status" required>
+                            <option selected disabled>Pilih Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="nonaktif">Non Aktif</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="teacherPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="teacherPassword" placeholder="Masukkan Password" name="password" required>
+                        <label for="teacherGender" class="form-label">Pilih Gender</label>
+                        <select class="form-select" id="teacherGender" aria-label="Pilih Gender" name="jenis_kelamin" required>
+                            <option selected disabled>Pilih Gender</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -477,7 +611,6 @@
         </div>
     </div>
 </div>
-
 
 
     </div>
@@ -501,19 +634,16 @@
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- bootstrap js -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-QFHYUXV3HSFfuEG6Vz8Kgygmkpdm42sGB8HhlNAmKXr6TOXrKqCyqHKTKLpvlPX7" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-tGlaOYxmi90Nf9A5jcM13CAdE4TT2ZmfdBG8e7eVsHO18TVAdu4iixCWjuf2NKaG" crossorigin="anonymous"></script>
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="/../../assets/vendor/aos/aos.js"></script>
+  <script src="/../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="/../../assets/js/main.js"></script>
 
   <script>
         window.onload = function() {
