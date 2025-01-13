@@ -207,6 +207,12 @@ table td {
             </div>
         </div>
 
+        
+        <!-- Jumlah Total GTK -->
+        <div class="text-end mb-4">
+            <span class="text-muted">Jumlah Total: <strong>15 Administrasi</strong></span>
+        </div>
+
         <div class="container mt-4">
     <h3 class="text-center">Administrasi Walas</h3>
     <table class="table table-striped table-bordered mt-3">
@@ -232,7 +238,7 @@ table td {
                 <td>2</td>
                 <td>Lembar Pengesahan</td>
                 <td>
-                    <a href="#">
+                    <a href="{{ route('lembarpengesahan.index') }}">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -241,7 +247,7 @@ table td {
                 <td>3</td>
                 <td>Struktur Organisasi Kelas</td>
                 <td>
-                    <a href="#">
+                    <a href="{{ route('strukturorganisasi.index') }}">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -250,7 +256,7 @@ table td {
                 <td>4</td>
                 <td>Jadwal KBM</td>
                 <td>
-                    <a href="#">
+                    <a href="{{route('jadwalkbm.index')}}">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -259,7 +265,7 @@ table td {
                 <td>5</td>
                 <td>Jadwal Kegiatan Piket Kelas</td>
                 <td>
-                    <a href="#">
+                    <a href="{{route('jadwalpiket.index')}}">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>

@@ -45,9 +45,9 @@ return new class extends Migration
             $table->unsignedBigInteger('guru5_id');
             $table->foreign('guru5_id')->references('id')->on('gurus')->onDelete('cascade')->onUpdate ('cascade');
 
-            $table->unsignedBigInteger('kurikulum_id');
+            $table->unsignedBigInteger('kurikulum_id')->nullable();
             $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
-            $table->date('tanggal');
+            $table->date('tanggal')->nullable();
             $table->string('ttdkurikulum_url',255)->nullable();
             $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();

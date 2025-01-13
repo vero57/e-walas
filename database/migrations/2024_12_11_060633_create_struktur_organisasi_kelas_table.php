@@ -25,8 +25,8 @@ return new class extends Migration
             $table->foreign('waketuakelas')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('bendahara');
             $table->foreign('bendahara')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('seketaris');
-            $table->foreign('seketaris')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->unsignedBigInteger('sekretaris');
+            $table->foreign('sekretaris')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('seksi_kebersihan');
             $table->foreign('seksi_kebersihan')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('seksi_perlengkapan');
@@ -35,9 +35,9 @@ return new class extends Migration
             $table->foreign('seksi_keamanan')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
             $table->unsignedBigInteger('seksi_kerohanian');
             $table->foreign('seksi_kerohanian')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('kurikulum_id');
+            $table->unsignedBigInteger('kurikulum_id')->nullable();
             $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
-            $table->date('tanggal');
+            $table->date('tanggal')->nullable();
             $table->string('ttdkurikulum_url',255)->nullable();
             $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();

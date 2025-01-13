@@ -37,9 +37,9 @@ return new class extends Migration
                 'Membagi dokumen hasil pembelajaran - Daftar serah terima raport'
             ])->default('Membagi dokumen hasil pembelajaran - Daftar serah terima raport');
             $table->enum('keterangan', ['true', 'false'])->default('false');
-            $table->unsignedBigInteger('kurikulum_id');
+            $table->unsignedBigInteger('kurikulum_id')->nullable();
             $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
-            $table->date('tanggalttd');
+            $table->date('tanggalttd')->nullable();
             $table->string('ttdkurikulum_url',255)->nullable();
             $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();

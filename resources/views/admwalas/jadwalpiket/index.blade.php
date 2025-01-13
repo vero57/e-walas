@@ -9,7 +9,7 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="../../../images/logokampak.png" rel="icon">
+  <link href="images/logokampak.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -18,18 +18,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
   <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
 
   <!-- Main CSS File -->
-  <link href="../../../assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: iLanding
@@ -40,6 +40,23 @@
   ======================================================== -->
 
   <style>
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        width: 100%;
+        table-layout: auto;
+        min-width: 1200px; /* Atur sesuai dengan lebar tabel kamu */
+    }
+
+    th, td {
+        white-space: nowrap;
+    }
+
+
+
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -139,91 +156,79 @@
 
        <!-- Hero Section -->
        <section id="hero" class="hero section">
-    <div class="starter-section container" >
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Administrasi</h2>
+            <h2 class="font-weight-bold">Jadwal Piket</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
+                <!-- Form Cari Administrasi -->
+                <!-- Tombol Unggah Data -->
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <i class="bi bi-cloud-upload"></i> Unggah Data
+                </button>
+                <!-- Tombol Tambah Data -->
+                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
+                <div class="d-flex-container">
+                <a href="{{ route('jadwalpiket.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus"></i> Tambah
+                </a>
 
 
-        <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3>Edit Identitas Kelas</h3>
+                    <!-- Search Box -->
+                <div class="searchBox">
+                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
+                    <button class="searchButton" href="#">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <form action="{{ route('identitaskelas.update', $identitaskelas->id) }}" method="POST">
-                @csrf
-                @method('PUT') <!-- Menandakan bahwa ini adalah update -->
 
-                <!-- Wali Kelas -->
-                <div class="mb-3">
-                    <label for="walas_id" class="form-label">Wali Kelas:</label>
-                    <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->walas_id ? 'selected' : '' }}>
-                                {{ $walas_item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Program Keahlian -->
-                <div class="mb-3">
-                    <label for="program_keahlian" class="form-label">Program Keahlian:</label>
-                    <select name="program_keahlian" id="program_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $program)
-                            <option value="{{ $program }}" {{ $program == $identitaskelas->program_keahlian ? 'selected' : '' }}>
-                                {{ $program }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Kompetensi Keahlian -->
-                <div class="mb-3">
-                    <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian:</label>
-                    <select name="kompetensi_keahlian" id="kompetensi_keahlian" class="form-select" required>
-                        @foreach(['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP', 'TFLM', 'TKR', 'TOI'] as $kompetensi)
-                            <option value="{{ $kompetensi }}" {{ $kompetensi == $identitaskelas->kompetensi_keahlian ? 'selected' : '' }}>
-                                {{ $kompetensi }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Wali Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
-                        <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                            @foreach($walas as $walas_item)
-                                <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->{'walas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $walas_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+        <div class="container">
+    <h1 class="mb-4">Jadwal Piket</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Wali Kelas</th>
+                    <th>Hari 1</th>
+                    <th>Siswa 1</th>
+                    <th>Hari 2</th>
+                    <th>Siswa 2</th>
+                    <th>Hari 3</th>
+                    <th>Siswa 3</th>
+                    <th>Hari 4</th>
+                    <th>Siswa 4</th>
+                    <th>Hari 5</th>
+                    <th>Siswa 5</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($jadwalpiket as $index => $jadwal)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $jadwal->walas_id }}</td>
+                    <td>{{ $jadwal->hari1 }}</td>
+                    <td>{{ $jadwal->siswa1 ? $jadwal->siswa1->nama : '-' }}</td>
+                    <td>{{ $jadwal->hari2 }}</td>
+                    <td>{{ $jadwal->siswa2 ? $jadwal->siswa2->nama : '-' }}</td>
+                    <td>{{ $jadwal->hari3 }}</td>
+                    <td>{{ $jadwal->siswa3 ? $jadwal->siswa3->nama : '-' }}</td>
+                    <td>{{ $jadwal->hari4 }}</td>
+                    <td>{{ $jadwal->siswa4 ? $jadwal->siswa4->nama : '-' }}</td>
+                    <td>{{ $jadwal->hari5 }}</td>
+                    <td>{{ $jadwal->siswa5 ? $jadwal->siswa5->nama : '-' }}</td>
+                    <td>
+                        <a href="{{ route('jadwalpiket.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        
+                    </td>
+                </tr>
                 @endforeach
-
-                <!-- Ketua Kelas per Tingkat -->
-                @foreach([10, 11, 12, 13] as $grade)
-                    <div class="mb-3">
-                        <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
-                        <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                            @foreach($siswas as $siswa_item)
-                                <option value="{{ $siswa_item->id }}" {{ $siswa_item->id == $identitaskelas->{'siswas_id_'.$grade} ? 'selected' : '' }}>
-                                    {{ $siswa_item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endforeach
-
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -247,15 +252,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <script>
         window.onload = function() {
