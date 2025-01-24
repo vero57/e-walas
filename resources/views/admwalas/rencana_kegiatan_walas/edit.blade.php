@@ -10,7 +10,7 @@
 
   <!-- Favicons -->
   <link href="../../../images/logokampak.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -142,92 +142,106 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Tambah Identitas Kelas</h2>
+            <h1 class="font-weight-bold">Rencana Kegiatan Walas - {{ ucfirst($semester) }}</h1>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-
-        <!-- Formulir Identitas Kelas dalam Card -->
-        <div class="container mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="{{ route('identitaskelas.store') }}" method="POST">
-                            @csrf
-                            <!-- Wali Kelas -->
-                            <div class="mb-3">
-                                <label for="walas_id" class="form-label">Wali Kelas:</label>
-                                <select name="walas_id" id="walas_id" class="form-select" required>
-                                    @foreach($walas as $walas_item)
-                                        <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Program Keahlian -->
-                            <div class="mb-3">
-                                <label for="program_keahlian" class="form-label">Program Keahlian:</label>
-                                <select name="program_keahlian" id="program_keahlian" class="form-select" required>
-                                    <option value="SIJA">SIJA</option>
-                                    <option value="TKJ">TKJ</option>
-                                    <option value="RPL">RPL</option>
-                                    <option value="DKV">DKV</option>
-                                    <option value="DPIB">DPIB</option>
-                                    <option value="TKP">TKP</option>
-                                    <option value="TP">TP</option>
-                                    <option value="TFLM">TFLM</option>
-                                    <option value="TKR">TKR</option>
-                                    <option value="TOI">TOI</option>
-                                </select>
-                            </div>
-
-                            <!-- Kompetensi Keahlian -->
-                            <div class="mb-3">
-                                <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian:</label>
-                                <select name="kompetensi_keahlian" id="kompetensi_keahlian" class="form-select" required>
-                                    <option value="SIJA">SIJA</option>
-                                    <option value="TKJ">TKJ</option>
-                                    <option value="RPL">RPL</option>
-                                    <option value="DKV">DKV</option>
-                                    <option value="DPIB">DPIB</option>
-                                    <option value="TKP">TKP</option>
-                                    <option value="TP">TP</option>
-                                    <option value="TFLM">TFLM</option>
-                                    <option value="TKR">TKR</option>
-                                    <option value="TOI">TOI</option>
-                                </select>
-                            </div>
-
-                            <!-- Wali Kelas per Tingkat -->
-                            @foreach([10, 11, 12, 13] as $grade)
-                                <div class="mb-3">
-                                    <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
-                                    <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                                        @foreach($walas as $walas_item)
-                                            <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endforeach
-
-                            <!-- Ketua Kelas per Tingkat -->
-                            @foreach([10, 11, 12, 13] as $grade)
-                                <div class="mb-3">
-                                    <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
-                                    <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                                        @foreach($siswas as $siswa_item)
-                                            <option value="{{ $siswa_item->id }}">{{ $siswa_item->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endforeach
-
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </form>
-                    </div>
-                </div>
+                
             </div>
-
         </div>
-    </section>
+
+        <div class="container">
+        <form action="{{ route('rencana_kegiatan_walas.update', ['semester' => $semester, 'id' => $rencana_kegiatan->id]) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="mb-3">
+    <label for="walas_id" class="form-label">Wali Kelas:</label>
+    <select name="walas_id" id="walas_id" class="form-select" required>
+        <option value="" disabled selected>Pilih Wali Kelas</option>
+        @foreach($walas as $walas_item)
+            <option value="{{ $walas_item->id }}" 
+                @if(old('walas_id', $rencana_kegiatan->walas_id) == $walas_item->id) selected @endif>
+                {{ $walas_item->nama }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+
+        <!-- Semester -->
+        <div class="form-group">
+            <label for="semester">Semester</label>
+            <input type="text" name="semester" class="form-control" value="{{ old('semester', $semester) }}" readonly>
+        </div>
+
+        <!-- Minggu Ke -->
+        <div class="form-group">
+            <label for="minggu_ke">Minggu ke-</label>
+            <select name="minggu_ke" class="form-control" id="minggu_ke" required>
+                @for ($i = 1; $i <= 18; $i++)
+                    <option value="{{ $i }}" 
+                        @if(old('minggu_ke', 1) == $i) selected @endif>
+                        {{ $i }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+
+        <!-- Kegiatan dan Bukti -->
+        <div class="form-group">
+            <label for="kegiatan_bukti">Kegiatan dan Bukti</label>
+            <select name="kegiatan_bukti" class="form-control" id="kegiatan_bukti" required>
+                @foreach([
+                    "Menyusun program / mengisi adm wali kelas - Adm Wali kelas",
+                    "Menyusun struktur organisasi kelas - Organigram",
+                    "Sosialisasi sistem pemelajaran Kurikulum 2013 atau Kurikulum Merdeka - Absensi",
+                    "Menata tempat duduk di kelas - Denah kelas",
+                    "Membagi biodata peserta didik - Ada bio data",
+                    "Mengisi data peserta - Ada data peserta",
+                    "Membimbing peserta didik - Ada daftar bimbingan",
+                    "Mengecek kehadiran peserta didik - Ada rekap",
+                    "Menindaklanjuti hasil pengecekan absensi - Pemang. / homevisit",
+                    "Membenahi keadaan kelas - Kelas tertata / lengkap",
+                    "Mengontrol kemajuan hasil pemelajaran - Rekaman kegiatan",
+                    "Visit Class - Surat tugas",
+                    "Home Visit - Rekaman kegiatan",
+                    "Rekapitulasi nilai kompetensi - Rekap nilai",
+                    "Membimbing remedial peserta didik - Daftar Remedial",
+                    "Mengisi Leger - Ada Leger",
+                    "Mengisi Buku Laporan - Ada buku Laporan",
+                    "Membagi dokumen hasil pembelajaran - Daftar serah terima raport"
+                ] as $option)
+                    <option value="{{ $option }}" 
+                        @if(old('kegiatan_bukti') == $option) selected @endif>
+                        {{ $option }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- Keterangan -->
+        <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <select name="keterangan" class="form-control" required>
+                <option value="true" @if(old('keterangan') == 'true') selected @endif>Ada</option>
+                <option value="false" @if(old('keterangan') == 'false') selected @endif>Tidak Ada</option>
+            </select>
+        </div>
+
+        <!-- Tanggal -->
+        <div class="form-group">
+            <label for="tanggalttd">Tanggal</label>
+            <input type="date" name="tanggalttd" class="form-control" value="{{ old('tanggalttd') }}">
+        </div>
+
+        <!-- TTD Walas URL -->
+        <div class="form-group">
+            <label for="ttdwalas_url">Tanda Tangan Walas URL</label>
+            <input type="text" name="ttdwalas_url" class="form-control" value="{{ old('ttdwalas_url') }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
+</div>
 
 </main>
   
@@ -247,15 +261,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../../../assets/vendor/aos/aos.js"></script>
+  <script src="../../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="../assets/js/main.js"></script>
+  <script src="../../../assets/js/main.js"></script>
 
   <script>
         window.onload = function() {

@@ -10,11 +10,14 @@ class JadwalKbm extends Model
     use HasFactory;
 
     /**
-     * The table associated with the model.
+     * Table name.
      *
      * @var string
      */
     protected $table = 'jadwal_kbms';
+    protected $primaryKey = 'id';
+    
+
 
     /**
      * The attributes that are mass assignable.
@@ -22,95 +25,61 @@ class JadwalKbm extends Model
      * @var array
      */
     protected $fillable = [
+        'rombels_id',
         'walas_id',
-        'hari1', 'mapel1_id', 'guru1_id',
-        'hari2', 'mapel2_id', 'guru2_id',
-        'hari3', 'mapel3_id', 'guru3_id',
-        'hari4', 'mapel4_id', 'guru4_id',
-        'hari5', 'mapel5_id', 'guru5_id',
         'kurikulum_id',
         'tanggal',
         'ttdkurikulum_url',
         'ttdwalas_url',
+        'senin',
+        'selasa',
+        'rabu',
+        'kamis',
+        'jumat',
     ];
 
     /**
-     * Get the mapel1 associated with this schedule.
+     * Cast JSON fields to array automatically.
+     *
+     * @var array
      */
-    public function mapel1()
-    {
-        return $this->belongsTo(Mapel::class, 'mapel1_id');
-    }
+    protected $casts = [
+        'senin' => 'array',
+        'selasa' => 'array',
+        'rabu' => 'array',
+        'kamis' => 'array',
+        'jumat' => 'array',
+    ];
 
     /**
-     * Get the guru1 associated with this schedule.
+     * Relationship with Walas.
      */
-    public function guru1()
+    public function walas()
     {
-        return $this->belongsTo(Guru::class, 'guru1_id');
+        return $this->belongsTo(Walas::class);
     }
 
-    /**
-     * Get the mapel2 associated with this schedule.
-     */
-    public function mapel2()
-    {
-        return $this->belongsTo(Mapel::class, 'mapel2_id');
-    }
+    public function rombel()
+{
+    return $this->belongsTo(Rombel::class, 'rombels_id');
+}
 
     /**
-     * Get the guru2 associated with this schedule.
+     * Relationship with Kurikulum.
      */
-    public function guru2()
+    public function kurikulum()
     {
-        return $this->belongsTo(Guru::class, 'guru2_id');
+        return $this->belongsTo(Kurikulum::class);
     }
 
-    /**
-     * Get the mapel3 associated with this schedule.
-     */
-    public function mapel3()
-    {
-        return $this->belongsTo(Mapel::class, 'mapel3_id');
-    }
+    public function mapels()
+{
+    return $this->hasMany(Mapel::class, 'id', 'mapel_id');
+}
 
-    /**
-     * Get the guru3 associated with this schedule.
-     */
-    public function guru3()
-    {
-        return $this->belongsTo(Guru::class, 'guru3_id');
-    }
+public function gurus()
+{
+    return $this->hasMany(Guru::class, 'id', 'guru_id');
+}
 
-    /**
-     * Get the mapel4 associated with this schedule.
-     */
-    public function mapel4()
-    {
-        return $this->belongsTo(Mapel::class, 'mapel4_id');
-    }
-
-    /**
-     * Get the guru4 associated with this schedule.
-     */
-    public function guru4()
-    {
-        return $this->belongsTo(Guru::class, 'guru4_id');
-    }
-
-    /**
-     * Get the mapel5 associated with this schedule.
-     */
-    public function mapel5()
-    {
-        return $this->belongsTo(Mapel::class, 'mapel5_id');
-    }
-
-    /**
-     * Get the guru5 associated with this schedule.
-     */
-    public function guru5()
-    {
-        return $this->belongsTo(Guru::class, 'guru5_id');
-    }
 }

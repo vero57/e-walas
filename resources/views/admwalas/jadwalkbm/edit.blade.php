@@ -10,7 +10,7 @@
 
   <!-- Favicons -->
   <link href="../../../images/logokampak.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -139,95 +139,116 @@
 
        <!-- Hero Section -->
        <section id="hero" class="hero section">
-    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+    <div class="starter-section container">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Tambah Identitas Kelas</h2>
+            <h1 class="font-weight-bold">Edit Jadwal Kbm</h1>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
+            </div>
+        </div>
 
-        <!-- Formulir Identitas Kelas dalam Card -->
-        <div class="container mt-4">
-                <div class="card">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+    
+<div class="container">
+    <h2>Edit Jadwal KBM</h2>
+    <form action="{{ route('jadwalkbm.update', $jadwalKbm->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <!-- Field lainnya -->
+
+        <div class="mb-3">
+            <label for="rombels_id" class="form-label">Rombel</label>
+            <select name="rombels_id" id="rombels_id" class="form-select" required>
+                <option value="" disabled selected>Pilih Rombel</option>
+                @foreach ($rombels as $rombel)
+                    <option value="{{ $rombel->id }}" {{ $rombel->id == $jadwalKbm->rombels_id ? 'selected' : '' }}>
+                        {{ $rombel->nama_kelas }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="walas_id" class="form-label">Wali Kelas</label>
+            <select name="walas_id" id="walas_id" class="form-select" required>
+                <option value="" disabled selected>Pilih Wali Kelas</option>
+                @foreach ($walasList as $walas)
+                    <option value="{{ $walas->id }}" {{ $walas->id == $jadwalKbm->walas_id ? 'selected' : '' }}>
+                        {{ $walas->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Jadwal KBM</label>
+            @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ ucfirst($hari) }}
+                    </div>
                     <div class="card-body">
-                        <form action="{{ route('identitaskelas.store') }}" method="POST">
-                            @csrf
-                            <!-- Wali Kelas -->
+                        @for ($jam = 1; $jam <= 12; $jam++)
                             <div class="mb-3">
-                                <label for="walas_id" class="form-label">Wali Kelas:</label>
-                                <select name="walas_id" id="walas_id" class="form-select" required>
-                                    @foreach($walas as $walas_item)
-                                        <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Program Keahlian -->
-                            <div class="mb-3">
-                                <label for="program_keahlian" class="form-label">Program Keahlian:</label>
-                                <select name="program_keahlian" id="program_keahlian" class="form-select" required>
-                                    <option value="SIJA">SIJA</option>
-                                    <option value="TKJ">TKJ</option>
-                                    <option value="RPL">RPL</option>
-                                    <option value="DKV">DKV</option>
-                                    <option value="DPIB">DPIB</option>
-                                    <option value="TKP">TKP</option>
-                                    <option value="TP">TP</option>
-                                    <option value="TFLM">TFLM</option>
-                                    <option value="TKR">TKR</option>
-                                    <option value="TOI">TOI</option>
-                                </select>
-                            </div>
-
-                            <!-- Kompetensi Keahlian -->
-                            <div class="mb-3">
-                                <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian:</label>
-                                <select name="kompetensi_keahlian" id="kompetensi_keahlian" class="form-select" required>
-                                    <option value="SIJA">SIJA</option>
-                                    <option value="TKJ">TKJ</option>
-                                    <option value="RPL">RPL</option>
-                                    <option value="DKV">DKV</option>
-                                    <option value="DPIB">DPIB</option>
-                                    <option value="TKP">TKP</option>
-                                    <option value="TP">TP</option>
-                                    <option value="TFLM">TFLM</option>
-                                    <option value="TKR">TKR</option>
-                                    <option value="TOI">TOI</option>
-                                </select>
-                            </div>
-
-                            <!-- Wali Kelas per Tingkat -->
-                            @foreach([10, 11, 12, 13] as $grade)
-                                <div class="mb-3">
-                                    <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
-                                    <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                                        @foreach($walas as $walas_item)
-                                            <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
+                                <label for="{{ $hari }}_{{ $jam }}" class="form-label">Jam ke-{{ $jam }}</label>
+                                <div class="input-group">
+                                    <select name="{{ $hari }}[{{ $jam }}][mapel]" class="form-select">
+                                        <option value="" disabled selected>Pilih Mata Pelajaran</option>
+                                        @foreach ($mapels as $mapel)
+                                            <option value="{{ $mapel->id }}"
+                                                @if(isset($jadwalKbm->{$hari}[$jam-1]) && $jadwalKbm->{$hari}[$jam-1]['mapel_id'] == $mapel->id)
+                                                    selected
+                                                @endif
+                                            >
+                                                {{ $mapel->nama_mapel }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <select name="{{ $hari }}[{{ $jam }}][guru]" class="form-select">
+                                        <option value="" disabled selected>Pilih Nama Guru</option>
+                                        @foreach ($gurus as $guru)
+                                            <option value="{{ $guru->id }}"
+                                                @if(isset($jadwalKbm->{$hari}[$jam-1]) && $jadwalKbm->{$hari}[$jam-1]['guru_id'] == $guru->id)
+                                                    selected
+                                                @endif
+                                            >
+                                                {{ $guru->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
-                            @endforeach
-
-                            <!-- Ketua Kelas per Tingkat -->
-                            @foreach([10, 11, 12, 13] as $grade)
-                                <div class="mb-3">
-                                    <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
-                                    <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                                        @foreach($siswas as $siswa_item)
-                                            <option value="{{ $siswa_item->id }}">{{ $siswa_item->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endforeach
-
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </form>
+                            </div>
+                        @endfor
                     </div>
                 </div>
-            </div>
-
+            @endforeach
         </div>
-    </section>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
+</div>
 
 </main>
   
@@ -247,15 +268,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../../../assets/vendor/aos/aos.js"></script>
+  <script src="../../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="../assets/js/main.js"></script>
+  <script src="../../../assets/js/main.js"></script>
 
   <script>
         window.onload = function() {

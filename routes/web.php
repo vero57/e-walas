@@ -1,6 +1,6 @@
 <?php
 
-use RencanaKegiatanWalasController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SiswaMiddleware;
 use App\Http\Controllers\LoginController;
@@ -9,6 +9,7 @@ use App\Http\Controllers\KakomTAController;
 use App\Http\Controllers\GuruPageController;
 use App\Http\Controllers\KepsekTAController;
 use App\Http\Controllers\LoginGtkController;
+use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\DashAdminController;
 use App\Http\Controllers\JadwalKBMController;
 use App\Http\Controllers\KakomDataController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\HomePageWalasController;
 use App\Http\Controllers\KurikulumPageController;
 use App\Http\Controllers\WaliKelasPageController;
 use App\Http\Controllers\DataSiswaWalasController;
+use App\Http\Controllers\DetailPresensiController;
 use App\Http\Controllers\IdentitasKelasController;
 use App\Http\Controllers\LoginKurikulumController;
 use App\Http\Controllers\LembarPengesahanController;
@@ -42,6 +44,7 @@ use App\Http\Controllers\ProfilePageWalasController;
 use App\Http\Controllers\AdministrasiWalasController;
 use App\Http\Controllers\InputDataDiriSiswaController;
 use App\Http\Controllers\StrukturOrganisasiController;
+use App\Http\Controllers\RencanaKegiatanWalasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -200,7 +203,20 @@ Route::resource('jadwalkbm', JadwalKBMController::class);
 Route::resource('jadwalpiket', JadwalPiketController::class);
 Route::resource('rencana_kegiatan_walas', RencanaKegiatanWalasController::class)->except(['index']);
 Route::get('/rencana_kegiatan/{semester}', [RencanaKegiatanWalasController::class, 'index'])->name('rencana_kegiatan_walas.index');
-
+Route::get('/rencana_kegiatan/{semester}/create', [RencanaKegiatanWalasController::class, 'create'])->name('rencana_kegiatan_walas.create');
+Route::post('/rencana_kegiatan/{semester}', [RencanaKegiatanWalasController::class, 'store'])->name('rencana_kegiatan_walas.store');
+Route::put('/rencana_kegiatan_walas/{semester}/update/{id}', [RencanaKegiatanWalasController::class, 'update'])->name('rencana_kegiatan_walas.update');
+Route::get('/rencana_kegiatan_walas/{semester}/edit/{id}', [RencanaKegiatanWalasController::class, 'edit'])->name('rencana_kegiatan_walas.edit');
+Route::resource('presensi', PresensiController::class);
+  // Detail Presensi
+  Route::prefix('{presensi}/detail')->group(function () {
+    Route::get('/', [DetailPresensiController::class, 'index'])->name('detailpresensi.index');
+    Route::get('/create', [DetailPresensiController::class, 'create'])->name('detailpresensi.create');
+    Route::post('/', [DetailPresensiController::class, 'store'])->name('detailpresensi.store');
+    Route::get('/{detail}/edit', [DetailPresensiController::class, 'edit'])->name('detailpresensi.edit');
+    Route::put('/{detail}', [DetailPresensiController::class, 'update'])->name('detailpresensi.update');
+    Route::delete('/{detail}', [DetailPresensiController::class, 'destroy'])->name('detailpresensi.destroy');
+});
 
 // Route Halaman Kepsek
 Route::get('/kepsekpage', function () {

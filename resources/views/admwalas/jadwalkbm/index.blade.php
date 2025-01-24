@@ -91,8 +91,17 @@
             }
         }
 
+    .table-bordered {
+        border: 1px solid #000;
+    }
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #000;
+    }
+    .text-center {
+        text-align: center;
+    }
 
-        
     </style>
 </head>
 
@@ -153,34 +162,73 @@
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
-                <a href="{{ route('lembarpengesahan.create') }}" class="btn btn-primary">
+                <a href="{{ route('jadwalkbm.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
+                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
+                <div class="d-flex-container">
+    @foreach ($jadwalKbms as $jadwalKbm) <!-- Looping pada setiap jadwalKbm -->
+        <a href="{{ route('jadwalkbm.edit', $jadwalKbm->id) }}" class="btn btn-warning">
+            <i class="bi bi-pencil"></i> Edit
+        </a>
+    @endforeach
+</div>
+                    
             </div>
-        </div>
+        </div><br>
 
-        <table class="table table-bordered table-striped">
+        <table>
+    <tr>
+        <td>Kelas</td>
+        <td>: {{ $jadwalKbms->first()->rombel->nama_kelas ?? '-' }}</td>
+    </tr>
+    <tr>
+        <td>Tahun Pelajaran</td>
+        <td>: {{ date('Y') }}</td>
+    </tr>
+</table>
+
+
+
+        <table class="table table-bordered text-center">
     <thead>
         <tr>
-            <th>No</th>
-            <th>Foto Dokumen</th>
-            <th>Aksi</th>
+            <th>  </th>
+            <th colspan="2">Senin</th>
+            <th colspan="2">Selasa</th>
+            <th colspan="2">Rabu</th>
+            <th colspan="2">Kamis</th>
+            <th colspan="2">Jumat</th>
+        </tr>
+        <tr>
+            <th>Jam Ke</th>
+            <th>Mapel</th>
+            <th>Guru</th>
+            <th>Mapel</th>
+            <th>Guru</th>
+            <th>Mapel</th>
+            <th>Guru</th>
+            <th>Mapel</th>
+            <th>Guru</th>
+            <th>Mapel</th>
+            <th>Guru</th>
         </tr>
     </thead>
     <tbody>
-        
+        @for ($jam = 1; $jam <= 12; $jam++)
+            <tr>
+                <td>{{ $jam }}</td>
+                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
+                    @php
+                        $jadwalHari = collect(json_decode($jadwalKbms->first()->$hari, true) ?? [])->firstWhere('jam', $jam);
+                    @endphp
+                    <td>{{ $jadwalHari ? $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' : '-' }}</td>
+                    <td>{{ $jadwalHari ? $gurus[$jadwalHari['guru_id']]->nama ?? '-' : '-' }}</td>
+                @endforeach
+            </tr>
+        @endfor
     </tbody>
 </table>
-
 </main>
   
     <div class="container copyright text-center mt-4">

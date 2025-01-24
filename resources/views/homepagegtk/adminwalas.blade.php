@@ -25,6 +25,9 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+<!-- bootstrap css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
 
@@ -271,19 +274,20 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>6</td>
-                <td>Rencana Kegiatan Walas (2 Semester)</td>
-                <td>
-                    <a href="#">
+            <td>6</td>
+            <td>Rencana Kegiatan Walas (2 Semester)</td>
+            <td>
+                <!-- tombol trigger modal -->
+                <a href="#" data-bs-toggle="modal" data-bs-target="#semesterModal">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
-                </td>
-            </tr>
+            </td>
+        </tr>
             <tr>
                 <td>7</td>
-                <td>Rekap Kehadiran Peserta Didik (2 Semester)</td>
+                <td>Kehadiran Peserta Didik</td>
                 <td>
-                    <a href="#">
+                    <a href="{{route('presensi.index')}}">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -445,6 +449,30 @@ table td {
 
   </footer>
 
+  <!-- modal -->
+<div class="modal fade" id="semesterModal" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="semesterModalLabel">Pilih Semester</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Silakan pilih semester untuk melihat rencana kegiatan walas.</p>
+                <div class="d-flex justify-content-around">
+                    <a href="{{ route('rencana_kegiatan_walas.index', ['semester' => 'ganjil']) }}" class="btn btn-primary">
+                        Semester Ganjil
+                    </a>
+                    <a href="{{ route('rencana_kegiatan_walas.index', ['semester' => 'genap']) }}" class="btn btn-secondary">
+                        Semester Genap
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -458,6 +486,8 @@ table td {
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- bootstrap js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
         window.onload = function() {

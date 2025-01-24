@@ -4,61 +4,42 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateJadwalKbmsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('jadwal_kbms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('walas_id');
-            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->enum('hari1', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('mapel1_id');
-            $table->foreign('mapel1_id')->references('id')->on('mapels')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('guru1_id');
-            $table->foreign('guru1_id')->references('id')->on('gurus')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari2', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('mapel2_id');
-            $table->foreign('mapel2_id')->references('id')->on('mapels')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('guru2_id');
-            $table->foreign('guru2_id')->references('id')->on('gurus')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari3', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('mapel3_id');
-            $table->foreign('mapel3_id')->references('id')->on('mapels')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('guru3_id');
-            $table->foreign('guru3_id')->references('id')->on('gurus')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari4', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('mapel4_id');
-            $table->foreign('mapel4_id')->references('id')->on('mapels')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('guru4_id');
-            $table->foreign('guru4_id')->references('id')->on('gurus')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari5', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('mapel5_id');
-            $table->foreign('mapel5_id')->references('id')->on('mapels')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('guru5_id');
-            $table->foreign('guru5_id')->references('id')->on('gurus')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->unsignedBigInteger('kurikulum_id')->nullable();
-            $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
+            $table->foreignId('rombels_id')->constrained('rombels')->onDelete('cascade')->onUpdate ('cascade');
+            $table->foreignId('walas_id')->constrained('walas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->foreignId('kurikulum_id')->nullable()->constrained('kurikulums')->onDelete('cascade');
             $table->date('tanggal')->nullable();
-            $table->string('ttdkurikulum_url',255)->nullable();
-            $table->string('ttdwalas_url',255)->nullable();
+            $table->string('ttdkurikulum_url')->nullable();
+            $table->string('ttdwalas_url')->nullable();
+
+            // kolom buat hari dan jam (1-12) untuk semua hari
+            $table->json('senin')->nullable();  // simpan data mapel_id + guru_id tiap jam
+            $table->json('selasa')->nullable();
+            $table->json('rabu')->nullable();
+            $table->json('kamis')->nullable();
+            $table->json('jumat')->nullable();
+
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('jadwal_kbms');
     }
-};
+}

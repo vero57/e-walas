@@ -140,14 +140,12 @@
     <div class="starter-section container">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Administrasi</h2>
+            <h2 class="font-weight-bold">Edit Lembar Pengesahan</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-            
-        
+
             <div class="container mt-4">
             <div class="card">
-    <div class="card-header">Edit Lembar Pengesahan</div>
     <div class="card-body">
         <form action="{{ route('lembarpengesahan.update', $lembarpengesahan->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
