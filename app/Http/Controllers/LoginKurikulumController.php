@@ -20,7 +20,7 @@ class LoginKurikulumController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

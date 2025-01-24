@@ -165,11 +165,20 @@ table td {
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
 
     </div>
   </header>
@@ -292,7 +301,7 @@ table td {
                 <td>8</td>
                 <td>Denah Tempat Kerja Kelompok Siswa</td>
                 <td>
-                    <a href="#">
+                <a href="{{route('denahkerjakelompok.index')}}">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -301,7 +310,7 @@ table td {
                 <td>9</td>
                 <td>Daftar Penyerahan/Pengembalian Rapor Siswa</td>
                 <td>
-                    <a href="#">
+                    <a href="/serahterimarapor">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -310,7 +319,7 @@ table td {
                 <td>10</td>
                 <td>Catatan Kasus Peserta Didik</td>
                 <td>
-                    <a href="#">
+                    <a href="/catatankasus">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -319,7 +328,7 @@ table td {
                 <td>11</td>
                 <td>Agenda Kegiatan Walas</td>
                 <td>
-                    <a href="#">
+                    <a href="/agendawalas">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -328,7 +337,7 @@ table td {
                 <td>12</td>
                 <td>Daftar Peserta Didik</td>
                 <td>
-                    <a href="#">
+                    <a href="/daftarpesertadidik">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -337,7 +346,7 @@ table td {
                 <td>13</td>
                 <td>Rekapitulasi Jumlah Peserta Didik</td>
                 <td>
-                    <a href="#">
+                    <a href="/rekapjumlahsiswa">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -346,7 +355,7 @@ table td {
                 <td>14</td>
                 <td>Home Visit</td>
                 <td>
-                    <a href="#">
+                    <a href="/homevisit">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>
@@ -355,7 +364,16 @@ table td {
                 <td>15</td>
                 <td>Buku Tamu Orang Tua/Wali Peserta Didik</td>
                 <td>
-                    <a href="#">
+                    <a href="/bukutamuortu">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Persentase Sosial Ekonomi</td>
+                <td>
+                    <a href="/persentasesosialekonomi">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>

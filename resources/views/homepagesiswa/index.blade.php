@@ -196,7 +196,9 @@
       </div>
       <div class="stat-content">
         <h4>Catatan Kasus</h4>
-        <p class="mb-0">Kelola data Catatan Kasus di Sini</p>
+        <p class="mb-0">
+           <a href="/catatankasussiswa">Lihat Catatan Kasus Disini</a>
+        </p>
       </div>
     </div>
   </div>

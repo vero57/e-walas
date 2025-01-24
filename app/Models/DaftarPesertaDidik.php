@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DaftarPesertaDidik extends Model
 {
@@ -14,6 +15,13 @@ class DaftarPesertaDidik extends Model
         'nama_siswa',
         'keterangan',
         'tanggal',
+        'jenis_kelamin',
         'ttdwalas_url',
     ];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'nama_siswa', 'id');
+    }
+
 }

@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('walas_id');
             $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('jenis_sosial_ekonomi');
-            $table->foreign('jenis_sosial_ekonomi')->references('id')->on('biodata_siswas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->string('jenis_sosial_ekonomi'); // Ubah tipe data menjadi string
             $table->string('jumlah', 50);
             $table->string('persentase', 50);
             $table->string('keterangan', 255);
             $table->date('tanggal');
-            $table->string('ttdwalas_url',255)->nullable();
+            $table->string('ttdwalas_url', 255)->nullable();
             $table->timestamps();
         });
     }

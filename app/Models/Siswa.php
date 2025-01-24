@@ -36,4 +36,29 @@ class Siswa extends Model
         return $this->belongsTo(Rombel::class, 'rombels_id', 'id');
     }
     
+    public function denahTempatKerjaKelompok()
+    {
+        return $this->belongsTo(DenahTempatKerjaKelompok::class);
+    }
+
+    public function kelompok()
+    {
+        return $this->belongsToMany(DenahTempatKerjaKelompok::class, 'kelompok_siswa', 'siswa_id', 'kelompok_id');
+    }
+
+    public function biodata()
+    {
+        return $this->hasOne(BiodataSiswa::class, 'siswas_id', 'id');
+    }
+
+    public function biodataSiswa()
+    {
+        return $this->hasOne(BiodataSiswa::class, 'siswas_id', 'id'); // Sesuaikan nama kolom jika berbeda
+    }
+
+    public function daftarPesertaDidik()
+    {
+        return $this->hasMany(DaftarPesertaDidik::class, 'nama_siswa', 'id');
+    }
+
 }
