@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Walas;
 
 class AdministrasiWalasController extends Controller
 {
@@ -11,7 +13,19 @@ class AdministrasiWalasController extends Controller
      */
     public function index()
     {
-        return view ("homepagegtk.adminwalas");
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+     $walas = Auth::guard('walas')->user();
+
+     // Periksa apakah session 'walas_id' ada
+     if (!session()->has('walas_id')) {
+         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+     }
+ 
+     // Ambil data walas berdasarkan 'walas_id' yang ada di session
+     $walas = Walas::find(session('walas_id'));
+ 
+       // Return view dengan data yang difilter
+    return view("homepagegtk.adminwalas", compact('walas'));
     }
 
     /**

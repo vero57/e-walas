@@ -33,8 +33,8 @@ return new class extends Migration
             $table->string('jumlah_saudara', 5);
             $table->string('no_wa',14);
             $table->string('email', 50);
-            $table->string('nis', 20);
-            $table->string('nisn', 20);
+            $table->string('nis', 20)->unique();
+            $table->string('nisn', 20)->unique();
             $table->string('kelas', 4);
             $table->enum('kompetensi', ['SIJA', 'TKJ', 'RPL', 'DKV', 'DPIB', 'TKP', 'TP','TFLM', 'TKR', 'TOI'])->default('SIJA');
             $table->string('tahun_masuk', 4);

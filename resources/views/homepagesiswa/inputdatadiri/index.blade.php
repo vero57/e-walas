@@ -430,7 +430,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pekerjaan_ayah" class="form-label">Pekerjaan Ayah</label>
-                        <input type="text" name="pekerjaan_ayah" id="pekerjaan_ayah" class="form-control" required>
+                        <input type="text" name="pekerjaan_ayah" id="pekerjaan_ayah" class="form-control" placeholder="Contoh: Programmer" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -462,7 +462,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pekerjaan_ibu" class="form-label">Pekerjaan Ibu</label>
-                        <input type="text" name="pekerjaan_ibu" id="pekerjaan_ibu" class="form-control" required>
+                        <input type="text" name="pekerjaan_ibu" id="pekerjaan_ibu" class="form-control" placeholder="Contoh: Dokter" required>
                     </div>
                 </div>
                 <div class="row mb-3">

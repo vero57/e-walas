@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AgendaKegiatanWalas extends Model
 {
@@ -15,7 +16,7 @@ class AgendaKegiatanWalas extends Model
             'hasil',
             'waktu',
             'keterangan',
-            'tanggal',
+            'tanggalttd',
             'ttdwalas_url',
     ];
 }

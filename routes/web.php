@@ -45,6 +45,19 @@ use App\Http\Controllers\AdministrasiWalasController;
 use App\Http\Controllers\InputDataDiriSiswaController;
 use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\RencanaKegiatanWalasController;
+use App\Http\Controllers\DenahKerjaKelompokSiswaController;
+use App\Http\Controllers\DaftarPenyerahanRapotController;
+use App\Http\Controllers\HomeVisitController;
+use App\Http\Controllers\BukuTamuOrtuController;
+use App\Http\Controllers\ShowDetailRombelController;
+use App\Http\Controllers\AgendaKegiatanWalasController;
+use App\Http\Controllers\CatatanKasusSiswaController;
+use App\Http\Controllers\CatatanKasusController;
+use App\Http\Controllers\KaprogPageController;
+use App\Http\Controllers\DaftarPesertaDidikController;
+use App\Http\Controllers\RekapitulasiJumlahSiswaController;
+use App\Http\Controllers\PersentasePekerjaanOrtuController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -158,7 +171,6 @@ Route::get('/hapusrombel/{id}', [RombelPageController::class, 'hapusrombel'])->n
 Route::get('/rombel/hapusrombel/{id}', [RombelPageController::class, 'hapusrombel']);
 Route::get ('/rombel_search', [RombelPageController::class,'rombel_search']);
 
-
 // CRUD MAPEL
 Route::resource('datamapel', MapelPageController::class);
 Route::get('/hapusmapel/{id}', [MapelPageController::class, 'hapusmapel'])->name('hapusmapel');
@@ -230,12 +242,7 @@ Route::resource('kepsekwalas', KepsekWalasController::class);
 Route::resource('kepsekrombel', KepsekRombelController::class);
 
 // Route Halaman Kaprog
-Route::get('/kaprogpage', function () {
-    if (!session()->has('kaprog_id')) {
-        return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepagekaprog.index'); // File di views/adminpage/index.blade.php
-})->name('homepagekaprog.index');
+Route::get('/homepagekaprog', [KaprogPageController::class, 'index'])->middleware('auth:kakoms');
 Route::resource('kakomta', KakomTAController::class);
 Route::resource('kakomwalas', KakomWalasController::class);
 Route::resource('kakomrombel', KakomRombelController::class);
@@ -252,8 +259,6 @@ Route::resource('rombelpage', RombelDataController::class);
 Route::resource('kinerjaguru', KinerjaGuruController::class);
 
 // Route Siswa Halaman
- 
-
     Route::get('/siswapage', [SiswaPageController::class, 'index'])->name('homepagesiswa.index');
     Route::resource('datadiri', DataDiriPageController::class);
     Route::resource('inputdatadiri', InputDataDiriSiswaController::class);
@@ -261,6 +266,88 @@ Route::resource('kinerjaguru', KinerjaGuruController::class);
     Route::resource('datadiripage', DataDiriDataController::class);
     Route::get('/biodatasiswa/{id}/edit', [InputDataDiriSiswaController::class, 'edit'])->name('datadiri.edit');
     Route::put('/biodatasiswaupdate/{id}', [InputDataDiriSiswaController::class, 'update'])->name('biodatasiswa.update');
+    Route::resource('catatankasussiswa', CatatanKasusController::class);
+
+
+// CRUD DENAH TEMPAT KERJA KELOMPOK SISWA ADM WALAS 
+Route::resource('denahkerjakelompok', DenahKerjaKelompokSiswaController::class);
+Route::get('/createkelompok', [DenahKerjaKelompokSiswaController::class, 'create'])->name('denahkerjakelompok.create');
+Route::post('/kelompok/{id}/add-siswa', [DenahKerjaKelompokSiswaController::class, 'addSiswa'])->name('kelompok.addSiswa');
+Route::post('/createkelompok/store', [DenahKerjaKelompokSiswaController::class, 'store'])->name('kelompoksiswa.store');
+Route::post('/kelompok/simpan', [DenahKerjaKelompokSiswaController::class, 'simpan'])->name('kelompoksiswa.simpan');
+Route::delete('/hapussiswadata/{id}', [DenahKerjaKelompokSiswaController::class, 'hapussiswadata'])->name('hapussiswadata');
+Route::put('/kelompoksiswa/update/{id}', [DenahKerjaKelompokSiswaController::class, 'update'])->name('kelompoksiswa.update');
+
+
+// CRUD SERAH TERIMA RAPOT 
+Route::resource('serahterimarapor', DaftarPenyerahanRapotController::class);
+Route::get('/penyerahanrapotcreate', [DaftarPenyerahanRapotController::class, 'create'])->name('penyerahanrapot.create');
+Route::post('/penyerahanrapot/store', [DaftarPenyerahanRapotController::class, 'store'])->name('penyerahanrapot.store');
+Route::get('/penyerahanrapot/{id}/edit', [DaftarPenyerahanRapotController::class, 'edit'])->name('penyerahanrapot.edit');
+Route::get('/hapuspenyerahanrapot/{id}', [DaftarPenyerahanRapotController::class, 'hapuspenyerahanrapot'])->name('hapuspenyerahanrapot');
+Route::put('/penyerahanrapot/{id}', [DaftarPenyerahanRapotController::class, 'update'])->name('penyerahanrapot.update');
+
+// CRUD HOME VISIT 
+Route::resource('homevisit', HomeVisitController::class);
+Route::get('/homevisitcreate', [HomeVisitController::class, 'create'])->name('homevisit.create');
+Route::post('/homevisit/store', [HomeVisitController::class, 'store'])->name('homevisit.store');
+Route::get('/homevisit/{id}/edit', [HomeVisitController::class, 'edit'])->name('homevisit.edit');
+Route::get('/hapushomevisit/{id}', [HomeVisitController::class, 'hapushomevisit'])->name('hapushomevisit');
+Route::put('/homevisit/{id}', [HomeVisitController::class, 'update'])->name('homevisit.update');
+
+// CRUD BUKU TAMU ORTI 
+Route::resource('bukutamuortu', BukuTamuOrtuController::class);
+Route::get('/bukutamuortucreate', [BukuTamuOrtuController::class, 'create'])->name('bukutamuortu.create');
+Route::post('/bukutamuortu/store', [BukuTamuOrtuController::class, 'store'])->name('bukutamuortu.store');
+Route::get('/bukutamuortu/{id}/edit', [BukuTamuOrtuController::class, 'edit'])->name('bukutamuortu.edit');
+Route::get('/hapusbukutamuortu/{id}', [BukuTamuOrtuController::class, 'hapusbukutamuortu'])->name('hapusbukutamuortu');
+Route::put('/bukutamuortu/{id}', [BukuTamuOrtuController::class, 'update'])->name('bukutamuortu.update');
+
+// CRUD AGENDA WALAS 
+Route::resource('agendawalas', AgendaKegiatanWalasController::class);
+Route::get('/agendawalascreate', [AgendaKegiatanWalasController::class, 'create'])->name('agendawalas.create');
+Route::post('/agendawalas/store', [AgendaKegiatanWalasController::class, 'store'])->name('agendawalas.store');
+Route::get('/agendawalas/{id}/edit', [AgendaKegiatanWalasController::class, 'edit'])->name('agendawalas.edit');
+Route::get('/hapusagendawalas/{id}', [AgendaKegiatanWalasController::class, 'hapusagendawalas'])->name('hapusagendawalas');
+Route::put('/agendawalas/{id}', [AgendaKegiatanWalasController::class, 'update'])->name('agendawalas.update');
+
+// CRUD CATATAN KASUS
+Route::resource('catatankasus', CatatanKasusSiswaController::class);
+Route::get('/catatankasuscreate', [CatatanKasusSiswaController::class, 'create'])->name('catatankasus.create');
+Route::post('/catatankasus/store', [CatatanKasusSiswaController::class, 'store'])->name('catatankasus.store');
+Route::get('/catatankasus/{id}/edit', [CatatanKasusSiswaController::class, 'edit'])->name('catatankasus.edit');
+Route::get('/hapuscatatankasus/{id}', [CatatanKasusSiswaController::class, 'hapuscatatankasus'])->name('hapuscatatankasus');
+Route::put('/catatankasus/{id}', [CatatanKasusSiswaController::class, 'update'])->name('catatankasus.update');
+
+
+// CRUD DATA SISWA
+Route::resource('daftarpesertadidik', DaftarPesertaDidikController::class);
+Route::get('/daftarpesertadidikcreate', [DaftarPesertaDidikController::class, 'create'])->name('daftarpesertadidik.create');
+Route::post('/daftarpesertadidik/store', [DaftarPesertaDidikController::class, 'store'])->name('daftarpesertadidik.store');
+Route::get('/daftarpesertadidik/{id}/edit', [DaftarPesertaDidikController::class, 'edit'])->name('daftarpesertadidik.edit');
+Route::get('/hapusdaftarpesertadidik/{id}', [DaftarPesertaDidikController::class, 'hapusdaftarpesertadidik'])->name('hapusdaftarpesertadidik');
+Route::put('/daftarpesertadidik/{id}', [DaftarPesertaDidikController::class, 'update'])->name('daftarpesertadidik.update');
+Route::get('/get-siswa/{id}', function ($id) {
+    $biodata = \App\Models\BiodataSiswa::where('siswas_id', $id)->first();
+    return response()->json($biodata);
+});
+
+// CRUD REKAPITULASI JUMLAH SISWA
+Route::resource('rekapjumlahsiswa', RekapitulasiJumlahSiswaController::class);
+Route::get('/rekapjumlahsiswacreate', [RekapitulasiJumlahSiswaController::class, 'create'])->name('rekapjumlahsiswa.create');
+Route::post('/rekapjumlahsiswa/store', [RekapitulasiJumlahSiswaController::class, 'store'])->name('rekapjumlahsiswa.store');
+Route::get('/rekapjumlahsiswa/{id}/edit', [RekapitulasiJumlahSiswaController::class, 'edit'])->name('rekapjumlahsiswa.edit');
+Route::get('/hapusrekapjumlahsiswa/{id}', [RekapitulasiJumlahSiswaController::class, 'hapusrekapjumlahsiswa'])->name('hapusrekapjumlahsiswa');
+Route::put('/rekapjumlahsiswa/{id}', [RekapitulasiJumlahSiswaController::class, 'update'])->name('rekapjumlahsiswa.update');
+
+// CRUD REKAPITULASI JUMLAH SISWA
+Route::resource('persentasesosialekonomi', PersentasePekerjaanOrtuController::class);
+Route::get('/persentasesosialekonomicreate', [PersentasePekerjaanOrtuController::class, 'create'])->name('persentasesosialekonomi.create');
+Route::post('/persentasesosialekonomi/store', [PersentasePekerjaanOrtuController::class, 'store'])->name('persentasesosialekonomi.store');
+Route::get('/persentasesosialekonomi/{id}/edit', [PersentasePekerjaanOrtuController::class, 'edit'])->name('persentasesosialekonomi.edit');
+Route::get('/hapuspersentasesosialekonomi/{id}', [PersentasePekerjaanOrtuController::class, 'hapuspersentasesosialekonomi'])->name('hapuspersentasesosialekonomi');
+Route::put('/persentasesosialekonomi/{id}', [PersentasePekerjaanOrtuController::class, 'update'])->name('persentasesosialekonomi.update');
+
 
 
 // Logout admin

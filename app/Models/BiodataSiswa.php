@@ -55,4 +55,10 @@ class BiodataSiswa extends Model
        'pengalaman_ekskul',
        'kepribadian'
     ];
+
+    public function siswa()
+{
+    return $this->belongsTo(Siswa::class, 'siswas_id', 'id');
+}
+
 }

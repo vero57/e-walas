@@ -101,7 +101,7 @@ class KakomDataController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'no_wa' => 'required|numeric',
-            'password' => 'nullable|string|min:6',
+            'password' => 'nullable|string|min:2',
             'kompetensi' => 'required',
             'image_url' => 'nullable|image|max:5000', 
         ]);

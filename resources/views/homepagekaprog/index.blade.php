@@ -176,9 +176,9 @@
         <i class="bi bi-trophy"></i>
       </div>
       <div class="stat-content">
-        <h4>Data Administrasi Walas</h4>
+        <h4>Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/kakomwalas">Kelola Data Administrasi Walas di Sini</a>
+        <a href="/kakomwalas">Kelola Administrasi Walas di Sini</a>
     </p>
       </div>
     </div>

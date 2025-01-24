@@ -175,10 +175,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Foto</th>
-                        <th>WhatsApp</th>
-                        <th>Informasi</th>
+                        <th>Nama Wali kelas</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
