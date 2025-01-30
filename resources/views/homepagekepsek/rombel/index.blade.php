@@ -184,15 +184,25 @@
       <nav id="navmenu" class="navmenu">
         <ul>
         <li><a href="/kepsekta">Tahun Akademik</a></li>
+        <li><a href="/kepsekrombel" class="active">Rombel</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutkepsek') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('kepsek_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilekepsek" class="text-decoration-none">
+                    <span>{{ $kepsek->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -244,7 +254,7 @@
                 <td>{{ $data->tingkat }}</td>
                 <td>{{ $data->kompetensi }}</td>
                 <td>{{ $data->nama_kelas }}</td>
-                <td>{{ $data->nama }}</td>
+                <td>{{ $data->walas_nama }}</td>
                 <td>{{ $data->no_wa }}</td> <!-- This can be updated to show name if needed -->
                 <td>
                     <!-- Aksi -->

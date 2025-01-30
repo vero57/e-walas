@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Walas;
+use App\Models\Admin;
 use App\Imports\WalasImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class WaliKelasPageController extends Controller
 {
@@ -16,10 +18,25 @@ class WaliKelasPageController extends Controller
      */
     public function index()
     {
-        // Mengirim data ke view
-    return view('homepageadmin.walikelasdata.index', [
-        'walasdata' =>  Walas::all(),
-    ]);
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $admin = Auth::guard('admins')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+    
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('admin_id')) {
+            return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+        }
+  
+        // Ambil data kurikulum berdasarkan 'admin_id' yang ada di session
+        $admin = Admin::find(session('admin_id'));
+        
+        // Periksa apakah data kurikulum ditemukan
+        if (!$admin) {
+            return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
+        }
+
+        $walasdata = Walas::all();
+        return view('homepageadmin.walikelasdata.index', compact('admin', 'walasdata'));
+
     }
 
     public function import(Request $request){

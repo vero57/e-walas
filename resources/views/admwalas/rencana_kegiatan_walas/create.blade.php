@@ -126,12 +126,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -153,14 +161,10 @@
         <form action="{{ route('rencana_kegiatan_walas.store', ['semester' => $semester]) }}" method="POST">
     @csrf
     <div class="mb-3">
-    <label for="walas_id" class="form-label">Wali Kelas:</label>
-    <select name="walas_id" id="walas_id" class="form-select" required>
-    <option value="" disabled selected>Pilih Wali Kelas</option>   
-    @foreach($walas as $walas_item)
-    <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
-    @endforeach
-    </select>
-    </div>
+            <label for="walas_id" class="form-label">Wali Kelas</label>
+            <input type="text" id="walas_nama" class="form-control" value="{{ $walas->nama }}" readonly>
+            <input type="hidden" name="walas_id" id="walas_id" value="{{ $walas->id }}">
+        </div>
 
     <div class="form-group">
         <label for="semester">Semester</label>

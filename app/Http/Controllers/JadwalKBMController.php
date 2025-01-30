@@ -9,6 +9,7 @@ use App\Models\Rombel;
 use App\Models\JadwalKbm;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class JadwalKbmController extends Controller
@@ -39,6 +40,43 @@ public function index(Request $request)
     
 
     return view('admwalas.jadwalkbm.index', compact('jadwalKbms', 'mapels', 'gurus', 'message'));
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walas = Walas::find(session('walas_id'));
+    
+    // Periksa apakah data walas ditemukan
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+   // Ambil data rombel yang dimiliki walas yang sedang login
+   $rombel = Rombel::where('walas_id', $walas->id)->first();
+
+   // Periksa apakah rombel ditemukan
+   if (!$rombel) {
+       return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+   }
+
+   // Ambil data siswa berdasarkan rombel yang terkait dengan walas
+   $siswa = DB::table('vwsiswas')
+               ->where('id', $rombel->id)  // Pastikan kolom yang digunakan sesuai dengan relasi rombel
+               ->get();
+
+   // Ambil semua data rombels
+   $rombels = Rombel::all();
+
+    $jadwalKbms = JadwalKBM::with(['rombel', 'walas', 'mapels', 'gurus'])->get();
+    $mapels = Mapel::all()->keyBy('id');
+    $gurus = Guru::all()->keyBy('id');
+
+    return view('admwalas.jadwalkbm.index', compact('jadwalKbms', 'mapels', 'gurus', 'walas', 'rombels', 'rombel', 'siswa'));
 }
 
 
@@ -47,15 +85,40 @@ public function index(Request $request)
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-{
-    $rombels = Rombel::all(); 
-    $walasList = Walas::all(); 
-    $mapels = Mapel::all();
-    $gurus = Guru::all();
 
-    return view('admwalas.jadwalkbm.create', compact('rombels', 'walasList', 'mapels', 'gurus'));
-}
+    public function create()
+    {
+            // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walas = Walas::find(session('walas_id'));
+        
+        // Periksa apakah data walas ditemukan
+        if (!$walas) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+
+    // Ambil data rombel yang dimiliki walas yang sedang login
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+    }
+
+        $rombels = Rombel::all(); 
+        $walasList = Walas::all(); 
+        $mapels = Mapel::all();
+        $gurus = Guru::all();
+
+        return view('admwalas.jadwalkbm.create', compact('rombels', 'walasList', 'mapels', 'gurus', 'walas', 'rombel'));
+    }
 
 
     /**
@@ -64,6 +127,7 @@ public function index(Request $request)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+   
     public function store(Request $request)
 {
     $request->validate([
@@ -74,9 +138,10 @@ public function index(Request $request)
         'rabu' => 'nullable|array',
         'kamis' => 'nullable|array',
         'jumat' => 'nullable|array',
+        'kurikulum_id' => $request->kurikulum_id, // Pastikan nilai ini ada di input
     ]);
 
-    // Loop dan pastikan setiap jam memiliki mapel dan guru yang valid
+    // Ambil data jadwal
     $senin = $this->prepareScheduleData($request->senin);
     $selasa = $this->prepareScheduleData($request->selasa);
     $rabu = $this->prepareScheduleData($request->rabu);
@@ -87,6 +152,7 @@ public function index(Request $request)
     JadwalKbm::create([
         'rombels_id' => $request->rombels_id,
         'walas_id' => $request->walas_id,
+        'kurikulum_id' => $request->kurikulum_id,
         'senin' => json_encode($senin),
         'selasa' => json_encode($selasa),
         'rabu' => json_encode($rabu),
@@ -96,6 +162,8 @@ public function index(Request $request)
 
     return redirect()->route('jadwalkbm.index')->with('success', 'Jadwal berhasil ditambahkan.');
 }
+
+    
 
 
     /**

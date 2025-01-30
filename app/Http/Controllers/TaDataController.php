@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kurikulum;
+use Illuminate\Support\Facades\Auth;
 
 class TaDataController extends Controller
 {
@@ -11,7 +13,23 @@ class TaDataController extends Controller
      */
     public function index()
     {
-        return view('homepagekurikulum.tadata');
+         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
+        
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data kurikulum tidak ditemukan.');
+        }
+
+        return view('homepagekurikulum.tadata', compact('kurikulum'));
     }
 
     /**

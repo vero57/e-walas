@@ -227,7 +227,7 @@
 
   <div class="container mt-5">
     <div class="form-container">
-    <h3>Form Edit Wali Kelas </h3>
+    <h3>Form Edit Kurikulum </h3>
     <br>
         <!-- Form Edit Data Wali Kelas -->
 <form action="{{ route('kurikulum.update', $kurikulum->id) }}" method="POST" enctype="multipart/form-data">

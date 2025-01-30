@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SiswaMiddleware;
 use App\Http\Controllers\LoginController;
@@ -57,7 +56,13 @@ use App\Http\Controllers\KaprogPageController;
 use App\Http\Controllers\DaftarPesertaDidikController;
 use App\Http\Controllers\RekapitulasiJumlahSiswaController;
 use App\Http\Controllers\PersentasePekerjaanOrtuController;
-
+use App\Http\Controllers\KurikulumIndexController;
+use App\Http\Controllers\ProfilePageKurikulumController;
+use App\Http\Controllers\PageAdminController;
+use App\Http\Controllers\ProfileKakomController;
+use App\Http\Controllers\ProfileAdminController;
+use App\Http\Controllers\KepsekIndexController;
+use App\Http\Controllers\ProfileKepsekPageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -86,13 +91,7 @@ Route::post('/loginsiswa', [LoginSiswaController::class, 'store'])->name('logins
 // Halaman Utama Controller
 
 // Route halaman admin
-Route::get('/adminpage', function () {
-    if (!session()->has('admin_id')) {
-        return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepageadmin.index'); // File di views/adminpage/index.blade.php
-
-})->name('homepageadmin.index');
+Route::resource('adminpage', PageAdminController::class)->name('index', 'homepageadmin.index');
 Route::resource('wargasekolah', WargaSekolahController::class);
 Route::resource('detailkelas', SiswaDataPageAdminController::class);
 Route::get('/rombeldetail/{walas_id}', [ShowDetailRombelController::class, 'showDetail'])->name('detail.kelas');
@@ -184,9 +183,29 @@ Route::get('/walaspage', [HomePageWalasController::class, 'index'])->name('homep
 
 Route::resource('siswadata', DataSiswaWalasController::class);
 
-Route::resource('profilewalas', ProfilePageWalasController::class);
-Route::resource('profilesiswa', ProfilePageController::class);
+Route::resource('profilekepsek', ProfileKepsekPageController::class);
+Route::get('/profilekepsek/{id}/edit', [ProfileKepsekPageController::class, 'edit'])->name('profilekepsek.edit');
+Route::put('/profilekepsek/{id}', [ProfileKepsekPageController::class, 'update'])->name('profilekepsek.update');
 
+Route::resource('profileadmin', ProfileAdminController::class);
+Route::get('/profileadmin/{id}/edit', [ProfileAdminController::class, 'edit'])->name('profileadmin.edit');
+Route::put('/profileadmin/{id}', [ProfileAdminController::class, 'update'])->name('profileadmin.update');
+
+Route::resource('profilewalas', ProfilePageWalasController::class);
+Route::get('/profilewalas/{id}/edit', [ProfilePageWalasController::class, 'edit'])->name('profilewalas.edit');
+Route::put('/profilewalas/{id}', [ProfilePageWalasController::class, 'update'])->name('profilewalas.update');
+
+Route::resource('profilesiswa', ProfilePageController::class);
+Route::get('/profilesiswa/{id}/edit', [ProfilePageController::class, 'edit'])->name('profilesiswa.edit');
+Route::put('/profilesiswa/{id}', [ProfilePageController::class, 'update'])->name('profilesiswa.update');
+
+Route::resource('profilekurikulum', ProfilePageKurikulumController::class);
+Route::get('/profilekurikulum/{id}/edit', [ProfilePageKurikulumController::class, 'edit'])->name('profilekurikulum.edit');
+Route::put('/profilekurikulum/{id}', [ProfilePageKurikulumController::class, 'update'])->name('profilekurikulum.update');
+
+Route::resource('profilekakom', ProfileKakomController::class);
+Route::get('/profilekakom/{id}/edit', [ProfileKakomController::class, 'edit'])->name('profilekaprog.edit');
+Route::put('/profilekakom/{id}', [ProfileKakomController::class, 'update'])->name('profilekaprog.update');
 
 Route::get ('/siswadata_search', [DataSiswaWalasController::class,'siswadata_search']);
 
@@ -230,29 +249,19 @@ Route::resource('presensi', PresensiController::class);
 });
 
 // Route Halaman Kepsek
-Route::get('/kepsekpage', function () {
-    if (!session()->has('kepsek_id')) {
-        return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepagekepsek.index'); // File di views/adminpage/index.blade.php
-})->name('homepagekepsek.index');
+Route::resource('kepsekpage', KepsekIndexController::class)->name('index', 'homepagekepsek.index');
 Route::resource('kepsekta', KepsekTAController::class);
 Route::resource('kepsekwalas', KepsekWalasController::class);
 Route::resource('kepsekrombel', KepsekRombelController::class);
 
 // Route Halaman Kaprog
-Route::get('/homepagekaprog', [KaprogPageController::class, 'index'])->middleware('auth:kakoms');
+Route::resource('homepagekaprog', KaprogPageController::class)->name('index', 'homepagekaprog.index');
 Route::resource('kakomta', KakomTAController::class);
 Route::resource('kakomwalas', KakomWalasController::class);
 Route::resource('kakomrombel', KakomRombelController::class);
 
 // Route Halaman Kurikulum
-Route::get('/kurikulumpage', function () {
-    if (!session()->has('kurikulum_id')) {
-        return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
-    }
-    return view('homepagekurikulum.index'); // File di views/adminpage/index.blade.php
-})->name('homepagekurikulum.index');
+Route::resource('kurikulumpage', KurikulumIndexController::class);
 Route::resource('tahunajarandata', TaDataController::class);
 Route::resource('rombelpage', RombelDataController::class);
 Route::resource('kinerjaguru', KinerjaGuruController::class);

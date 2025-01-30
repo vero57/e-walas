@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Walas;
+use App\Models\Rombel;
+use App\Models\Kepsek;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class KepsekRombelController extends Controller
@@ -12,9 +16,25 @@ class KepsekRombelController extends Controller
      */
     public function index()
     {
-        return view('homepagekepsek.rombel.index', [
-            'vwrombels' => DB::table('vwrombels')->get()
-        ]);
+         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+      $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+
+      // Periksa apakah session 'kurikulum_id' ada
+      if (!session()->has('kepsek_id')) {
+          return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+      }
+
+      // Ambil data kurikulum berdasarkan 'kepsek_id' yang ada di session
+      $kepsek = Kepsek::find(session('kepsek_id'));
+      
+      // Periksa apakah data kurikulum ditemukan
+      if (!$kepsek) {
+          return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+      }
+
+      $vwrombels = DB::table('vwrombels')->get();
+
+      return view('homepagekepsek.rombel.index', compact('kepsek', 'vwrombels'));
         
     }
 

@@ -126,12 +126,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -176,20 +184,14 @@
             <label for="rombels_id" class="form-label">Rombel</label>
             <select name="rombels_id" id="rombels_id" class="form-select" required>
                 <option value="" disabled selected>Pilih Rombel</option>
-                @foreach ($rombels as $rombel)
-                    <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
-                @endforeach
+                <option value="{{ $rombel->id }}" selected>{{ $rombel->nama_kelas }}</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="walas_id" class="form-label">Wali Kelas</label>
-            <select name="walas_id" id="walas_id" class="form-select" required>
-                <option value="" disabled selected>Pilih Wali Kelas</option>
-                @foreach ($walasList as $walas)
-                    <option value="{{ $walas->id }}">{{ $walas->nama }}</option>
-                @endforeach
-            </select>
+            <input type="text" id="walas_nama" class="form-control" value="{{ $walas->nama }}" readonly>
+            <input type="hidden" name="walas_id" id="walas_id" value="{{ $walas->id }}">
         </div>
 
         <div class="mb-3">

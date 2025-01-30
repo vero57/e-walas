@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\Kakom;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Imports\KakomImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class KakomDataController extends Controller
 {
@@ -15,9 +17,25 @@ class KakomDataController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.kakomdata.index', [
-            'kakomdata' =>  Kakom::all(),
-        ]);
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $admin = Auth::guard('admins')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+    
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('admin_id')) {
+            return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+        }
+  
+        // Ambil data kurikulum berdasarkan 'admin_id' yang ada di session
+        $admin = Admin::find(session('admin_id'));
+        
+        // Periksa apakah data kurikulum ditemukan
+        if (!$admin) {
+            return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
+        }
+
+        $kakomdata = Kakom::all();
+
+        return view('homepageadmin.kakomdata.index', compact('kakomdata', 'admin'));
         }
 
     public function import(Request $request){

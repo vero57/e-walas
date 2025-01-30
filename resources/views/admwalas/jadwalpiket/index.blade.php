@@ -254,6 +254,7 @@
       </nav>
        <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
 <div class="user-info d-flex align-items-center">
+      <div class="user-info d-flex align-items-center">
             @if(session()->has('walas_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
@@ -269,6 +270,11 @@
 </div>
       
 
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -281,6 +287,7 @@
             <h2 class="font-weight-bold">Jadwal Piket Siswa</h2>
             <hr class="my-3">
         </div>
+        <br>
 
         <div>
         <a href="{{ route('jadwalpiket.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary"   style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">

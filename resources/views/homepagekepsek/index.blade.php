@@ -118,12 +118,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutkepsek') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('kepsek_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilekepsek" class="text-decoration-none">
+                    <span>{{ $kepsek->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -175,9 +183,9 @@
         <i class="bi bi-trophy"></i>
       </div>
       <div class="stat-content">
-        <h4>Data Administrasi Walas</h4>
+        <h4>Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/kepsekwalas">Kelola Data Administrasi Walas di Sini</a>
+        <a href="/kepsekwalas">Lihat Data Administrasi Walas di Sini</a>
     </p>
       </div>
     </div>

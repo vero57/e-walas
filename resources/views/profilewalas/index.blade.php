@@ -224,11 +224,22 @@ h1 .accent-text {
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
+<!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+<div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
+      
       
 
     </div>
@@ -259,10 +270,10 @@ h1 .accent-text {
         <p><strong>Phone:</strong> {{ $walas->no_wa }}</p>
         <p><strong>NIP:</strong> {{ $walas->nip }}</p>
         <p><strong>Password:</strong> {{ $walas->password }}</p>
-
+        <br>
         <!-- Tombol Edit -->
-        <button class="edit-button">Edit Data</button>
-        <a href="/walaspage" class="kembali-button">Kembali</a>
+        <a href="{{ route('profilewalas.edit', $walas->id) }}" class="edit-button" style="margin-right: 10px;">Edit Data</a>
+         <a href="/walaspage" class="kembali-button">Kembali</a>
     </div>
 
 </div>
