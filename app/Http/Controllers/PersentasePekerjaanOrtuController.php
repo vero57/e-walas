@@ -8,7 +8,9 @@ use App\Models\Walas;
 use App\Models\Rombel;
 use App\Models\Kurikulum;
 use App\Models\PersentaseSosialEkonomi;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class PersentasePekerjaanOrtuController extends Controller
@@ -48,6 +50,10 @@ class PersentasePekerjaanOrtuController extends Controller
         // Ambil data rekapitulasi jumlah siswa berdasarkan walas_id tanpa relasi siswa
         $persentasesosialekonomi = PersentaseSosialEkonomi::where('walas_id', $walas->id)->get();
 
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdf.persentasesosialekonomi', compact('walas', 'siswas', 'rombel', 'persentasesosialekonomi'));
+            return $pdf->download('Persentase Sosial Ekonomi.pdf');
+        }
         // Kirim data walas, siswa, dan rekapitulasi jumlah siswa ke view
         return view('admwalas.persentasesosialekonomi.index', compact('walas', 'persentasesosialekonomi', 'siswas'));
     }

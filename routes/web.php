@@ -212,7 +212,6 @@ Route::resource('identitaskelas', IdentitasKelasController::class);
 Route::resource('lembarpengesahan', LembarPengesahanController::class);
 Route::resource('strukturorganisasi', StrukturOrganisasiController::class);
 Route::resource('jadwalkbm', JadwalKBMController::class);
-Route::resource('jadwalpiket', JadwalPiketController::class);
 Route::resource('rencana_kegiatan_walas', RencanaKegiatanWalasController::class)->except(['index']);
 Route::get('/rencana_kegiatan/{semester}', [RencanaKegiatanWalasController::class, 'index'])->name('rencana_kegiatan_walas.index');
 Route::get('/rencana_kegiatan/{semester}/create', [RencanaKegiatanWalasController::class, 'create'])->name('rencana_kegiatan_walas.create');
@@ -278,6 +277,40 @@ Route::post('/kelompok/simpan', [DenahKerjaKelompokSiswaController::class, 'simp
 Route::delete('/hapussiswadata/{id}', [DenahKerjaKelompokSiswaController::class, 'hapussiswadata'])->name('hapussiswadata');
 Route::put('/kelompoksiswa/update/{id}', [DenahKerjaKelompokSiswaController::class, 'update'])->name('kelompoksiswa.update');
 
+// CRUD JADWALPIKET
+// Route::resource('jadwalpiket', JadwalPiketController::class);
+Route::get('/createpiket', [JadwalPiketController::class, 'create'])->name('jadwalpiket.create');
+// Route::post('/piket/{id}/add-siswa', [JadwalPiketController::class, 'addSiswa'])->name('piket.addSiswa');
+Route::post('/createpiket/store', [JadwalPiketController::class, 'store'])->name('piket.store');
+// Route::post('/piket/simpan', [JadwalPiketController::class, 'simpan'])->name('piket.simpan');
+Route::delete('/hapussiswapiket/{id}', [JadwalPiketController::class, 'hapussiswapiket'])->name('hapussiswapiket');
+// Route::put('/piket/update/{id}', [JadwalPiketController::class, 'update'])->name('piket.update');
+
+Route::resource('jadwalpiket', JadwalPiketController::class)
+    ->except(['edit', 'show']) // Kecualikan jika method tidak digunakan
+    ->names([
+        'index' => 'jadwalpiket.index',
+        'create' => 'jadwalpiket.create',
+        'store' => 'jadwalpiket.store',
+        'update' => 'jadwalpiket.update',
+        'destroy' => 'jadwalpiket.destroy',
+    ]);
+
+// Tambahkan siswa ke jadwal piket
+Route::post('/jadwalpiket/{id}/siswa', [JadwalPiketController::class, 'addSiswa'])
+    ->name('jadwalpiket.addSiswa');
+
+// Simpan detail siswa pada jadwal piket
+Route::post('/jadwalpiket/simpan', [JadwalPiketController::class, 'simpan'])
+    ->name('jadwalpiket.simpan');
+
+// Hapus data siswa dari jadwal piket
+// Route::delete('/jadwalpiket/siswa/{id}', [JadwalPiketController::class, 'hapussiswapiket'])
+//     ->name('jadwalpiket.hapusSiswa');
+
+// Perbarui siswa di jadwal piket
+Route::put('/jadwalpiket/siswa/{id}', [JadwalPiketController::class, 'update'])
+    ->name('jadwalpiket.updateSiswa');
 
 // CRUD SERAH TERIMA RAPOT 
 Route::resource('serahterimarapor', DaftarPenyerahanRapotController::class);

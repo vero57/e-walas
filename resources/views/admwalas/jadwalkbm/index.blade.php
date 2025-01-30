@@ -155,6 +155,11 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
+                <div class="d-flex-container">
+                    <a href="{{ route('jadwalkbm.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i> Unduh
+                    </a>
+                </div>
                 <!-- Tombol Unggah Data -->
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
@@ -176,59 +181,64 @@
                     
             </div>
         </div><br>
+        @if ($message)
+    <div class="alert alert-warning">{{ $message }}</div>
+@endif
 
-        <table>
-    <tr>
-        <td>Kelas</td>
-        <td>: {{ $jadwalKbms->first()->rombel->nama_kelas ?? '-' }}</td>
-    </tr>
-    <tr>
-        <td>Tahun Pelajaran</td>
-        <td>: {{ date('Y') }}</td>
-    </tr>
-</table>
-
-
-
-        <table class="table table-bordered text-center">
-    <thead>
+@if ($jadwalKbms->isNotEmpty())
+    <table>
         <tr>
-            <th>  </th>
-            <th colspan="2">Senin</th>
-            <th colspan="2">Selasa</th>
-            <th colspan="2">Rabu</th>
-            <th colspan="2">Kamis</th>
-            <th colspan="2">Jumat</th>
+            <td>Kelas</td>
+            <td>: {{ $jadwalKbms->first()->rombel->nama_kelas ?? '-' }}</td>
         </tr>
         <tr>
-            <th>Jam Ke</th>
-            <th>Mapel</th>
-            <th>Guru</th>
-            <th>Mapel</th>
-            <th>Guru</th>
-            <th>Mapel</th>
-            <th>Guru</th>
-            <th>Mapel</th>
-            <th>Guru</th>
-            <th>Mapel</th>
-            <th>Guru</th>
+            <td>Tahun Pelajaran</td>
+            <td>: {{ date('Y') }}</td>
         </tr>
-    </thead>
-    <tbody>
-        @for ($jam = 1; $jam <= 12; $jam++)
+    </table>
+
+    <table class="table table-bordered text-center">
+        <thead>
             <tr>
-                <td>{{ $jam }}</td>
-                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
-                    @php
-                        $jadwalHari = collect(json_decode($jadwalKbms->first()->$hari, true) ?? [])->firstWhere('jam', $jam);
-                    @endphp
-                    <td>{{ $jadwalHari ? $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' : '-' }}</td>
-                    <td>{{ $jadwalHari ? $gurus[$jadwalHari['guru_id']]->nama ?? '-' : '-' }}</td>
-                @endforeach
+                <th></th>
+                <th colspan="2">Senin</th>
+                <th colspan="2">Selasa</th>
+                <th colspan="2">Rabu</th>
+                <th colspan="2">Kamis</th>
+                <th colspan="2">Jumat</th>
             </tr>
-        @endfor
-    </tbody>
-</table>
+            <tr>
+                <th>Jam Ke</th>
+                <th>Mapel</th>
+                <th>Guru</th>
+                <th>Mapel</th>
+                <th>Guru</th>
+                <th>Mapel</th>
+                <th>Guru</th>
+                <th>Mapel</th>
+                <th>Guru</th>
+                <th>Mapel</th>
+                <th>Guru</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for ($jam = 1; $jam <= 12; $jam++)
+                <tr>
+                    <td>{{ $jam }}</td>
+                    @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
+                        @php
+                            $jadwalHari = collect(json_decode($jadwalKbms->first()->$hari, true) ?? [])->firstWhere('jam', $jam);
+                        @endphp
+                        <td>{{ $jadwalHari ? $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' : '-' }}</td>
+                        <td>{{ $jadwalHari ? $gurus[$jadwalHari['guru_id']]->nama ?? '-' : '-' }}</td>
+                    @endforeach
+                </tr>
+            @endfor
+        </tbody>
+    </table>
+@else
+    <div class="alert alert-info">Data jadwal belum tersedia.</div>
+@endif
 </main>
   
     <div class="container copyright text-center mt-4">

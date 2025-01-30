@@ -151,6 +151,11 @@
                     <i class="bi bi-plus"></i> Tambah
                 </a>
             </div>
+            <div class="d-flex-container">
+                <a href="{{ route('identitaskelas.index') }}?export=pdf" class="btn btn-outline-secondary">
+                <i class="bi bi-download"></i>Unduh
+                </a>
+            </div>
         </div><br>
 
         <table class="table table-bordered table-striped">

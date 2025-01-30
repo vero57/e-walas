@@ -8,18 +8,32 @@ use App\Models\Kepsek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\StrukturOrganisasiKelas;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StrukturOrganisasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $struktur = DB::table('vwstrukturorganisasi')->first();
-        return view("admwalas.strukturorganisasi.index" , compact('struktur'));
+
+    public function index(Request $request)
+{
+
+    $struktur = DB::table('vwstrukturorganisasi')->get();
+
+    if ($request->get('export') == 'pdf') {
+        if ($struktur->isEmpty()) {
+            return redirect()->route('strukturorganisasi.index')->with('error', 'Data tidak tersedia untuk diunduh.');
+        }
+
+        $pdf = Pdf::loadView('pdf.strukturorganisasi', ['struktur' => $struktur]);
+        return $pdf->download('Struktur_Organisasi.pdf');
     }
 
+    return view("admwalas.strukturorganisasi.index", compact('struktur'));
+}
+
+    
     /**
      * Show the form for creating a new resource.
      */

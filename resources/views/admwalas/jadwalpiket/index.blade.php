@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Walas</title>
+  <title>E Walas SMKN 1 Cibinong - Walas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -27,6 +27,14 @@
 
   <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- Import Bootstrap CSS (jika belum) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Import Bootstrap JS (jika belum) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -40,23 +48,6 @@
   ======================================================== -->
 
   <style>
-    .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-        width: 100%;
-        table-layout: auto;
-        min-width: 1200px; /* Atur sesuai dengan lebar tabel kamu */
-    }
-
-    th, td {
-        white-space: nowrap;
-    }
-
-
-
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -80,12 +71,110 @@
             align-items: center; /* Mengatur teks ke tengah secara vertikal */
         }
 
+        .card-header h5 {
+            color: white;
+        }
+
         .alert-danger {
             background-color: #e74c3c; /* Merah */
         }
 
         .alert-success {
             background-color: #2ecc71; /* Hijau */
+        }
+
+        .list-group-item {
+            position: relative;
+            padding-right: 50px;
+        }
+
+        .list-group-item:hover .action-icons {
+            display: inline;
+        }
+
+        .action-icons {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f0f0f0; /* Warna abu-abu background */
+            color: #6c757d; /* Warna abu-abu ikon */
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid #d6d6d6; /* Border abu-abu */
+        }
+
+        .icon-circle:hover {
+            background-color: #e0e0e0; /* Warna abu-abu lebih gelap saat hover */
+            color: #495057; /* Warna abu-abu lebih gelap untuk ikon */
+            border-color: #c0c0c0;
+        }
+
+        .icon-circle i {
+            pointer-events: none; /* Mencegah klik pada ikon langsung */
+        }
+
+        .modal-dialog.modal-sm {
+            max-width: 400px; /* Sesuaikan dengan ukuran yang diinginkan */
+        }
+
+        /* Menyesuaikan tampilannya agar dropdown tampil lebih rapi */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        select.form-control {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Styling tambahan untuk button Pilih Siswa */
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Pastikan form muncul di tengah halaman */
+        .edit-siswa-form {
+            display: none; /* Sembunyikan form awalnya */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; /* Menentukan lebar form */
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .edit-siswa-form.show {
+            display: block; /* Tampilkan form saat diaktifkan */
         }
 
         /* Animasi slide down */
@@ -107,10 +196,30 @@
                 transform: translateY(-100%);
             }
         }
-
-
-        
     </style>
+
+<style>
+    .meja-guru-box-style {
+        width: 200px; /* Lebar persegi panjang */
+        height: 100px; /* Tinggi persegi panjang */
+        background-color: #CECECE; /* Warna latar belakang */
+        border-radius: 20px; /* Sudut membulat */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .meja-guru-box h4 {
+        font-size: 20px; /* Ukuran font judul */
+        color: #333; /* Warna teks */
+        margin: 0; /* Menghapus margin default */
+    }
+</style>
+
+
+
 </head>
 
 <body class="index-page">
@@ -136,106 +245,126 @@
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
-
       <nav id="navmenu" class="navmenu">
         <ul>
-        
+        <li><a href="/jadwalpiket" class="active">Jadwal Piket</a></li>
+          <li><a href="/createpiket" >Buat Piket</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
+       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+<div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+    <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+        @csrf
+        <button type="submit" class="btn-getstarted">Logout</button>
+    </form>
+</div>
       
 
     </div>
   </header>
 
-<main class="main">
+  <main class="main">
 
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
+  <!-- Hero Section -->
+<section id="hero" class="hero section">
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-        <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Jadwal Piket</h2>
-            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="{{ route('jadwalpiket.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus"></i> Tambah
-                </a>
-
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
+            <h2 class="font-weight-bold">Jadwal Piket Siswa</h2>
+            <hr class="my-3">
         </div>
 
-        <div class="container">
-    <h1 class="mb-4">Jadwal Piket</h1>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Wali Kelas</th>
-                    <th>Hari 1</th>
-                    <th>Siswa 1</th>
-                    <th>Hari 2</th>
-                    <th>Siswa 2</th>
-                    <th>Hari 3</th>
-                    <th>Siswa 3</th>
-                    <th>Hari 4</th>
-                    <th>Siswa 4</th>
-                    <th>Hari 5</th>
-                    <th>Siswa 5</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($jadwalpiket as $index => $jadwal)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $jadwal->walas_id }}</td>
-                    <td>{{ $jadwal->hari1 }}</td>
-                    <td>{{ $jadwal->siswa1 ? $jadwal->siswa1->nama : '-' }}</td>
-                    <td>{{ $jadwal->hari2 }}</td>
-                    <td>{{ $jadwal->siswa2 ? $jadwal->siswa2->nama : '-' }}</td>
-                    <td>{{ $jadwal->hari3 }}</td>
-                    <td>{{ $jadwal->siswa3 ? $jadwal->siswa3->nama : '-' }}</td>
-                    <td>{{ $jadwal->hari4 }}</td>
-                    <td>{{ $jadwal->siswa4 ? $jadwal->siswa4->nama : '-' }}</td>
-                    <td>{{ $jadwal->hari5 }}</td>
-                    <td>{{ $jadwal->siswa5 ? $jadwal->siswa5->nama : '-' }}</td>
-                    <td>
-                        <a href="{{ route('jadwalpiket.edit', $jadwal->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        <div>
+        <a href="{{ route('jadwalpiket.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary"   style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
+    <i class="bi bi-download"></i> Unduh PDF
+</a>
 </div>
+        @foreach (array_chunk($data, 3) as $row)
+        <div class="row mt-4">
+            @foreach ($row as $piket)
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5>{{ $piket['nama_hari'] }}</h5>
+                    </div>
+                    <div class="card-body">
+                       <ul class="list-group">
+                            @if ($piket['siswas']->isEmpty())
+                                <li class="list-group-item">Tidak ada data</li>
+                            @else
+                                @foreach ($piket['siswas'] as $siswa)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ $siswa->nama }}
+                                        <div class="action-icons">
+                                            <a href="/hapussiswapiket/{{$siswa->id}}" 
+                                                class="icon-circle text-secondary" 
+                                                title="Hapus Siswa"
+                                                onclick="event.preventDefault(); document.getElementById('delete-form-{{$siswa->id}}').submit();">
+                                                <i class="fas fa-trash-alt"></i>
+                                                </a>
 
-    </section>
+                                                <!-- Form penghapusan, tetap tersembunyi -->
+                                                <form id="delete-form-{{$siswa->id}}" action="/hapussiswapiket/{{$siswa->id}}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
 
-</main>
-  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                       </ul>
+
+                        <!-- Tombol tambah siswa dengan ikon + -->
+                        <div class="d-flex justify-content-center mt-4">
+                            <button class="btn btn-success" onclick="toggleSelectSiswa({{ $piket['id'] }})">
+                                <i class="fas fa-plus"></i> Tambah Siswa
+                            </button>
+                        </div>
+
+                        <!-- Form pemilihan siswa -->
+                        <div id="selectSiswaContainer_{{ $piket['id'] }}" class="mt-3" style="display: none;">
+                            <form action="{{ route('jadwalpiket.simpan') }}" method="POST">
+                                @csrf
+                                <!-- Hidden input untuk kelompok_id -->
+                                <input type="hidden" name="jadwalpikets_id" value="{{ $piket['id'] }}">
+
+                                <div class="form-group">
+                                    <label for="siswa_select_{{ $piket['id'] }}">Pilih Siswa</label>
+                                    <select name="siswas_id" id="siswa_select_{{ $piket['id'] }}" class="form-control">
+                                        <option value="" disabled selected>Pilih Siswa</option>
+                                        @foreach ($siswas as $siswa)
+                                        <option value="{{ $siswa->id }}">
+                                            {{ $siswa->nama }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-sm d-block mx-auto">
+                                    Tambah Siswa
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endforeach
+
+
+</section>
+
+
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
@@ -261,6 +390,41 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+ <!-- Tambahkan Font Awesome untuk ikon + -->
+ <script>
+    // Fungsi untuk toggle visibilitas form pemilihan siswa
+    function toggleSelectSiswa(kelompokId) {
+        const container = document.getElementById(`selectSiswaContainer_${kelompokId}`);
+        if (container.style.display === 'none') {
+            container.style.display = 'block'; // Tampilkan form
+        } else {
+            container.style.display = 'none'; // Sembunyikan form
+        }
+    }
+</script>
+
+<script>
+    function toggleEditSiswaForm(kelompokId, siswaId) {
+        var formContainer = document.getElementById("editSiswaContainer_" + kelompokId);
+        // Menyembunyikan atau menampilkan form ketika tombol edit diklik
+        if (formContainer.style.display === "none") {
+            formContainer.style.display = "block";
+        } else {
+            formContainer.style.display = "none";
+        }
+
+        // Mengarahkan form ke ID siswa yang dipilih
+        document.getElementById("siswa_select_" + kelompokId).value = siswaId;
+    }
+</script>
+
+<script>
+    function openEditForm(kelompokId, siswaId) {
+        var form = document.getElementById('editSiswaForm_' + kelompokId);
+        form.classList.add('show'); // Menambahkan kelas 'show' untuk menampilkan form
+    }
+</script>
+
 
   <script>
         window.onload = function() {

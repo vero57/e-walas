@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Siswa;
 use App\Models\Walas;
 use Illuminate\Http\Request;
@@ -12,12 +13,18 @@ class IdentitasKelasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $identitaskelas = DB::table('vwidentitaskelas')->get(); // ambil data dari view
-        return view('admwalas.identitaskelas.index', compact('identitaskelas'));
-        
+    public function index(Request $request)
+{
+    $identitaskelas = DB::table('vwidentitaskelas')->get();
+
+    if ($request->get('export') == 'pdf') {
+        $pdf = Pdf::loadView('pdf.identitaskelas', ['data' => $identitaskelas]);
+        return $pdf->download('Identitas_Kelas.pdf');
     }
+
+    return view('admwalas.identitaskelas.index', compact('identitaskelas'));
+}
+
 
     public function create()
     {

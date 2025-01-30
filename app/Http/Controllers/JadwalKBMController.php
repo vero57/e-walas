@@ -8,6 +8,8 @@ use App\Models\Walas;
 use App\Models\Rombel;
 use App\Models\JadwalKbm;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class JadwalKbmController extends Controller
 {
@@ -16,13 +18,27 @@ class JadwalKbmController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+public function index(Request $request)
 {
-    $jadwalKbms = JadwalKBM::with(['rombel', 'walas', 'mapels', 'gurus'])->get();
+    $jadwalKbms = JadwalKbm::with(['rombel', 'walas', 'mapels', 'gurus'])->get();
+    $message = $jadwalKbms->isEmpty() ? 'Data jadwal belum tersedia.' : null;
+
     $mapels = Mapel::all()->keyBy('id');
     $gurus = Guru::all()->keyBy('id');
 
-    return view('admwalas.jadwalkbm.index', compact('jadwalKbms', 'mapels', 'gurus'));
+    if ($request->input('export') === 'pdf') {
+        $data = [
+            'jadwalKbms' => $jadwalKbms,
+            'mapels' => $mapels,
+            'gurus' => $gurus
+        ];
+        $pdf = Pdf::loadView('pdf.jadwalkbm', $data)->setPaper('A4', 'portrait');
+        return $pdf->download('Jadwal_KBM.pdf');
+    }
+    
+
+    return view('admwalas.jadwalkbm.index', compact('jadwalKbms', 'mapels', 'gurus', 'message'));
 }
 
 

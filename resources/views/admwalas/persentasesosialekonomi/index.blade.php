@@ -186,7 +186,12 @@
                 <div class="d-flex-container">
                 <a href="/persentasesosialekonomicreate" class="btn btn-primary">
                     <i class="bi bi-plus"></i> Tambah
-                </a>
+                </a></div>
+                <div>
+        <a href="{{ route('persentasesosialekonomi.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
+    <i class="bi bi-download"></i> Unduh PDF
+</a>
+</div>
 
 
                     <!-- Search Box -->

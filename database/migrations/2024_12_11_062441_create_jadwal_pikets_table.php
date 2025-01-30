@@ -14,30 +14,13 @@ return new class extends Migration
         Schema::create('jadwal_pikets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('walas_id');
-            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->enum('hari1', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('siswa1_id');
-            $table->foreign('siswa1_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari2', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('siswa2_id');
-            $table->foreign('siswa2_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari3', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('siswa3_id');
-            $table->foreign('siswa3_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari4', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('siswa4_id');
-            $table->foreign('siswa4_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->enum('hari5', ['senin', 'selasa', 'rabu', 'kamis', 'jumat'])->default('senin');
-            $table->unsignedBigInteger('siswa5_id');
-            $table->foreign('siswa5_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-
-            $table->unsignedBigInteger('kurikulum_id');
+            $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('siswas_id')->nullable(); 
+            $table->foreign('siswas_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('nama_hari');
+            $table->unsignedBigInteger('kurikulum_id')->nullable();
             $table->foreign('kurikulum_id')->references('id')->on('kurikulums')->onDelete('cascade')->onUpdate ('cascade');
-            $table->date('tanggal');
+            $table->date('tanggal')->nullable();
             $table->string('ttdkurikulum_url',255)->nullable();
             $table->string('ttdwalas_url',255)->nullable();
             $table->timestamps();

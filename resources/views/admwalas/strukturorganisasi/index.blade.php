@@ -206,88 +206,87 @@
         <div class="mb-4">
             <h2 class="font-weight-bold">Struktur Organisasi Kelas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="{{ route('strukturorganisasi.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus"></i> Tambah
-                </a>
+            <div class="d-flex-container">
+            <a href="{{ route('strukturorganisasi.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus"></i> Tambah Data
+            </a>
             </div>
             <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
             <div class="d-flex-container">
-                <a href="{{ route('strukturorganisasi.edit', $struktur->id)}}" class="btn btn-warning">
-                    <i class="bi bi-plus"></i> Edit
+            @foreach ($struktur as $data)
+            <a href="{{ route('strukturorganisasi.edit', $data->id) }}" class="btn btn-warning">
+                <i class="bi bi-pencil"></i> Edit {{ $data->id }}
+            </a>
+        @endforeach
+        </div>
+            <div class="d-flex-container">
+                <a href="{{ route('strukturorganisasi.index') }}?export=pdf" class="btn btn-outline-secondary">
+                <i class="bi bi-download"></i>Unduh
                 </a>
             </div>
         </div>
 
         <div class="container mt-5">
     <h2 class="text-center mb-4">Struktur Organisasi Kelas</h2>
-    
-    <div class="tree">
-    <ul>
-        <!-- Kepala Sekolah -->
-        <li>
-            <a href="#" class="node">Kepala Sekolah<br>{{ $struktur->kepala_sekolah }}</a>
-            <ul>
-                <!-- Wali Kelas -->
-                <li>
-                    <a href="#" class="node">Wali Kelas<br>{{ $struktur->wali_kelas }}</a>
-                    <ul>
-                        <!-- Ketua Kelas -->
-                        <li>
-                            <a href="#" class="node">Ketua Kelas<br>{{ $struktur->ketua_kelas }}</a>
-                            <ul>
-                                <!-- Wakil Ketua Kelas -->
-                                <li>
-                                    <a href="#" class="node">Wakil Ketua Kelas<br>{{ $struktur->wakil_ketua_kelas }}</a>
-                                    <ul>
-                                        <!-- Bendahara & Sekretaris -->
-                                        <li>
-                                            <a href="#" class="node">Bendahara<br>{{ $struktur->bendahara }}</a>
-                                            <ul>
-                                                <!-- Seksi di bawah Bendahara -->
-                                                <li>
-                                                    <a href="#" class="node">Seksi Kebersihan<br>{{ $struktur->seksi_kebersihan }}</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="node">Seksi Perlengkapan<br>{{ $struktur->seksi_perlengkapan }}</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="node">Sekretaris<br>{{ $struktur->sekretaris }}</a>
-                                            <ul>
-                                                <!-- Seksi di bawah Sekretaris -->
-                                                <li>
-                                                    <a href="#" class="node">Seksi Keamanan<br>{{ $struktur->seksi_keamanan }}</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="node">Seksi Kerohanian<br>{{ $struktur->seksi_kerohanian }}</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-</div>
-</div>
-</div>
 
-  
+    @if ($struktur->isEmpty())
+        <p class="text-center">Tidak ada data struktur organisasi.</p>
+    @else
+        <div class="tree">
+            @foreach ($struktur as $data)
+                <ul>
+                    <!-- Kepala Sekolah -->
+                    <li>
+                        <a href="#" class="node">Kepala Sekolah<br>{{ $data->kepala_sekolah }}</a>
+                        <ul>
+                            <!-- Wali Kelas -->
+                            <li>
+                                <a href="#" class="node">Wali Kelas<br>{{ $data->wali_kelas }}</a>
+                                <ul>
+                                    <!-- Ketua Kelas -->
+                                    <li>
+                                        <a href="#" class="node">Ketua Kelas<br>{{ $data->ketua_kelas }}</a>
+                                        <ul>
+                                            <!-- Wakil Ketua Kelas -->
+                                            <li>
+                                                <a href="#" class="node">Wakil Ketua Kelas<br>{{ $data->wakil_ketua_kelas }}</a>
+                                                <ul>
+                                                    <!-- Bendahara & Sekretaris -->
+                                                    <li>
+                                                        <a href="#" class="node">Bendahara<br>{{ $data->bendahara }}</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" class="node">Seksi Kebersihan<br>{{ $data->seksi_kebersihan }}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" class="node">Seksi Perlengkapan<br>{{ $data->seksi_perlengkapan }}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="node">Sekretaris<br>{{ $data->sekretaris }}</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" class="node">Seksi Keamanan<br>{{ $data->seksi_keamanan }}</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" class="node">Seksi Kerohanian<br>{{ $data->seksi_kerohanian }}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            @endforeach
+        </div>
+    @endif
+</div>  
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
