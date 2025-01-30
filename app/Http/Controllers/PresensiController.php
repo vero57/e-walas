@@ -5,18 +5,50 @@ namespace App\Http\Controllers;
 use App\Models\Walas;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
     public function index()
     {
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walas = Walas::find(session('walas_id'));
+        
+        // Periksa apakah data walas ditemukan
+        if (!$walas) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+
         $presensis = Presensi::all();
-        return view('admwalas.presensi.index', compact('presensis'));
+        return view('admwalas.presensi.index', compact('presensis', 'walas'));
     }
 
     public function create()
     {
-        $walas = Walas::all();
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walas = Walas::find(session('walas_id'));
+        
+        // Periksa apakah data walas ditemukan
+        if (!$walas) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+
         return view('admwalas.presensi.create', compact('walas'));
     }
 

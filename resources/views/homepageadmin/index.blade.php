@@ -114,12 +114,20 @@
       </a>
 
 
-      <form action="{{ route('logoutadmin') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+  <div class="user-info d-flex align-items-center">
+              @if(session()->has('admin_id'))
+                  <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                  
+                  <!-- Tautkan nama walas ke /userprofile -->
+                  <a href="/profileadmin" class="text-decoration-none">
+                      <span>{{ $admin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                  </a>
+              @endif
+      <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+          @csrf
+          <button type="submit" class="btn-getstarted">Logout</button>
+      </form>
     </div>
   </header>
 

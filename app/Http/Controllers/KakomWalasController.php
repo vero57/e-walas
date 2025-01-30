@@ -15,20 +15,22 @@ class KakomWalasController extends Controller
     public function index()
 {
     // Mengambil siswa yang sedang login
-        $kakom = Auth::guard('kakoms')->user();
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+       $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
+    
+       // Periksa apakah session 'kakom_id' ada
+       if (!session()->has('kakom_id')) {
+           return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+       }
+ 
+       // Ambil data kurikulum berdasarkan 'kakom_id' yang ada di session
+       $kakom = Kakom::find(session('kakom_id'));
+       
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kakom) {
+           return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+       }
 
-        // Periksa apakah session 'kakom_id' ada
-        if (!session()->has('kakoms_id')) {
-            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        // Ambil data kakom berdasarkan 'kakoms_id' yang ada di session
-        $kakom = Kakom::find(session('kakoms_id'));
-
-        // Periksa apakah data kakom ditemukan
-        if (!$kakom) {
-            return redirect('/loginkaprog')->with('error', 'Data kakom tidak ditemukan.');
-        }
         // Ambil kompetensi dari kakom yang sedang login
         $kompetensi_kakom = $kakom->kompetensi;
 

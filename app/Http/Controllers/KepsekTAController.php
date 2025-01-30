@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+namespace App\Http\Controllers;
+use Carbon\Carbon;
+use App\Models\Kepsek;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class KepsekTAController extends Controller
 {
@@ -11,7 +18,24 @@ class KepsekTAController extends Controller
      */
     public function index()
     {
-        return view ('homepagekepsek.tahunakademik');
+          // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+      $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+
+      // Periksa apakah session 'kurikulum_id' ada
+      if (!session()->has('kepsek_id')) {
+          return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+      }
+
+      // Ambil data kurikulum berdasarkan 'kepsek_id' yang ada di session
+      $kepsek = Kepsek::find(session('kepsek_id'));
+      
+      // Periksa apakah data kurikulum ditemukan
+      if (!$kepsek) {
+          return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+      }
+
+
+      return view ('homepagekepsek.tahunakademik', compact('kepsek'));
     }
 
     /**

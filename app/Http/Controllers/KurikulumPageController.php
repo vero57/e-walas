@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Kurikulum;
+use App\Models\Admin;
 use App\Imports\KurikulumImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class KurikulumPageController extends Controller
 {
@@ -16,8 +18,24 @@ class KurikulumPageController extends Controller
      */
     public function index()
     {
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $admin = Auth::guard('admins')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+    
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('admin_id')) {
+            return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+        }
+  
+        // Ambil data kurikulum berdasarkan 'admin_id' yang ada di session
+        $admin = Admin::find(session('admin_id'));
+        
+        // Periksa apakah data kurikulum ditemukan
+        if (!$admin) {
+            return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
+        }
+
         $kurikulumdata = Kurikulum::all();
-        return view('homepageadmin.kurikulumdata.index', compact('kurikulumdata'));
+        return view('homepageadmin.kurikulumdata.index', compact('kurikulumdata', 'admin'));
     }
 
     public function import(Request $request){
@@ -91,7 +109,7 @@ class KurikulumPageController extends Controller
         $kurikulum = Kurikulum::findOrFail($id);
 
         // Kirim data ke view edit
-        return view('homepageadmin.kurikulumdata.edit', compact('kurikulumdata'));
+        return view('homepageadmin.kurikulumdata.edit', compact('kurikulum'));
     }
     /**
      * Update the specified resource in storage.
@@ -103,7 +121,7 @@ class KurikulumPageController extends Controller
             'nama' => 'required|string|max:255',
             'image_url' => 'nullable|image|max:5000', // Foto bersifat opsional
             'no_wa' => 'required|numeric',
-            'password' => 'nullable|string|min:6', // Password opsional
+            'password' => 'nullable|string|min:1', // Password opsional
             'nip' => 'required|numeric',
         ]);
     

@@ -155,14 +155,10 @@
     <form action="{{ route('jadwalpiket.store') }}" method="POST">
         @csrf
 
-        <div class="form-group">
-            <label for="walas_id">Wali Kelas</label>
-            <select name="walas_id" class="form-control" id="walas_id" required>
-            <option value="" disabled selected>Pilih Wali Kelas</option>    
-            @foreach($walas as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                @endforeach
-            </select>
+        <div class="mb-3">
+            <label for="walas_id" class="form-label">Wali Kelas</label>
+            <input type="text" id="walas_nama" class="form-control" value="{{ $walas->nama }}" readonly>
+            <input type="hidden" name="walas_id" id="walas_id" value="{{ $walas->id }}">
         </div>
 
         <div class="form-group">

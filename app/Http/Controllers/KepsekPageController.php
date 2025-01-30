@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Kepsek;
+use App\Models\Admin;
 use App\Imports\KepsekImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class KepsekPageController extends Controller
 {
@@ -16,9 +19,24 @@ class KepsekPageController extends Controller
      */
     public function index()
     {
+         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+         $admin = Auth::guard('admins')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+    
+         // Periksa apakah session 'kurikulum_id' ada
+         if (!session()->has('admin_id')) {
+             return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+         }
+   
+         // Ambil data kurikulum berdasarkan 'admin_id' yang ada di session
+         $admin = Admin::find(session('admin_id'));
+         
+         // Periksa apakah data kurikulum ditemukan
+         if (!$admin) {
+             return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
+         }
 
         $kepsekdata = Kepsek::all();
-        return view('homepageadmin.kepsek.index', compact('kepsekdata'));
+        return view('homepageadmin.kepsek.index', compact('kepsekdata', 'admin'));
     }
 
     public function import(Request $request){

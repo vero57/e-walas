@@ -40,7 +40,7 @@ class LoginKaprogController extends Controller
         // Periksa apakah kaprog ditemukan dan password cocok
         if ($kaprog && $request->password === $kaprog->password) {
             // Simpan informasi login ke session
-            $request->session()->put('kaprog_id', $kaprog->id);
+            $request->session()->put('kakom_id', $kaprog->id);
 
             // Redirect ke halaman kaprog dengan pesan sukses
             return redirect()->route('homepagekaprog.index')->with('success', 'Login berhasil! Selamat datang di halaman kepala program.');

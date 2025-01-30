@@ -262,8 +262,9 @@ h1 .accent-text {
         <p><strong>Password:</strong> {{ $siswa->password }}</p>
 
         <!-- Tombol Edit -->
-        <button class="edit-button">Edit Data</button>
-        <a href="/siswapage" class="kembali-button">Kembali</a>
+        <br>
+         <a href="{{ route('profilesiswa.edit', $siswa->id) }}" class="edit-button" style="margin-right: 10px;">Edit Data</a>
+         <a href="/siswapage" class="kembali-button">Kembali</a>
     </div>
 
 </div>

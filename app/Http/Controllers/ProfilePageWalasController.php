@@ -80,15 +80,72 @@ class ProfilePageWalasController extends Controller
      */
     public function edit(string $id)
     {
-        //
-    }
+         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+         $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+   
+         // Periksa apakah session 'walas_id' ada
+         if (!session()->has('walas_id')) {
+             return redirect('/loginwalas')->with('error', 'Silakan login terlebih dahulu.');
+         }
+    
+         // Ambil data walas berdasarkan 'walas_id' yang ada di session
+         $walas = Walas::find(session('walas_id'));
+         
+         // Periksa apakah data walas ditemukan
+         if (!$walas) {
+             return redirect('/loginwalas')->with('error', 'Data Wali Kelas tidak ditemukan.');
+         }
 
+        // Ambil data produk berdasarkan ID
+        $walas = Walas::findOrFail($id);
+
+        // Kirim data ke view edit
+        return view('profilewalas.edit', compact('walas'));
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'image_url' => 'nullable|image|max:5000', // Foto bersifat opsional
+            'no_wa' => 'required|numeric',
+            'password' => 'nullable|string|min:1', // Password opsional
+            'nip' => 'required|numeric',
+        ]);
+    
+        // Cari Wali Kelas berdasarkan ID
+        $walas = Walas::findOrFail($id); // Jika tidak ditemukan, akan mengembalikan error 404
+    
+        // Simpan foto jika ada file baru yang diunggah
+        if ($request->hasFile('image_url')) {
+            // Hapus foto lama jika ada
+            if ($walas->image_url) {
+                Storage::delete('public/' . $walas->image_url);
+            }
+            
+            // Simpan foto baru
+            $imagePath = $request->file('image_url')->store('walasfoto/Photos', 'public');
+            $walas->image_url = $imagePath; // Update dengan path foto yang baru
+        }
+    
+        // Update data Wali Kelas
+        $walas->nama = $request->nama;
+        $walas->no_wa = $request->no_wa;
+        $walas->nip = $request->nip;
+    
+        // Update password jika diisi (jika tidak, biarkan yang lama)
+        if ($request->filled('password')) {
+            $walas->password = ($request->password);
+        }
+    
+        // Simpan perubahan ke database
+        $walas->save();
+    
+        // Redirect dengan pesan sukses
+        return redirect('/profilewalas')->with('success', 'Data Walas Berhasil di Edit');
     }
 
     /**

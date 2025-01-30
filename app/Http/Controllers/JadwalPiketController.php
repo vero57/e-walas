@@ -7,6 +7,7 @@ use App\Models\Walas;
 use App\Models\Kurikulum;
 use App\Models\JadwalPiket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalPiketController extends Controller
 {
@@ -15,8 +16,24 @@ class JadwalPiketController extends Controller
      */
     public function index()
 {
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walas = Walas::find(session('walas_id'));
+    
+    // Periksa apakah data walas ditemukan
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
     $jadwalpiket = JadwalPiket::with(['siswa1', 'siswa2', 'siswa3', 'siswa4', 'siswa5'])->get();
-    return view('admwalas.jadwalpiket.index', compact('jadwalpiket'));
+    return view('admwalas.jadwalpiket.index', compact('jadwalpiket', 'walas'));
 }
 
     /**
@@ -24,7 +41,22 @@ class JadwalPiketController extends Controller
      */
     public function create()
 {
-    $walas = Walas::all();
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walas = Walas::find(session('walas_id'));
+    
+    // Periksa apakah data walas ditemukan
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+    
     $siswas = Siswa::all();
     $kurikulum = Kurikulum::all();
     return view('admwalas.jadwalpiket.create', compact('walas', 'siswas', 'kurikulum'));
