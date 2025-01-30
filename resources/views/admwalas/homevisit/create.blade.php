@@ -126,12 +126,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walaslogin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -146,36 +154,80 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
 
-        <!-- Formulir Identitas Kelas dalam Card -->
+        <!-- Formulir Home Visit dalam Card -->
         <div class="container mt-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Formulir Home Visit Data</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('homevisit.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                           <!-- Wali Kelas -->
-                            <div class="mb-3">
-                                <label for="walas_id" class="form-label">Wali Kelas:</label>
-                                <select name="walas_id" id="walas_id" class="form-select" required>
-                                    @foreach($walas as $walas_item)
-                                        <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <!-- Foto -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Formulir Home Visit Data</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('homevisit.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <!-- Wali Kelas -->
                         <div class="mb-3">
-                            <label for="image_url" class="form-label">Masukkan foto dokumen di sini:</label>
-                            <input type="file" name="image_url" id="image_url" class="form-control" accept="image/*" required>
+                            <label for="walas_id" class="form-label">Wali Kelas:</label>
+                            <select name="walas_id" id="walas_id" class="form-select" required>
+                                @foreach($walas as $walas_item)
+                                    <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </form>
-                    </div>
+
+                        <!-- Tanggal -->
+                        <div class="mb-3">
+                            <label for="tanggal" class="form-label">Tanggal:</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                        </div>
+
+                         <!-- Siswa -->
+                         <div class="mb-3">
+                            <label for="nama_peserta_didik" class="form-label">Pilih Siswa:</label>
+                            <select name="nama_peserta_didik" id="nama_peserta_didik" class="form-control" required>
+                                <option value="" disabled selected>Pilih Siswa</option>
+                                @foreach ($siswas as $s)
+                                    <option value="{{ $s->id }}">{{ $s->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Kasus -->
+                        <div class="mb-3">
+                            <label for="kasus" class="form-label">Keperluan:</label>
+                            <textarea name="kasus" id="kasus" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                        <!-- Kasus -->
+                        <div class="mb-3">
+                        <label for="solusi" class="form-label">Solusi:</label>
+                            <textarea name="solusi" id="solusi" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                         <!-- Kasus -->
+                        <div class="mb-3">
+                        <label for="tindak_lanjut" class="form-label">Tindak Lanjut:</label>
+                            <textarea name="tindak_lanjut" id="tindak_lanjut" class="form-control" rows="3" required></textarea>
+                        </div>
+
+
+                        <!-- Bukti (Gambar) -->
+                        <div class="mb-3">
+                            <label for="bukti_url" class="form-label">Unggah Bukti (Gambar Surat Tugas):</label>
+                            <input type="file" name="bukti_url" id="bukti_url" class="form-control" accept="image/*" required>
+                        </div>
+
+                        <!-- Dokumentasi (Gambar) -->
+                        <div class="mb-3">
+                            <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
+                            <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
                 </div>
             </div>
-
         </div>
+
     </section>
 
 </main>

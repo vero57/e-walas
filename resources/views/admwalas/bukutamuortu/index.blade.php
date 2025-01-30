@@ -71,6 +71,11 @@
             background-color: #2ecc71; /* Hijau */
         }
 
+        .button-style {
+            display: flex;
+            gap: 10px; /* Mengatur jarak antar tombol */
+        }
+
         /* Animasi slide down */
         @keyframes slideDown {
             from {
@@ -189,47 +194,58 @@
     @endif
 
     <!-- Tabel Data -->
-    @if($bukutamuortu->isNotEmpty())
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Foto Dokumen</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-    @if($bukutamuortu->isEmpty())
-        <tr>
-            <td colspan="3" class="text-center">Data masih kosong</td>
-        </tr>
-    @else
-        @foreach($bukutamuortu as $index => $bukutamuortu)
+@if($bukutamuortu->isNotEmpty())
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>
-                    @if($bukutamuortu->image_url)
-                        <img src="{{ asset('storage/'.$bukutamuortu->image_url) }}" 
-                             style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
-                    @else
-                        <p>No image</p>
-                    @endif
-                </td>
-                <td>
-                    <a href="/hapusbukutamuortu/{{ $bukutamuortu->id }}" class="btn btn-danger btn-sm">
-                        Hapus
-                    </a>
-                    <a href="{{ route('bukutamuortu.edit', $bukutamuortu->id) }}" class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
-                </td>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Nama Siswa</th>
+                <th>Keperluan</th>
+                <th>Tindak Lanjut</th>
+                <th>Solusi</th>
+                <th>Foto Dokumen</th>
+                <th>Aksi</th>
             </tr>
-        @endforeach
-    @endif
-</tbody>
+        </thead>
+        <tbody>
+            @foreach($bukutamuortu as $index => $bukutamuortu)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $bukutamuortu->tanggal }}</td>
+                    <td>{{ $bukutamuortu->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                    <td>{{ $bukutamuortu->kasus }}</td>
+                    <td>{{ $bukutamuortu->tindak_lanjut }}</td>
+                    <td>{{ $bukutamuortu->solusi }}</td>
+                    <td>
+                        @if($bukutamuortu->dokumentasi_url)
+                            <img src="{{ asset('storage/'.$bukutamuortu->dokumentasi_url) }}" 
+                                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @else
+                            <p>No image</p>
+                        @endif
+                    </td>
+                    <td class="text-center" colspan="4">
+                        <div class="d-flex justify-content-center">
+                            <a href="/hapusbukutamuortu/{{ $bukutamuortu->id }}" class="btn btn-primary btn-sm me-2">
+                                Hapus
+                            </a>
+                            <a href="{{ route('bukutamuortu.edit', $bukutamuortu->id) }}" class="btn btn-danger btn-sm">
+                                Edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <tr>
+        <td colspan="8" class="text-center">Data masih kosong</td>
+    </tr>
+@endif
 
-        </table>
-    @endif
+</tbody>
 </div>
 
 </main>

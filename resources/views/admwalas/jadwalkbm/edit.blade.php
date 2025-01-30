@@ -126,12 +126,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -192,13 +200,8 @@
 
         <div class="mb-3">
             <label for="walas_id" class="form-label">Wali Kelas</label>
-            <select name="walas_id" id="walas_id" class="form-select" required>
-                <option value="" disabled selected>Pilih Wali Kelas</option>
-                @foreach ($walasList as $walas)
-                    <option value="{{ $walas->id }}" {{ $walas->id == $jadwalKbm->walas_id ? 'selected' : '' }}>
-                        {{ $walas->nama }}
-                    </option>
-                @endforeach
+            <select name="walas_id" id="walas_id" class="form-select" required readonly>
+                <option value="{{ $walas->id }}" selected>{{ $walas->nama }}</option>
             </select>
         </div>
 

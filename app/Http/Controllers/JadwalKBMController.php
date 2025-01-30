@@ -183,6 +183,30 @@ public function index(Request $request)
      */
     public function edit($id)
 {
+     // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+     $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+     // Periksa apakah session 'walas_id' ada
+     if (!session()->has('walas_id')) {
+         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+     }
+ 
+     // Ambil data walas berdasarkan 'walas_id' yang ada di session
+     $walas = Walas::find(session('walas_id'));
+     
+     // Periksa apakah data walas ditemukan
+     if (!$walas) {
+         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+     }
+ 
+    // Ambil data rombel yang dimiliki walas yang sedang login
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+ 
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+    }
+
     $jadwalKbm = JadwalKbm::find($id);
 
     if (!$jadwalKbm) {
@@ -199,7 +223,7 @@ public function index(Request $request)
     $mapels = Mapel::all();
     $gurus = Guru::all();
 
-    return view('admwalas.jadwalkbm.edit', compact('jadwalKbm', 'rombels', 'walasList', 'mapels', 'gurus'));
+    return view('admwalas.jadwalkbm.edit', compact('jadwalKbm', 'rombels', 'walasList', 'mapels', 'gurus', 'walas', 'rombel'));
 }
 
 public function update(Request $request, $id)

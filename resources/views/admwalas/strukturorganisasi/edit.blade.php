@@ -126,12 +126,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutwalas') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walaslogin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+                @csrf
+                <button type="submit" class="btn-getstarted">Logout</button>
+            </form>
+        </div>
     </div>
   </header>
 
@@ -152,14 +160,9 @@
         @method('PUT') 
         <div class="mb-3">
         <div class="mb-3">
-            <label for="walas_id" class="form-label">Wali Kelas Yang Login</label>
-            <select name="walas_id" id="walas_id" class="form-select" required>
-                <option value="" disabled selected>Pilih Wali Kelas</option>
-                @foreach($walas as $item)
-                <option value="{{ $item->id }}" {{ $struktur->walas_id == $item->id ? 'selected' : '' }}>
-                        {{ $item->nama }}
-                    </option>
-                @endforeach
+            <label for="walas_id" class="form-label">Wali Kelas</label>
+            <select name="walas_id" id="walas_id" class="form-select" required readonly>
+                <option value="{{ $walaslogin->id }}" selected>{{ $walaslogin->nama }}</option>
             </select>
         </div>
             <label for="kepala_sekolah" class="form-label">Kepala Sekolah</label>

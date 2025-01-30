@@ -152,7 +152,7 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Penyerahan/Pengembalian Rapot</h2>
+            <h2 class="font-weight-bold">Daftar Home Visit</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
@@ -194,7 +194,13 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Foto Dokumen</th>
+                    <th>Tanggal</th>
+                    <th>Nama Peserta Didik</th>
+                    <th>Kasus</th>
+                    <th>Solusi</th>
+                    <th>Tindak Lanjut</th>
+                    <th>Foto Surat</th>
+                    <th>Dokumentasi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -207,21 +213,36 @@
         @foreach($homevisit as $index => $homevisit)
             <tr>
                 <td>{{ $index + 1 }}</td>
+                <td>{{ $homevisit->tanggal }}</td>
+                <td>{{ $homevisit->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                <td>{{ $homevisit->kasus }}</td>
+                <td>{{ $homevisit->solusi }}</td>
+                <td>{{ $homevisit->tindak_lanjut }}</td>
                 <td>
-                    @if($homevisit->image_url)
-                        <img src="{{ asset('storage/'.$homevisit->image_url) }}" 
+                    @if($homevisit->bukti_url)
+                        <img src="{{ asset('storage/'.$homevisit->bukti_url) }}" 
                              style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
                     @else
                         <p>No image</p>
                     @endif
                 </td>
                 <td>
-                    <a href="/hapushomevisit/{{ $homevisit->id }}" class="btn btn-danger btn-sm">
-                        Hapus
-                    </a>
-                    <a href="{{ route('homevisit.edit', $homevisit->id) }}" class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
+                    @if($homevisit->dokumentasi_url)
+                        <img src="{{ asset('storage/'.$homevisit->dokumentasi_url) }}" 
+                             style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                    @else
+                        <p>No image</p>
+                    @endif
+                </td>
+                <td class="text-center" colspan="4">
+                    <div class="d-flex justify-content-center">
+                        <a href="/hapushomevisit/{{ $homevisit->id }}" class="btn btn-primary btn-sm me-2">
+                            Hapus
+                        </a>
+                        <a href="{{ route('homevisit.edit', $homevisit->id) }}" class="btn btn-danger btn-sm">
+                            Edit
+                        </a>
+                    </div>
                 </td>
             </tr>
         @endforeach

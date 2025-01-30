@@ -283,17 +283,10 @@ table td {
                 </td>
             </tr>
             <tr>
-            <td>6</td>
-            <td>Rencana Kegiatan Walas (2 Semester)</td>
-            <td>
-                <!-- tombol trigger modal -->
-                <a href="#" data-bs-toggle="modal" data-bs-target="#semesterModal">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-            </td>
+           
         </tr>
             <tr>
-                <td>7</td>
+                <td>6</td>
                 <td>Kehadiran Peserta Didik</td>
                 <td>
                     <a href="{{route('presensi.index')}}">
@@ -302,16 +295,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>8</td>
-                <td>Denah Tempat Kerja Kelompok Siswa</td>
-                <td>
-                <a href="{{route('denahkerjakelompok.index')}}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
-                </a>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
+                <td>7</td>
                 <td>Daftar Penyerahan/Pengembalian Rapor Siswa</td>
                 <td>
                     <a href="/serahterimarapor">
@@ -320,7 +304,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>10</td>
+                <td>8</td>
                 <td>Catatan Kasus Peserta Didik</td>
                 <td>
                     <a href="/catatankasus">
@@ -329,7 +313,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>11</td>
+                <td>9</td>
                 <td>Agenda Kegiatan Walas</td>
                 <td>
                     <a href="/agendawalas">
@@ -338,7 +322,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>12</td>
+                <td>10</td>
                 <td>Daftar Peserta Didik</td>
                 <td>
                     <a href="/daftarpesertadidik">
@@ -347,7 +331,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>13</td>
+                <td>11</td>
                 <td>Rekapitulasi Jumlah Peserta Didik</td>
                 <td>
                     <a href="/rekapjumlahsiswa">
@@ -356,7 +340,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>14</td>
+                <td>12</td>
                 <td>Home Visit</td>
                 <td>
                     <a href="/homevisit">
@@ -365,7 +349,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>15</td>
+                <td>13</td>
                 <td>Buku Tamu Orang Tua/Wali Peserta Didik</td>
                 <td>
                     <a href="/bukutamuortu">
@@ -374,7 +358,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>16</td>
+                <td>14</td>
                 <td>Persentase Sosial Ekonomi</td>
                 <td>
                     <a href="/persentasesosialekonomi">

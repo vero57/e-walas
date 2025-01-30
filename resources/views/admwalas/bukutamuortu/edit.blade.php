@@ -126,10 +126,20 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walaslogin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
             <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
+        </div>
         </div>
     </div>
   </header>
@@ -154,32 +164,84 @@
             @csrf
             @method('PUT')
 
-           <!-- Wali Kelas -->
-            <div class="mb-3">
-                <label for="walas_id" class="form-label">Wali Kelas:</label>
-                <select name="walas_id" id="walas_id" class="form-select" required>
-                    @foreach($walas as $walas_item)
-                        <option value="{{ $walas_item->id }}" 
-                            {{ $bukutamuortu->walas_id == $walas_item->id ? 'selected' : '' }}>
-                            {{ $walas_item->nama }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+           <!-- Formulir Update Buku Tamu Orangtua dalam Card -->
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>Update Formulir Buku Tamu Orangtua Data</h3>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('bukutamuortu.update', $bukutamuortu->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-            <!-- Foto -->
-            <div class="mb-3">
-                <label for="image_url" class="form-label">Foto Dokumen:</label>
-                <input type="file" name="image_url" id="image_url" class="form-control" accept="image/*">
-                @if($bukutamuortu->image_url)
-                    <img src="{{ asset('storage/'.$bukutamuortu->image_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
-                @endif
-            </div>
+                <!-- Wali Kelas -->
+                <div class="mb-3">
+                    <label for="walas_id" class="form-label">Wali Kelas:</label>
+                    <select name="walas_id" id="walas_id" class="form-select" required>
+                        @foreach($walas as $walas_item)
+                            <option value="{{ $walas_item->id }}" 
+                                @if($bukutamuortu->walas_id == $walas_item->id) selected @endif>
+                                {{ $walas_item->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
+                <!-- Tanggal -->
+                <div class="mb-3">
+                    <label for="tanggal" class="form-label">Tanggal:</label>
+                    <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ $bukutamuortu->tanggal }}" required>
+                </div>
+
+                <!-- Siswa -->
+                <div class="mb-3">
+                    <label for="nama_peserta_didik" class="form-label">Pilih Siswa:</label>
+                    <select name="nama_peserta_didik" id="nama_peserta_didik" class="form-control" required>
+                        <option value="" disabled>Pilih Siswa</option>
+                        @foreach ($siswas as $s)
+                            <option value="{{ $s->id }}" 
+                                @if($bukutamuortu->nama_peserta_didik == $s->id) selected @endif>
+                                {{ $s->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Kasus -->
+                <div class="mb-3">
+                    <label for="kasus" class="form-label">Keperluan:</label>
+                    <textarea name="kasus" id="kasus" class="form-control" rows="3" required>{{ old('kasus', $bukutamuortu->kasus) }}</textarea>
+                </div>
+
+                <!-- Solusi -->
+                <div class="mb-3">
+                    <label for="solusi" class="form-label">Solusi:</label>
+                    <textarea name="solusi" id="solusi" class="form-control" rows="3" required>{{ old('solusi', $bukutamuortu->solusi) }}</textarea>
+                </div>
+
+                <!-- Tindak Lanjut -->
+                <div class="mb-3">
+                    <label for="tindak_lanjut" class="form-label">Tindak Lanjut:</label>
+                    <textarea name="tindak_lanjut" id="tindak_lanjut" class="form-control" rows="3" required>{{ old('tindak_lanjut', $bukutamuortu->tindak_lanjut) }}</textarea>
+                </div>
+
+                <!-- Dokumentasi (Gambar) -->
+                <div class="mb-3">
+                    <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
+                    <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
+                    <small>Jika tidak ingin mengubah gambar, biarkan kosong.</small>
+                    @if($bukutamuortu->dokumentasi_url)
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $bukutamuortu->dokumentasi_url) }}" alt="Dokumentasi" class="img-thumbnail" width="100">
+                        </div>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
     </div>
-</div>
 </div>
     </section>
 

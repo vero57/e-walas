@@ -15,7 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('walas_id');
             $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->string('image_url',255);
+            $table->date('tanggal');
+            $table->string('nama_peserta_didik',255);
+            $table->string('tindak_lanjut',255);
+            $table->string('kasus',255);
+            $table->string('solusi',255);
+            $table->string('bukti_url',255);
+            $table->string('dokumentasi_url',255);
             $table->timestamps();
         });
     }
@@ -28,3 +34,6 @@ return new class extends Migration
         Schema::dropIfExists('home_visits');
     }
 };
+
+
+

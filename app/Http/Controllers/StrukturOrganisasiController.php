@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\Walas;
 use App\Models\Kepsek;
+use App\Models\Rombel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\StrukturOrganisasiKelas;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class StrukturOrganisasiController extends Controller
 {
@@ -18,6 +20,30 @@ class StrukturOrganisasiController extends Controller
 
     public function index(Request $request)
 {
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walaslogin = Auth::guard('walas')->user();
+
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walaslogin = Walas::find(session('walas_id'));
+
+    // Periksa apakah data walas ditemukan
+    if (!$walaslogin) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+    // Ambil data rombel yang dimiliki walas yang sedang login
+    $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
+
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+    }
+
 
     $struktur = DB::table('vwstrukturorganisasi')->get();
 
@@ -30,7 +56,7 @@ class StrukturOrganisasiController extends Controller
         return $pdf->download('Struktur_Organisasi.pdf');
     }
 
-    return view("admwalas.strukturorganisasi.index", compact('struktur'));
+    return view("admwalas.strukturorganisasi.index", compact('struktur', 'walaslogin', 'rombel'));
 }
 
     
@@ -39,10 +65,33 @@ class StrukturOrganisasiController extends Controller
      */
     public function create()
 {
+     // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+     $walaslogin = Auth::guard('walas')->user();
+
+     // Periksa apakah session 'walas_id' ada
+     if (!session()->has('walas_id')) {
+         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+     }
+ 
+     // Ambil data walas berdasarkan 'walas_id' yang ada di session
+     $walaslogin = Walas::find(session('walas_id'));
+ 
+     // Periksa apakah data walas ditemukan
+     if (!$walaslogin) {
+         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+     }
+ 
+     // Ambil data rombel yang dimiliki walas yang sedang login
+     $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
+ 
+     // Periksa apakah rombel ditemukan
+     if (!$rombel) {
+         return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+     }
     $siswa = Siswa::all();
     $kepsek = Kepsek::all();
     $walas = Walas::all();
-    return view('admwalas.strukturorganisasi.create', compact('siswa', 'kepsek', 'walas'));
+    return view('admwalas.strukturorganisasi.create', compact('siswa', 'kepsek', 'walaslogin', 'walas'));
 }
 
 public function store(Request $request)
@@ -79,11 +128,35 @@ public function store(Request $request)
      */
     public function edit(string $id)
     {
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+     $walaslogin = Auth::guard('walas')->user();
+
+     // Periksa apakah session 'walas_id' ada
+     if (!session()->has('walas_id')) {
+         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+     }
+ 
+     // Ambil data walas berdasarkan 'walas_id' yang ada di session
+     $walaslogin = Walas::find(session('walas_id'));
+ 
+     // Periksa apakah data walas ditemukan
+     if (!$walaslogin) {
+         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+     }
+ 
+     // Ambil data rombel yang dimiliki walas yang sedang login
+     $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
+ 
+     // Periksa apakah rombel ditemukan
+     if (!$rombel) {
+         return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+     }
+
         $struktur = StrukturOrganisasiKelas::findOrFail($id);
         $siswa = Siswa::all();
         $kepsek = Kepsek::all();
         $walas = Walas::all();
-        return view('admwalas.strukturorganisasi.edit', compact('siswa', 'kepsek', 'walas', 'struktur'));
+        return view('admwalas.strukturorganisasi.edit', compact('siswa', 'kepsek', 'walas', 'struktur', 'walaslogin', 'rombel'));
     }
 
     /**

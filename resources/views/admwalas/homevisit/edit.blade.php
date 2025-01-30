@@ -126,6 +126,15 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+      <div class="user-info d-flex align-items-center">
+            @if(session()->has('walas_id'))
+                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                
+                <!-- Tautkan nama walas ke /userprofile -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walaslogin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                </a>
+            @endif
             <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
@@ -136,8 +145,8 @@
 
 <main class="main">
 
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
+      <!-- Hero Section -->
+<section id="hero" class="hero section">
     <div class="starter-section container">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
@@ -145,43 +154,86 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
             
-        
             <div class="container mt-4">
-            <div class="card">
-    <div class="card-header">Edit Daftar Home Visit</div>
-    <div class="card-body">
-        <form action="{{ route('homevisit.update', $homevisit->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+                <div class="card">
+                    <div class="card-header">Edit Daftar Home Visit</div>
+                    <div class="card-body">
+                        <form action="{{ route('homevisit.update', $homevisit->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT') <!-- Method PUT untuk mengupdate data -->
 
-           <!-- Wali Kelas -->
-            <div class="mb-3">
-                <label for="walas_id" class="form-label">Wali Kelas:</label>
-                <select name="walas_id" id="walas_id" class="form-select" required>
-                    @foreach($walas as $walas_item)
-                        <option value="{{ $walas_item->id }}" 
-                            {{ $homevisit->walas_id == $walas_item->id ? 'selected' : '' }}>
-                            {{ $walas_item->nama }}
-                        </option>
-                    @endforeach
-                </select>
+                            <!-- Wali Kelas -->
+                            <div class="mb-3">
+                                <label for="walas_id" class="form-label">Wali Kelas:</label>
+                                <select name="walas_id" id="walas_id" class="form-select" required>
+                                    @foreach($walas as $walas_item)
+                                        <option value="{{ $walas_item->id }}" 
+                                            {{ $homevisit->walas_id == $walas_item->id ? 'selected' : '' }}>
+                                            {{ $walas_item->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Tanggal -->
+                        <div class="mb-3">
+                            <label for="tanggal" class="form-label">Tanggal:</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ old('tanggal', $homevisit->tanggal) }}" required>
+                        </div>
+
+                          <!-- Nama Peserta Didik -->
+                            <div class="mb-3">
+                                <label for="nama_peserta_didik" class="form-label">Nama Peserta Didik:</label>
+                                <input type="text" name="nama_peserta_didik" id="nama_peserta_didik" 
+                                    class="form-control" value="{{ old('nama_peserta_didik', $homevisit->siswa->nama) }}" required>
+                            </div>
+
+                            <!-- Kasus -->
+                            <div class="mb-3">
+                                <label for="kasus" class="form-label">Keperluan:</label>
+                                <textarea name="kasus" id="kasus" class="form-control" required>{{ old('kasus', $homevisit->kasus) }}</textarea>
+                            </div>
+
+                            <!-- Solusi -->
+                            <div class="mb-3">
+                                <label for="solusi" class="form-label">Solusi:</label>
+                                <textarea name="solusi" id="solusi" class="form-control" required>{{ old('solusi', $homevisit->solusi) }}</textarea>
+                            </div>
+
+                            <!-- Tindak Lanjut -->
+                            <div class="mb-3">
+                                <label for="tindak_lanjut" class="form-label">Tindak Lanjut:</label>
+                                <textarea name="tindak_lanjut" id="tindak_lanjut" class="form-control" required>{{ old('tindak_lanjut', $homevisit->tindak_lanjut) }}</textarea>
+                            </div>
+
+                            <!-- Foto Bukti -->
+                            <div class="mb-3">
+                                <label for="bukti_url" class="form-label">Foto Bukti:</label>
+                                <input type="file" name="bukti_url" id="bukti_url" class="form-control" accept="image/*">
+                                @if($homevisit->bukti_url)
+                                    <img src="{{ asset('storage/'.$homevisit->bukti_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
+                                @endif
+                            </div>
+
+                            <!-- Dokumentasi Foto -->
+                            <div class="mb-3">
+                                <label for="dokumentasi_url" class="form-label">Foto Dokumentasi:</label>
+                                <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
+                                @if($homevisit->dokumentasi_url)
+                                    <img src="{{ asset('storage/'.$homevisit->dokumentasi_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
+                                @endif
+                            </div>
+
+                            <!-- Button Update -->
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <!-- Foto -->
-            <div class="mb-3">
-                <label for="image_url" class="form-label">Foto Dokumen:</label>
-                <input type="file" name="image_url" id="image_url" class="form-control" accept="image/*">
-                @if($homevisit->image_url)
-                    <img src="{{ asset('storage/'.$homevisit->image_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
-                @endif
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
+        </div>
     </div>
-</div>
-</div>
-    </section>
+</section>
+
 
 </main>
   

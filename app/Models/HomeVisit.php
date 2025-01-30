@@ -11,6 +11,25 @@ class HomeVisit extends Model
     use HasFactory;
     protected $fillable = [
         'walas_id',
-        'image_url'
+        'tanggal',
+        'nama_peserta_didik',
+        'tindak_lanjut',
+        'kasus',
+        'solusi',
+        'bukti_url',
+        'dokumentasi_url'
+
     ];
+
+    public function siswa()
+{
+    return $this->belongsTo(Siswa::class, 'nama_peserta_didik', 'id');
+}
+
+public function siswaedit()
+{
+    return $this->belongsTo(Siswa::class, 'siswa_id');
+}
+
+
 }

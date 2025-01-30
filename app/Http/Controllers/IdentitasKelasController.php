@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Siswa;
 use App\Models\Walas;
+use App\Models\Rombel;
 use Illuminate\Http\Request;
 use App\Models\IdentitasKelas;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class IdentitasKelasController extends Controller
 {
@@ -15,25 +18,74 @@ class IdentitasKelasController extends Controller
      */
     public function index(Request $request)
 {
-    $identitaskelas = DB::table('vwidentitaskelas')->get();
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walas = Auth::guard('walas')->user();
+
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walas = Walas::find(session('walas_id'));
+
+    // Periksa apakah data walas ditemukan
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+    // Ambil data rombel yang dimiliki walas yang sedang login
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+    }
+
+    // Mengambil data IdentitasKelas hanya yang sesuai dengan walas yang login
+    $identitaskelas = IdentitasKelas::where('walas_id', $walas->id)->get();
 
     if ($request->get('export') == 'pdf') {
         $pdf = Pdf::loadView('pdf.identitaskelas', ['data' => $identitaskelas]);
         return $pdf->download('Identitas_Kelas.pdf');
     }
 
-    return view('admwalas.identitaskelas.index', compact('identitaskelas'));
+    return view('admwalas.identitaskelas.index', compact('identitaskelas', 'walas', 'rombel'));
 }
 
 
     public function create()
     {
+         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+     $walaslogin = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+       
+     // Periksa apakah session 'walas_id' ada
+     if (!session()->has('walas_id')) {
+         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+     }
+
+     // Ambil data walas berdasarkan 'walas_id' yang ada di session
+     $walaslogin = Walas::find(session('walas_id'));
+     
+     // Periksa apakah data walas ditemukan
+     if (!$walaslogin) {
+         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+     }
+
+    // Ambil data rombel yang dimiliki walas yang sedang login
+    $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
+
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+    }
+    
         // Mengambil data wali kelas dan siswa
         $walas = Walas::all();
         $siswas = Siswa::all();
 
         // Mengembalikan view dan mengirimkan data wali kelas dan siswa
-        return view('admwalas.identitaskelas.create', compact('walas', 'siswas'));
+        return view('admwalas.identitaskelas.create', compact('walas', 'siswas', 'rombel', 'walaslogin'));
     }
 
 
@@ -71,7 +123,7 @@ class IdentitasKelasController extends Controller
         ]);
 
         // Redirect ke halaman index setelah berhasil menyimpan
-        return redirect()->route('admwalas.identitaskelas.index')->with('success', 'Data identitas kelas berhasil disimpan');
+        return redirect('/identitaskelas')->with('success', 'Data identitas kelas berhasil disimpan');
     }
 
     /**
@@ -87,6 +139,30 @@ class IdentitasKelasController extends Controller
      */
     public function edit($identitas_kelas_id)
 {
+         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+         $walaslogin = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+       
+         // Periksa apakah session 'walas_id' ada
+         if (!session()->has('walas_id')) {
+             return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+         }
+    
+         // Ambil data walas berdasarkan 'walas_id' yang ada di session
+         $walaslogin = Walas::find(session('walas_id'));
+         
+         // Periksa apakah data walas ditemukan
+         if (!$walaslogin) {
+             return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+         }
+    
+        // Ambil data rombel yang dimiliki walas yang sedang login
+        $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
+    
+        // Periksa apakah rombel ditemukan
+        if (!$rombel) {
+            return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+        }
+
     // Ambil data identitas kelas berdasarkan id
     $identitaskelas = IdentitasKelas::findOrFail($identitas_kelas_id);
 
@@ -95,7 +171,7 @@ class IdentitasKelasController extends Controller
     $siswas = Siswa::all();
 
     // Mengembalikan view dan mengirimkan data
-    return view('admwalas.identitaskelas.edit', compact('identitaskelas', 'walas', 'siswas'));
+    return view('admwalas.identitaskelas.edit', compact('identitaskelas', 'walas', 'siswas', 'walaslogin', 'rombel'));
 }
 
 public function update(Request $request, $identitas_kelas_id)
