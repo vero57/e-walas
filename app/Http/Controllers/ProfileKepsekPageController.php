@@ -8,6 +8,8 @@ use App\Models\Rombel;
 use App\Models\Kepsek;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileKepsekPageController extends Controller
 {

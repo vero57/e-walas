@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class JadwalPiketController extends Controller
 {
@@ -76,37 +75,10 @@ class JadwalPiketController extends Controller
         return view('admwalas.jadwalpiket.index', compact('walas', 'data', 'siswas', 'rombel'));
     }
 
-//     public function index()
-// {
-//     $jadwalpiket = JadwalPiket::with(['siswa1', 'siswa2', 'siswa3', 'siswa4', 'siswa5'])->get();
-//     return view('admwalas.jadwalpiket.index', compact('jadwalpiket'));
-// }
-{
-    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
-
-    // Periksa apakah session 'walas_id' ada
-    if (!session()->has('walas_id')) {
-        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
-    }
-
-    // Ambil data walas berdasarkan 'walas_id' yang ada di session
-    $walas = Walas::find(session('walas_id'));
-    
-    // Periksa apakah data walas ditemukan
-    if (!$walas) {
-        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
-    }
-
-    $jadwalpiket = JadwalPiket::with(['siswa1', 'siswa2', 'siswa3', 'siswa4', 'siswa5'])->get();
-    return view('admwalas.jadwalpiket.index', compact('jadwalpiket', 'walas'));
-}
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-<<<<<<< HEAD
     {
         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
         $walas = Auth::guard('walas')->user();
@@ -173,30 +145,6 @@ class JadwalPiketController extends Controller
         // Kirim data ke view
         return view('admwalas.jadwalpiket.create', compact('walas', 'piket', 'dataSiswa', 'siswas', 'data'));
     }
-
-=======
-{
-    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
-
-    // Periksa apakah session 'walas_id' ada
-    if (!session()->has('walas_id')) {
-        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
-    }
-
-    // Ambil data walas berdasarkan 'walas_id' yang ada di session
-    $walas = Walas::find(session('walas_id'));
-    
-    // Periksa apakah data walas ditemukan
-    if (!$walas) {
-        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
-    }
-    
-    $siswas = Siswa::all();
-    $kurikulum = Kurikulum::all();
-    return view('admwalas.jadwalpiket.create', compact('walas', 'siswas', 'kurikulum'));
-}
->>>>>>> 0f1146867082a4d884ccf3920d5a5f6dec97e573
 
 
     /**

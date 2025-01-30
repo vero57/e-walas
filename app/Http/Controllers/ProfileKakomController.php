@@ -7,6 +7,8 @@ use App\Models\Kakom;
 use App\Models\Rombel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileKakomController extends Controller
 {

@@ -212,19 +212,6 @@
 <br>
 
 
-
-        <table class="table table-bordered text-center">
-    <thead>
-        <tr>
-            <td>Kelas</td>
-            <td>: {{ $jadwalKbms->first()->rombel->nama_kelas ?? '-' }}</td>
-        </tr>
-        <tr>
-            <td>Tahun Pelajaran</td>
-            <td>: {{ date('Y') }}</td>
-        </tr>
-    </table>
-
     <table class="table table-bordered text-center">
         <thead>
             <tr>

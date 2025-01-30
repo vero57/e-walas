@@ -268,14 +268,6 @@
         <button type="submit" class="btn-getstarted">Logout</button>
     </form>
 </div>
-      
-
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
-                @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
-            </form>
-        </div>
-    </div>
   </header>
 
   <main class="main">

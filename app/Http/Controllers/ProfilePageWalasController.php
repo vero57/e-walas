@@ -8,6 +8,8 @@ use App\Models\Rombel;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfilePageWalasController extends Controller
 {

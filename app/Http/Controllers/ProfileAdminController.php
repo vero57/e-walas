@@ -8,6 +8,8 @@ use App\Models\Rombel;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileAdminController extends Controller
 {
