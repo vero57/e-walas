@@ -45,6 +45,7 @@ class BiodataSiswa extends Model
        'tanggal_lahir_ibu',
        'alamat_ibu',
        'no_wa_ibu',
+       'pendapatan_ortu',
        'namasekolah_asal',
        'alamat_sekolah',
        'tahun_lulus',

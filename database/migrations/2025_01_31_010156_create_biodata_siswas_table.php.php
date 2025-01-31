@@ -50,6 +50,7 @@ return new class extends Migration
             $table->date('tanggal_lahir_ibu',50);
             $table->text('alamat_ibu');
             $table->string('no_wa_ibu',15);
+            $table->string('pendapatan_ortu', 80);
             $table->string('namasekolah_asal',50);
             $table->text('alamat_sekolah');
             $table->string('tahun_lulus',4);
