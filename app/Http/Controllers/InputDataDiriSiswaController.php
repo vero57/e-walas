@@ -113,6 +113,18 @@ class InputDataDiriSiswaController extends Controller
 
      // Mengambil data dari tabel walas
      $walas = DB::table('walas')->select('id', 'nama')->get();
+     // Menambahkan siswas_id ke request
+    $request->merge(['siswas_id' => $siswa->id]);
+
+    // Mengecek apakah pekerjaan ayah adalah "Lainnya" dan mengganti nilainya jika perlu
+    if ($request->pekerjaan_ayah === 'Lainnya' && $request->has('pekerjaan_ayah_lainnya')) {
+        $request->merge(['pekerjaan_ayah' => $request->pekerjaan_ayah_lainnya]);
+    }
+
+    // Mengecek apakah pekerjaan ibu adalah "Lainnya" dan mengganti nilainya jika perlu
+    if ($request->pekerjaan_ibu === 'Lainnya' && $request->has('pekerjaan_ibu_lainnya')) {
+        $request->merge(['pekerjaan_ibu' => $request->pekerjaan_ibu_lainnya]);
+    }
 
     // Membuat biodata siswa
     $biodata = BiodataSiswa::create($request->all());
@@ -233,6 +245,17 @@ class InputDataDiriSiswaController extends Controller
         // Ambil data biodata siswa berdasarkan ID
         $biodata = BiodataSiswa::findOrFail($id);
 
+        // Mengecek apakah pekerjaan ayah adalah "Lainnya" dan mengganti nilainya jika perlu
+    if ($request->pekerjaan_ayah === 'Lainnya' && $request->has('pekerjaan_ayah_lainnya')) {
+        $request->merge(['pekerjaan_ayah' => $request->pekerjaan_ayah_lainnya]);
+    }
+
+    // Mengecek apakah pekerjaan ibu adalah "Lainnya" dan mengganti nilainya jika perlu
+    if ($request->pekerjaan_ibu === 'Lainnya' && $request->has('pekerjaan_ibu_lainnya')) {
+        $request->merge(['pekerjaan_ibu' => $request->pekerjaan_ibu_lainnya]);
+    }
+
+
     // Update data siswa
     $biodata->fill($request->all());
     $biodata->siswas_id = $siswa->id; // Tambahkan siswas_id dari session
@@ -285,12 +308,11 @@ class InputDataDiriSiswaController extends Controller
     // Redirect ke halaman dengan pesan sukses
     return redirect('/datadiripage')->with([
         'success' => 'Data berhasil diperbarui!',
-        'biodatas' => BiodataSiswa::all(), // Mengambil semua data biodata
+        'biodatas' => BiodataSiswa::all(),
         'siswa' => $siswa,
-        'walas' => DB::table('walas')->select('id', 'nama')->get() // Mengambil data walas
+        'walas' => DB::table('walas')->select('id', 'nama')->get()
     ]);
-
-    }
+}
 
     /**
      * Remove the specified resource from storage.

@@ -665,17 +665,24 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-  function togglePekerjaanInput() {
-    var pekerjaanayah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
+  document.addEventListener("DOMContentLoaded", function () {
+    var radioButtons = document.querySelectorAll('input[name="pekerjaan_ayah"]');
     var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
 
-    if (pekerjaanayah === "Lainnya") {
-        pekerjaanInput.style.display = "block";
-    } else {
-        pekerjaanInput.style.display = "none";
-    }
-}
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            if (this.value === "Lainnya") {
+                pekerjaanInput.style.display = "block";
+                pekerjaanInput.focus(); // Memberikan fokus ke input box
+            } else {
+                pekerjaanInput.style.display = "none";
+                pekerjaanInput.value = ""; // Reset value jika tidak dipilih "Lainnya"
+            }
+        });
+    });
+  });
 </script>
+
 
 <script>
   function togglePekerjaanInput() {

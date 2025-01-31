@@ -472,6 +472,7 @@
                         </ul>
                         <input type="text" name="pekerjaan_ayah_lainnya" id="pekerjaan_ayah_lainnya" class="form-control mt-2" placeholder="Masukkan pekerjaan lain..." style="display: none;">
                     </div>
+
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -520,7 +521,7 @@
                                 <label for="Wiraswasta">Wiraswasta</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Ibu Rumah Tangga" id="Ibu Rumah Tangga" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Ibu Rumah Tangga" id="Pengemudi" onchange="togglePekerjaanInput()"> 
                                 <label for="Ibu Rumah Tangga">Ibu Rumah Tangga</label>
                             </li>
                             <li class="col-md-6">
@@ -655,39 +656,31 @@
   <script src="/../../assets/js/main.js"></script>
 
   <script>
-        window.onload = function() {
-            // Cek jika ada pesan error
-            var errorAlert = document.getElementById('alertError');
-            var successAlert = document.getElementById('alertSuccess');
+  document.addEventListener("DOMContentLoaded", function () {
+    var radioButtons = document.querySelectorAll('input[name="pekerjaan_ayah"]');
+    var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
 
-            // Jika ada pesan error, sembunyikan setelah 2 detik dengan animasi
-            if (errorAlert) {
-                setTimeout(function() {
-                    errorAlert.style.animation = 'slideUp 0.5s ease-out'; // Animasi naik
-                    setTimeout(function() {
-                        errorAlert.style.display = 'none'; // Sembunyikan setelah animasi selesai
-                    }, 500); // Durasi animasi
-                }, 2000); // Tunda selama 2 detik sebelum animasi
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            if (this.value === "Lainnya") {
+                pekerjaanInput.style.display = "block";
+                pekerjaanInput.focus(); // Memberikan fokus ke input box
+            } else {
+                pekerjaanInput.style.display = "none";
+                pekerjaanInput.value = ""; // Reset value jika tidak dipilih "Lainnya"
             }
+        });
+    });
+  });
+</script>
 
-            // Jika ada pesan success, sembunyikan setelah 2 detik dengan animasi
-            if (successAlert) {
-                setTimeout(function() {
-                    successAlert.style.animation = 'slideUp 0.5s ease-out'; // Animasi naik
-                    setTimeout(function() {
-                        successAlert.style.display = 'none'; // Sembunyikan setelah animasi selesai
-                    }, 500); // Durasi animasi
-                }, 2000); // Tunda selama 2 detik sebelum animasi
-            }
-        };
-    </script>
 
 <script>
   function togglePekerjaanInput() {
-    var pekerjaanAyah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
-    var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
+    var pekerjaanibu = document.querySelector('input[name="pekerjaan_ibu"]:checked').value;
+    var pekerjaanInput = document.getElementById("pekerjaan_ibu_lainnya");
 
-    if (pekerjaanAyah === "Lainnya") {
+    if (pekerjaanibu === "Lainnya") {
         pekerjaanInput.style.display = "block";
     } else {
         pekerjaanInput.style.display = "none";
