@@ -166,8 +166,12 @@
                 <a href="/homevisitcreate" class="btn btn-primary">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-
-
+                <div>
+                </div>
+                    <a href="{{ route('homevisit.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
+                <i class="bi bi-download"></i> Unduh PDF
+            </a>
+            </div>
                     <!-- Search Box -->
                 <div class="searchBox">
                     <input class="searchInput" type="text" placeholder="  Cari Penyerahan Rapot">
@@ -175,7 +179,6 @@
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
-            </div>
         </div>
         <br><br>
         <div class="container mt-4">

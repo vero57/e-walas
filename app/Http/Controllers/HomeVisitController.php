@@ -9,6 +9,7 @@ use App\Models\Rombel;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeVisitController extends Controller
 {
@@ -46,6 +47,11 @@ class HomeVisitController extends Controller
 
        // Ambil data siswa berdasarkan rombel_id yang sama dengan rombel
      $siswas = Siswa::where('rombels_id', $rombel->id)->get();
+
+     if (request()->has('export') && request()->get('export') === 'pdf') {
+        $pdf = Pdf::loadView('pdf.homevisit', compact('walas', 'homevisit', 'siswas', 'rombel'));
+        return $pdf->stream('Home_Visit.pdf');
+    }
 
     // Return view dengan data yang difilter
     return view("admwalas.homevisit.index", compact('homevisit', 'walas', 'siswas', 'rombel'));

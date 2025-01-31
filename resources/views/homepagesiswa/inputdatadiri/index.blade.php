@@ -518,7 +518,7 @@
                                 <label for="Wiraswasta">Wiraswasta</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Pengemudi" id="Pengemudi" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Ibu Rumah Tangga" id="Pengemudi" onchange="togglePekerjaanInput()"> 
                                 <label for="Ibu Rumah Tangga">Ibu Rumah Tangga</label>
                             </li>
                             <li class="col-md-6">
@@ -666,10 +666,10 @@
 
   <script>
   function togglePekerjaanInput() {
-    var pekerjaanAyah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
+    var pekerjaanayah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
     var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
 
-    if (pekerjaanAyah === "Lainnya") {
+    if (pekerjaanayah === "Lainnya") {
         pekerjaanInput.style.display = "block";
     } else {
         pekerjaanInput.style.display = "none";
