@@ -157,6 +157,49 @@
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
 }
 
+/* Mengatur tampilan grid agar lebih rapi */
+#pendapatan_ortu {
+    padding: 0;
+    margin: 0;
+}
+
+/* Styling untuk setiap item dalam list */
+#pendapatan_ortu li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efek hover untuk item */
+#pendapatan_ortu li:hover {
+    background-color: #f0f8ff;
+    transform: scale(1.05);
+}
+
+/* Menambahkan icon atau gambar checkbox kecil di sebelah label untuk tampilan lebih menarik */
+#pendapatan_ortu input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #007bff;
+}
+
+/* Styling label supaya lebih jelas dan terpisah dengan baik */
+#pendapatan_ortu label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 767px) {
+    #pendapatan_ortu li {
+        flex: 0 0 50%; /* 2 kolom di layar kecil */
+    }
+}
+
 </style>
 </head>
 
@@ -562,6 +605,44 @@
                         <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" required>
                     </div>
                 </div>
+                <br>
+                <h4 class="text-bold">Rentang Pendapatan Kedua Orangtua</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="pendapatan_ortu" class="form-label">Pendapatan Ayah dan Ibu</label>
+                            <ul id="pendapatan_ortu" class="list-unstyled d-flex flex-wrap">
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Kurang dari Rp1.000.000,00" id="Kurang_dari_Rp1_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Kurang_dari_Rp1_000_000_00">Kurang dari Rp1.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp1.000.000,00 - Rp3.000.000,00" id="Rp1_000_000_00_-_Rp3_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp1_000_000_00_-_Rp3_000_000_00">Rp1.000.000,00 - Rp3.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp3.000.000,00 - Rp5.000.000,00" id="Rp3_000_000_00_-_Rp5_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp3_000_000_00_-_Rp5_000_000_00">Rp3.000.000,00 - Rp5.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp5.000.000,00 - Rp10.000.000,00" id="Rp5_000_000_00_-_Rp10_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp5_000_000_00_-_Rp10_000_000_00">Rp5.000.000,00 - Rp10.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp10.000.000,00 - Rp25.000.000,00" id="Rp10_000_000_00_-_Rp25_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp10_000_000_00_-_Rp25_000_000_00">Rp10.000.000,00 - Rp25.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp25.000.000,00 - Rp50.000.000,00" id="Rp25_000_000_00_-_Rp50_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp25_000_000_00_-_Rp50_000_000_00">Rp25.000.000,00 - Rp50.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Lebih dari Rp50.000.000,00" id="Lebih_dari_Rp50_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Lebih_dari_Rp50_000_000_00">Lebih dari Rp50.000.000,00</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                 <br>
                 <h4>Data Pendidikan Sebelumnya</h4>
                 <div class="row mb-3">
