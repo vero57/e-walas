@@ -366,6 +366,24 @@ table td {
                 </a>
                 </td>
             </tr>
+            <tr>
+                <td>15</td>
+                <td>Rentang Pendapatan Orang Tua</td>
+                <td>
+                    <a href="/pendapatanortu">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Prestasi Peserta Didik</td>
+                <td>
+                    <a href="#">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
