@@ -518,7 +518,7 @@
                                 <label for="Wiraswasta">Wiraswasta</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Pengemudi" id="Pengemudi" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Ibu Rumah Tangga" id="Pengemudi" onchange="togglePekerjaanInput()"> 
                                 <label for="Ibu Rumah Tangga">Ibu Rumah Tangga</label>
                             </li>
                             <li class="col-md-6">
@@ -665,17 +665,24 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-  function togglePekerjaanInput() {
-    var pekerjaanAyah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
+  document.addEventListener("DOMContentLoaded", function () {
+    var radioButtons = document.querySelectorAll('input[name="pekerjaan_ayah"]');
     var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
 
-    if (pekerjaanAyah === "Lainnya") {
-        pekerjaanInput.style.display = "block";
-    } else {
-        pekerjaanInput.style.display = "none";
-    }
-}
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            if (this.value === "Lainnya") {
+                pekerjaanInput.style.display = "block";
+                pekerjaanInput.focus(); // Memberikan fokus ke input box
+            } else {
+                pekerjaanInput.style.display = "none";
+                pekerjaanInput.value = ""; // Reset value jika tidak dipilih "Lainnya"
+            }
+        });
+    });
+  });
 </script>
+
 
 <script>
   function togglePekerjaanInput() {
