@@ -80,6 +80,7 @@ class InputDataDiriSiswaController extends Controller
             'tanggal_lahir_ibu' => 'nullable|date',
             'alamat_ibu' => 'nullable|string|max:255',
             'no_wa_ibu' => 'nullable|string|max:15',
+            'pendapatan_ortu' => 'string|max:255',
             'namasekolah_asal' => 'nullable|string|max:255',
             'alamat_sekolah' => 'nullable|string|max:255',
             'tahun_lulus' => 'nullable|string|max:4',

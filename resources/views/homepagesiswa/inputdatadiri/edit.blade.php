@@ -157,6 +157,49 @@
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
 }
 
+/* Mengatur tampilan grid agar lebih rapi */
+#pendapatan_ortu {
+    padding: 0;
+    margin: 0;
+}
+
+/* Styling untuk setiap item dalam list */
+#pendapatan_ortu li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efek hover untuk item */
+#pendapatan_ortu li:hover {
+    background-color: #f0f8ff;
+    transform: scale(1.05);
+}
+
+/* Menambahkan icon atau gambar checkbox kecil di sebelah label untuk tampilan lebih menarik */
+#pendapatan_ortu input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #007bff;
+}
+
+/* Styling label supaya lebih jelas dan terpisah dengan baik */
+#pendapatan_ortu label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 767px) {
+    #pendapatan_ortu li {
+        flex: 0 0 50%; /* 2 kolom di layar kecil */
+    }
+}
+
 </style>
 </head>
 
@@ -434,39 +477,39 @@
                         <label for="pekerjaan_ayah" class="form-label">Pekerjaan Ayah</label>
                         <ul id="pekerjaan_ayah" class="list-unstyled d-flex flex-wrap">
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="TNI/POLRI" id="TNI_POLRI" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="TNI/POLRI" id="TNI_POLRI" onchange="togglePekerjaanInput()" required> 
                                 <label for="TNI_POLRI">TNI/POLRI</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="ASN/PNS" id="ASN_PNS" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="ASN/PNS" id="ASN_PNS" onchange="togglePekerjaanInput()" required> 
                                 <label for="ASN_PNS">ASN/PNS</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Karyawan" id="Karyawan" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Karyawan" id="Karyawan" onchange="togglePekerjaanInput()" required> 
                                 <label for="Karyawan">Karyawan</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Wiraswasta" id="Wiraswasta" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Wiraswasta" id="Wiraswasta" onchange="togglePekerjaanInput()" required> 
                                 <label for="Wiraswasta">Wiraswasta</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Pengemudi" id="Pengemudi" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Pengemudi" id="Pengemudi" onchange="togglePekerjaanInput()" required> 
                                 <label for="Pengemudi">Pengemudi</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Buruh" id="Buruh" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Buruh" id="Buruh" onchange="togglePekerjaanInput()" required> 
                                 <label for="Buruh">Buruh</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Tani" id="Tani" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Tani" id="Tani" onchange="togglePekerjaanInput()" required> 
                                 <label for="Tani">Tani</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Pensiunan" id="Pensiunan" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Pensiunan" id="Pensiunan" onchange="togglePekerjaanInput()" required> 
                                 <label for="Pensiunan">Pensiunan</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ayah" value="Lainnya" id="Lainnya" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ayah" value="Lainnya" id="Lainnya" onchange="togglePekerjaanInput()" required> 
                                 <label for="Lainnya">Lainnya</label>
                             </li>
                         </ul>
@@ -505,39 +548,39 @@
                         <label for="pekerjaan_ibu" class="form-label">Pekerjaan Ibu</label>
                         <ul id="pekerjaan_ibu" class="list-unstyled d-flex flex-wrap">
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="TNI/POLRI" id="TNI_POLRI" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="TNI/POLRI" id="TNI_POLRI" onchange="togglePekerjaanInput()" required> 
                                 <label for="TNI_POLRI">TNI/POLRI</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="ASN/PNS" id="ASN_PNS" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="ASN/PNS" id="ASN_PNS" onchange="togglePekerjaanInput()" required> 
                                 <label for="ASN_PNS">ASN/PNS</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Karyawan" id="Karyawan" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Karyawan" id="Karyawan" onchange="togglePekerjaanInput()" required> 
                                 <label for="Karyawan">Karyawan</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Wiraswasta" id="Wiraswasta" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Wiraswasta" id="Wiraswasta" onchange="togglePekerjaanInput()" required> 
                                 <label for="Wiraswasta">Wiraswasta</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Ibu Rumah Tangga" id="Pengemudi" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Ibu Rumah Tangga" id="Pengemudi" onchange="togglePekerjaanInput()" required> 
                                 <label for="Ibu Rumah Tangga">Ibu Rumah Tangga</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Buruh" id="Buruh" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Buruh" id="Buruh" onchange="togglePekerjaanInput()" required> 
                                 <label for="Buruh">Buruh</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Tani" id="Tani" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Tani" id="Tani" onchange="togglePekerjaanInput()" required> 
                                 <label for="Tani">Tani</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Pensiunan" id="Pensiunan" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Pensiunan" id="Pensiunan" onchange="togglePekerjaanInput()" required> 
                                 <label for="Pensiunan">Pensiunan</label>
                             </li>
                             <li class="col-md-6">
-                                <input type="radio" name="pekerjaan_ibu" value="Lainnya" id="Lainnya" onchange="togglePekerjaanInput()"> 
+                                <input type="radio" name="pekerjaan_ibu" value="Lainnya" id="Lainnya" onchange="togglePekerjaanInput()" required> 
                                 <label for="Lainnya">Lainnya</label>
                             </li>
                         </ul>
@@ -566,6 +609,43 @@
                     </div>
                 </div>
                 <br><br>
+                <h4 class="text-bold">Rentang Pendapatan Kedua Orangtua</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="pendapatan_ortu" class="form-label">Pendapatan Ayah dan Ibu</label>
+                            <ul id="pendapatan_ortu" class="list-unstyled d-flex flex-wrap">
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Kurang dari Rp1.000.000,00" id="Kurang_dari_Rp1_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Kurang_dari_Rp1_000_000_00">Kurang dari Rp1.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp1.000.000,00 - Rp3.000.000,00" id="Rp1_000_000_00_-_Rp3_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp1_000_000_00_-_Rp3_000_000_00">Rp1.000.000,00 - Rp3.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp3.000.000,00 - Rp5.000.000,00" id="Rp3_000_000_00_-_Rp5_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp3_000_000_00_-_Rp5_000_000_00">Rp3.000.000,00 - Rp5.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp5.000.000,00 - Rp10.000.000,00" id="Rp5_000_000_00_-_Rp10_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp5_000_000_00_-_Rp10_000_000_00">Rp5.000.000,00 - Rp10.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp10.000.000,00 - Rp25.000.000,00" id="Rp10_000_000_00_-_Rp25_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp10_000_000_00_-_Rp25_000_000_00">Rp10.000.000,00 - Rp25.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Rp25.000.000,00 - Rp50.000.000,00" id="Rp25_000_000_00_-_Rp50_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Rp25_000_000_00_-_Rp50_000_000_00">Rp25.000.000,00 - Rp50.000.000,00</label>
+                                </li>
+                                <li class="col-md-3 col-sm-6">
+                                    <input type="radio" name="pendapatan_ortu" value="Lebih dari Rp50.000.000,00" id="Lebih_dari_Rp50_000_000_00" onchange="togglePekerjaanInput()">
+                                    <label for="Lebih_dari_Rp50_000_000_00">Lebih dari Rp50.000.000,00</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                
                 <h4>Data Pendidikan Sebelumnya</h4>
                 <div class="row mb-3">
                     <div class="col-md-6">

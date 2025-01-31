@@ -414,6 +414,13 @@
                         <p><strong>Alamat ibu :</strong> {{ $biodata->alamat_ibu }}</p>
                         <p><strong>No WA ibu:</strong> {{ $biodata->no_wa_ibu }}</p>
                     </div>
+
+                    <div class="card-header">
+                        <h5>Data Pendapatan Orang Tua</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Pendapatan Kedua Orangtua:</strong> {{ $biodata->pendapatan_ortu }}</p>
+                    </div>
   
                     <div class="card-header">
                         <h5>Data Pelengkap</h5>
