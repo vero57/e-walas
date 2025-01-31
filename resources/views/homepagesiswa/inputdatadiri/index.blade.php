@@ -430,7 +430,45 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pekerjaan_ayah" class="form-label">Pekerjaan Ayah</label>
-                        <input type="text" name="pekerjaan_ayah" id="pekerjaan_ayah" class="form-control" placeholder="Contoh: Programmer" required>
+                        <ul id="pekerjaan_ayah" class="list-unstyled d-flex flex-wrap">
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="TNI/POLRI" id="TNI_POLRI" onchange="togglePekerjaanInput()"> 
+                                <label for="TNI_POLRI">TNI/POLRI</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="ASN/PNS" id="ASN_PNS" onchange="togglePekerjaanInput()"> 
+                                <label for="ASN_PNS">ASN/PNS</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Karyawan" id="Karyawan" onchange="togglePekerjaanInput()"> 
+                                <label for="Karyawan">Karyawan</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Wiraswasta" id="Wiraswasta" onchange="togglePekerjaanInput()"> 
+                                <label for="Wiraswasta">Wiraswasta</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Pengemudi" id="Pengemudi" onchange="togglePekerjaanInput()"> 
+                                <label for="Pengemudi">Pengemudi</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Buruh" id="Buruh" onchange="togglePekerjaanInput()"> 
+                                <label for="Buruh">Buruh</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Tani" id="Tani" onchange="togglePekerjaanInput()"> 
+                                <label for="Tani">Tani</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Pensiunan" id="Pensiunan" onchange="togglePekerjaanInput()"> 
+                                <label for="Pensiunan">Pensiunan</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ayah" value="Lainnya" id="Lainnya" onchange="togglePekerjaanInput()"> 
+                                <label for="Lainnya">Lainnya</label>
+                            </li>
+                        </ul>
+                        <input type="text" name="pekerjaan_ayah_lainnya" id="pekerjaan_ayah_lainnya" class="form-control mt-2" placeholder="Masukkan pekerjaan lain..." style="display: none;">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -462,7 +500,45 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pekerjaan_ibu" class="form-label">Pekerjaan Ibu</label>
-                        <input type="text" name="pekerjaan_ibu" id="pekerjaan_ibu" class="form-control" placeholder="Contoh: Dokter" required>
+                        <ul id="pekerjaan_ibu" class="list-unstyled d-flex flex-wrap">
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="TNI/POLRI" id="TNI_POLRI" onchange="togglePekerjaanInput()"> 
+                                <label for="TNI_POLRI">TNI/POLRI</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="ASN/PNS" id="ASN_PNS" onchange="togglePekerjaanInput()"> 
+                                <label for="ASN_PNS">ASN/PNS</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Karyawan" id="Karyawan" onchange="togglePekerjaanInput()"> 
+                                <label for="Karyawan">Karyawan</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Wiraswasta" id="Wiraswasta" onchange="togglePekerjaanInput()"> 
+                                <label for="Wiraswasta">Wiraswasta</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Pengemudi" id="Pengemudi" onchange="togglePekerjaanInput()"> 
+                                <label for="Ibu Rumah Tangga">Ibu Rumah Tangga</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Buruh" id="Buruh" onchange="togglePekerjaanInput()"> 
+                                <label for="Buruh">Buruh</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Tani" id="Tani" onchange="togglePekerjaanInput()"> 
+                                <label for="Tani">Tani</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Pensiunan" id="Pensiunan" onchange="togglePekerjaanInput()"> 
+                                <label for="Pensiunan">Pensiunan</label>
+                            </li>
+                            <li class="col-md-6">
+                                <input type="radio" name="pekerjaan_ibu" value="Lainnya" id="Lainnya" onchange="togglePekerjaanInput()"> 
+                                <label for="Lainnya">Lainnya</label>
+                            </li>
+                        </ul>
+                        <input type="text" name="pekerjaan_ibu_lainnya" id="pekerjaan_ibu_lainnya" class="form-control mt-2" placeholder="Masukkan pekerjaan lain..." style="display: none;">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -587,6 +663,32 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+  function togglePekerjaanInput() {
+    var pekerjaanAyah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
+    var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
+
+    if (pekerjaanAyah === "Lainnya") {
+        pekerjaanInput.style.display = "block";
+    } else {
+        pekerjaanInput.style.display = "none";
+    }
+}
+</script>
+
+<script>
+  function togglePekerjaanInput() {
+    var pekerjaanibu = document.querySelector('input[name="pekerjaan_ibu"]:checked').value;
+    var pekerjaanInput = document.getElementById("pekerjaan_ibu_lainnya");
+
+    if (pekerjaanibu === "Lainnya") {
+        pekerjaanInput.style.display = "block";
+    } else {
+        pekerjaanInput.style.display = "none";
+    }
+}
+</script>
 
   <script>
         window.onload = function() {

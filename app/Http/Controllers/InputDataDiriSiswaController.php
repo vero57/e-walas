@@ -52,7 +52,7 @@ class InputDataDiriSiswaController extends Controller
             'tempat_lahir' => 'nullable|string|max:255',
             'tanggal_lahir' => 'nullable|date',
             'alamat' => 'nullable|string|max:255',
-            'alamat_maps' => 'nullable|string|max:255',
+            'alamat_maps' => 'nullable|string|max:1000',
             'jalur_masuk' => 'nullable|string|max:50',
             'jarak_rumah' => 'nullable|string|max:50',
             'transportasi_sekolah' => 'nullable|string|max:50',
