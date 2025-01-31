@@ -209,32 +209,36 @@
 
 <main class="main">
 
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
-    <div class="starter-section container">
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
             <h2 class="font-weight-bold">Struktur Organisasi Kelas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex-container">
-            <a href="{{ route('strukturorganisasi.create') }}" class="btn btn-primary">
+            <div class="d-flex flex-wrap align-items-center justify-content-start">
+                <!-- Tombol Unggah Data -->
+                <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <i class="bi bi-cloud-upload"></i> Unggah Data
+                </button>
+                <!-- Tombol Tambah Data -->
+                <a href="{{ route('strukturorganisasi.create') }}" class="btn btn-primary me-2 mb-2">
                 <i class="bi bi-plus"></i> Tambah Data
             </a>
-            </div>
-            <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-            <div class="d-flex-container">
             @foreach ($struktur as $data)
-            <a href="{{ route('strukturorganisasi.edit', $data->id) }}" class="btn btn-warning">
-                <i class="bi bi-pencil"></i> Edit {{ $data->id }}
-            </a>
-        @endforeach
-        </div>
-            <div class="d-flex-container">
-                <a href="{{ route('strukturorganisasi.index') }}?export=pdf" class="btn btn-outline-secondary">
-                <i class="bi bi-download"></i>Unduh
+                <a href="{{ route('strukturorganisasi.edit', $data->id) }}" class="btn btn-warning me-2 mb-2">
+                    <i class="bi bi-pencil"></i> Edit {{ $data->id }}
                 </a>
+            @endforeach
+                <!-- Tombol Unduh PDF -->
+                
+
+                <a href="{{ route('strukturorganisasi.index') }}?export=pdf" class="btn btn-outline-secondary me-2 mb-2">
+                <i class="bi bi-download"></i> Unduh
+            </a>
             </div>
         </div>
+    </div>
 
         <div class="container mt-5">
     <h2 class="text-center mb-4">Struktur Organisasi Kelas</h2>

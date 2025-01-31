@@ -154,18 +154,15 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="{{ route('identitaskelas.create') }}" class="btn btn-primary">
+                <a href="{{ route('identitaskelas.create') }}" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-            </div>
-            <div class="d-flex-container">
-                <a href="{{ route('identitaskelas.index') }}?export=pdf" class="btn btn-outline-secondary">
+                <a href="{{ route('identitaskelas.index') }}?export=pdf" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i>Unduh
                 </a>
             </div>
-        </div><br>
-        <br>
+
+
         <table class="table table-bordered table-striped">
     <thead>
         <tr>

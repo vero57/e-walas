@@ -182,13 +182,13 @@
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
                 </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="/agendawalascreate" class="btn btn-primary">
+                <a href="/agendawalascreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-
+                    <a href="{{ route('agendawalas.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                <i class="bi bi-download"></i> Unduh PDF
+            </a>
+            
                     <!-- Search Box -->
                 <div class="searchBox">
                     <input class="searchInput" type="text" placeholder="  Cari Agenda Walas">

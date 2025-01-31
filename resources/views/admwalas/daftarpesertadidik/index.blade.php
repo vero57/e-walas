@@ -179,20 +179,19 @@
         <div class="mb-4">
             <h2 class="font-weight-bold">Daftar Peserta Didik</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
+            <div class="d-flex flex-wrap align-items-center justify-content-start">
                 <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
                 </button>
                 <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="/daftarpesertadidikcreate" class="btn btn-primary">
+                <a href="/daftarpesertadidikcreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-
-
+                <!-- Tombol Unduh PDF -->
+                <a href="{{ route('daftarpesertadidik.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <i class="bi bi-download"></i> Unduh PDF
+                </a>
                     <!-- Search Box -->
                 <div class="searchBox">
                     <input class="searchInput" type="text" placeholder="  Cari Catatan Kasus">

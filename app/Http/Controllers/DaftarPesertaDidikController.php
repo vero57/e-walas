@@ -9,6 +9,7 @@ use App\Models\Rombel;
 use App\Models\Kurikulum;
 use App\Models\DaftarPesertaDidik;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class DaftarPesertaDidikController extends Controller
@@ -54,6 +55,11 @@ class DaftarPesertaDidikController extends Controller
         $jenisKelaminCount = $daftarpdidik->groupBy('jenis_kelamin')->map(function ($items) {
             return $items->count();
         });
+
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdf.daftarpesertadidik', compact('walas', 'siswas', 'daftarpdidik', 'jenisKelaminCount'));
+            return $pdf->stream('Daftar_Peserta_Didik.pdf');
+        }
 
         // Kirim data walas, siswa, catatan kasus, dan jenisKelaminCount ke view
         return view('admwalas.daftarpesertadidik.index', compact('walas', 'daftarpdidik', 'siswas', 'jenisKelaminCount'));
@@ -105,48 +111,44 @@ class DaftarPesertaDidikController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-        $walas = Auth::guard('walas')->user();
-        
-        // Periksa apakah session 'walas_id' ada
-        if (!session()->has('walas_id')) {
-            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        // Ambil data walas berdasarkan 'walas_id' yang ada di session
-        $walas = Walas::find(session('walas_id'));
-
-        // Periksa apakah data walas ditemukan
-        if (!$walas) {
-            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
-        }
-
-        // Ambil ID pertama dari tabel kurikulums
-        $kurikulum = Kurikulum::first();
-        $kurikulum_id = $kurikulum ? $kurikulum->id : null;
-
-        // Validasi input
-        $validatedData = $request->validate([
-            'walas_id' => 'required|exists:walas,id',
-            'kurikulum_id' => 'required|integer',
-            'nis' => 'required',
-            'nisn' => 'required',
-            'nama_siswa' => 'required|string|max:255',
-            'keterangan' => 'required|string|max:255',
-            'tanggal' => 'required|date',
-            'jenis_kelamin' => 'required',
-            'ttdwalas_url' => 'nullable|url',
-        ]);
-
-        // Tambahkan kurikulum_id secara otomatis
-        $validatedData['kurikulum_id'] = $kurikulum_id;
-
-        // Simpan data ke database
-        DaftarPesertaDidik::create($validatedData);
-
-        return redirect('/daftarpesertadidik')->with('success', 'Data berhasil disimpan.');
+{
+    $walas = Auth::guard('walas')->user();
+    
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
     }
+
+    $walas = Walas::find(session('walas_id'));
+
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+    $kurikulum = Kurikulum::first();
+    $kurikulum_id = $kurikulum ? $kurikulum->id : null;
+
+    // Validasi input
+    $validatedData = $request->validate([
+        'walas_id' => 'required|exists:walas,id',
+        'kurikulum_id' => 'required|integer',
+        'nis' => 'required',
+        'nisn' => 'required',
+        'nama_siswa' => 'required|string|max:255',
+        'keterangan' => 'nullable|string|max:255',  // Menjadi nullable
+        'tanggal' => 'required|date',
+        'jenis_kelamin' => 'required',
+        'ttdwalas_url' => 'nullable|url',
+    ]);
+
+    // Set 'keterangan' otomatis menjadi 'aktif'
+    $validatedData['keterangan'] = 'aktif';
+
+    // Simpan data ke database
+    DaftarPesertaDidik::create($validatedData);
+
+    return redirect('/daftarpesertadidik')->with('success', 'Data berhasil disimpan.');
+}
+
 
 
     /**
@@ -206,26 +208,20 @@ class DaftarPesertaDidikController extends Controller
      */
     public function update(Request $request, $id)
 {
-    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
     $walas = Auth::guard('walas')->user();
     
-    // Periksa apakah session 'walas_id' ada
     if (!session()->has('walas_id')) {
         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
     }
 
-    // Ambil data walas berdasarkan 'walas_id' yang ada di session
     $walas = Walas::find(session('walas_id'));
 
-    // Periksa apakah data walas ditemukan
     if (!$walas) {
         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
     }
 
-    // Ambil data DaftarPesertaDidik yang akan diedit
     $daftarPesertaDidik = DaftarPesertaDidik::findOrFail($id);
 
-    // Ambil ID pertama dari tabel kurikulums
     $kurikulum = Kurikulum::first();
     $kurikulum_id = $kurikulum ? $kurikulum->id : null;
 
@@ -236,21 +232,20 @@ class DaftarPesertaDidikController extends Controller
         'nis' => 'required',
         'nisn' => 'required',
         'nama_siswa' => 'required|string|max:255',
-        'keterangan' => 'required|string|max:255',
+        'keterangan' => 'nullable|string|max:255',  // Menjadi nullable
         'tanggal' => 'required|date',
         'jenis_kelamin' => 'required',
         'ttdwalas_url' => 'nullable|url',
     ]);
 
-    // Tambahkan kurikulum_id secara otomatis
-    $validatedData['kurikulum_id'] = $kurikulum_id;
+    // Set 'keterangan' otomatis menjadi 'aktif'
+    $validatedData['keterangan'] = 'aktif';
 
     // Update data DaftarPesertaDidik
     $daftarPesertaDidik->update($validatedData);
 
     return redirect('/daftarpesertadidik')->with('success', 'Data berhasil diperbarui.');
 }
-
 
     /**
      * Remove the specified resource from storage.

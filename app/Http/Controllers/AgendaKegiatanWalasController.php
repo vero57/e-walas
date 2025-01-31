@@ -7,6 +7,7 @@ use App\Models\Walas;
 use App\Models\AgendaKegiatanWalas;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AgendaKegiatanWalasController extends Controller
 {
@@ -31,6 +32,11 @@ class AgendaKegiatanWalasController extends Controller
         // Ambil data agenda berdasarkan walas_id
         $agendawalas = AgendaKegiatanWalas::where('walas_id', $walas->id)->get();
     
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdf.agendawalas', compact('walas', 'agendawalas'));
+            return $pdf->stream('Agenda_Walas.pdf');
+        }
+
         // Mengirim data ke view
         return view('admwalas.agendawalas.index', [
             'walas' => $walas,

@@ -204,10 +204,8 @@
                                 </div>
 
                                 <!-- Keterangan -->
-                                <div class="mb-3">
-                                    <label for="keterangan" class="form-label">Keterangan:</label>
-                                    <textarea name="keterangan" id="keterangan" class="form-control" required></textarea>
-                                </div>
+                                    <label for="keterangan" class="form-label"></label>
+                                    <textarea name="keterangan" id="keterangan" class="form-control" hidden></textarea>
 
                                 <!-- Tanggal -->
                                 <div class="mb-3">
