@@ -32,7 +32,7 @@ class PresensiController extends Controller
         $semester = request()->get('semester'); // Mendapatkan parameter semester (ganjil/genap)
 
         // Ambil data presensi
-        $presensis = Presensi::with('detailPresensis.siswa')
+        $presensis = Presensi::where('walas_id', $walas->id)
             ->when($semester === 'ganjil', function ($query) {
                 // Filter untuk semester ganjil (Juli - Desember)
                 return $query->whereMonth('tanggal', '>=', 7)->whereMonth('tanggal', '<=', 12);

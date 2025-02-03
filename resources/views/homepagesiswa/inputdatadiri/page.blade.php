@@ -293,7 +293,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-<form action="{{ route('logoutadmin') }}" method="POST">
+<form action="{{ route('logoutsiswa') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>

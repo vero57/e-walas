@@ -47,8 +47,8 @@ class JadwalKbmController extends Controller
         }
     
         // Ambil data siswa berdasarkan rombel yang terkait dengan walas
-        $siswa = DB::table('vwsiswas')
-                    ->where('rombel_id', $rombel->id)  // Sesuaikan dengan kolom yang tepat
+        $siswa = DB::table('siswas')
+                    ->where('rombels_id', $rombel->id)  // Sesuaikan dengan kolom yang tepat
                     ->get();
     
         // Ambil semua data rombel
