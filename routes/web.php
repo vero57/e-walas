@@ -408,6 +408,7 @@ Route::put('/persentasesosialekonomi/{id}', [PersentasePekerjaanOrtuController::
 
 // CRUD REKAPITULASI PRESTASI SISWA
 Route::resource('prestasisiswa', PrestasiSiswaController::class);
+Route::post('/prestasisiswa/generatepdf', [PrestasiSiswaController::class, 'generatePDF'])->name('prestasisiswa.generatepdf');
 Route::get('/prestasisiswacreate', [PrestasiSiswaController::class, 'create'])->name('prestasisiswa.create');
 Route::post('/prestasisiswa/store', [PrestasiSiswaController::class, 'store'])->name('prestasisiswa.store');
 Route::get('/prestasisiswa/{id}/edit', [PrestasiSiswaController::class, 'edit'])->name('prestasisiswa.edit');

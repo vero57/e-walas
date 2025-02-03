@@ -152,103 +152,94 @@
     </div>
   </header>
 
-<main class="main">
-
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
-    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-        <!-- Header dengan Title, Pencarian, dan Tombol -->
-        <div class="mb-4">
-            <h2 class="font-weight-bold">Jadwal KBM</h2>
-            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <div class="d-flex-container">
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+        <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+            <!-- Header dengan Title, Pencarian, dan Tombol -->
+            <div class="mb-4">
+                <h2 class="font-weight-bold">Jadwal KBM</h2>
+                <hr class="my-3">
+                
+                <div class="d-flex align-items-center justify-content-start gap-2">
                     <a href="{{ route('jadwalkbm.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
                         <i class="bi bi-download"></i> Unduh
                     </a>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <i class="bi bi-cloud-upload"></i> Unggah Data
+                    </button>
+                    <a href="{{ route('jadwalkbm.create') }}" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Tambah
+                    </a>
                 </div>
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="{{ route('jadwalkbm.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus"></i> Tambah
-                </a>
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-    @foreach ($jadwalKbms as $jadwalKbm) <!-- Looping pada setiap jadwalKbm -->
-        <a href="{{ route('jadwalkbm.edit', $jadwalKbm->id) }}" class="btn btn-warning">
-            <i class="bi bi-pencil"></i> Edit
-        </a>
-    @endforeach
-</div>
-                    
-@if ($jadwalKbms->isNotEmpty())
-    <table>
-        <table>
-        <tr>
-        <tr>
-    <td>Kelas</td>
-    <td>: {{ $rombel->nama_kelas }}</td>
-</tr>
+            </div>
+            
+            @if ($jadwalKbms->isNotEmpty())
+                <table>
+                    <tr>
+                        <td>Kelas</td>
+                        <td>: {{ $rombel->nama_kelas }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tahun Pelajaran</td>
+                        <td>: {{ date('Y') }}</td>
+                    </tr>
+                </table>
+                <br>
 
-</tr>
-
-    <tr>
-        <td>Tahun Pelajaran</td>
-        <td>: {{ date('Y') }}</td>
-    </tr>
-</table>
-<br>
-
-
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th></th>
-                <th colspan="2">Senin</th>
-                <th colspan="2">Selasa</th>
-                <th colspan="2">Rabu</th>
-                <th colspan="2">Kamis</th>
-                <th colspan="2">Jumat</th>
-            </tr>
-            <tr>
-                <th>Jam Ke</th>
-                <th>Mapel</th>
-                <th>Guru</th>
-                <th>Mapel</th>
-                <th>Guru</th>
-                <th>Mapel</th>
-                <th>Guru</th>
-                <th>Mapel</th>
-                <th>Guru</th>
-                <th>Mapel</th>
-                <th>Guru</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for ($jam = 1; $jam <= 12; $jam++)
-                <tr>
-                    <td>{{ $jam }}</td>
-                    @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
-                        @php
-                            $jadwalHari = collect(json_decode($jadwalKbms->first()->$hari, true) ?? [])->firstWhere('jam', $jam);
-                        @endphp
-                        <td>{{ $jadwalHari ? $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' : '-' }}</td>
-                        <td>{{ $jadwalHari ? $gurus[$jadwalHari['guru_id']]->nama ?? '-' : '-' }}</td>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan="2">Senin</th>
+                            <th colspan="2">Selasa</th>
+                            <th colspan="2">Rabu</th>
+                            <th colspan="2">Kamis</th>
+                            <th colspan="2">Jumat</th>
+                        </tr>
+                        <tr>
+                            <th>Jam Ke</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for ($jam = 1; $jam <= 12; $jam++)
+                            <tr>
+                                <td>{{ $jam }}</td>
+                                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
+                                @php
+                                $jadwalHari = collect(json_decode($jadwalKbms->first()->$hari, true) ?? [])->firstWhere('jam', $jam);
+                                @endphp
+                                    <td>{{ $jadwalHari ? $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' : '-' }}</td>
+                                    <td>{{ $jadwalHari ? $gurus[$jadwalHari['guru_id']]->nama ?? '-' : '-' }}</td>
+                                @endforeach
+                            </tr>
+                        @endfor
+                    </tbody>
+                </table>
+            @else
+                <div class="alert alert-info">Data jadwal belum tersedia.</div>
+            @endif
+            <div class="d-flex-container">
+                    @foreach ($jadwalKbms as $jadwalKbm) <!-- Looping pada setiap jadwalKbm -->
+                        <a href="{{ route('jadwalkbm.edit', $jadwalKbm->id) }}" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
                     @endforeach
-                </tr>
-            @endfor
-        </tbody>
-    </table>
-@else
-    <div class="alert alert-info">Data jadwal belum tersedia.</div>
-@endif
+                </div>
+        </div>
+    </section>
 </main>
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>

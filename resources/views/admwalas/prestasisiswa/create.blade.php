@@ -180,9 +180,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                 <!-- Wali Kelas -->
+                                 <!-- Kelas -->
                                  <div class="mb-3">
-                                    <label for="rombels_id" class="form-label">Wali Kelas:</label>
+                                    <label for="rombels_id" class="form-label">Kelas:</label>
                                     <select name="rombels_id" id="rombels_id" class="form-select" required disabled>
                                         <option value="{{ $rombel->id }}" selected>{{ $rombel->nama_kelas }}</option>
                                     </select>

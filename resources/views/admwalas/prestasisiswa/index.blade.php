@@ -182,15 +182,21 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
                 </button>
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="/prestasisiswacreate" class="btn btn-primary">
+                <a href="/prestasisiswacreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
+                <form id="exportForm" method="POST" action="{{ route('prestasisiswa.generatepdf') }}">
+                    @csrf
+                    <input type="hidden" id="Data" name="Image">
+                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </button>
+                </form>
 
 
                     <!-- Search Box -->
@@ -200,7 +206,6 @@
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
-            </div>
         </div>
         <br><br>
         <div class="container mt-4">
@@ -233,7 +238,7 @@
                     <td>{{ $data->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
                     <td>{{ $data->jenis_prestasi }}</td>
                     <td>{{ $data->nama_prestasi }}</td>
-                    <td>{{ $data->tanggal }}</td>
+                    <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d-m-Y') }}</td>
                     <td>
                         @if($data->sertifikat_url)
                             <img src="{{ asset('storage/'.$data->sertifikat_url) }}" 
@@ -299,6 +304,19 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    document.getElementById("exportPdfButton").addEventListener("click", function() {
+        // Jika ada grafik Chart.js yang ingin disertakan, ambil datanya
+        var Canvas = document.getElementById("Canvas"); // Gantilah dengan ID chart yang benar
+        if (Canvas) {
+            var Image = chartCanvas.toDataURL("image/png"); // Convert chart ke base64
+            document.getElementById("Data").value = Image;
+        }
+
+        // Submit form setelah data gambar (jika ada) di-set
+        document.getElementById("exportForm").submit();
+    });
+</script>
 
   <script>
         window.onload = function() {

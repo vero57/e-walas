@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Walas;
 use App\Models\Rombel;
 use App\Models\Kurikulum;
+use Illuminate\Http\Request;
 use App\Models\PrestasiSiswa;
-use App\Models\RekapitulasiJumlahSiswa;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RekapitulasiJumlahSiswa;
 use Illuminate\Support\Facades\Storage;
 
 class PrestasiSiswaController extends Controller
@@ -52,6 +53,57 @@ class PrestasiSiswaController extends Controller
         // Kirim data walas, siswa, dan rekapitulasi jumlah siswa ke view
         return view('admwalas.prestasisiswa.index', compact('walas', 'prestasisiswa', 'siswas'));
     }
+
+    public function generatePDF(Request $request)
+{
+    $walas = Walas::find(session('walas_id'));
+
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+    // Ambil data rombel berdasarkan 'walas_id'
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+            
+    // Periksa apakah rombel ditemukan
+    if (!$rombel) {
+        return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
+    }
+
+    // Ambil data siswa berdasarkan rombel_id yang sama dengan rombel
+    $siswas = Siswa::where('rombels_id', $rombel->id)->get();
+
+    // Ambil data rekapitulasi jumlah siswa berdasarkan walas_id tanpa relasi siswa
+    $prestasisiswa = PrestasiSiswa::where('walas_id', $walas->id)->get();
+
+    // Ambil base64 dari request (grafik chart)
+    $sertifImage = $request->input('sertifImage');
+    $dokumImage = $request->input('dokumImage');
+
+    // Konversi gambar bukti_url dan dokumentasi_url ke base64
+    foreach ($prestasisiswa as $item) {
+        $item->sertifikat_base64 = $this->convertToBase64($item->sertifikat_url);
+        $item->dokumentasi_base64 = $this->convertToBase64($item->dokumentasi_url);
+    }
+
+    // Load view PDF
+    $pdf = Pdf::loadView('pdf.prestasisiswa', compact('walas', 'prestasisiswa', 'siswas', 'rombel', 'sertifImage', 'dokumImage'));
+
+    return $pdf->stream('Prestasi_Siswa.pdf');
+}
+
+// Fungsi untuk mengubah gambar ke base64
+private function convertToBase64($path)
+{
+    $fullPath = storage_path("app/public/" . $path);
+    
+    if (file_exists($fullPath)) {
+        $imageData = file_get_contents($fullPath);
+        $mimeType = mime_content_type($fullPath);
+        return 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
+    }
+
+    return null;
+}
 
 
 

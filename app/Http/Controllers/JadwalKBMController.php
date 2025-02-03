@@ -140,6 +140,7 @@ class JadwalKbmController extends Controller
    
     public function store(Request $request)
 {
+    
     $request->validate([
         'rombels_id' => 'required|exists:rombels,id',
         'walas_id' => 'required|exists:walas,id',
@@ -148,7 +149,6 @@ class JadwalKbmController extends Controller
         'rabu' => 'nullable|array',
         'kamis' => 'nullable|array',
         'jumat' => 'nullable|array',
-        'kurikulum_id' => $request->kurikulum_id, // Pastikan nilai ini ada di input
     ]);
 
     // Ambil data jadwal
@@ -158,18 +158,17 @@ class JadwalKbmController extends Controller
     $kamis = $this->prepareScheduleData($request->kamis);
     $jumat = $this->prepareScheduleData($request->jumat);
 
-    // Simpan data ke database
     JadwalKbm::create([
         'rombels_id' => $request->rombels_id,
         'walas_id' => $request->walas_id,
-        'kurikulum_id' => $request->kurikulum_id,
-        'senin' => json_encode($senin),
-        'selasa' => json_encode($selasa),
-        'rabu' => json_encode($rabu),
-        'kamis' => json_encode($kamis),
-        'jumat' => json_encode($jumat),
+        'senin' => json_encode($senin ?? []),
+        'selasa' => json_encode($selasa ?? []),
+        'rabu' => json_encode($rabu ?? []),
+        'kamis' => json_encode($kamis ?? []),
+        'jumat' => json_encode($jumat ?? []),
     ]);
-
+    
+    
     return redirect()->route('jadwalkbm.index')->with('success', 'Jadwal berhasil ditambahkan.');
 }
 
@@ -264,22 +263,25 @@ public function update(Request $request, $id)
 
 
     
-            private function prepareScheduleData($scheduleData)
-            {
-                $preparedData = [];
-                if (is_array($scheduleData)) {
-                    foreach ($scheduleData as $jam => $detail) {
-                        if (isset($detail['mapel']) && isset($detail['guru'])) {
-                            $preparedData[] = [
-                                'jam' => $jam,
-                                'mapel_id' => $detail['mapel'],
-                                'guru_id' => $detail['guru'],
-                            ];
-                        }
-                    }
-                }
-                return $preparedData;
+        private function prepareScheduleData($scheduleData)
+        {
+            if (!is_array($scheduleData) || empty($scheduleData)) {
+                return [];
             }
+
+            $preparedData = [];
+            foreach ($scheduleData as $jam => $detail) {
+                if (isset($detail['mapel']) && isset($detail['guru'])) {
+                    $preparedData[] = [
+                        'jam' => $jam,
+                        'mapel_id' => $detail['mapel'],
+                        'guru_id' => $detail['guru'],
+                    ];
+                }
+            }
+            return $preparedData;
+        }
+
 
     /**
      * Remove the specified resource from storage.
