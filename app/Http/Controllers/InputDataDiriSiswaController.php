@@ -8,6 +8,7 @@ use App\Models\Walas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class InputDataDiriSiswaController extends Controller
 {
@@ -44,104 +45,94 @@ class InputDataDiriSiswaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'walas_id' => 'nullable|integer',
-            'siswas_id' => 'nullable|integer',
-            'nama_lengkap' => 'nullable|string|max:255',
-            'jenis_kelamin' => 'nullable|string|max:10',
-            'tempat_lahir' => 'nullable|string|max:255',
-            'tanggal_lahir' => 'nullable|date',
-            'alamat' => 'nullable|string|max:255',
-            'alamat_maps' => 'nullable|string|max:1000',
-            'jalur_masuk' => 'nullable|string|max:50',
-            'jarak_rumah' => 'nullable|string|max:50',
-            'transportasi_sekolah' => 'nullable|string|max:50',
-            'transportasi_rumah' => 'nullable|string|max:50',
-            'agama' => 'nullable|string|max:50',
-            'kewarganegaraan' => 'nullable|string|max:50',
-            'anak_ke' => 'nullable|integer',
-            'jumlah_saudara' => 'nullable|integer',
-            'no_wa' => 'nullable|string|max:15',
-            'email' => 'nullable|email|max:255',
-            'nis' => 'nullable|string|max:20',
-            'nisn' => 'nullable|string|max:20',
-            'kelas' => 'nullable|string|max:50',
-            'kompetensi' => 'nullable|string|max:100',
-            'tahun_masuk' => 'nullable|string|max:4',
-            'nama_ayah' => 'nullable|string|max:255',
-            'pekerjaan_ayah' => 'nullable|string|max:255',
-            'tempat_lahir_ayah' => 'nullable|string|max:255',
-            'tanggal_lahir_ayah' => 'nullable|date',
-            'alamat_ayah' => 'nullable|string|max:255',
-            'no_wa_ayah' => 'nullable|string|max:15',
-            'nama_ibu' => 'nullable|string|max:255',
-            'pekerjaan_ibu' => 'nullable|string|max:255',
-            'tempat_lahir_ibu' => 'nullable|string|max:255',
-            'tanggal_lahir_ibu' => 'nullable|date',
-            'alamat_ibu' => 'nullable|string|max:255',
-            'no_wa_ibu' => 'nullable|string|max:15',
-            'pendapatan_ortu' => 'string|max:255',
-            'namasekolah_asal' => 'nullable|string|max:255',
-            'alamat_sekolah' => 'nullable|string|max:255',
-            'tahun_lulus' => 'nullable|string|max:4',
-            'riwayat_penyakit' => 'nullable|string|max:255',
-            'alergi' => 'nullable|string|max:255',
-            'prestasi_akademik' => 'nullable|string|max:255',
-            'prestasi_non_akademik' => 'nullable|string|max:255',
-            'pengalaman_ekskul' => 'nullable|string|max:255',
-            'kepribadian' => 'nullable|string|max:255'
-        ]);
-    
-                // Mengambil siswa yang sedang login
-                $siswa = Auth::guard('siswas')->user();
+{
+    // Menggunakan guard 'siswas' untuk mendapatkan data siswa yang login
+    $siswa = Auth::guard('siswas')->user();
 
-                // Periksa apakah session 'siswa_id' ada
-                if (!session()->has('siswa_id')) {
-                    return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
-                }
-        
-                // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
-                $siswa = Siswa::find(session('siswa_id'));
-        
-                // Periksa apakah data siswa ditemukan
-                if (!$siswa) {
-                    return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
-                }
-        
-
-    // Menambahkan walas_id dan siswas_id ke request
-    $request->merge(['siswas_id' => $siswa->id]);
-
-     // Mengambil data dari tabel walas
-     $walas = DB::table('walas')->select('id', 'nama')->get();
-     // Menambahkan siswas_id ke request
-    $request->merge(['siswas_id' => $siswa->id]);
-
-    // Mengecek apakah pekerjaan ayah adalah "Lainnya" dan mengganti nilainya jika perlu
-    if ($request->pekerjaan_ayah === 'Lainnya' && $request->has('pekerjaan_ayah_lainnya')) {
-        $request->merge(['pekerjaan_ayah' => $request->pekerjaan_ayah_lainnya]);
+    // Periksa apakah session 'siswa_id' ada
+    if (!session()->has('siswa_id')) {
+        return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
     }
 
-    // Mengecek apakah pekerjaan ibu adalah "Lainnya" dan mengganti nilainya jika perlu
-    if ($request->pekerjaan_ibu === 'Lainnya' && $request->has('pekerjaan_ibu_lainnya')) {
-        $request->merge(['pekerjaan_ibu' => $request->pekerjaan_ibu_lainnya]);
+    // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
+    $siswa = Siswa::find(session('siswa_id'));
+
+    // Periksa apakah data siswa ditemukan
+    if (!$siswa) {
+        return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
     }
 
-    // Membuat biodata siswa
-    $biodata = BiodataSiswa::create($request->all());
+    // Validasi input
+    $validatedData = $request->validate([
+        'walas_id' => 'nullable|integer',
+        'siswas_id' => 'nullable|integer',
+        'nama_lengkap' => 'nullable|string|max:255',
+        'jenis_kelamin' => 'nullable|string|max:10',
+        'tempat_lahir' => 'nullable|string|max:255',
+        'tanggal_lahir' => 'nullable|date',
+        'alamat' => 'nullable|string|max:255',
+        'alamat_maps' => 'nullable|string|max:1000',
+        'fotorumah_url' => 'nullable',
+        'jalur_masuk' => 'nullable|string|max:50',
+        'jarak_rumah' => 'nullable|string|max:50',
+        'transportasi_sekolah' => 'nullable|string|max:50',
+        'transportasi_rumah' => 'nullable|string|max:50',
+        'agama' => 'nullable|string|max:50',
+        'kewarganegaraan' => 'nullable|string|max:50',
+        'anak_ke' => 'nullable|integer',
+        'jumlah_saudara' => 'nullable|integer',
+        'no_wa' => 'nullable|string|max:15',
+        'email' => 'nullable|email|max:255',
+        'nis' => 'nullable|string|max:20',
+        'nisn' => 'nullable|string|max:20',
+        'kelas' => 'nullable|string|max:50',
+        'kompetensi' => 'nullable|string|max:100',
+        'tahun_masuk' => 'nullable|string|max:4',
+        'nama_ayah' => 'nullable|string|max:255',
+        'pekerjaan_ayah' => 'nullable|string|max:255',
+        'tempat_lahir_ayah' => 'nullable|string|max:255',
+        'tanggal_lahir_ayah' => 'nullable|date',
+        'alamat_ayah' => 'nullable|string|max:255',
+        'no_wa_ayah' => 'nullable|string|max:15',
+        'nama_ibu' => 'nullable|string|max:255',
+        'pekerjaan_ibu' => 'nullable|string|max:255',
+        'tempat_lahir_ibu' => 'nullable|string|max:255',
+        'tanggal_lahir_ibu' => 'nullable|date',
+        'alamat_ibu' => 'nullable|string|max:255',
+        'no_wa_ibu' => 'nullable|string|max:15',
+        'pendapatan_ortu' => 'string|max:255',
+        'namasekolah_asal' => 'nullable|string|max:255',
+        'alamat_sekolah' => 'nullable|string|max:255',
+        'tahun_lulus' => 'nullable|string|max:4',
+        'riwayat_penyakit' => 'nullable|string|max:255',
+        'alergi' => 'nullable|string|max:255',
+        'prestasi_akademik' => 'nullable|string|max:255',
+        'prestasi_non_akademik' => 'nullable|string|max:255',
+        'pengalaman_ekskul' => 'nullable|string|max:255',
+        'kepribadian' => 'nullable|string|max:255'
+    ]);
 
-    // Redirect dengan compact
-    $biodatas = BiodataSiswa::all(); // Mengambil semua data biodata
-        // Redirect ke /siswapage dengan membawa data compact
-        return redirect('/datadiripage')
-        ->with([
-            'biodatas' => $biodatas,
-            'siswa' => $siswa,
-            'walas' => $walas,
-            'success' => 'Data berhasil ditambahkan!'
-        ]);
+    // Menambahkan siswas_id ke request
+    $validatedData['siswas_id'] = $siswa->id;
+
+    // Cek dan simpan file gambar jika ada
+    if ($request->hasFile('fotorumah_url')) {
+        // Memberi nama unik pada file
+        $fileName = uniqid() . '.' . $request->file('fotorumah_url')->getClientOriginalExtension();
+        
+        // Menyimpan file dengan nama unik
+        $fotoRumahPath = $request->file('fotorumah_url')->storeAs('images/photos', $fileName, 'public');
+        
+        // Menyimpan path file yang ter-link di public
+        $validatedData['fotorumah_url'] = $fotoRumahPath;
     }
+
+    // Simpan data ke database
+    BiodataSiswa::create($validatedData);
+
+    return redirect('/datadiripage')->with('success', 'Data berhasil ditambahkan!');
+}
+
     
     /**
      * Display the specified resource.
