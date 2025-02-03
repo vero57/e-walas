@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
 use App\Models\Walas;
 use App\Models\Rombel;
-use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\BukuTamuOrangtua;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BukuTamuOrtuController extends Controller
 {
@@ -38,6 +39,48 @@ class BukuTamuOrtuController extends Controller
 
     // Return view dengan data yang difilter
     return view("admwalas.bukutamuortu.index", compact('bukutamuortu', 'walas'));
+}
+
+public function generatePDF(Request $request)
+{
+    $walas = Walas::find(session('walas_id'));
+
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+    $bukutamuortu = BukuTamuorangtua::where('walas_id', $walas->id)->get();
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+    if (!$rombel) {
+        return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
+    }
+
+    $siswas = Siswa::where('rombels_id', $rombel->id)->get();
+
+    $dokumImage = $request->input('dokumImage');
+
+    foreach ($bukutamuortu as $item) {
+        $item->dokumentasi_base64 = $this->convertToBase64($item->dokumentasi_url);
+    }
+
+    // Load view PDF
+    $pdf = Pdf::loadView('pdf.bukutamuortu', compact('walas', 'bukutamuortu', 'siswas', 'rombel', 'dokumImage'));
+
+    return $pdf->stream('Buku_Tamu_Ortu.pdf');
+}
+
+// Fungsi untuk mengubah gambar ke base64
+private function convertToBase64($path)
+{
+    $fullPath = storage_path("app/public/" . $path);
+    
+    if (file_exists($fullPath)) {
+        $imageData = file_get_contents($fullPath);
+        $mimeType = mime_content_type($fullPath);
+        return 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
+    }
+
+    return null;
 }
 
 
@@ -104,6 +147,7 @@ class BukuTamuOrtuController extends Controller
              'walas_id' => 'required|exists:walas,id',
              'tanggal' => 'required|date', // Validasi untuk tanggal
              'nama_peserta_didik' => 'required|string|max:255', // Validasi nama peserta didik
+             'nama_orang_tua' => 'required|string',
              'tindak_lanjut' => 'required|string', // Validasi tindak lanjut
              'kasus' => 'required|string', // Validasi kasus
              'solusi' => 'required|string', // Validasi solusi
@@ -120,6 +164,7 @@ class BukuTamuOrtuController extends Controller
              'walas_id' => $request->walas_id,
              'tanggal' => $request->tanggal,
              'nama_peserta_didik' => $request->nama_peserta_didik,
+             'nama_orang_tua' => $request->nama_orang_tua,
              'tindak_lanjut' => $request->tindak_lanjut,
              'kasus' => $request->kasus,
              'solusi' => $request->solusi,
@@ -199,6 +244,7 @@ public function update(Request $request, $id)
     $request->validate([
         'walas_id' => 'required|exists:walas,id',
         'nama_peserta_didik' => 'required',
+        'nama_orang_tua' => 'required',
         'tanggal' => 'required',
         'kasus' => 'required',
         'solusi' => 'required',
@@ -223,6 +269,7 @@ public function update(Request $request, $id)
     $bukutamuortu->update([
         'walas_id' => $request->walas_id,
         'nama_peserta_didik' => $request->nama_peserta_didik,
+        'nama_orang_tua' => $request->nama_orang_tua,
         'tanggal' => $request->tanggal,
         'kasus' => $request->kasus,
         'solusi' => $request->solusi,

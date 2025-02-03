@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Walas;
 use App\Models\Presensi;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
@@ -26,10 +27,34 @@ class PresensiController extends Controller
         if (!$walas) {
             return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
         }
+        
 
-        $presensis = Presensi::all();
+        $semester = request()->get('semester'); // Mendapatkan parameter semester (ganjil/genap)
+
+    // Ambil data presensi
+    $presensis = Presensi::with('detailPresensis.siswa')
+        ->when($semester === 'ganjil', function ($query) {
+            // Filter untuk semester ganjil (Juli - Desember)
+            return $query->whereMonth('tanggal', '>=', 7)->whereMonth('tanggal', '<=', 12);
+        })
+        ->when($semester === 'genap', function ($query) {
+            // Filter untuk semester genap (Januari - Juni)
+            return $query->whereMonth('tanggal', '>=', 1)->whereMonth('tanggal', '<=', 6);
+        })
+        ->get();
+
+    // Jika ada parameter 'export=pdf', generate PDF
+if (request()->has('export') && request()->get('export') === 'pdf') {
+    $semester = request()->get('semester'); // Ambil semester yang dipilih
+    $pdf = Pdf::loadView('pdf.rekapkehadiran', compact('walas', 'presensis', 'semester'))
+        ->setPaper('A4', 'landscape');
+    return $pdf->stream('rekap_kehadiran_' . $semester . '.pdf');
+}
+
         return view('admwalas.presensi.index', compact('presensis', 'walas'));
     }
+
+
 
     public function create()
     {

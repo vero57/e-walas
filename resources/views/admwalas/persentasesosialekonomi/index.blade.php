@@ -183,24 +183,13 @@
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="/persentasesosialekonomicreate" class="btn btn-primary">
+                <a href="/persentasesosialekonomicreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
-                </a></div>
-                <div>
-        <a href="{{ route('persentasesosialekonomi.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
+                </a>
+                
+        <a href="{{ route('persentasesosialekonomi.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
     <i class="bi bi-download"></i> Unduh PDF
 </a>
-</div>
-
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Pekerjaan">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         <br><br>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Peserta Didik</title>
+    <title>Home Visit Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,57 +40,74 @@
             width: 100%;
             text-align: left;
         }
+        .img-container img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
-
-    <div class="title">DAFTAR PESERTA DIDIK</div>
-
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Nama Siswa</th>
-            <th>NIS</th>
-            <th>NISN</th>
-            <th>Jenis Kelamin</th>
-            <th>Keterangan</th>
-            <th>Tanggal</th>
-        </tr>
-        @foreach ($daftarpdidik as $idx => $data)
-            <tr>
-                <td>{{ $idx + 1 }}</td>
-                <td>{{ $data->siswa->nama }}</td>
-                <td>{{ $data->nis }}</td>
-                <td>{{ $data->nisn }}</td>
-                <td>{{ $data->jenis_kelamin }}</td>
-                <td>{{ $data->keterangan }}</td>
-                <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d-m-Y') }}</td>
-            </tr>
-        @endforeach
-    </table>
+    <div class="title">LAPORAN HOME VISIT</div>
 
     <table class="info-table">
         <tr>
-            <td>Jumlah Laki-laki</td>
-            <td>: {{ $jenisKelaminCount['Laki-laki'] ?? 0 }}</td>
+            <td>Wali Kelas</td>
+            <td>: {{ $walas->nama ?? '-' }}</td>
         </tr>
         <tr>
-            <td>Jumlah Perempuan</td>
-            <td>: {{ $jenisKelaminCount['Perempuan'] ?? 0 }}</td>
+            <td>Kelas</td>
+            <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td>Tahun Pelajaran</td>
+            <td>: {{ date('Y') }}</td>
         </tr>
     </table>
+
+    <table>
+    <tr>
+        <th>No</th>
+        <th>Tanggal</th>
+        <th>Nama Peserta Didik</th>
+        <th>Nama Orang Tua/Wali</th>
+        <th>Keperluan</th>
+        <th>Solusi</th>
+        <th>Tindak Lanjut</th>
+        <th>Dokumentasi</th>
+    </tr>
+    @foreach($bukutamuortu as $index => $item)
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $item->tanggal }}</td>
+            <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+            <td>{{ $item->tanggal }}</td>
+            <td>{{ $item->kasus }}</td>
+            <td>{{ $item->solusi }}</td>
+            <td>{{ $item->tindak_lanjut }}</td>
+<td>
+    @if($item->dokumentasi_base64)
+        <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
+    @else
+        <p>No image</p>
+    @endif
+</td>
+        </tr>
+    @endforeach
+</table>
+
 
     <div class="signature">
         <table>
             <tr>
                 <td>Mengetahui,</td>
                 <td></td>
-                <td>Cibinong, ..................... 20...</td>
+                <td>{{ date('d F Y') }}</td>
             </tr>
             <tr>
-                <td>Waka. Bidang Akademik,</td>
-                <td></td>
                 <td>Wali Kelas</td>
+                <td></td>
+                <td>Waka. Bidang Akademik</td>
             </tr>
             <tr><td colspan="3"><br><br><br></td></tr>
             <tr>
@@ -98,13 +115,7 @@
                 <td></td>
                 <td>(_________________)</td>
             </tr>
-            <tr>
-                <td>NIP: ......................</td>
-                <td></td>
-                <td>NIP: ......................</td>
-            </tr>
         </table>
     </div>
-
 </body>
 </html>

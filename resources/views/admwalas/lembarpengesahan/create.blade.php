@@ -175,7 +175,7 @@
                             <!-- Foto -->
                         <div class="mb-3">
                             <label for="image_url" class="form-label">Masukkan foto dokumen di sini:</label>
-                            <input type="file" name="image_url" id="image_url" class="form-control" accept="image/*" required>
+                            <input type="file" name="image_url" id="image_url" class="form-control" required>
                         </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

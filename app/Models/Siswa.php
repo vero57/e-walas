@@ -61,4 +61,8 @@ class Siswa extends Model
         return $this->hasMany(DaftarPesertaDidik::class, 'nama_siswa', 'id');
     }
 
+    public function detailPresensis()
+    {
+        return $this->hasMany(DetailPresensi::class, 'siswa_id');
+    }
 }

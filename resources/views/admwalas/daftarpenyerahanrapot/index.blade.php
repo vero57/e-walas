@@ -157,9 +157,9 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
+                <a href="{{ route('serahterimarapor.download-template') }}" class="btn btn-outline-secondary" download>
+                    <i class="bi bi-cloud-download"></i> Download File
+                </a>
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
@@ -209,10 +209,23 @@
                 <td>{{ $index + 1 }}</td>
                 <td>
                     @if($penyerahan->image_url)
-                        <img src="{{ asset('storage/'.$penyerahan->image_url) }}" 
-                             style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @php
+                            $fileExtension = pathinfo($penyerahan->image_url, PATHINFO_EXTENSION);
+                        @endphp
+                        
+                        @if(in_array(strtolower($fileExtension), ['jpeg', 'png', 'jpg', 'gif']))
+                            <!-- Preview for image files -->
+                            <img src="{{ asset('storage/'.$penyerahan->image_url) }}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @elseif(strtolower($fileExtension) == 'pdf')
+                            <!-- Preview for PDF files -->
+                            <object data="{{ asset('storage/'.$penyerahan->image_url) }}" type="application/pdf" width="150" height="150">
+                                <a href="{{ asset('storage/'.$penyerahan->image_url) }}" target="_blank">View PDF</a>
+                            </object>
+                        @else
+                            <p>No preview available</p>
+                        @endif
                     @else
-                        <p>No image</p>
+                        <p>No file</p>
                     @endif
                 </td>
                 <td>
@@ -222,6 +235,8 @@
                     <a href="{{ route('penyerahanrapot.edit', $penyerahan->id) }}" class="btn btn-warning btn-sm">
                         Edit
                     </a>
+                    <a href="{{ asset('storage/'.$penyerahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
+                
                 </td>
             </tr>
         @endforeach

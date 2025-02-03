@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Siswa;
-use App\Imports\SiswaImport;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\DB;
-use App\Models\Rombel;
 use App\Models\Walas;
+use App\Models\Rombel;
+use App\Imports\SiswaImport;
+use App\Models\BiodataSiswa;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataSiswaWalasController extends Controller
 {
@@ -65,6 +67,45 @@ class DataSiswaWalasController extends Controller
         $pathToFile = storage_path('app/public/template_siswa.xlsx'); // Sesuaikan dengan lokasi file template Excel
         return response()->download($pathToFile);
     }
+
+    public function biodata($id)
+{
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walas = Walas::find(session('walas_id'));
+    
+    // Periksa apakah data walas ditemukan
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+   // Ambil data rombel yang dimiliki walas yang sedang login
+   $rombel = Rombel::where('walas_id', $walas->id)->first();
+
+   // Periksa apakah rombel ditemukan
+   if (!$rombel) {
+       return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
+   }
+
+    $siswa = Siswa::findOrFail($id); // Ambil data siswa berdasarkan ID
+    $biodatas = BiodataSiswa::where('siswas_id', $siswa->id)->get();
+
+    
+    if (request()->has('export') && request()->get('export') === 'pdf') {
+        $biodatas = BiodataSiswa::where('siswas_id', $siswa->id)->first();
+        $pdf = Pdf::loadView('pdf.pdfbiodatasiswa', compact('siswa', 'biodatas', 'walas', 'rombel'));
+        return $pdf->stream('Biodata_Siswa.pdf');
+    }
+
+    return view('homepagegtk.biodatasiswa', compact('siswa', 'biodatas', 'walas', 'rombel'));
+}
 
     /**
      * Show the form for creating a new resource.

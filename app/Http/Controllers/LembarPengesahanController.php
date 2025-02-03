@@ -44,6 +44,12 @@ class LembarPengesahanController extends Controller
         return view("admwalas.lembarpengesahan.index" , compact('lembarpengesahan', 'walas', 'rombel'));
     }
 
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/Lembar_Pengesahan.pdf');
+        return response()->download($pathToFile);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -86,7 +92,7 @@ public function store(Request $request)
     // validasi input
     $request->validate([
         'walas_id' => 'required|exists:walas,id',
-        'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
+        'image_url' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:2048', // validasi file gambar
     ]);
 
     // simpan file ke storage
@@ -154,7 +160,7 @@ public function update(Request $request, $id)
     // validasi input
     $request->validate([
         'walas_id' => 'required|exists:walas,id',
-        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
+        'image_url' => 'nullable|mimes:jpeg,png,jpg,gif,pdf|max:2048', // validasi file gambar
     ]);
 
     // ambil data lama

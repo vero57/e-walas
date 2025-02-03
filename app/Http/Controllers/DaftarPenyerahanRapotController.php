@@ -38,6 +38,12 @@ class DaftarPenyerahanRapotController extends Controller
     return view("admwalas.daftarpenyerahanrapot.index", compact('penyerahanrapot', 'walas'));
 }
 
+public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/Penyerahan Pengembalian Rapor.pdf');
+        return response()->download($pathToFile);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +78,7 @@ public function store(Request $request)
     // validasi input
     $request->validate([
         'walas_id' => 'required|exists:walas,id',
-        'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
+        'image_url' => 'required|mimes:jpeg,png,jpg,gif,pdf|max:2048', // validasi file gambar
     ]);
 
     // simpan file ke storage
@@ -131,7 +137,7 @@ public function update(Request $request, $id)
     // validasi input
     $request->validate([
         'walas_id' => 'required|exists:walas,id',
-        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
+        'image_url' => 'nullable|mimes:jpeg,png,jpg,gif,pdf|max:2048', // validasi file gambar
     ]);
 
     // ambil data lama

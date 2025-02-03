@@ -161,16 +161,13 @@
                 <a href="/homevisitcreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-                    <a href="{{ route('homevisit.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-                <i class="bi bi-download"></i> Unduh PDF
-            </a>
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Penyerahan Rapot">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
+                <form id="exportForm" method="POST" action="{{ route('homevisit.generatepdf') }}">
+                    @csrf
+                    <input type="hidden" id="chartData" name="chartImage">
+                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                        <i class="bi bi-download"></i> Unduh PDF
                     </button>
-                </div>
+                </form>
         </div>
         <br><br>
         <div class="container mt-4">
@@ -275,6 +272,20 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  
+  <script>
+    document.getElementById("exportPdfButton").addEventListener("click", function() {
+        // Jika ada grafik Chart.js yang ingin disertakan, ambil datanya
+        var chartCanvas = document.getElementById("chartCanvas"); // Gantilah dengan ID chart yang benar
+        if (chartCanvas) {
+            var chartImage = chartCanvas.toDataURL("image/png"); // Convert chart ke base64
+            document.getElementById("chartData").value = chartImage;
+        }
+
+        // Submit form setelah data gambar (jika ada) di-set
+        document.getElementById("exportForm").submit();
+    });
+</script>
 
   <script>
         window.onload = function() {

@@ -208,6 +208,11 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="nama_orang_tua" class="form-label">Nama Orang tua/Wali murid</label>
+                    <input name="nama_orang_tua" id="nama_orang_tua" class="form-control" rows="3" required>{{ old('nama_orang_tua', $bukutamuortu->nama_orang_tua) }}</input>
+                </div>
+
                 <!-- Kasus -->
                 <div class="mb-3">
                     <label for="kasus" class="form-label">Keperluan:</label>
