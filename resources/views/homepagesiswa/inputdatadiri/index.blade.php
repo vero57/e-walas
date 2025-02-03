@@ -357,6 +357,12 @@
                     </div>
                 </div>
 
+                  <!-- Dokumentasi (Gambar) -->
+                  <div class="row mb-3">
+                        <label for="fotorumah_url" class="form-label">Unggah Foto Tampak Depan Rumah (Gambar):</label>
+                        <input type="file" name="fotorumah_url" id="fotorumah_url" class="form-control" required>
+                </div>
+
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="jalur_masuk" class="form-label">Jalur Masuk</label>

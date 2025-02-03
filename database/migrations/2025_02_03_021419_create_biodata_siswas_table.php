@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tanggal_lahir',255);
             $table->text('alamat');
             $table->text('alamat_maps');
+            $table->string('fotorumah_url',255)->nullable();
             $table->enum('jalur_masuk', ['Afirmasi', 'Zonasi', 'Rapor', 'Prestasi', 'Anak Guru','Perpindahan Orang Tua',])->default('Rapor');
             $table->string('jarak_rumah',255);
             $table->string('transportasi_sekolah',255);
