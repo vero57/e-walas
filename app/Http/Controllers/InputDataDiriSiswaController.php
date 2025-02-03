@@ -72,7 +72,7 @@ class InputDataDiriSiswaController extends Controller
         'tanggal_lahir' => 'nullable|date',
         'alamat' => 'nullable|string|max:255',
         'alamat_maps' => 'nullable|string|max:1000',
-        'fotorumah_url' => 'nullable',
+        'fotorumah_url' => 'nulable',
         'jalur_masuk' => 'nullable|string|max:50',
         'jarak_rumah' => 'nullable|string|max:50',
         'transportasi_sekolah' => 'nullable|string|max:50',

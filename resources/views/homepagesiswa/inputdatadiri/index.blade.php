@@ -302,7 +302,7 @@
         </h1>
         <br>
         <div class="container">
-            <form action="{{ route('biodatasiswa.store') }}" method="POST">
+            <form action="{{ route('biodatasiswa.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
         <h4 class="text-bold">Data Pribadi</h4>
                 <div class="row mb-3">
