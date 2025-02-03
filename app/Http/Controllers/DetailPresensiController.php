@@ -32,6 +32,7 @@ class DetailPresensiController extends Controller
 
          
         $presensi = Presensi::with('detailPresensis.siswa')->findOrFail($presensiId);
+        
         return view('admwalas.detailpresensi.index', compact('presensi', 'walas'));
     }
 
@@ -118,7 +119,7 @@ class DetailPresensiController extends Controller
 
         $presensi = Presensi::findOrFail($presensi_id);
         $detail = DetailPresensi::findOrFail($detail_id);
-        $siswas = Siswa::all();
+        $siswas = Siswa::where('rombels_id', $rombel->id)->get();
         return view('admwalas.detailpresensi.edit', compact('presensi', 'detail', 'siswas', 'walas', 'rombel'));
     }
 

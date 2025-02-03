@@ -20,9 +20,44 @@ class IdentitasKelas extends Model
         return $this->belongsTo(Walas::class, 'walas_id');
     }
 
-    public function siswas()
-    {
-        return $this->belongsTo(Siswa::class, 'siswas_id_10');
-        // kamu bisa menambahkan relasi lainnya untuk siswas_id_11, siswas_id_12, siswas_id_13 jika perlu
-    }
+    public function walas10()
+{
+    return $this->belongsTo(Walas::class, 'walas_id_10'); // Pastikan tabel Walas menyimpan nama walas
+}
+
+public function walas11()
+{
+    return $this->belongsTo(Walas::class, 'walas_id_11');
+}
+
+public function walas12()
+{
+    return $this->belongsTo(Walas::class, 'walas_id_12');
+}
+
+public function walas13()
+{
+    return $this->belongsTo(Walas::class, 'walas_id_13');
+}
+
+public function siswa10()
+{
+    return $this->belongsTo(Siswa::class, 'siswas_id_10'); // Sesuaikan dengan model siswa
+}
+
+public function siswa11()
+{
+    return $this->belongsTo(Siswa::class, 'siswas_id_11');
+}
+
+public function siswa12()
+{
+    return $this->belongsTo(Siswa::class, 'siswas_id_12');
+}
+
+public function siswa13()
+{
+    return $this->belongsTo(Siswa::class, 'siswas_id_13');
+}
+
 }

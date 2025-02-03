@@ -62,4 +62,10 @@ class BiodataSiswa extends Model
     return $this->belongsTo(Siswa::class, 'siswas_id', 'id');
 }
 
+public function walas()
+{
+    return $this->belongsTo(Walas::class, 'walas_id', 'id');
+}
+
+
 }

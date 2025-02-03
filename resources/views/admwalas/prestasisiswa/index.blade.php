@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Walas</title>
+  <title>E Walas SMKN 1 Cibinong - Walas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="../../../images/logokampak.png" rel="icon">
+  <link href="images/logokampak.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -18,18 +18,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
   <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
 
   <!-- Main CSS File -->
-  <link href="../../../assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: iLanding
@@ -69,6 +69,31 @@
 
         .alert-success {
             background-color: #2ecc71; /* Hijau */
+        }
+
+        .table th,
+        .table td {
+            text-align: center; /* Menyelaraskan teks ke tengah */
+            vertical-align: middle; /* Menyelaraskan secara vertikal */
+        }
+
+        .table th {
+            background-color: #f8f9fa; /* Memberikan latar belakang ringan pada th */
+            font-weight: bold; /* Membuat font di th menjadi bold */
+        }
+
+        .table td {
+            padding: 12px; /* Memberikan jarak pada sel */
+        }
+
+        .table td img {
+            border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
+            object-fit: cover; /* Menyesuaikan gambar agar tidak terdistorsi */
+        }
+
+        /* Menambahkan sedikit ruang antara baris */
+        .table tbody tr {
+            border-bottom: 1px solid #e4e7ea; /* Menambahkan garis pemisah antar baris */
         }
 
         /* Animasi slide down */
@@ -126,13 +151,14 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <div class="user-info d-flex align-items-center">
+       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+     <div class="user-info d-flex align-items-center">
             @if(session()->has('walas_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
                 <a href="/profilewalas" class="text-decoration-none">
-                    <span>{{ $walaslogin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
@@ -140,7 +166,7 @@
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
         </div>
-        </div>
+
     </div>
   </header>
 
@@ -148,97 +174,103 @@
 
        <!-- Hero Section -->
        <section id="hero" class="hero section">
-    <div class="starter-section container">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Buku Tamu Orangtua/Wali Murid</h2>
+            <h2 class="font-weight-bold">Prestasi Siswa</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-            
-        
-            <div class="container mt-4">
-            <div class="card">
-    <div class="card-header">Edit Data Buku Tamu Orangtua/Wali Murid</div>
-           <!-- Formulir Update Buku Tamu Orangtua dalam Card -->
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3>Update Formulir Buku Tamu Orangtua Data</h3>
+                <!-- Form Cari Administrasi -->
+                <!-- Tombol Unggah Data -->
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <i class="bi bi-cloud-upload"></i> Unggah Data
+                </button>
+                <!-- Tombol Tambah Data -->
+                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
+                <div class="d-flex-container">
+                <a href="/prestasisiswacreate" class="btn btn-primary">
+                    <i class="bi bi-plus"></i> Tambah
+                </a>
+
+
+                    <!-- Search Box -->
+                <div class="searchBox">
+                    <input class="searchInput" type="text" placeholder="  Cari Catatan Kasus">
+                    <button class="searchButton" href="#">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <form action="{{ route('bukutamuortu.update', $bukutamuortu->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+        <br><br>
+        <div class="container mt-4">
+    <h4>Prestasi Siswa</h4>
 
-                <!-- Wali Kelas -->
-                <div class="mb-3">
-                    <label for="walas_id" class="form-label">Wali Kelas:</label>
-                    <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" 
-                                @if($bukutamuortu->walas_id == $walas_item->id) selected @endif>
-                                {{ $walas_item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+    <!-- Pesan jika data tidak ditemukan -->
+    @if(isset($message))
+        <div class="alert alert-warning text-center">
+            {{ $message }}
+        </div>
+    @endif
 
-                <!-- Tanggal -->
-                <div class="mb-3">
-                    <label for="tanggal" class="form-label">Tanggal:</label>
-                    <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ $bukutamuortu->tanggal }}" required>
-                </div>
-
-                <!-- Siswa -->
-                <div class="mb-3">
-                    <label for="nama_peserta_didik" class="form-label">Pilih Siswa:</label>
-                    <select name="nama_peserta_didik" id="nama_peserta_didik" class="form-control" required>
-                        <option value="" disabled>Pilih Siswa</option>
-                        @foreach ($siswas as $s)
-                            <option value="{{ $s->id }}" 
-                                @if($bukutamuortu->nama_peserta_didik == $s->id) selected @endif>
-                                {{ $s->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Kasus -->
-                <div class="mb-3">
-                    <label for="kasus" class="form-label">Keperluan:</label>
-                    <textarea name="kasus" id="kasus" class="form-control" rows="3" required>{{ old('kasus', $bukutamuortu->kasus) }}</textarea>
-                </div>
-
-                <!-- Solusi -->
-                <div class="mb-3">
-                    <label for="solusi" class="form-label">Solusi:</label>
-                    <textarea name="solusi" id="solusi" class="form-control" rows="3" required>{{ old('solusi', $bukutamuortu->solusi) }}</textarea>
-                </div>
-
-                <!-- Tindak Lanjut -->
-                <div class="mb-3">
-                    <label for="tindak_lanjut" class="form-label">Tindak Lanjut:</label>
-                    <textarea name="tindak_lanjut" id="tindak_lanjut" class="form-control" rows="3" required>{{ old('tindak_lanjut', $bukutamuortu->tindak_lanjut) }}</textarea>
-                </div>
-
-                <!-- Dokumentasi (Gambar) -->
-                <div class="mb-3">
-                    <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
-                    <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
-                    <small>Jika tidak ingin mengubah gambar, biarkan kosong.</small>
-                    @if($bukutamuortu->dokumentasi_url)
-                        <div class="mt-2">
-                            <img src="{{ asset('storage/' . $bukutamuortu->dokumentasi_url) }}" alt="Dokumentasi" class="img-thumbnail" width="100">
+    @if($prestasisiswa->isNotEmpty())
+    <table class="table table-bordered table-striped">
+            <tr>
+                <th>No</th>
+                <th>Nama Siswa</th>
+                <th>Jenis Prestasi</th>
+                <th>Nama Prestasi</th>
+                <th>Tanggal</th>
+                <th>Sertifikat</th>
+                <th>Dokumentasi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($prestasisiswa ?? [] as $idx => $data)
+                <tr>
+                    <td>{{ $idx + 1 }}</td>
+                    <td>{{ $data->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                    <td>{{ $data->jenis_prestasi }}</td>
+                    <td>{{ $data->nama_prestasi }}</td>
+                    <td>{{ $data->tanggal }}</td>
+                    <td>
+                        @if($data->sertifikat_url)
+                            <img src="{{ asset('storage/'.$data->sertifikat_url) }}" 
+                                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @else
+                            <p>No image</p>
+                        @endif
+                    </td>
+                    <td>
+                        @if($data->dokumentasi_url)
+                            <img src="{{ asset('storage/'.$data->dokumentasi_url) }}" 
+                                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @else
+                            <p>No image</p>
+                        @endif
+                    </td>
+                    
+                    <td class="text-center" colspan="2">
+                        <div class="d-flex justify-content-center">
+                            <!-- Tombol Edit -->
+                            <a href="{{ route('prestasisiswa.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                            <!-- Tombol Delete -->
+                            <a href="/hapusprestasisiswa/{{$data->id}}" class="btn btn-danger btn-sm">Hapus</a>
                         </div>
-                    @endif
-                </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="10" class="text-center">Tidak ada data wali kelas.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+    <br>
+@endif
 
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
-    </div>
 </div>
-    </section>
 
 </main>
   
@@ -258,15 +290,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <script>
         window.onload = function() {

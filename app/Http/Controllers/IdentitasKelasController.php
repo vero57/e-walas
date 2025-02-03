@@ -42,8 +42,16 @@ class IdentitasKelasController extends Controller
         return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
     }
 
-    // Mengambil data IdentitasKelas hanya yang sesuai dengan walas yang login
-    $identitaskelas = IdentitasKelas::where('walas_id', $walas->id)->get();
+    $walas_id = session('walas_id'); // Ambil ID walas yang login
+
+$identitaskelas = IdentitasKelas::with(['walas10', 'walas11', 'walas12', 'walas13', 'siswa10', 'siswa11', 'siswa12', 'siswa13'])
+    ->where(function ($query) use ($walas_id) {
+        $query->where('walas_id_10', $walas_id)
+              ->orWhere('walas_id_11', $walas_id)
+              ->orWhere('walas_id_12', $walas_id);
+    })
+    ->get();
+
 
     if ($request->get('export') == 'pdf') {
         $pdf = Pdf::loadView('pdf.identitaskelas', ['data' => $identitaskelas]);

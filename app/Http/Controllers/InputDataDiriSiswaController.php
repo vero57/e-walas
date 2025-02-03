@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BiodataSiswa;
 use App\Models\Siswa;
+use App\Models\Walas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -155,29 +156,67 @@ class InputDataDiriSiswaController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-          // Mengambil siswa yang sedang login
-          $siswa = Auth::guard('siswas')->user();
+{
+     // Mengambil siswa yang sedang login
+     $siswa = Auth::guard('siswas')->user();
 
-          // Periksa apakah session 'siswa_id' ada
-          if (!session()->has('siswa_id')) {
-              return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
-          }
-  
-          // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
-          $siswa = Siswa::find(session('siswa_id'));
-  
-          // Periksa apakah data siswa ditemukan
-          if (!$siswa) {
-              return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
-          }
-  
-           // Mengambil data dari tabel walas
-          $walas = DB::table('walas')->select('id', 'nama')->get();
+     // Periksa apakah session 'siswa_id' ada
+     if (!session()->has('siswa_id')) {
+         return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
+     }
 
-        $biodata = BiodataSiswa::findOrFail($id);
-        return view('homepagesiswa.inputdatadiri.edit', compact('biodata', 'siswa', 'walas'));
+     // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
+     $siswa = Siswa::find(session('siswa_id'));
+
+     // Periksa apakah data siswa ditemukan
+     if (!$siswa) {
+         return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
+     }
+
+    // Ambil biodata berdasarkan 'siswas_id'
+    $biodata = BiodataSiswa::where('siswas_id', $siswa->id)->first();
+
+    // Periksa apakah data biodata ditemukan
+    if (!$biodata) {
+        return redirect('/homepagesiswa')->with('error', 'Data biodata tidak ditemukan.');
     }
+
+    // Cek apakah siswa sedang login
+    if ($siswa) {
+        // Ambil walas_id dari biodata
+        $walas_id = $biodata ? $biodata->walas_id : null;
+
+        // Ambil wali kelas berdasarkan walas_id (jika ada)
+        $walas = $walas_id ? Walas::find($walas_id) : null;
+
+        // Ambil nomor WhatsApp Walas atau tampilkan pesan default
+        $no_wa_walas = $walas && !empty($walas->no_wa) ? $walas->no_wa : 'Nomor tidak tersedia';
+    } else {
+        $no_wa_walas = 'Nomor tidak tersedia';
+    }
+
+    // Ambil data rombel siswa
+    $rombel = $siswa->rombel;
+
+    // Ambil wali kelas dari rombel siswa
+    $nowalas = $rombel ? $rombel->walas : null;
+
+    // Mengambil data dari tabel walas
+    $walasList = DB::table('walas')->select('id', 'nama')->get();
+
+    // Ambil biodata siswa berdasarkan ID, tetapi hanya jika milik siswa yang login
+    $biodata = BiodataSiswa::where('id', $id)->where('siswas_id', $siswa->id)->first();
+
+    // Jika biodata tidak ditemukan atau bukan milik siswa yang login, redirect dengan error
+    if (!$biodata) {
+        return redirect('/homepagesiswa')->with('error', 'Data tidak ditemukan.');
+    }
+
+    // Return view dengan data yang dibutuhkan
+    return view('homepagesiswa.inputdatadiri.edit', compact('biodata', 'siswa', 'nowalas', 'walasList', 'no_wa_walas', 'walas'));
+}
+
+
 
     /**
      * Update the specified resource in storage.

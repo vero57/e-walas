@@ -107,7 +107,7 @@ class WaliKelasPageController extends Controller
     public function edit($id)
     {
         // Ambil data produk berdasarkan ID
-        $walasdata = Walas::findOrFail($id);
+        $walas = Walas::findOrFail($id);
 
         // Kirim data ke view edit
         return view('homepageadmin.walikelasdata.edit', compact('walas'));
@@ -123,7 +123,7 @@ class WaliKelasPageController extends Controller
         'nama' => 'required|string|max:255',
         'image_url' => 'nullable|image|mimes:jpg,jpeg,png|max:5000', // Foto bersifat opsional
         'no_wa' => 'required|numeric',
-        'password' => 'nullable|string|min:6', // Password opsional
+        'password' => 'nullable|string|min:2', // Password opsional
         'nip' => 'required|numeric',
         'jenis_kelamin' => 'required|string',
     ]);

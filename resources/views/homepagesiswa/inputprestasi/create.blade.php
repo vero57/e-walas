@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Walas</title>
+  <title>E Walas SMKN 1 Cibinong - Siswa</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -114,7 +114,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminwalas" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -130,9 +130,9 @@
             @if(session()->has('walas_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
-                <!-- Tautkan nama walas ke /userprofile -->
+                <!-- Tautkan nama walas ke /userprxofile -->
                 <a href="/profilewalas" class="text-decoration-none">
-                    <span>{{ $walaslogin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                    <span>{{ $siswa->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
@@ -140,105 +140,106 @@
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
         </div>
-        </div>
     </div>
   </header>
 
 <main class="main">
 
        <!-- Hero Section -->
-       <section id="hero" class="hero section">
-    <div class="starter-section container">
+<section id="hero" class="hero section">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Buku Tamu Orangtua/Wali Murid</h2>
+            <h2 class="font-weight-bold">Form Input Prestasi Siswa</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-            
-        
-            <div class="container mt-4">
-            <div class="card">
-    <div class="card-header">Edit Data Buku Tamu Orangtua/Wali Murid</div>
-           <!-- Formulir Update Buku Tamu Orangtua dalam Card -->
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h3>Update Formulir Buku Tamu Orangtua Data</h3>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('bukutamuortu.update', $bukutamuortu->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
 
-                <!-- Wali Kelas -->
-                <div class="mb-3">
-                    <label for="walas_id" class="form-label">Wali Kelas:</label>
-                    <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" 
-                                @if($bukutamuortu->walas_id == $walas_item->id) selected @endif>
-                                {{ $walas_item->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Tanggal -->
-                <div class="mb-3">
-                    <label for="tanggal" class="form-label">Tanggal:</label>
-                    <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ $bukutamuortu->tanggal }}" required>
-                </div>
-
-                <!-- Siswa -->
-                <div class="mb-3">
-                    <label for="nama_peserta_didik" class="form-label">Pilih Siswa:</label>
-                    <select name="nama_peserta_didik" id="nama_peserta_didik" class="form-control" required>
-                        <option value="" disabled>Pilih Siswa</option>
-                        @foreach ($siswas as $s)
-                            <option value="{{ $s->id }}" 
-                                @if($bukutamuortu->nama_peserta_didik == $s->id) selected @endif>
-                                {{ $s->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Kasus -->
-                <div class="mb-3">
-                    <label for="kasus" class="form-label">Keperluan:</label>
-                    <textarea name="kasus" id="kasus" class="form-control" rows="3" required>{{ old('kasus', $bukutamuortu->kasus) }}</textarea>
-                </div>
-
-                <!-- Solusi -->
-                <div class="mb-3">
-                    <label for="solusi" class="form-label">Solusi:</label>
-                    <textarea name="solusi" id="solusi" class="form-control" rows="3" required>{{ old('solusi', $bukutamuortu->solusi) }}</textarea>
-                </div>
-
-                <!-- Tindak Lanjut -->
-                <div class="mb-3">
-                    <label for="tindak_lanjut" class="form-label">Tindak Lanjut:</label>
-                    <textarea name="tindak_lanjut" id="tindak_lanjut" class="form-control" rows="3" required>{{ old('tindak_lanjut', $bukutamuortu->tindak_lanjut) }}</textarea>
-                </div>
-
-                <!-- Dokumentasi (Gambar) -->
-                <div class="mb-3">
-                    <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
-                    <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
-                    <small>Jika tidak ingin mengubah gambar, biarkan kosong.</small>
-                    @if($bukutamuortu->dokumentasi_url)
-                        <div class="mt-2">
-                            <img src="{{ asset('storage/' . $bukutamuortu->dokumentasi_url) }}" alt="Dokumentasi" class="img-thumbnail" width="100">
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Formulir Input Prestasi Siswa</h3>
                         </div>
-                    @endif
+                        <div class="card-body">
+                            <form action="{{ route('prestasisiswainput.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                
+                                <!-- Siswa -->
+                                <div class="mb-3">
+                                    <label for="walas_id" class="form-label">Pilih Wali Kelas:</label>
+                                    <select name="walas_id" id="walas_id" class="form-select" required>
+                                        <option value="" disabled selected>Pilih Wali Kelas</option>
+                                        @foreach ($walas as $w)
+                                            <option value="{{ $w->id }}">{{ $w->nama }}</>
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                 <!-- Wali Kelas -->
+                                 <div class="mb-3">
+                                    <label for="siswas_id" class="form-label">Nama Siswa:</label>
+                                    <select name="siswas_id" id="siswas_id" class="form-select" required disabled>
+                                        <option value="{{ $siswa->id }}" selected>{{ $siswa->nama }}</option>
+                                    </select>
+                                    <input type="hidden" name="siswas_id" value="{{ $siswa->id }}">
+                                </div>
+
+                                <!-- Rombel -->
+                                <div class="mb-3">
+                                    <label for="rombels_id" class="form-label">Rombel:</label>
+                                    <select name="rombels_id" id="rombels_id" class="form-select" required>
+                                        @foreach ($rombel as $rombel)
+                                            <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Jenis Prestasi -->
+                                <div class="mb-3">
+                                    <label for="jenis_prestasi" class="form-label">Jenis Prestasi:</label>
+                                    <select name="jenis_prestasi" id="jenis_prestasi" class="form-select" required>
+                                        <option value="" disabled selected>Pilih Jenis Prestasi</option>
+                                        <option value="Akademik">Akademik</option>
+                                        <option value="Non-Akademik">Non Akademik</option>
+                                    </select>
+                                </div>
+
+                                <!-- Nama Prestasi -->
+                                <div class="mb-3">
+                                    <label for="nama_prestasi" class="form-label">Nama Prestasi:</label>
+                                    <input type="text" name="nama_prestasi" id="nama_prestasi" class="form-control" required>
+                                </div>
+
+                                <!-- Tanggal Prestasi -->
+                                <div class="mb-3">
+                                    <label for="tanggal" class="form-label">Tanggal Prestasi:</label>
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                                </div>
+
+                                <!-- Sertifikat (Gambar) -->
+                                <div class="mb-3">
+                                    <label for="sertifikat_url" class="form-label">Unggah Sertifikat (Gambar):</label>
+                                    <input type="file" name="sertifikat_url" id="sertifikat_url" class="form-control" accept="image/*" required>
+                                </div>
+
+                                <!-- Dokumentasi (Gambar) -->
+                                <div class="mb-3">
+                                    <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
+                                    <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*" required>
+                                </div>
+
+                                <!-- Tombol Simpan -->
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-    </section>
+</section>
+
 
 </main>
   
@@ -295,6 +296,68 @@
             }
         };
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const namaSiswaSelect = document.getElementById('nama_siswa');
+        const nisInput = document.getElementById('nis');
+        const nisnInput = document.getElementById('nisn');
+
+        namaSiswaSelect.addEventListener('change', function () {
+            // Ambil data-nis dan data-nisn dari option yang dipilih
+            const selectedOption = this.options[this.selectedIndex];
+            const nis = selectedOption.getAttribute('data-nis');
+            const nisn = selectedOption.getAttribute('data-nisn');
+
+            // Set nilai input NIS dan NISN
+            nisInput.value = nis || '';
+            nisnInput.value = nisn || '';
+        });
+    });
+</script>
+</script>
+
+<script>
+// Event listener untuk memilih siswa
+document.getElementById('nama_siswa').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex];
+    var nis = selectedOption.getAttribute('data-nis');
+    var nisn = selectedOption.getAttribute('data-nisn');
+
+    // Update field NIS dan NISN secara otomatis
+    document.getElementById('nis').value = nis;
+    document.getElementById('nisn').value = nisn;
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#nama_siswa').change(function () {
+            let siswaId = $(this).val(); // Ambil ID siswa yang dipilih
+            if (siswaId) {
+                // Kirim AJAX request untuk mengambil data siswa
+                $.ajax({
+                    url: '/get-siswa/' + siswaId,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data) {
+                            // Isi field NIS dan NISN
+                            $('#nis').val(data.nis);
+                            $('#nisn').val(data.nisn);
+                        } else {
+                            alert('Data siswa tidak ditemukan.');
+                        }
+                    },
+                    error: function () {
+                        alert('Terjadi kesalahan saat mengambil data.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 
 </body>
 

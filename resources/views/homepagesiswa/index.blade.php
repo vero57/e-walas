@@ -202,6 +202,19 @@
       </div>
     </div>
   </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-item text-center">
+      <div class="stat-icon">
+        <i class="bi bi-briefcase"></i>
+      </div>
+      <div class="stat-content">
+        <h4>Prestasi Siswa</h4>
+        <p class="mb-0">
+           <a href="/prestasisiswainput">Kelola Data Prestasi Disini</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
       </div>

@@ -187,12 +187,6 @@
     @endforeach
 </div>
                     
-            </div>
-        </div><br>
-        @if ($message)
-    <div class="alert alert-warning">{{ $message }}</div>
-@endif
-
 @if ($jadwalKbms->isNotEmpty())
     <table>
         <table>
@@ -308,6 +302,16 @@
                 }, 2000); // Tunda selama 2 detik sebelum animasi
             }
         };
+    </script>
+
+<script>
+        // Menampilkan pesan selama 2 detik dan kemudian menghilangkannya
+        setTimeout(function() {
+            var messageElement = document.getElementById('message');
+            if (messageElement) {
+                messageElement.style.display = 'none';
+            }
+        }, 2000); // 2000 ms = 2 detik
     </script>
 
 </body>

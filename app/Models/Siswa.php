@@ -61,4 +61,5 @@ class Siswa extends Model
         return $this->hasMany(DaftarPesertaDidik::class, 'nama_siswa', 'id');
     }
 
+
 }

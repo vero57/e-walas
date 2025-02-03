@@ -27,7 +27,11 @@ class PresensiController extends Controller
             return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
         }
 
-        $presensis = Presensi::all();
+        // Ambil data catatan kasus berdasarkan walas_id dengan relasi siswa
+        $presensis = Presensi::where('walas_id', $walas->id)
+            ->get();
+    
+
         return view('admwalas.presensi.index', compact('presensis', 'walas'));
     }
 

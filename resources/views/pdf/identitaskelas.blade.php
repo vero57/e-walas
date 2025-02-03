@@ -55,36 +55,36 @@
         <div class="section-title">NAMA WALI KELAS</div>
         <div>
             <span class="label">KELAS X</span>: 
-            <span class="dots">{{ $data->first()->walas_10 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->walas10->nama ?? '..............................' }}</span>
         </div>
         <div>
             <span class="label">KELAS XI</span>: 
-            <span class="dots">{{ $data->first()->walas_11 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->walas11->nama ?? '..............................' }}</span>
         </div>
         <div>
             <span class="label">KELAS XII</span>: 
-            <span class="dots">{{ $data->first()->walas_12 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->walas12->nama ?? '..............................' }}</span>
         </div>
         <div>
             <span class="label">KELAS XIII</span>: 
-            <span class="dots">{{ $data->first()->walas_13 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->walas13->nama ?? '..............................' }}</span>
         </div>
         <div class="section-title">NAMA KETUA KELAS</div>
         <div>
             <span class="label">KELAS X</span>: 
-            <span class="dots">{{ $data->first()->siswa_10 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->siswa10->nama ?? '..............................' }}</span>
         </div>
         <div>
             <span class="label">KELAS XI</span>: 
-            <span class="dots">{{ $data->first()->siswa_11 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->siswa11->nama ?? '..............................' }}</span>
         </div>
         <div>
             <span class="label">KELAS XII</span>: 
-            <span class="dots">{{ $data->first()->siswa_12 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->siswa12->nama ?? '..............................' }}</span>
         </div>
         <div>
             <span class="label">KELAS XIII</span>: 
-            <span class="dots">{{ $data->first()->siswa_13 ?? '..............................' }}</span>
+            <span class="dots">{{ $data->first()->siswa13->nama ?? '..............................' }}</span>
         </div>
     </div>
 </body>

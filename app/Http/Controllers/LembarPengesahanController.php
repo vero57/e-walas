@@ -40,7 +40,10 @@ class LembarPengesahanController extends Controller
         return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
     }
 
-        $lembarpengesahan = LembarPengesahan::all();
+    $walas_id = session('walas_id'); // Ambil ID walas yang sedang login
+
+    $lembarpengesahan = LembarPengesahan::where('walas_id', $walas_id)->get();
+    
         return view("admwalas.lembarpengesahan.index" , compact('lembarpengesahan', 'walas', 'rombel'));
     }
 

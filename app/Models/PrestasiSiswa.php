@@ -8,6 +8,7 @@ class PrestasiSiswa extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'walas_id',
         'siswas_id', 
         'rombels_id', 
         'jenis_prestasi',
@@ -16,4 +17,9 @@ class PrestasiSiswa extends Model
         'sertifikat_url',
         'dokumentasi_url'
     ];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswas_id', 'id');
+    }
 }

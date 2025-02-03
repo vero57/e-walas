@@ -157,6 +157,23 @@
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
 }
 
+
+.custom-btn {
+        background-color: rgba(128, 128, 128, 0.5); /* Abu-abu transparan */
+        color: white; /* Warna teks putih */
+        border: none;
+        padding: 10px 16px;
+        font-size: 16px;
+        border-radius: 10px; /* Kotak dengan lengkungan sedikit */
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+}
+
+.custom-btn:hover {
+        background-color: #50D6DA; /* Warna biru saat hover */
+        box-shadow: 0px 6px 12px rgb(206, 206, 206);
+}
+
 /* Mengatur tampilan grid agar lebih rapi */
 #pendapatan_ortu {
     padding: 0;
@@ -326,7 +343,7 @@
                 <label for="walas" class="form-label">Wali Kelas</label>
                 <select class="form-select" id="walas" name="walas_id" required>
                     <option selected disabled>Pilih Wali Kelas</option>
-                    @foreach ($walas as $wali)
+                    @foreach ($walasList as $wali)
                         <option value="{{ $wali->id }}" {{ old('walas_id', $biodata->walas_id ?? '') == $wali->id ? 'selected' : '' }}>{{ $wali->nama }}</option>
                     @endforeach
                 </select>
@@ -535,7 +552,32 @@
                     </div>
                     <div class="col-md-6">
                         <label for="no_wa_ayah" class="form-label">Nomor WhatsApp Ayah</label>
-                        <input type="text" name="no_wa_ayah" id="no_wa_ayah" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ayah', $biodata->no_wa_ayah ?? '') }}" required>
+                        <input type="text" name="no_wa_ayah" id="no_wa_ayah" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ayah', $biodata->no_wa_ayah ?? '') }}" required readonly>
+                        <button type="button" class="custom-btn mt-2" data-bs-toggle="modal" data-bs-target="#errorModal">Kesalahan data?</button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="errorModalLabel">Kesalahan Data Nomor WhatsApp Ayah?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>Silakan hubungi Walas untuk merubah data.</p>
+                                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                                    @if($walas && $walas->no_wa)
+                                        <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" class="btn btn-secondary mt-3">
+                                            <i class="fab fa-whatsapp"></i> Hubungi Walas
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -606,7 +648,33 @@
                     <div class="col-md-6">
                         <label for="no_wa_ibu" class="form-label">Nomor WhatsApp Ibu</label>
                         <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ibu', $biodata->no_wa_ibu ?? '') }}" required>
+                        <button type="button" class="custom-btn mt-2" data-bs-toggle="modal" data-bs-target="#errorModal2">Kesalahan data?</button>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="errorModal2" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="errorModalLabel">Kesalahan Data Nomor WhatsApp Ibu?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>Silakan hubungi Walas untuk merubah data.</p>
+                                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                                    @if($walas && $walas->no_wa)
+                                        <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" class="btn btn-secondary mt-3">
+                                            <i class="fab fa-whatsapp"></i> Hubungi Walas
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <br><br>
                 <h4 class="text-bold">Rentang Pendapatan Kedua Orangtua</h4>

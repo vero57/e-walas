@@ -63,6 +63,9 @@ use App\Http\Controllers\ProfileKakomController;
 use App\Http\Controllers\ProfileAdminController;
 use App\Http\Controllers\KepsekIndexController;
 use App\Http\Controllers\ProfileKepsekPageController;
+use App\Http\Controllers\PrestasiSiswaController;
+use App\Http\Controllers\PrestasiSiswaInputController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -228,6 +231,8 @@ Route::resource('adminwalas', AdministrasiWalasController::class);
 
 //administrasi walas
 Route::resource('identitaskelas', IdentitasKelasController::class);
+Route::get('/identitaskelas/{id}/edit', [IdentitasKelasController::class, 'edit'])->name('identitaskelas.edit');
+
 Route::resource('lembarpengesahan', LembarPengesahanController::class);
 Route::resource('strukturorganisasi', StrukturOrganisasiController::class);
 Route::resource('jadwalkbm', JadwalKBMController::class);
@@ -390,6 +395,21 @@ Route::get('/persentasesosialekonomi/{id}/edit', [PersentasePekerjaanOrtuControl
 Route::get('/hapuspersentasesosialekonomi/{id}', [PersentasePekerjaanOrtuController::class, 'hapuspersentasesosialekonomi'])->name('hapuspersentasesosialekonomi');
 Route::put('/persentasesosialekonomi/{id}', [PersentasePekerjaanOrtuController::class, 'update'])->name('persentasesosialekonomi.update');
 
+// CRUD REKAPITULASI PRESTASI SISWA
+Route::resource('prestasisiswa', PrestasiSiswaController::class);
+Route::get('/prestasisiswacreate', [PrestasiSiswaController::class, 'create'])->name('prestasisiswa.create');
+Route::post('/prestasisiswa/store', [PrestasiSiswaController::class, 'store'])->name('prestasisiswa.store');
+Route::get('/prestasisiswa/{id}/edit', [PrestasiSiswaController::class, 'edit'])->name('prestasisiswa.edit');
+Route::get('/hapusprestasisiswa/{id}', [PrestasiSiswaController::class, 'hapusprestasisiswa'])->name('hapusprestasisiswa');
+Route::put('/prestasisiswa/{id}', [PrestasiSiswaController::class, 'update'])->name('prestasisiswa.update');
+
+// CRUD PRESTASI SISWA (SISWA INPUT)
+Route::resource('prestasisiswainput', PrestasiSiswaInputController::class);
+Route::get('/prestasisiswainputcreate', [PrestasiSiswaInputController::class, 'create'])->name('prestasisiswainput.create');
+Route::post('/prestasisiswainput/store', [PrestasiSiswaInputController::class, 'store'])->name('prestasisiswainput.store');
+Route::get('/prestasisiswainput/{id}/edit', [PrestasiSiswaInputController::class, 'edit'])->name('prestasisiswainput.edit');
+Route::get('/hapusprestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'hapusprestasisiswainput'])->name('hapusprestasisiswainput');
+Route::put('/prestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'update'])->name('prestasisiswainput.update');
 
 
 // Logout admin

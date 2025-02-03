@@ -379,7 +379,7 @@ table td {
                 <td>16</td>
                 <td>Prestasi Peserta Didik</td>
                 <td>
-                    <a href="#">
+                    <a href="/prestasisiswa">
                     <i class="fas fa-edit edit-icon" title="Isi data"></i>
                 </a>
                 </td>

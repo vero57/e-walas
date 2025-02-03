@@ -161,7 +161,7 @@
                 <i class="bi bi-download"></i>Unduh
                 </a>
             </div>
-
+        <br>
 
         <table class="table table-bordered table-striped">
     <thead>
@@ -182,20 +182,20 @@
     </thead>
     <tbody>
         @foreach($identitaskelas as $index => $identitas)
-            <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $identitas->program_keahlian }}</td>
-                <td>{{ $identitas->kompetensi_keahlian }}</td>
-                <td>{{ $identitas->walas_10 }}</td>
-                <td>{{ $identitas->walas_11 }}</td>
-                <td>{{ $identitas->walas_12 }}</td>
-                <td>{{ $identitas->walas_13 }}</td>
-                <td>{{ $identitas->siswa_10 }}</td>
-                <td>{{ $identitas->siswa_11 }}</td>
-                <td>{{ $identitas->siswa_12 }}</td>
-                <td>{{ $identitas->siswa_13 }}</td>
-                <td><a href="{{ route('identitaskelas.edit', $identitas->identitas_kelas_id) }}" class="btn btn-warning btn-sm">Edit</a></td>
-            </tr>
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $identitas->program_keahlian }}</td>
+            <td>{{ $identitas->kompetensi_keahlian }}</td>
+            <td>{{ $identitas->walas10->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->walas11->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->walas12->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->walas13->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->siswa10->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->siswa11->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->siswa12->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->siswa13->nama ?? 'N/A' }}</td>
+            <td><a href="{{ route('identitaskelas.edit', $identitas->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
+        </tr>
         @endforeach
     </tbody>
 </table>

@@ -18,35 +18,33 @@ class StrukturOrganisasiController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index(Request $request)
+     public function index(Request $request)
 {
-    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-    $walaslogin = Auth::guard('walas')->user();
-
-    // Periksa apakah session 'walas_id' ada
+    // Pastikan user login sebagai walas
     if (!session()->has('walas_id')) {
         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
     }
 
-    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    // Ambil data walas yang sedang login
     $walaslogin = Walas::find(session('walas_id'));
 
-    // Periksa apakah data walas ditemukan
+    // Jika data walas tidak ditemukan, redirect ke halaman login
     if (!$walaslogin) {
         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
     }
 
-    // Ambil data rombel yang dimiliki walas yang sedang login
+    // Ambil data rombel berdasarkan walas yang login
     $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
-
-    // Periksa apakah rombel ditemukan
     if (!$rombel) {
         return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
     }
 
+    // **Filter data dari View berdasarkan nama wali kelas yang login**
+    $struktur = DB::table('vwstrukturorganisasi')
+        ->where('wali_kelas', $walaslogin->nama) // Filter berdasarkan nama walas yang login
+        ->get();
 
-    $struktur = DB::table('vwstrukturorganisasi')->get();
-
+    // **Export PDF**
     if ($request->get('export') == 'pdf') {
         if ($struktur->isEmpty()) {
             return redirect()->route('strukturorganisasi.index')->with('error', 'Data tidak tersedia untuk diunduh.');
@@ -59,6 +57,7 @@ class StrukturOrganisasiController extends Controller
     return view("admwalas.strukturorganisasi.index", compact('struktur', 'walaslogin', 'rombel'));
 }
 
+     
     
     /**
      * Show the form for creating a new resource.
@@ -88,7 +87,8 @@ class StrukturOrganisasiController extends Controller
      if (!$rombel) {
          return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
      }
-    $siswa = Siswa::all();
+    // Ambil data siswa berdasarkan rombel_id yang sama dengan rombel
+    $siswa = Siswa::where('rombels_id', $rombel->id)->get();
     $kepsek = Kepsek::all();
     $walas = Walas::all();
     return view('admwalas.strukturorganisasi.create', compact('siswa', 'kepsek', 'walaslogin', 'walas'));
@@ -153,7 +153,7 @@ public function store(Request $request)
      }
 
         $struktur = StrukturOrganisasiKelas::findOrFail($id);
-        $siswa = Siswa::all();
+        $siswa = Siswa::where('rombels_id', $rombel->id)->get();
         $kepsek = Kepsek::all();
         $walas = Walas::all();
         return view('admwalas.strukturorganisasi.edit', compact('siswa', 'kepsek', 'walas', 'struktur', 'walaslogin', 'rombel'));

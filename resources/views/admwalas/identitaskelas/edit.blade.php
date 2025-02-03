@@ -164,11 +164,9 @@
                 <div class="mb-3">
                     <label for="walas_id" class="form-label">Wali Kelas:</label>
                     <select name="walas_id" id="walas_id" class="form-select" required>
-                        @foreach($walas as $walas_item)
-                            <option value="{{ $walas_item->id }}" {{ $walas_item->id == $identitaskelas->walas_id ? 'selected' : '' }}>
-                                {{ $walas_item->nama }}
+                            <option value="{{ $walaslogin->id }}" {{ $walaslogin->id == $identitaskelas->walas_id ? 'selected' : '' }}>
+                                {{ $walaslogin->nama }}
                             </option>
-                        @endforeach
                     </select>
                 </div>
 

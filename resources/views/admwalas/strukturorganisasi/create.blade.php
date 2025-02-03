@@ -174,11 +174,8 @@
         </div>
         <div class="mb-3">
             <label for="walas" class="form-label">Wali Kelas</label>
-            <select name="walas" id="walas" class="form-select" required>
-                <option value="" disabled selected>Pilih Wali Kelas</option>
-                @foreach($walas as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                @endforeach
+            <select name="walas" id="walas" class="form-select" required readonly>
+                <option value="{{ $walaslogin->id }}" selected>{{ $walaslogin->nama }}</option>
             </select>
         </div>
         <div class="mb-3">

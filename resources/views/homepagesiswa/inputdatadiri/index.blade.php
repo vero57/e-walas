@@ -532,7 +532,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="no_wa_ayah" class="form-label">Nomor WhatsApp Ayah</label>
-                        <input type="text" name="no_wa_ayah" id="no_wa_ayah" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" required>
+                        <input type="text" name="no_wa_ayah" id="no_wa_ayah" class="form-control" maxlength="15" placeholder="Contoh: 081234567890 (Masukkan No Telp Aktif dan Valid)" required>
                     </div>
                 </div>
 
@@ -602,7 +602,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="no_wa_ibu" class="form-label">Nomor WhatsApp Ibu</label>
-                        <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" required>
+                        <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 081234567890 (Masukkan No Telp Aktif dan Valid)" required>
                     </div>
                 </div>
                 <br>

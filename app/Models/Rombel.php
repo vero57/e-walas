@@ -18,16 +18,14 @@ class Rombel extends Model
 
     // app/Models/Rombel.php
 
-public function siswas()
-{
-    return $this->hasMany(Siswa::class, 'rombels_id', 'id');
-}
+    public function siswas()
+    {
+        return $this->hasMany(Siswa::class, 'rombels_id', 'id');
+    }
 
-public function walas()
-{
-    return $this->belongsTo(Walas::class, 'walas_id', 'id'); // walas_id adalah foreign key
-}
-
-
+    public function walas()
+    {
+        return $this->belongsTo(Walas::class, 'walas_id', 'id'); // walas_id adalah foreign key
+    }
 
 }
