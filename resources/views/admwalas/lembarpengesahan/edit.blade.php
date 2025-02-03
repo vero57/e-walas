@@ -175,7 +175,7 @@
             <!-- Foto -->
             <div class="mb-3">
                 <label for="image_url" class="form-label">Foto Dokumen:</label>
-                <input type="file" name="image_url" id="image_url" class="form-control" accept="image/*">
+                <input type="file" name="image_url" id="image_url" class="form-control">
                 @if($lembarpengesahan->image_url)
                     <img src="{{ asset('storage/'.$lembarpengesahan->image_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
                 @endif

@@ -384,6 +384,15 @@ table td {
                 </a>
                 </td>
             </tr>
+            <tr>
+                <td>17</td>
+                <td>Grafik Jarak Tempuh Siswa</td>
+                <td>
+                    <a href="/grafikjaraktempuh">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

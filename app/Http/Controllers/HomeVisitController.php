@@ -48,14 +48,58 @@ class HomeVisitController extends Controller
        // Ambil data siswa berdasarkan rombel_id yang sama dengan rombel
      $siswas = Siswa::where('rombels_id', $rombel->id)->get();
 
-     if (request()->has('export') && request()->get('export') === 'pdf') {
-        $pdf = Pdf::loadView('pdf.homevisit', compact('walas', 'homevisit', 'siswas', 'rombel'));
-        return $pdf->stream('Home_Visit.pdf');
-    }
 
     // Return view dengan data yang difilter
     return view("admwalas.homevisit.index", compact('homevisit', 'walas', 'siswas', 'rombel'));
 }
+
+public function generatePDF(Request $request)
+{
+    $walas = Walas::find(session('walas_id'));
+
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
+
+    $homevisit = HomeVisit::where('walas_id', $walas->id)->get();
+    $rombel = Rombel::where('walas_id', $walas->id)->first();
+    if (!$rombel) {
+        return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
+    }
+
+    $siswas = Siswa::where('rombels_id', $rombel->id)->get();
+
+    // Ambil base64 dari request (grafik chart)
+    $suratImage = $request->input('suratImage');
+    $dokumImage = $request->input('dokumImage');
+
+    // Konversi gambar bukti_url dan dokumentasi_url ke base64
+    foreach ($homevisit as $item) {
+        $item->bukti_base64 = $this->convertToBase64($item->bukti_url);
+        $item->dokumentasi_base64 = $this->convertToBase64($item->dokumentasi_url);
+    }
+
+    // Load view PDF
+    $pdf = Pdf::loadView('pdf.homevisit', compact('walas', 'homevisit', 'siswas', 'rombel', 'suratImage', 'dokumImage'));
+
+    return $pdf->stream('Home_Visit.pdf');
+}
+
+// Fungsi untuk mengubah gambar ke base64
+private function convertToBase64($path)
+{
+    $fullPath = storage_path("app/public/" . $path);
+    
+    if (file_exists($fullPath)) {
+        $imageData = file_get_contents($fullPath);
+        $mimeType = mime_content_type($fullPath);
+        return 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
+    }
+
+    return null;
+}
+
+
 
 
     /**

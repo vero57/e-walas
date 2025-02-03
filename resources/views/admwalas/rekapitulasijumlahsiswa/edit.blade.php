@@ -209,7 +209,7 @@
                             <!-- Tanggal -->
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label">Tanggal Input:</label>
-                                <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ $rekapjumlahsiswa->tanggal }}" required>
+                                <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ $rekapjumlahsiswa->tanggal }}">
                             </div>
 
                             <!-- Tombol Simpan -->

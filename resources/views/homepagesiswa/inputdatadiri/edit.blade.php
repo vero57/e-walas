@@ -392,8 +392,8 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="jarak_rumah" class="form-label">Jarak Rumah (meter)</label>
-                    <input type="text" name="jarak_rumah" id="jarak_rumah" class="form-control" value="{{ old('jarak_rumah', $biodata->jarak_rumah ?? '') }}" maxlength="255" required>
+                    <label for="jarak_rumah" class="form-label">Jarak Rumah (KM)</label>
+                    <input type="text" placeholder="dalam Kilometer (cth. 3 km)" name="jarak_rumah" id="jarak_rumah" class="form-control" value="{{ old('jarak_rumah', $biodata->jarak_rumah ?? '') }}" maxlength="255" required>
                 </div>
                 <div class="col-md-6">
                     <label for="transportasi_sekolah" class="form-label">Transportasi ke Sekolah</label>

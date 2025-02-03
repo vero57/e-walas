@@ -10,26 +10,34 @@ use App\Http\Controllers\KepsekTAController;
 use App\Http\Controllers\LoginGtkController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\DashAdminController;
+use App\Http\Controllers\HomeVisitController;
 use App\Http\Controllers\JadwalKBMController;
 use App\Http\Controllers\KakomDataController;
 use App\Http\Controllers\MapelPageController;
+use App\Http\Controllers\PageAdminController;
 use App\Http\Controllers\SiswaPageController;
 use App\Http\Controllers\KakomWalasController;
+use App\Http\Controllers\KaprogPageController;
 use App\Http\Controllers\KepsekPageController;
 use App\Http\Controllers\LoginSiswaController;
 use App\Http\Controllers\RombelDataController;
 use App\Http\Controllers\RombelPageController;
 use App\Http\Controllers\JadwalPiketController;
 use App\Http\Controllers\KakomRombelController;
+use App\Http\Controllers\KepsekIndexController;
 use App\Http\Controllers\KepsekWalasController;
 use App\Http\Controllers\KinerjaGuruController;
 use App\Http\Controllers\LoginKaprogController;
 use App\Http\Controllers\LoginKepsekController;
 use App\Http\Controllers\ProfilePageController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\BukuTamuOrtuController;
+use App\Http\Controllers\CatatanKasusController;
 use App\Http\Controllers\DataDiriDataController;
 use App\Http\Controllers\DataDiriPageController;
 use App\Http\Controllers\KepsekRombelController;
+use App\Http\Controllers\ProfileAdminController;
+use App\Http\Controllers\ProfileKakomController;
 use App\Http\Controllers\WargaSekolahController;
 use App\Http\Controllers\HomePageWalasController;
 use App\Http\Controllers\KurikulumPageController;
@@ -37,35 +45,28 @@ use App\Http\Controllers\WaliKelasPageController;
 use App\Http\Controllers\DataSiswaWalasController;
 use App\Http\Controllers\DetailPresensiController;
 use App\Http\Controllers\IdentitasKelasController;
+use App\Http\Controllers\KurikulumIndexController;
 use App\Http\Controllers\LoginKurikulumController;
+use App\Http\Controllers\PendapatanOrtuController;
 use App\Http\Controllers\LembarPengesahanController;
 use App\Http\Controllers\ProfilePageWalasController;
+use App\Http\Controllers\ShowDetailRombelController;
 use App\Http\Controllers\AdministrasiWalasController;
+use App\Http\Controllers\CatatanKasusSiswaController;
+use App\Http\Controllers\GrafikJarakTempuhController;
+use App\Http\Controllers\ProfileKepsekPageController;
+use App\Http\Controllers\DaftarPesertaDidikController;
 use App\Http\Controllers\InputDataDiriSiswaController;
 use App\Http\Controllers\StrukturOrganisasiController;
-use App\Http\Controllers\RencanaKegiatanWalasController;
-use App\Http\Controllers\DenahKerjaKelompokSiswaController;
-use App\Http\Controllers\DaftarPenyerahanRapotController;
-use App\Http\Controllers\HomeVisitController;
-use App\Http\Controllers\BukuTamuOrtuController;
-use App\Http\Controllers\ShowDetailRombelController;
 use App\Http\Controllers\AgendaKegiatanWalasController;
-use App\Http\Controllers\CatatanKasusSiswaController;
-use App\Http\Controllers\CatatanKasusController;
-use App\Http\Controllers\KaprogPageController;
-use App\Http\Controllers\DaftarPesertaDidikController;
-use App\Http\Controllers\RekapitulasiJumlahSiswaController;
-use App\Http\Controllers\PersentasePekerjaanOrtuController;
-use App\Http\Controllers\KurikulumIndexController;
 use App\Http\Controllers\ProfilePageKurikulumController;
-use App\Http\Controllers\PageAdminController;
-use App\Http\Controllers\ProfileKakomController;
-use App\Http\Controllers\ProfileAdminController;
-use App\Http\Controllers\KepsekIndexController;
-use App\Http\Controllers\ProfileKepsekPageController;
 use App\Http\Controllers\PrestasiSiswaController;
 use App\Http\Controllers\PrestasiSiswaInputController;
-
+use App\Http\Controllers\RencanaKegiatanWalasController;
+use App\Http\Controllers\DaftarPenyerahanRapotController;
+use App\Http\Controllers\DenahKerjaKelompokSiswaController;
+use App\Http\Controllers\PersentasePekerjaanOrtuController;
+use App\Http\Controllers\RekapitulasiJumlahSiswaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -185,6 +186,7 @@ Route::get ('/mapel_search', [MapelPageController::class,'mapel_search']);
 Route::get('/walaspage', [HomePageWalasController::class, 'index'])->name('homepagegtk.index');
 
 Route::resource('siswadata', DataSiswaWalasController::class);
+Route::get('/siswa/biodata/{id}', [DataSiswaWalasController::class, 'biodata'])->name('homepagegtk.biodatasiswa');
 
 Route::resource('profilekepsek', ProfileKepsekPageController::class);
 Route::get('/profilekepsek/{id}/edit', [ProfileKepsekPageController::class, 'edit'])->name('profilekepsek.edit');
@@ -234,8 +236,13 @@ Route::resource('identitaskelas', IdentitasKelasController::class);
 Route::get('/identitaskelas/{id}/edit', [IdentitasKelasController::class, 'edit'])->name('identitaskelas.edit');
 
 Route::resource('lembarpengesahan', LembarPengesahanController::class);
+Route::get('/lembarpengesahan-download-template', [LembarPengesahanController::class, 'downloadTemplate'])->name('lembarpengesahan.download-template');
 Route::resource('strukturorganisasi', StrukturOrganisasiController::class);
 Route::resource('jadwalkbm', JadwalKBMController::class);
+Route::resource('pendapatanortu', PendapatanOrtuController::class);
+Route::post('/pendapatanortu/generatepdf', [PendapatanOrtuController::class, 'generatePDF'])->name('pendapatanortu.generatepdf');
+Route::resource('grafikjaraktempuh', GrafikJarakTempuhController::class);
+Route::post('/grafikjaraktempuh/generatepdf', [GrafikJarakTempuhController::class, 'generatePDF'])->name('grafikjaraktempuh.generatepdf');
 Route::resource('rencana_kegiatan_walas', RencanaKegiatanWalasController::class)->except(['index']);
 Route::get('/rencana_kegiatan/{semester}', [RencanaKegiatanWalasController::class, 'index'])->name('rencana_kegiatan_walas.index');
 Route::get('/rencana_kegiatan/{semester}/create', [RencanaKegiatanWalasController::class, 'create'])->name('rencana_kegiatan_walas.create');
@@ -243,6 +250,7 @@ Route::post('/rencana_kegiatan/{semester}', [RencanaKegiatanWalasController::cla
 Route::put('/rencana_kegiatan_walas/{semester}/update/{id}', [RencanaKegiatanWalasController::class, 'update'])->name('rencana_kegiatan_walas.update');
 Route::get('/rencana_kegiatan_walas/{semester}/edit/{id}', [RencanaKegiatanWalasController::class, 'edit'])->name('rencana_kegiatan_walas.edit');
 Route::resource('presensi', PresensiController::class);
+Route::get('/presensi/export-pdf', [PresensiController::class, 'exportPdf'])->name('presensi.exportPdf');
   // Detail Presensi
   Route::prefix('{presensi}/detail')->group(function () {
     Route::get('/', [DetailPresensiController::class, 'index'])->name('detailpresensi.index');
@@ -328,6 +336,7 @@ Route::put('/jadwalpiket/siswa/{id}', [JadwalPiketController::class, 'update'])
 
 // CRUD SERAH TERIMA RAPOT 
 Route::resource('serahterimarapor', DaftarPenyerahanRapotController::class);
+Route::get('/serahterimarapor-download-template', [DaftarPenyerahanRapotController::class, 'downloadTemplate'])->name('serahterimarapor.download-template');
 Route::get('/penyerahanrapotcreate', [DaftarPenyerahanRapotController::class, 'create'])->name('penyerahanrapot.create');
 Route::post('/penyerahanrapot/store', [DaftarPenyerahanRapotController::class, 'store'])->name('penyerahanrapot.store');
 Route::get('/penyerahanrapot/{id}/edit', [DaftarPenyerahanRapotController::class, 'edit'])->name('penyerahanrapot.edit');
@@ -336,6 +345,7 @@ Route::put('/penyerahanrapot/{id}', [DaftarPenyerahanRapotController::class, 'up
 
 // CRUD HOME VISIT 
 Route::resource('homevisit', HomeVisitController::class);
+Route::post('/homevisit/generatepdf', [HomeVisitController::class, 'generatePDF'])->name('homevisit.generatepdf');
 Route::get('/homevisitcreate', [HomeVisitController::class, 'create'])->name('homevisit.create');
 Route::post('/homevisit/store', [HomeVisitController::class, 'store'])->name('homevisit.store');
 Route::get('/homevisit/{id}/edit', [HomeVisitController::class, 'edit'])->name('homevisit.edit');
@@ -344,6 +354,7 @@ Route::put('/homevisit/{id}', [HomeVisitController::class, 'update'])->name('hom
 
 // CRUD BUKU TAMU ORTI 
 Route::resource('bukutamuortu', BukuTamuOrtuController::class);
+Route::post('/bukutamuortu/generatepdf', [BukuTamuOrtuController::class, 'generatePDF'])->name('bukutamuortu.generatepdf');
 Route::get('/bukutamuortucreate', [BukuTamuOrtuController::class, 'create'])->name('bukutamuortu.create');
 Route::post('/bukutamuortu/store', [BukuTamuOrtuController::class, 'store'])->name('bukutamuortu.store');
 Route::get('/bukutamuortu/{id}/edit', [BukuTamuOrtuController::class, 'edit'])->name('bukutamuortu.edit');

@@ -150,7 +150,7 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Detail Presensi</h2>
+            <h2 class="font-weight-bold">Detail Presensi - {{ \Carbon\Carbon::parse($presensi->tanggal)->format('d-m-Y') }}</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
@@ -175,12 +175,6 @@
                 </div>
             </div>
         </div><br>
-
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
 
     @if(session('success'))
         <div class="alert alert-success">

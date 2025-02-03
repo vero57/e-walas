@@ -6,7 +6,7 @@
         body {
             font-family: Tahoma, sans-serif;
             font-size: 11px;
-            line-height: 4; /* Line spacing 2.0 */
+            line-height: 4;
             margin: 30px;
         }
         .title {

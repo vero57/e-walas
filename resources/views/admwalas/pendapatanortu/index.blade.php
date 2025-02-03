@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Walas</title>
+  <title>E Walas SMKN 1 Cibinong - Walas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -30,6 +30,8 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   <!-- =======================================================
   * Template Name: iLanding
@@ -71,6 +73,31 @@
             background-color: #2ecc71; /* Hijau */
         }
 
+        .table th,
+        .table td {
+            text-align: center; /* Menyelaraskan teks ke tengah */
+            vertical-align: middle; /* Menyelaraskan secara vertikal */
+        }
+
+        .table th {
+            background-color: #f8f9fa; /* Memberikan latar belakang ringan pada th */
+            font-weight: bold; /* Membuat font di th menjadi bold */
+        }
+
+        .table td {
+            padding: 12px; /* Memberikan jarak pada sel */
+        }
+
+        .table td img {
+            border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
+            object-fit: cover; /* Menyesuaikan gambar agar tidak terdistorsi */
+        }
+
+        /* Menambahkan sedikit ruang antara baris */
+        .table tbody tr {
+            border-bottom: 1px solid #e4e7ea; /* Menambahkan garis pemisah antar baris */
+        }
+
         /* Animasi slide down */
         @keyframes slideDown {
             from {
@@ -89,10 +116,7 @@
             to {
                 transform: translateY(-100%);
             }
-        }
-
-
-        
+        }    
     </style>
 </head>
 
@@ -114,7 +138,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminwalas" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -126,7 +150,8 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <div class="user-info d-flex align-items-center">
+       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+     <div class="user-info d-flex align-items-center">
             @if(session()->has('walas_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
@@ -140,75 +165,135 @@
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
         </div>
+
     </div>
   </header>
 
 <main class="main">
 
        <!-- Hero Section -->
-<section id="hero" class="hero section">
+       <section id="hero" class="hero section">
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Lembar Pengesahan</h2>
+            <h2 class="font-weight-bold">Pendapatan Ortu</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Tombol Download Data PDF -->
-                <a href="{{ route('lembarpengesahan.download-template') }}" class="btn btn-outline-secondary" download>
-                    <i class="bi bi-cloud-download"></i> Download Lembar Pengesahan
-                </a>
-                <!-- Tombol Tambah Data -->
-                <div class="d-flex-container">
-                    <a href="{{ route('lembarpengesahan.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Tambah
-                    </a>
+                <!-- Form Cari Administrasi -->
+                <!-- Tombol Unggah Data -->
+                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdf') }}">
+    @csrf
+    <input type="hidden" id="chartData" name="chartImage">
+    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+    <i class="bi bi-download"></i> Unduh PDF</button>
+</form>
+
+                    <!-- Search Box -->
+                <div class="searchBox">
+                    <input class="searchInput" type="text" placeholder="  Cari Agenda Walas">
+                    <button class="searchButton" href="#">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
             </div>
         </div>
-        <br>
 
-        <table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Foto Dokumen</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($lembarpengesahan as $index => $lembarpengesahan)
+    <!-- Pesan jika data tidak ditemukan -->
+    @if(isset($message))
+        <div class="alert alert-warning text-center">
+            {{ $message }}
+        </div>
+    @endif
+
+    <div class="container">
+    <h2>Data Pendapatan Orang Tua</h2>
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>
-                    @if($lembarpengesahan->image_url)
-                        @php
-                            $fileExtension = pathinfo($lembarpengesahan->image_url, PATHINFO_EXTENSION);
-                        @endphp
-                        
-                        @if(in_array(strtolower($fileExtension), ['jpeg', 'png', 'jpg', 'gif']))
-                            <!-- Preview for image files -->
-                            <img src="{{ asset('storage/'.$lembarpengesahan->image_url) }}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
-                        @elseif(strtolower($fileExtension) == 'pdf')
-                            <!-- Preview for PDF files -->
-                            <object data="{{ asset('storage/'.$lembarpengesahan->image_url) }}" type="application/pdf" width="150" height="150">
-                                <a href="{{ asset('storage/'.$lembarpengesahan->image_url) }}" target="_blank">View PDF</a>
-                            </object>
-                        @else
-                            <p>No preview available</p>
-                        @endif
-                    @else
-                        <p>No file</p>
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('lembarpengesahan.edit', $lembarpengesahan->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ asset('storage/'.$lembarpengesahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
-                </td>
+                <th>Id</th>
+                <th>Nama Siswa</th>
+                <th>Pendapatan Orang Tua</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach($pendapatan as $data)
+            <tr>
+                <td>{{ $data->id }}</td>
+                <td>{{ $data->nama_lengkap }}</td>
+                <td>{{ $data->pendapatan_ortu }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+</div>
 
+<div class="container">
+    <h2>Grafik Pendapatan Orang Tua</h2>
+
+    <canvas id="pendapatanChart"></canvas>
+
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("pendapatanChart");
+
+    document.getElementById("exportPdfButton").addEventListener("click", function () {
+        var imageData = canvas.toDataURL("image/png"); // Ubah grafik jadi base64
+        document.getElementById("chartData").value = imageData; // Simpan base64 ke input hidden
+        
+        document.getElementById("exportForm").submit(); // Kirim form
+    });
+});
+</script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('pendapatanChart').getContext('2d');
+            var dataPendapatan = @json($dataPendapatan);
+
+            new Chart(ctx, {
+                type: 'bar', // Bisa diubah menjadi 'pie' atau 'doughnut'
+                data: {
+                    labels: Object.keys(dataPendapatan),
+                    datasets: [{
+                        label: 'Jumlah Siswa',
+                        data: Object.values(dataPendapatan),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)',
+                            'rgba(0, 128, 0, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 128, 0, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+</div>
 
 </main>
   

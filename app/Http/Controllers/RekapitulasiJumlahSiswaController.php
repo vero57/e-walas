@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Walas;
 use App\Models\Rombel;
 use App\Models\Kurikulum;
-use App\Models\RekapitulasiJumlahSiswa;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RekapitulasiJumlahSiswa;
 
 
 class RekapitulasiJumlahSiswaController extends Controller
@@ -48,6 +49,11 @@ class RekapitulasiJumlahSiswaController extends Controller
         // Ambil data rekapitulasi jumlah siswa berdasarkan walas_id tanpa relasi siswa
         $rekapjumlahsiswa = RekapitulasiJumlahSiswa::where('walas_id', $walas->id)->get();
 
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdf.rekapitulasijumlahsiswa', compact('walas', 'rekapjumlahsiswa', 'siswas'));
+            return $pdf->stream('Rekap_Jumlah_Siswa.pdf');
+        }
+        
         // Kirim data walas, siswa, dan rekapitulasi jumlah siswa ke view
         return view('admwalas.rekapitulasijumlahsiswa.index', compact('walas', 'rekapjumlahsiswa', 'siswas'));
     }
@@ -128,7 +134,7 @@ class RekapitulasiJumlahSiswaController extends Controller
             'jumlah_akhir_siswa' => 'required',
             'keterangan' => 'required|string|max:255',
             'bulan' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'tanggal' => 'nullable|date',
             'ttdkurikulum_url' => 'nullable|url',
             'ttdwalas_url' => 'nullable|url',
         ]);
@@ -225,7 +231,7 @@ class RekapitulasiJumlahSiswaController extends Controller
         'jumlah_akhir_siswa' => 'required',
         'keterangan' => 'required|string|max:255',
         'bulan' => 'required|string|max:255',
-        'tanggal' => 'required|date',
+        'tanggal' => 'nullable|date',
         'ttdkurikulum_url' => 'nullable|url',
         'ttdwalas_url' => 'nullable|url',
     ]);

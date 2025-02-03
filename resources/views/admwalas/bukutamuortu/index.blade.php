@@ -162,15 +162,21 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
                 </button>
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                <a href="/bukutamuortucreate" class="btn btn-primary">
+                <a href="/bukutamuortucreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
+                <form id="exportForm" method="POST" action="{{ route('bukutamuortu.generatepdf') }}">
+                    @csrf
+                    <input type="hidden" id="chartData" name="chartImage">
+                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </button>
+                </form>
 
 
                     <!-- Search Box -->
@@ -181,7 +187,6 @@
                     </button>
                 </div>
             </div>
-        </div>
         <br><br>
         <div class="container mt-4">
     <h4>Daftar History Buku Tamu Orangtua</h4>
@@ -201,6 +206,7 @@
                 <th>No</th>
                 <th>Tanggal</th>
                 <th>Nama Siswa</th>
+                <th>Nama Ortu</th>
                 <th>Keperluan</th>
                 <th>Tindak Lanjut</th>
                 <th>Solusi</th>
@@ -214,6 +220,7 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $bukutamuortu->tanggal }}</td>
                     <td>{{ $bukutamuortu->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                    <td>{{ $bukutamuortu->nama_orang_tua }}</td>
                     <td>{{ $bukutamuortu->kasus }}</td>
                     <td>{{ $bukutamuortu->tindak_lanjut }}</td>
                     <td>{{ $bukutamuortu->solusi }}</td>
@@ -275,6 +282,20 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.getElementById("exportPdfButton").addEventListener("click", function() {
+        // Jika ada grafik Chart.js yang ingin disertakan, ambil datanya
+        var chartCanvas = document.getElementById("chartCanvas"); // Gantilah dengan ID chart yang benar
+        if (chartCanvas) {
+            var chartImage = chartCanvas.toDataURL("image/png"); // Convert chart ke base64
+            document.getElementById("chartData").value = chartImage;
+        }
+
+        // Submit form setelah data gambar (jika ada) di-set
+        document.getElementById("exportForm").submit();
+    });
+</script>
 
   <script>
         window.onload = function() {

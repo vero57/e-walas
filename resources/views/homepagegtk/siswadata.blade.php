@@ -434,14 +434,15 @@
                     <td>{{ $data->status }}</td>
                     <td>
                 <div class="d-flex justify-content-center">
+                <a href="{{ route('homepagegtk.biodatasiswa', $data->siswa_id) }}" class="btn btn-info btn-sm me-2">
+                    Biodata
+                </a>
                 <a href="{{ route('siswa.edit', $data->siswa_id) }}" class="btn btn-primary btn-sm me-2">
                     Edit 
                 </a>
-
-                    <!-- Tombol Delete -->
-                    <a href="/hapussiswa/{{$data->siswa_id}}" class="btn btn-danger btn-sm">
-                            Hapus
-                    </a>
+                <a href="/hapussiswa/{{$data->siswa_id}}" class="btn btn-danger btn-sm">
+                    Hapus
+                </a>
                 </div>
                 </td>
                 </tr>

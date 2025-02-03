@@ -228,7 +228,7 @@
                 <tr>
                     <td>{{ $idx + 1 }}</td>
                     <td>{{ $data->hari }}</td>
-                    <td>{{ $data->tanggal }}</td>
+                    <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d-m-Y') }}</td>
                     <td>{{ $data->nama_kegiatan }}</td>
                     <td>{{ $data->hasil }}</td>
                     <td>{{ $data->waktu }}</td>

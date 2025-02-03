@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Walas;
-use App\Models\CatatanKasusSiswa;
 use App\Models\Rombel;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\CatatanKasusSiswa;
 use Illuminate\Support\Facades\Auth;
 
 class CatatanKasusSiswaController extends Controller
@@ -47,6 +48,11 @@ class CatatanKasusSiswaController extends Controller
         $catatankasus = CatatanKasusSiswa::where('walas_id', $walas->id)
             ->with('siswa')
             ->get();
+
+            if (request()->has('export') && request()->get('export') === 'pdf') {
+                $pdf = Pdf::loadView('pdf.catatankasus', compact('walas', 'rombel', 'siswas', 'catatankasus'));
+                return $pdf->stream('Catatan_Kasus.pdf');
+            }
     
         // Kirim data walas, siswa, dan catatan kasus ke view
         return view('admwalas.catatankasus.index', compact('walas', 'catatankasus', 'siswas'));

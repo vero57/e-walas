@@ -12,6 +12,7 @@ class BukuTamuOrangtua extends Model
         'walas_id',
         'tanggal',
         'nama_peserta_didik',
+        'nama_orang_tua',
         'tindak_lanjut',
         'kasus',
         'solusi',

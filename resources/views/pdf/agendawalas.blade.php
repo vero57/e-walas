@@ -71,7 +71,7 @@
             <tr>
                 <td>{{ $idx + 1 }}</td>
                 <td>{{ $agenda->hari }}</td>
-                <td>{{ $agenda->tanggal }}</td>
+                <td>{{ \Carbon\Carbon::parse($agenda->tanggal)->format('d-m-Y') }}</td>
                 <td>{{ $agenda->nama_kegiatan }}</td>
                 <td>{{ $agenda->hasil }}</td>
                 <td>{{ $agenda->waktu }}</td>
