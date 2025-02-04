@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong - Siswa</title>
+  <title>E Walas SMKN 1 Cibinong - Walas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -257,12 +257,12 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilesiswa" class="text-decoration-none">
-                    <span>{{ $siswa->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                <a href="/profilewalas" class="text-decoration-none">
+                    <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
 
-            <form action="{{ route('logoutsiswa') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
@@ -286,7 +286,7 @@
              <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
               <div class="company-badge mb-4">
                 <i class="bi bi-gear-fill me-2"></i>
-                    Edit Biodata Diri
+                    Edit Biodata Diri Siswa
               </div> 
 
               <!-- <h1 class="mb-4">
@@ -316,14 +316,14 @@
     <div class="col-lg-12">
     <br>
     <h1 class="mb-4 text-center">
-        Edit Biodata Diri <br>
+        Edit Biodata Diri Siswa <br>
         <span class="accent-text"></span>
     </h1>
     <br>
-    <form action="{{ route('biodatasiswa.update', $biodata->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('homepagegtk.updatebiodata', $biodata->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-            <h4 class="text-bold">Data Pribadi</h4>
+            <h4 class="text-bold">Data Siswa</h4>
             <div class="row mb-3">
                 <div class="col-md-12">
                     <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
@@ -570,32 +570,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="no_wa_ayah" class="form-label">Nomor WhatsApp Ayah</label>
-                        <input type="text" name="no_wa_ayah" id="no_wa_ayah" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ayah', $biodata->no_wa_ayah ?? '') }}" required readonly>
-                        <button type="button" class="custom-btn mt-2" data-bs-toggle="modal" data-bs-target="#errorModal">Kesalahan data?</button>
-                    </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title" id="errorModalLabel">Kesalahan Data Nomor WhatsApp Ayah?</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <p>Silakan hubungi Walas untuk merubah data.</p>
-                                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
-                                    @if($walas && $walas->no_wa)
-                                        <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" class="btn btn-secondary mt-3">
-                                            <i class="fab fa-whatsapp"></i> Hubungi Walas
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
-                                </div>
-                            </div>
-                        </div>
+                        <input type="text" name="no_wa_ayah" id="no_wa_ayah" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ayah', $biodata->no_wa_ayah ?? '') }}" required>
                     </div>
                 </div>
 
@@ -672,33 +647,7 @@
                     <div class="col-md-6">
                         <label for="no_wa_ibu" class="form-label">Nomor WhatsApp Ibu</label>
                         <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ibu', $biodata->no_wa_ibu ?? '') }}" required>
-                        <button type="button" class="custom-btn mt-2" data-bs-toggle="modal" data-bs-target="#errorModal2">Kesalahan data?</button>
                     </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="errorModal2" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title" id="errorModalLabel">Kesalahan Data Nomor WhatsApp Ibu?</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <p>Silakan hubungi Walas untuk merubah data.</p>
-                                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
-                                    @if($walas && $walas->no_wa)
-                                        <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" class="btn btn-secondary mt-3">
-                                            <i class="fab fa-whatsapp"></i> Hubungi Walas
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <br><br>
                 <h4 class="text-bold">Rentang Pendapatan Kedua Orangtua</h4>

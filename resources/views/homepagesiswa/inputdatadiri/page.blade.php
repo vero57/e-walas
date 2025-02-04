@@ -387,11 +387,12 @@
                           <div class="mt-4">
                           <h5>Foto Tampak Depan Rumah</h5>
                           @if($biodata->fotorumah_url)
-                                <img src="{{ asset('storage/'.$biodata->fotorumah_url) }}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                                <img src="{{ asset('storage/'.$biodata->fotorumah_url) }}" style="width: 450px; height: 250px; object-fit: cover; border-radius: 0;">
                             @else
                                 <p>No image</p>
                             @endif
                           </td>
+                          
                           <!-- Google Maps - Tampak Depan -->
                           <!-- <div class="mt-4">
                               <h5>Tampak Depan</h5>
@@ -404,6 +405,7 @@
                                   loading="lazy">
                               </iframe>
                           </div> -->
+                          <br>
                           <br>
                     <div class="card-header">
                         <h5>Data Orang Tua</h5>

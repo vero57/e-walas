@@ -187,6 +187,8 @@ Route::get('/walaspage', [HomePageWalasController::class, 'index'])->name('homep
 
 Route::resource('siswadata', DataSiswaWalasController::class);
 Route::get('/siswa/biodata/{id}', [DataSiswaWalasController::class, 'biodata'])->name('homepagegtk.biodatasiswa');
+Route::get('/siswabiodata/{id}/edit', [DataSiswaWalasController::class, 'editbiodata'])->name('homepagegtk.editbiodata');
+Route::put('/siswabiodata/{id}', [DataSiswaWalasController::class, 'updatebiodata'])->name('homepagegtk.updatebiodata');
 
 Route::resource('profilekepsek', ProfileKepsekPageController::class);
 Route::get('/profilekepsek/{id}/edit', [ProfileKepsekPageController::class, 'edit'])->name('profilekepsek.edit');
