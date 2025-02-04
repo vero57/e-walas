@@ -210,15 +210,15 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>No</th>
                 <th>Nama Siswa</th>
                 <th>Pendapatan Orang Tua</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($pendapatan as $data)
+            @foreach($pendapatan ?? [] as $idx => $data)
             <tr>
-                <td>{{ $data->id }}</td>
+                <td>{{ $idx + 1 }}</td>
                 <td>{{ $data->nama_lengkap }}</td>
                 <td>{{ $data->pendapatan_ortu }}</td>
             </tr>
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var dataPendapatan = @json($dataPendapatan);
 
             new Chart(ctx, {
-                type: 'bar', // Bisa diubah menjadi 'pie' atau 'doughnut'
+                type: 'line',
                 data: {
                     labels: Object.keys(dataPendapatan),
                     datasets: [{

@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var labelsJarak = @json(array_keys($dataJarak));
 
     var jarakChart = new Chart(ctx, {
-        type: "bar",
+        type: "line",
         data: {
             labels: labelsJarak,
             datasets: [{
