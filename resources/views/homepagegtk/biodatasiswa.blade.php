@@ -399,6 +399,16 @@
                                   loading="lazy">
                               </iframe>
                           </div>
+                          <td>
+                          <div class="mt-4">
+                          <h5>Foto Tampak Depan Rumah</h5>
+                          @if($biodata->fotorumah_url)
+                                <img src="{{ asset('storage/'.$biodata->fotorumah_url) }}" style="width: 450px; height: 250px; object-fit: cover; border-radius: 0;">
+                            @else
+                                <p>No image</p>
+                            @endif
+                          </td>
+                          <br>
                           <!-- Google Maps - Tampak Depan -->
                           <!-- <div class="mt-4">
                               <h5>Tampak Depan</h5>
@@ -453,7 +463,7 @@
                         <p><strong>Kepribadian:</strong> {{ $biodata->kepribadian }}</p>
                        
                     <div class="card-footer text-end">
-                        <a href="{{ route('datadiri.edit', $biodata->id) }}" class="btn btn-danger btn-sm">Edit</a>
+                        <a href="{{ route('homepagegtk.editbiodata', $biodata->id) }}" class="btn btn-danger btn-sm">Edit</a>
                     </div>
                 </div>
             @endforeach

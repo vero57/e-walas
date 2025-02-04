@@ -182,11 +182,11 @@
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
                 <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdf') }}">
-    @csrf
-    <input type="hidden" id="chartData" name="chartImage">
-    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
-    <i class="bi bi-download"></i> Unduh PDF</button>
-</form>
+                    @csrf
+                    <input type="hidden" id="chartData" name="chartImage">
+                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                    <i class="bi bi-download"></i> Unduh PDF</button>
+                </form>
 
                     <!-- Search Box -->
                 <div class="searchBox">
@@ -210,7 +210,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>No</th>
                 <th>Nama Siswa</th>
                 <th>Pendapatan Orang Tua</th>
             </tr>
@@ -218,7 +218,7 @@
         <tbody>
             @foreach($pendapatan as $data)
             <tr>
-                <td>{{ $data->id }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->nama_lengkap }}</td>
                 <td>{{ $data->pendapatan_ortu }}</td>
             </tr>
@@ -227,10 +227,10 @@
     </table>
 </div>
 </div>
-
+<br>
 <div class="container">
     <h2>Grafik Pendapatan Orang Tua</h2>
-
+<br>
     <canvas id="pendapatanChart"></canvas>
 
 

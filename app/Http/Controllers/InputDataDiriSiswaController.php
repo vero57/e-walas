@@ -72,7 +72,7 @@ class InputDataDiriSiswaController extends Controller
         'tanggal_lahir' => 'nullable|date',
         'alamat' => 'nullable|string|max:255',
         'alamat_maps' => 'nullable|string|max:1000',
-        'fotorumah_url' => 'nulable',
+        'fotorumah_url' => 'nullable',
         'jalur_masuk' => 'nullable|string|max:50',
         'jarak_rumah' => 'nullable|string|max:50',
         'transportasi_sekolah' => 'nullable|string|max:50',
@@ -127,10 +127,20 @@ class InputDataDiriSiswaController extends Controller
         $validatedData['fotorumah_url'] = $fotoRumahPath;
     }
 
+     // Mengecek apakah pekerjaan ayah adalah "Lainnya" dan mengganti nilainya jika perlu
+     if ($request->pekerjaan_ayah === 'Lainnya' && $request->has('pekerjaan_ayah_lainnya')) {
+        $request->merge(['pekerjaan_ayah' => $request->pekerjaan_ayah_lainnya]);
+    }
+
+    // Mengecek apakah pekerjaan ibu adalah "Lainnya" dan mengganti nilainya jika perlu
+    if ($request->pekerjaan_ibu === 'Lainnya' && $request->has('pekerjaan_ibu_lainnya')) {
+        $request->merge(['pekerjaan_ibu' => $request->pekerjaan_ibu_lainnya]);
+    }
+
     // Simpan data ke database
     BiodataSiswa::create($validatedData);
-
-    return redirect('/datadiripage')->with('success', 'Data berhasil ditambahkan!');
+ 
+    return redirect('/datadiripage')->with('success', 'Data Berhasil Ditambahkan!');
 }
 
     
@@ -147,67 +157,65 @@ class InputDataDiriSiswaController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-{
-     // Mengambil siswa yang sedang login
-     $siswa = Auth::guard('siswas')->user();
+    {
+        // Mengambil siswa yang sedang login
+        $siswa = Auth::guard('siswas')->user();
 
-     // Periksa apakah session 'siswa_id' ada
-     if (!session()->has('siswa_id')) {
-         return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
-     }
+        // Periksa apakah session 'siswa_id' ada
+        if (!session()->has('siswa_id')) {
+            return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
+        }
 
-     // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
-     $siswa = Siswa::find(session('siswa_id'));
+        // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
+        $siswa = Siswa::find(session('siswa_id'));
 
-     // Periksa apakah data siswa ditemukan
-     if (!$siswa) {
-         return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
-     }
+        // Periksa apakah data siswa ditemukan
+        if (!$siswa) {
+            return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
+        }
 
-    // Ambil biodata berdasarkan 'siswas_id'
-    $biodata = BiodataSiswa::where('siswas_id', $siswa->id)->first();
+        // Ambil biodata berdasarkan 'siswas_id'
+        $biodata = BiodataSiswa::where('siswas_id', $siswa->id)->first();
 
-    // Periksa apakah data biodata ditemukan
-    if (!$biodata) {
-        return redirect('/homepagesiswa')->with('error', 'Data biodata tidak ditemukan.');
+        // Periksa apakah data biodata ditemukan
+        if (!$biodata) {
+            return redirect('/homepagesiswa')->with('error', 'Data biodata tidak ditemukan.');
+        }
+
+        // Cek apakah siswa sedang login
+        if ($siswa) {
+            // Ambil walas_id dari biodata
+            $walas_id = $biodata ? $biodata->walas_id : null;
+
+            // Ambil wali kelas berdasarkan walas_id (jika ada)
+            $walas = $walas_id ? Walas::find($walas_id) : null;
+
+            // Ambil nomor WhatsApp Walas atau tampilkan pesan default
+            $no_wa_walas = $walas && !empty($walas->no_wa) ? $walas->no_wa : 'Nomor tidak tersedia';
+        } else {
+            $no_wa_walas = 'Nomor tidak tersedia';
+        }
+
+        // Ambil data rombel siswa
+        $rombel = $siswa->rombel;
+
+        // Ambil wali kelas dari rombel siswa
+        $nowalas = $rombel ? $rombel->walas : null;
+
+        // Mengambil data dari tabel walas
+        $walasList = DB::table('walas')->select('id', 'nama')->get();
+
+        // Ambil biodata siswa berdasarkan ID, tetapi hanya jika milik siswa yang login
+        $biodata = BiodataSiswa::where('id', $id)->where('siswas_id', $siswa->id)->first();
+
+        // Jika biodata tidak ditemukan atau bukan milik siswa yang login, redirect dengan error
+        if (!$biodata) {
+            return redirect('/homepagesiswa')->with('error', 'Data tidak ditemukan.');
+        }
+
+        // Return view dengan data yang dibutuhkan
+        return view('homepagesiswa.inputdatadiri.edit', compact('biodata', 'siswa', 'nowalas', 'walasList', 'no_wa_walas', 'walas'));
     }
-
-    // Cek apakah siswa sedang login
-    if ($siswa) {
-        // Ambil walas_id dari biodata
-        $walas_id = $biodata ? $biodata->walas_id : null;
-
-        // Ambil wali kelas berdasarkan walas_id (jika ada)
-        $walas = $walas_id ? Walas::find($walas_id) : null;
-
-        // Ambil nomor WhatsApp Walas atau tampilkan pesan default
-        $no_wa_walas = $walas && !empty($walas->no_wa) ? $walas->no_wa : 'Nomor tidak tersedia';
-    } else {
-        $no_wa_walas = 'Nomor tidak tersedia';
-    }
-
-    // Ambil data rombel siswa
-    $rombel = $siswa->rombel;
-
-    // Ambil wali kelas dari rombel siswa
-    $nowalas = $rombel ? $rombel->walas : null;
-
-    // Mengambil data dari tabel walas
-    $walasList = DB::table('walas')->select('id', 'nama')->get();
-
-    // Ambil biodata siswa berdasarkan ID, tetapi hanya jika milik siswa yang login
-    $biodata = BiodataSiswa::where('id', $id)->where('siswas_id', $siswa->id)->first();
-
-    // Jika biodata tidak ditemukan atau bukan milik siswa yang login, redirect dengan error
-    if (!$biodata) {
-        return redirect('/homepagesiswa')->with('error', 'Data tidak ditemukan.');
-    }
-
-    // Return view dengan data yang dibutuhkan
-    return view('homepagesiswa.inputdatadiri.edit', compact('biodata', 'siswa', 'nowalas', 'walasList', 'no_wa_walas', 'walas'));
-}
-
-
 
     /**
      * Update the specified resource in storage.
@@ -224,6 +232,7 @@ class InputDataDiriSiswaController extends Controller
             'tanggal_lahir' => 'nullable|date',
             'alamat' => 'nullable|string|max:255',
             'alamat_maps' => 'nullable|string|max:5000',
+            'fotorumah_url' => 'nullable',
             'jalur_masuk' => 'nullable|string|max:50',
             'jarak_rumah' => 'nullable|string|max:50',
             'transportasi_sekolah' => 'nullable|string|max:50',
@@ -286,6 +295,18 @@ class InputDataDiriSiswaController extends Controller
         $request->merge(['pekerjaan_ibu' => $request->pekerjaan_ibu_lainnya]);
     }
 
+    // Periksa apakah ada file baru yang diunggah
+    if ($request->hasFile('fotorumah_url')) {
+        // Hapus file lama jika ada
+        if ($biodata->fotorumah_url && Storage::exists('public/' . $biodata->fotorumah_url)) {
+            Storage::delete('public/' . $biodata->fotorumah_url);
+        }
+        // Simpan file baru
+        $fotoRumahPath = $request->file('fotorumah_url')->store('images/photos', 'public');
+    } else {
+        $fotoRumahPath = $biodata->fotorumah_url; // Gunakan file lama jika tidak ada perubahan
+    }
+
 
     // Update data siswa
     $biodata->fill($request->all());
@@ -296,6 +317,7 @@ class InputDataDiriSiswaController extends Controller
     $biodata->tanggal_lahir = $request->tanggal_lahir;
     $biodata->alamat = $request->alamat;
     $biodata->alamat_maps = $request->alamat_maps;
+    $biodata->fotorumah_url = $fotoRumahPath;
     $biodata->jalur_masuk = $request->jalur_masuk;
     $biodata->jarak_rumah = $request->jarak_rumah;
     $biodata->transportasi_sekolah = $request->transportasi_sekolah;
