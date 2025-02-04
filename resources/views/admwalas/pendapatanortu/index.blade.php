@@ -216,9 +216,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($pendapatan as $data)
+            @foreach($pendapatan ?? [] as $idx => $data)
             <tr>
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $idx + 1 }}</td>
                 <td>{{ $data->nama_lengkap }}</td>
                 <td>{{ $data->pendapatan_ortu }}</td>
             </tr>
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var dataPendapatan = @json($dataPendapatan);
 
             new Chart(ctx, {
-                type: 'line', // Bisa diubah menjadi 'pie' atau 'doughnut'
+                type: 'line',
                 data: {
                     labels: Object.keys(dataPendapatan),
                     datasets: [{
