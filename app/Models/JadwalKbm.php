@@ -73,13 +73,14 @@ class JadwalKbm extends Model
     }
 
     public function mapels()
-{
-    return $this->hasMany(Mapel::class, 'id', 'mapel_id');
-}
+    {
+        return $this->belongsTo(Mapel::class, 'mapel_id');
+    }
 
-public function gurus()
-{
-    return $this->hasMany(Guru::class, 'id', 'guru_id');
-}
+    public function gurus()
+    {
+        return $this->belongsTo(Guru::class, 'guru_id');
+    }
+
 
 }

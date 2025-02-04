@@ -45,7 +45,6 @@ class JadwalKbmController extends Controller
         if (!$rombel) {
             return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
         }
-    
         // Ambil data siswa berdasarkan rombel yang terkait dengan walas
         $siswa = DB::table('siswas')
                     ->where('rombels_id', $rombel->id)  // Sesuaikan dengan kolom yang tepat

@@ -15,20 +15,20 @@ class KakomRombelController extends Controller
      */
     public function index()
     {
-        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
-    
-       // Periksa apakah session 'kakom_id' ada
-       if (!session()->has('kakom_id')) {
-           return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
-       }
- 
-       // Ambil data kurikulum berdasarkan 'kakom_id' yang ada di session
-       $kakom = Kakom::find(session('kakom_id'));
-       
-       // Periksa apakah data kurikulum ditemukan
-       if (!$kakom) {
-           return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
-       }
+        $kakom = Auth::guard('kakoms')->user();  // Mendapatkan data kakom yang sedang login
+        
+        // Periksa apakah session 'kakom_id' ada
+        if (!session()->has('kakom_id')) {
+            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
 
         // Ambil kompetensi dari kakom yang sedang login
         $kompetensi_kakom = $kakom->kompetensi;
@@ -36,10 +36,16 @@ class KakomRombelController extends Controller
         // Ambil semua rombel yang memiliki kompetensi yang sama dengan kompetensi kakom yang sedang login
         $kompetensi = Rombel::where('kompetensi', $kompetensi_kakom)->get();
 
-        $vwrombels = DB::table('vwrombels')->get();
+        // Ambil data walas_id berdasarkan kompetensi yang sama dengan kompetensi kakom
+        $walasIds = $kompetensi->pluck('walas_id')->toArray();
 
+        // Ambil data dari 'vwrombels' berdasarkan walas_id yang sesuai
+        $vwrombels = DB::table('vwrombels')
+                        ->whereIn('walas_id', $walasIds)
+                        ->get();
+
+        // Mengembalikan view dengan data yang telah difilter
         return view('homepagekaprog.rombel.index', compact('vwrombels', 'kakom', 'kompetensi_kakom', 'kompetensi'));
-
     }
 
     /**

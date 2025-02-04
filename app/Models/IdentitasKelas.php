@@ -17,7 +17,7 @@ class IdentitasKelas extends Model
 
     public function walas()
     {
-        return $this->belongsTo(Walas::class, 'walas_id');
+        return $this->belongsTo(Walas::class, 'walas_id', 'id');
     }
 
     public function walas10()

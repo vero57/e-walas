@@ -67,6 +67,8 @@ use App\Http\Controllers\DaftarPenyerahanRapotController;
 use App\Http\Controllers\DenahKerjaKelompokSiswaController;
 use App\Http\Controllers\PersentasePekerjaanOrtuController;
 use App\Http\Controllers\RekapitulasiJumlahSiswaController;
+use App\Http\Controllers\AdmWalasViewController;
+use App\Http\Controllers\ViewAdmWalasKaprogController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -425,6 +427,26 @@ Route::get('/prestasisiswainput/{id}/edit', [PrestasiSiswaInputController::class
 Route::get('/hapusprestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'hapusprestasisiswainput'])->name('hapusprestasisiswainput');
 Route::put('/prestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'update'])->name('prestasisiswainput.update');
 
+
+// Route Kaprog Walas Data 
+Route::resource('admwalasview', AdmWalasViewController::class);
+Route::get('agendawalasview', [ViewAdmWalasKaprogController::class, 'agendawalas'])->name('admwalas.agendawalas');
+Route::get('identiaskelasview', [ViewAdmWalasKaprogController::class, 'identitaskelas'])->name('admwalas.identitaskelas');
+Route::get('lembarpengesahanview', [ViewAdmWalasKaprogController::class, 'lembarpengesahan'])->name('admwalas.lembarpengesahan');
+Route::get('strukturorganisasikelasview', [ViewAdmWalasKaprogController::class, 'strukturorganisasikelas'])->name('admwalas.strukturorganisasikelas');
+Route::get('jadwalkbmview', [ViewAdmWalasKaprogController::class, 'jadwalkbm'])->name('admwalas.jadwalkbm');
+Route::get('presensisview', [ViewAdmWalasKaprogController::class, 'presensis'])->name('admwalas.presensis');
+Route::get('piketkelasview', [ViewAdmWalasKaprogController::class, 'piketkelas'])->name('admwalas.piketkelas');
+Route::get('serahterimaraporview', [ViewAdmWalasKaprogController::class, 'serahterimarapor'])->name('admwalas.serahterimarapor');
+Route::get('catatankasusview', [ViewAdmWalasKaprogController::class, 'catatankasus'])->name('admwalas.catatankasus');
+Route::get('daftarpesertadidikview', [ViewAdmWalasKaprogController::class, 'daftarpesertadidik'])->name('admwalas.daftarpesertadidik');
+Route::get('rekapitulasijumlahsiswaview', [ViewAdmWalasKaprogController::class, 'rekapitulasipdidik'])->name('admwalas.rekapitulasipdidik');
+Route::get('homevisitview', [ViewAdmWalasKaprogController::class, 'homevisit'])->name('admwalas.homevisit');
+Route::get('bukutamuview', [ViewAdmWalasKaprogController::class, 'bukutamuortu'])->name('admwalas.bukutamuortu');
+Route::get('persentasesosialekonomiview', [ViewAdmWalasKaprogController::class, 'persentasesosialekonomi'])->name('admwalas.persentasesosialekonomi');
+Route::get('rentangpendapatanortuview', [ViewAdmWalasKaprogController::class, 'rentangpendapatanortu'])->name('admwalas.rentangpendapatanortu');
+Route::get('prestasisiswaview', [ViewAdmWalasKaprogController::class, 'prestasisiswa'])->name('admwalas.prestasisiswa');
+Route::get('grafikjaraktempuhview', [ViewAdmWalasKaprogController::class, 'grafikjaraktempuh'])->name('admwalas.grafikjaraktempuh');
 
 // Logout admin
 Route::post('/homepageadmin/logout', function () {

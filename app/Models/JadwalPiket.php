@@ -22,4 +22,9 @@ class JadwalPiket extends Model
     {
         return $this->belongsToMany(Siswa::class, 'detail_jadwal_pikets', 'jadwalpikets_id', 'siswas_id');
     }
+
+    public function walas()
+    {
+        return $this->belongsTo(Walas::class, 'walas_id', 'id');
+    }
 }

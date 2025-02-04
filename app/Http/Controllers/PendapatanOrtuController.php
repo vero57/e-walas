@@ -42,7 +42,10 @@ class PendapatanOrtuController extends Controller
             'Lebih dari Rp50.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Lebih dari Rp50.000.000,00')->count(),
         ];
 
-        $pendapatan = BiodataSiswa::select('id', 'nama_lengkap', 'pendapatan_ortu')->get();
+        // Ambil data siswa hanya untuk walas yang sedang login
+            $pendapatan = BiodataSiswa::select('id', 'nama_lengkap', 'pendapatan_ortu')
+                ->where('walas_id', $walas->id)
+                ->get();
         
         if (request()->has('export') && request()->get('export') === 'pdf') {
             $chartImage = request()->input('chartImage'); // Ambil data grafik dari form

@@ -19,4 +19,9 @@ class AgendaKegiatanWalas extends Model
             'tanggalttd',
             'ttdwalas_url',
     ];
+
+    public function walas()
+    {
+        return $this->belongsTo(Walas::class, 'walas_id', 'id');
+    }
 }

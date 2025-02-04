@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var dataPendapatan = @json($dataPendapatan);
 
             new Chart(ctx, {
-                type: 'bar', // Bisa diubah menjadi 'pie' atau 'doughnut'
+                type: 'line', // Bisa diubah menjadi 'pie' atau 'doughnut'
                 data: {
                     labels: Object.keys(dataPendapatan),
                     datasets: [{

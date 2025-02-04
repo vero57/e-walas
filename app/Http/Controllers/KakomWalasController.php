@@ -13,8 +13,7 @@ class KakomWalasController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Mengambil siswa yang sedang login
+    {
         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
     
@@ -31,15 +30,31 @@ class KakomWalasController extends Controller
            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
-        // Ambil kompetensi dari kakom yang sedang login
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil kompetensi kakom yang sedang login
         $kompetensi_kakom = $kakom->kompetensi;
 
         // Ambil semua rombel yang memiliki kompetensi yang sama dengan kompetensi kakom yang sedang login
-        $kompetensi = Rombel::where('kompetensi', $kompetensi_kakom)->get();
+        $rombels = Rombel::where('kompetensi', $kompetensi_kakom)->with('walas')->get();
 
-    // Kirim data kakom dan kompetensi ke view
-    return view('homepagekaprog.datawalas', compact('kompetensi', 'kakom', 'kompetensi_kakom'));
-}
+        // Ambil data walas dari rombel yang sesuai
+        $walasList = $rombels->map(function ($rombel) {
+            return $rombel->walas;
+        })->filter(); // Menghapus nilai null jika ada
+
+        // Kirim data ke view
+        return view('homepagekaprog.datawalas', compact('rombels', 'kakom', 'kompetensi_kakom', 'walasList'));
+    }
+
+    
+
 
     /**
      * Show the form for creating a new resource.

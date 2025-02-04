@@ -12,4 +12,9 @@ class LembarPengesahan extends Model
         'walas_id',
         'image_url'
     ];
+
+    public function walas()
+    {
+        return $this->belongsTo(Walas::class, 'walas_id', 'id');
+    }
 }

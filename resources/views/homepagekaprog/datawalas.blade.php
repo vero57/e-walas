@@ -190,7 +190,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data Administrasi Akan Tampil Di Sini -->
+                    @foreach ($walasList as $index => $walas)
+                        <tr>
+                            <td class="text-center">{{ $index + 1 }}</td>
+                            <td>{{ $walas->nama ?? 'Tidak Ada Data' }}</td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ route('admwalasview.show', $walas->id) }}" class="btn btn-sm btn-primary">
+                                        Detail
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
