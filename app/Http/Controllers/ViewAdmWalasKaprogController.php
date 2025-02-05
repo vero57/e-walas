@@ -252,12 +252,20 @@ class ViewAdmWalasKaprogController extends Controller
     // Ambil semua data rombel
     $rombels = Rombel::all();
 
-    $jadwalKbms = JadwalKBM::with(['rombel', 'walas', 'mapels', 'gurus'])
+    $jadwalKbm = JadwalKBM::with(['rombel', 'walas', 'mapels', 'gurus'])
         ->where('walas_id', $walas->id)
         ->get();
 
     $mapels = Mapel::all()->keyBy('id');
     $gurus = Guru::all()->keyBy('id');
+
+    $dataHari = [
+        'senin'  => json_decode($jadwalKbm->first()->senin, true)  ?? [],
+        'selasa' => json_decode($jadwalKbm->first()->selasa, true) ?? [],
+        'rabu'   => json_decode($jadwalKbm->first()->rabu, true)   ?? [],
+        'kamis'  => json_decode($jadwalKbm->first()->kamis, true)  ?? [],
+        'jumat'  => json_decode($jadwalKbm->first()->jumat, true)  ?? [],
+    ];
     return view("homepagekaprog.admwalas.jadwalkbm.index", [
         'walasList' => $walasList,
         'walasIds' => $walasIds,
@@ -271,6 +279,8 @@ class ViewAdmWalasKaprogController extends Controller
     ]);
 }
 
+
+    
 
     public function presensis(Request $request)
     {
