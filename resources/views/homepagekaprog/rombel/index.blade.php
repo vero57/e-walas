@@ -216,18 +216,6 @@
             <h2 class="font-weight-bold">Daftar Rombel</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-
-                <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Rombel">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-
         <div class="table-container">
             <table class="table">
             <table class="table">
@@ -255,14 +243,21 @@
                 <td>{{ $data->kompetensi }}</td>
                 <td>{{ $data->nama_kelas }}</td>
                 <td>{{ $data->walas_nama }}</td>
-                <td>{{ $data->no_wa }}</td> <!-- This can be updated to show name if needed -->
                 <td>
-                    <!-- Aksi -->
-                    <div class="d-inline-flex gap-2">
-                        <button class="btn btn-sm btn-info text-white">
-                            <i class="bi bi-info-circle text-white"></i> Detail Kelas
-                        </button>
-                    </div>
+                    @if ($data->no_wa)
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $data->no_wa) }}" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30">
+                        </a>
+                    @else
+                        Tidak Ada Data
+                    @endif
+                </td>
+                <td>
+                <div class="d-inline-flex gap-2">
+                    <a href="{{ route('rombel.showDetail', ['walas_id' => $data->walas_id]) }}" class="btn btn-sm btn-info text-white">
+                        <i class="bi bi-info-circle text-white"></i> Detail Kelas
+                    </a>
+                </div>
                 </td>
                 <td class="text-center align-middle">
                     <!-- Tombol Edit -->

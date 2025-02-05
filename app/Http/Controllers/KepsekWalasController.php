@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Kepsek;
+use App\Models\Walas;
+use App\Models\Rombel;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -18,25 +20,29 @@ class KepsekWalasController extends Controller
      */
     public function index()
     {
-        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-      $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+        // Ambil data Kepala Sekolah yang sedang login
+        $kepseks = Auth::guard('kepseks')->user();
 
-      // Periksa apakah session 'kurikulum_id' ada
-      if (!session()->has('kepsek_id')) {
-          return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
-      }
+        // Periksa apakah sesi 'kepsek_id' ada
+        if (!session()->has('kepsek_id')) {
+            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        }
 
-      // Ambil data kurikulum berdasarkan 'kepsek_id' yang ada di session
-      $kepsek = Kepsek::find(session('kepsek_id'));
-      
-      // Periksa apakah data kurikulum ditemukan
-      if (!$kepsek) {
-          return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
-      }
+        // Ambil data Kepala Sekolah berdasarkan sesi
+        $kepseks = Kepsek::find(session('kepsek_id'));
 
-    // Kirim data siswa, rombels, dan walas ke view
-    return view("homepagekepsek.datawalas", compact('kepsek'));
+        // Pastikan data ditemukan
+        if (!$kepseks) {
+            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
+
+        // Ambil semua data walas dengan relasi rombelnya
+        $walasList = Walas::with('rombel')->get();
+
+        // Kirim data ke view
+        return view('homepagekepsek.datawalas', compact('kepseks', 'walasList'));
     }
+
 
     /**
      * Show the form for creating a new resource.

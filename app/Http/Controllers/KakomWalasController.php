@@ -38,24 +38,20 @@ class KakomWalasController extends Controller
             return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
         }
 
-        // Ambil kompetensi kakom yang sedang login
+       // Ambil kompetensi kakom yang sedang login
         $kompetensi_kakom = $kakom->kompetensi;
 
-        // Ambil semua rombel yang memiliki kompetensi yang sama dengan kompetensi kakom yang sedang login
+        // Ambil semua rombel yang memiliki kompetensi yang sama dengan kakom yang login
         $rombels = Rombel::where('kompetensi', $kompetensi_kakom)->with('walas')->get();
 
-        // Ambil data walas dari rombel yang sesuai
-        $walasList = $rombels->map(function ($rombel) {
-            return $rombel->walas;
-        })->filter(); // Menghapus nilai null jika ada
+        // Ambil daftar walas dari semua rombel, hindari duplikasi dengan unique()
+        $walasList = $rombels->pluck('walas')->filter()->unique('id');
 
         // Kirim data ke view
         return view('homepagekaprog.datawalas', compact('rombels', 'kakom', 'kompetensi_kakom', 'walasList'));
     }
 
     
-
-
     /**
      * Show the form for creating a new resource.
      */

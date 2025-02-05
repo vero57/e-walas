@@ -105,7 +105,7 @@ class KepsekPageController extends Controller
         $kepsek = Kepsek::findOrFail($id);
 
         // Kirim data ke view edit
-        return view('homepageadmin.kepsek.edit', compact('kepsekdata'));
+        return view('homepageadmin.kepsek.edit', compact('kepsek'));
     }
 
     /**
@@ -118,7 +118,7 @@ class KepsekPageController extends Controller
             'nama' => 'required|string|max:255',
             'image_url' => 'nullable|image|max:5000', // Foto bersifat opsional
             'no_wa' => 'required|numeric',
-            'password' => 'nullable|string|min:6', // Password opsional
+            'password' => 'nullable|string|min:1', // Password opsional
         ]);
     
         // Cari Wali Kelas berdasarkan ID

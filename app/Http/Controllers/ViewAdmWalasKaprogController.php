@@ -215,9 +215,9 @@ class ViewAdmWalasKaprogController extends Controller
         // Ambil walas_id dari URL query parameter
         $walasIdSelected = $request->query('walas_id'); 
 
-        // Filter jika ada walas_id yang dipilih
+        $rombel = null;
         if ($walasIdSelected) {
-            $query->where('walas_id', $walasIdSelected);
+            $rombel = Rombel::where('walas_id', $walasIdSelected)->first();
         }
 
         // Ambil data rombel berdasarkan walas_id yang dipilih
@@ -259,7 +259,6 @@ class ViewAdmWalasKaprogController extends Controller
         // Return view dengan data yang difilter
         return view("homepagekaprog.admwalas.jadwalkbm.index", compact('walasList', 'walasIds', 'kakom', 'jadwalKbms', 'rombel', 'siswa'));
     }
-
 
     public function presensis(Request $request)
     {

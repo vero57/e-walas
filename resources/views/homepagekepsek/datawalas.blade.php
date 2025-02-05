@@ -129,7 +129,7 @@
                 
                 <!-- Tautkan nama walas ke /userprofile -->
                 <a href="/profilekepsek" class="text-decoration-none">
-                    <span>{{ $kepsek->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                    <span>{{ $kepseks->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
@@ -151,26 +151,6 @@
             <h2 class="font-weight-bold">Daftar Administrasi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         
@@ -185,14 +165,37 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Foto</th>
                         <th>WhatsApp</th>
                         <th>Informasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data Administrasi Akan Tampil Di Sini -->
+                    @foreach ($walasList as $index => $walas)
+                        <tr>
+                            <td class="text-center">{{ $index + 1 }}</td>
+                            <td>{{ $walas->nama ?? 'Tidak Ada Data' }}</td>
+                            <td class="text-center">
+                                @if ($walas->no_wa)
+                                    <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+                                            alt="WhatsApp" width="25">
+                                    </a>
+                                @else
+                                    Tidak Ada Data
+                                @endif
+                            </td>
+                            <td>{{ $walas->rombel->nama_kelas ?? 'Belum Masuk Rombel' }}</td>
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ route('admwalasviewkepsek.show', $walas->id) }}" class="btn btn-sm btn-primary">
+                                        Detail
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
