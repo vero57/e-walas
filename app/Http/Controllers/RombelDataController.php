@@ -57,10 +57,46 @@ class RombelDataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showDetailKurikulum($walas_id)
     {
-        //
+      // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+      $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+
+      // Periksa apakah session 'kurikulum_id' ada
+      if (!session()->has('kurikulum_id')) {
+          return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
+      }
+
+      // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+      $kurikulum = Kurikulum::find(session('kurikulum_id'));
+      
+      // Periksa apakah data kurikulum ditemukan
+      if (!$kurikulum) {
+          return redirect('/loginkurikulum')->with('error', 'Data kurikulum tidak ditemukan.');
+      }
+
+        $rombel = Rombel::where('walas_id', $walas_id)
+                        ->with('walas') // Pastikan relasi 'walas' sudah didefinisikan di model
+                        ->first();
+
+        // Jika rombel tidak ditemukan atau tidak sesuai dengan kompetensi kakom
+        if (!$rombel) {
+            return redirect('/rombels')->with('error', 'Rombel tidak ditemukan atau kompetensi tidak cocok.');
+        }
+
+        // Ambil data siswa berdasarkan rombel_id yang ditemukan
+        $siswas = Siswa::where('rombels_id', $rombel->id)->get();
+
+        // Ambil informasi wali kelas dari rombel yang dipilih
+        $walas = $rombel->walas; // Menggunakan relasi langsung dari model
+
+        // Ambil semua data rombels untuk kebutuhan lainnya
+        $rombels = Rombel::all(); // Hanya ambil rombel sesuai kompetensi kakom
+
+        // Kirim data ke view
+        return view('homepagekurikulum.rombelpage.view', compact('siswas', 'walas', 'rombel', 'rombels'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

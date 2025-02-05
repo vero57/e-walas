@@ -111,7 +111,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kaprogpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/homepagekaprog" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -152,26 +152,6 @@
             <h2 class="font-weight-bold">Daftar Administrasi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         
@@ -182,6 +162,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Wali kelas</th>
+                        <th>Nama Kelas</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -190,6 +171,13 @@
                         <tr>
                             <td class="text-center">{{ $index + 1 }}</td>
                             <td>{{ $walas->nama ?? 'Tidak Ada Data' }}</td>
+                            <td>
+                                @php
+                                    // Cari rombel yang memiliki walas ini
+                                    $rombel = $rombels->firstWhere('walas_id', $walas->id);
+                                @endphp
+                                {{ $rombel->nama_kelas ?? 'Tidak Ada Data' }}
+                            </td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
                                     <a href="{{ route('admwalasview.show', $walas->id) }}" class="btn btn-sm btn-primary">

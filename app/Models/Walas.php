@@ -20,7 +20,7 @@ class Walas extends Model
 
     public function rombel()
     {
-        return $this->hasMany(Rombel::class, 'walas_id', 'id');
+        return $this->hasOne(Rombel::class, 'walas_id'); // Pastikan foreign key sesuai
     }
 
 }
