@@ -186,14 +186,14 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ $identitas->program_keahlian }}</td>
             <td>{{ $identitas->kompetensi_keahlian }}</td>
-            <td>{{ $identitas->walas10->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->walas11->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->walas12->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->walas13->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa10->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa11->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa12->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa13->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->walas10->nama ?? '-' }}</td>
+            <td>{{ $identitas->walas11->nama ?? '-' }}</td>
+            <td>{{ $identitas->walas12->nama ?? '-' }}</td>
+            <td>{{ $identitas->walas13->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa10->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa11->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa12->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa13->nama ?? '-' }}</td>
             <td><a href="{{ route('identitaskelas.edit', $identitas->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
         </tr>
         @endforeach

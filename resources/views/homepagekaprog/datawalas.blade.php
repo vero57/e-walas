@@ -175,10 +175,6 @@
             </div>
         </div>
         
-        <!-- Jumlah Total GTK -->
-        <div class="text-end mb-4">
-            <span class="text-muted">Jumlah Total: <strong>0 Administrasi</strong></span>
-        </div>
 
         <div class="table-container">
             <table class="table">

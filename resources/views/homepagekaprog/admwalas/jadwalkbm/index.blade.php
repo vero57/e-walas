@@ -152,13 +152,14 @@
     </div>
   </header>
 
-<main class="main">
+  <main class="main">
+    <!-- Hero Section -->
     <section id="hero" class="hero section">
         <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-            <!-- Header dengan Title, Pencarian, dan Tombol -->
             <div class="mb-4">
                 <h2 class="font-weight-bold">Jadwal KBM</h2>
                 <hr class="my-3">
+
                 <div class="d-flex align-items-center justify-content-start gap-2">
                     <a href="{{ route('jadwalkbm.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
                         <i class="bi bi-download"></i> Unduh
@@ -166,85 +167,67 @@
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                         <i class="bi bi-cloud-upload"></i> Unggah Data
                     </button>
+                    <a href="{{ route('jadwalkbm.create') }}" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Tambah
+                    </a>
                 </div>
             </div>
-            
-            @if ($jadwalKbms->isEmpty())
-                <div class="alert alert-info">Data jadwal belum tersedia.</div>
-            @else
+            <pre>{{ print_r($hari, true) }}</pre>
+
+            @if ($jadwalKbm)
                 <table>
                     <tr>
-                        <td>Kelas</td>
-                        <td>: {{ $rombel->nama_kelas }}</td>
+                        <td><strong>Kelas</strong></td>
+                        <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
                     </tr>
                     <tr>
-                        <td>Tahun Pelajaran</td>
+                        <td><strong>Tahun Pelajaran</strong></td>
                         <td>: {{ date('Y') }}</td>
-                    </tr>
-                    <tr>
-                    @foreach ($jadwalKbms as $jadwal)
-                    <h5>Nama Wali Kelas : {{ $jadwal->walas->nama }}</h5>
-                    @endforeach
                     </tr>
                 </table>
                 <br>
 
                 <table class="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th colspan="2">Senin</th>
-                            <th colspan="2">Selasa</th>
-                            <th colspan="2">Rabu</th>
-                            <th colspan="2">Kamis</th>
-                            <th colspan="2">Jumat</th>
-                        </tr>
-                        <tr>
-                            <th>Jam Ke</th>
-                            <th>Mapel</th>
-                            <th>Guru</th>
-                            <th>Mapel</th>
-                            <th>Guru</th>
-                            <th>Mapel</th>
-                            <th>Guru</th>
-                            <th>Mapel</th>
-                            <th>Guru</th>
-                            <th>Mapel</th>
-                            <th>Guru</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for ($jam = 1; $jam <= 12; $jam++)
-                            <tr>
-                                <td>{{ $jam }}</td>
-                                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
-                                    @php
-                                        // Menemukan jadwal yang sesuai untuk hari dan jam tertentu
-                                        $jadwalHari = $jadwal->$hari ? collect(json_decode($jadwal->$hari, true))->firstWhere('jam', $jam) : null;
-                                    @endphp
-                                    <td>
-                                        @if ($jadwalHari)
-                                            {{ $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' }}
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($jadwalHari)
-                                            {{ $gurus[$jadwalHari['guru_id']]->nama ?? '-' }}
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                @endforeach
-                            </tr>
-                        @endfor
-                    </tbody>
-                </table>
+    <thead class="table-dark">
+        <tr>
+            <th rowspan="2" class="align-middle">Jam Ke</th>
+            @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $hari)
+                <th colspan="2">{{ $hari }}</th>
+            @endforeach
+        </tr>
+        <tr>
+            @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $hari)
+                <th>Mapel</th>
+                <th>Guru</th>
+            @endforeach
+        </tr>
+    </thead>
+    <tbody>
+        @for ($jam = 1; $jam <= 12; $jam++)
+            <tr>
+                <td>{{ $jam }}</td>
+                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hariKey)
+                    @php
+                        $jadwalHari = collect($hari[$hariKey] ?? [])->firstWhere('jam', $jam);
+                        $mapelNama = $jadwalHari ? ($mapels[$jadwalHari['mapel_id']] ?? 'Tidak ditemukan') : '-';
+                        $guruNama = $jadwalHari ? ($gurus[$jadwalHari['guru_id']] ?? 'Tidak ditemukan') : '-';
+                    @endphp
+                    <td>{{ $mapelNama }}</td>
+                    <td>{{ $guruNama }}</td>
+                @endforeach
+            </tr>
+        @endfor
+    </tbody>
+</table>
+
+            @else
+                <div class="alert alert-info">Data jadwal belum tersedia.</div>
             @endif
+
         </div>
     </section>
 </main>
+
 
 
   

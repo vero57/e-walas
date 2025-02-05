@@ -161,7 +161,7 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <form id="exportForm" method="POST" action="{{ route('bukutamuortu.generatepdf') }}">
+                <form id="exportForm" method="POST" action="{{ route('bukutamuortu.generatepdfbukutamuortu') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">

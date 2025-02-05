@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rekapitulasi Jumlah Siswa</title>
+    <title>Rekapitulasi Pendapatan Orang Tua</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,9 +31,9 @@
         th {
             background-color: #f2f2f2;
         }
-        .info-table {
-            width: 50%;
-            margin-bottom: 10px;
+        .chart-container {
+            text-align: center;
+            margin-top: 20px;
         }
         .signature {
             margin-top: 30px;
@@ -43,28 +43,31 @@
     </style>
 </head>
 <body>
-
-    <div class="title">REKAPITULASI JUMLAH SISWA</div>
+    <div class="title">REKAPITULASI PENDAPATAN ORANG TUA</div>
     
     <table>
         <tr>
             <th>No</th>
-            <th>Bulan</th>
-            <th>Jumlah Siswa Awal</th>
-            <th>Jumlah Siswa Akhir</th>
-            <th>Keterangan</th>
+            <th>Nama Siswa</th>
+            <th>Pendapatan Orang Tua</th>
         </tr>
-        @foreach ($rekapjumlahsiswa as $idx => $data)
+        @foreach ($pendapatan as $idx => $data)
             <tr>
                 <td>{{ $idx + 1 }}</td>
-                <td>{{ $data->bulan }}</td>
-                <td>{{ $data->jumlah_awal_siswa }}</td>
-                <td>{{ $data->jumlah_akhir_siswa }}</td>
-                <td>{{ $data->keterangan }}</td>
+                <td>{{ $data->nama_lengkap }}</td>
+                <td>{{ $data->pendapatan_ortu }}</td>
             </tr>
         @endforeach
-    </table><br><br><br><br><br>
+    </table>
 
+    <div class="chart-container">
+        <h3>Grafik Pendapatan Orang Tua</h3>
+        @if($chartImage)
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ $chartImage }}" style="width: 100%; max-width: 600px;">
+    </div>
+@endif
+    </div>
 
     <div class="signature">
         <table>
@@ -91,6 +94,5 @@
             </tr>
         </table>
     </div>
-
 </body>
 </html>

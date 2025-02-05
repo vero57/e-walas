@@ -155,7 +155,7 @@
             <h2 class="font-weight-bold">Daftar Home Visit</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <form id="exportForm" method="POST" action="{{ route('homevisit.generatepdf') }}">
+                <form id="exportForm" method="POST" action="{{ route('homevisit.generatepdfhomevisit') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">

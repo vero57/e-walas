@@ -106,13 +106,13 @@ $identitaskelas = IdentitasKelas::with(['walas10', 'walas11', 'walas12', 'walas1
             'program_keahlian' => 'required|in:SIJA,TKJ,RPL,DKV,DPIB,TKP,TP,TFLM,TKR,TOI',
             'kompetensi_keahlian' => 'required|in:SIJA,TKJ,RPL,DKV,DPIB,TKP,TP,TFLM,TKR,TOI',
             'walas_id_10' => 'required|exists:walas,id',
-            'walas_id_11' => 'required|exists:walas,id',
-            'walas_id_12' => 'required|exists:walas,id',
-            'walas_id_13' => 'required|exists:walas,id',
+            'walas_id_11' => 'nullable|exists:walas,id',
+            'walas_id_12' => 'nullable|exists:walas,id',
+            'walas_id_13' => 'nullable|exists:walas,id',
             'siswas_id_10' => 'required|exists:siswas,id',
-            'siswas_id_11' => 'required|exists:siswas,id',
-            'siswas_id_12' => 'required|exists:siswas,id',
-            'siswas_id_13' => 'required|exists:siswas,id',
+            'siswas_id_11' => 'nullable|exists:siswas,id',
+            'siswas_id_12' => 'nullable|exists:siswas,id',
+            'siswas_id_13' => 'nullable|exists:siswas,id',
         ]);
 
         // Menyimpan data ke dalam database
@@ -190,13 +190,13 @@ public function update(Request $request, $identitas_kelas_id)
         'program_keahlian' => 'required|in:SIJA,TKJ,RPL,DKV,DPIB,TKP,TP,TFLM,TKR,TOI',
         'kompetensi_keahlian' => 'required|in:SIJA,TKJ,RPL,DKV,DPIB,TKP,TP,TFLM,TKR,TOI',
         'walas_id_10' => 'required|exists:walas,id',
-        'walas_id_11' => 'required|exists:walas,id',
-        'walas_id_12' => 'required|exists:walas,id',
-        'walas_id_13' => 'required|exists:walas,id',
+        'walas_id_11' => 'nullable|exists:walas,id',
+        'walas_id_12' => 'nullable|exists:walas,id',
+        'walas_id_13' => 'nullable|exists:walas,id',
         'siswas_id_10' => 'required|exists:siswas,id',
-        'siswas_id_11' => 'required|exists:siswas,id',
-        'siswas_id_12' => 'required|exists:siswas,id',
-        'siswas_id_13' => 'required|exists:siswas,id',
+        'siswas_id_11' => 'nullable|exists:siswas,id',
+        'siswas_id_12' => 'nullable|exists:siswas,id',
+        'siswas_id_13' => 'nullable|exists:siswas,id',
     ]);
 
     // Menemukan data IdentitasKelas berdasarkan id

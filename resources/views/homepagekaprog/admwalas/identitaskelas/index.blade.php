@@ -153,7 +153,7 @@
             <h2 class="font-weight-bold">Identitas Kelas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <a href="{{ route('identitaskelas.index') }}?export=pdf" class="btn btn-outline-secondary me-2 mb-2">
+                <a href="{{ route('admwalas.identitaskelas') }}?export=pdf" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i>Unduh Data
                 </a>
             </div>
@@ -182,14 +182,14 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ $identitas->program_keahlian }}</td>
             <td>{{ $identitas->kompetensi_keahlian }}</td>
-            <td>{{ $identitas->walas10->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->walas11->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->walas12->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->walas13->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa10->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa11->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa12->nama ?? 'N/A' }}</td>
-            <td>{{ $identitas->siswa13->nama ?? 'N/A' }}</td>
+            <td>{{ $identitas->walas10->nama ?? '-' }}</td>
+            <td>{{ $identitas->walas11->nama ?? '-' }}</td>
+            <td>{{ $identitas->walas12->nama ?? '-' }}</td>
+            <td>{{ $identitas->walas13->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa10->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa11->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa12->nama ?? '-' }}</td>
+            <td>{{ $identitas->siswa13->nama ?? '-' }}</td>
         </tr>
         @endforeach
     </tbody>

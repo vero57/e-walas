@@ -182,7 +182,7 @@
                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
                 </button>
-                    <a href="{{ route('agendawalas.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <a href="{{ route('admwalas.agendawalas', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i> Unduh PDF
             </a>
             
@@ -224,7 +224,6 @@
             @forelse ($agendaList ?? [] as $idx => $data)
             <h5>Nama Wali Kelas : {{ $data->walas->nama }}</h5>
                 <tr>
-                <h5>Nama Wali Kelas : {{ $data->walas->nama }}</h5>
                     <td>{{ $idx + 1 }}</td>
                     <td>{{ $data->hari }}</td>
                     <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d-m-Y') }}</td>

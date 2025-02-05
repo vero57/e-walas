@@ -160,7 +160,7 @@
                     <div class="card-body">
                         <form action="{{ route('identitaskelas.store') }}" method="POST">
                             @csrf
-                            <!-- Wali Kelas -->
+                            <!-- Wali Kelasks -->
                             <div class="mb-3">
                                 <label for="walas_id" class="form-label">Wali Kelas:</label>
                                 <select name="walas_id" id="walas_id" class="form-select" required>
@@ -207,7 +207,8 @@
                                 <div class="mb-3">
                                     <label for="walas_id_{{ $grade }}" class="form-label">Wali Kelas {{ $grade }}:</label>
                                     <select name="walas_id_{{ $grade }}" id="walas_id_{{ $grade }}" class="form-select">
-                                        @foreach($walas as $walas_item)
+                                    <option value="" disabled selected>Pilih Nama Wali Kelas</option>
+                                    @foreach($walas as $walas_item)
                                             <option value="{{ $walas_item->id }}">{{ $walas_item->nama }}</option>
                                         @endforeach
                                     </select>
@@ -219,7 +220,8 @@
                                 <div class="mb-3">
                                     <label for="siswas_id_{{ $grade }}" class="form-label">Ketua Kelas {{ $grade }}:</label>
                                     <select name="siswas_id_{{ $grade }}" id="siswas_id_{{ $grade }}" class="form-select">
-                                        @foreach($siswas as $siswa_item)
+                                    <option value="" disabled selected>Pilih Nama Siswa Ketua Kelas</option>
+                                    @foreach($siswas as $siswa_item)
                                             <option value="{{ $siswa_item->id }}">{{ $siswa_item->nama }}</option>
                                         @endforeach
                                     </select>

@@ -54,7 +54,7 @@
             <th>Jumlah Siswa Akhir</th>
             <th>Keterangan</th>
         </tr>
-        @foreach ($rekapjumlahsiswa as $idx => $data)
+        @foreach ($rekapitulasiPDidik as $idx => $data)
             <tr>
                 <td>{{ $idx + 1 }}</td>
                 <td>{{ $data->bulan }}</td>

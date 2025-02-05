@@ -181,7 +181,7 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
-                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdf') }}">
+                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdfpendapatanortu') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">

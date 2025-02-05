@@ -380,6 +380,7 @@ Route::post('/catatankasus/store', [CatatanKasusSiswaController::class, 'store']
 Route::get('/catatankasus/{id}/edit', [CatatanKasusSiswaController::class, 'edit'])->name('catatankasus.edit');
 Route::get('/hapuscatatankasus/{id}', [CatatanKasusSiswaController::class, 'hapuscatatankasus'])->name('hapuscatatankasus');
 Route::put('/catatankasus/{id}', [CatatanKasusSiswaController::class, 'update'])->name('catatankasus.update');
+Route::get('/catatankasus/export/pdf', [CatatanKasusSiswaController::class, 'index'])->name('catatankasus.export');
 
 
 // CRUD DATA SISWA
@@ -428,7 +429,7 @@ Route::get('/hapusprestasisiswainput/{id}', [PrestasiSiswaInputController::class
 Route::put('/prestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'update'])->name('prestasisiswainput.update');
 
 
-// Route Kaprog Walas Data 
+// Route Kaprog Walas Data bl
 Route::resource('admwalasview', AdmWalasViewController::class);
 Route::get('agendawalasview', [ViewAdmWalasKaprogController::class, 'agendawalas'])->name('admwalas.agendawalas');
 Route::get('identiaskelasview', [ViewAdmWalasKaprogController::class, 'identitaskelas'])->name('admwalas.identitaskelas');
@@ -442,11 +443,17 @@ Route::get('catatankasusview', [ViewAdmWalasKaprogController::class, 'catatankas
 Route::get('daftarpesertadidikview', [ViewAdmWalasKaprogController::class, 'daftarpesertadidik'])->name('admwalas.daftarpesertadidik');
 Route::get('rekapitulasijumlahsiswaview', [ViewAdmWalasKaprogController::class, 'rekapitulasipdidik'])->name('admwalas.rekapitulasipdidik');
 Route::get('homevisitview', [ViewAdmWalasKaprogController::class, 'homevisit'])->name('admwalas.homevisit');
+Route::post('/homevisit/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFhomevisit'])->name('homevisit.generatepdfhomevisit');
 Route::get('bukutamuview', [ViewAdmWalasKaprogController::class, 'bukutamuortu'])->name('admwalas.bukutamuortu');
+Route::post('/bukutamuortu/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFbukutamuortu'])->name('bukutamuortu.generatepdfbukutamuortu');
 Route::get('persentasesosialekonomiview', [ViewAdmWalasKaprogController::class, 'persentasesosialekonomi'])->name('admwalas.persentasesosialekonomi');
 Route::get('rentangpendapatanortuview', [ViewAdmWalasKaprogController::class, 'rentangpendapatanortu'])->name('admwalas.rentangpendapatanortu');
+Route::post('/pendapatanortu/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFpendapatanortu'])->name('pendapatanortu.generatepdfpendapatanortu');
 Route::get('prestasisiswaview', [ViewAdmWalasKaprogController::class, 'prestasisiswa'])->name('admwalas.prestasisiswa');
+Route::post('/prestasisiswa/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFprestasi'])->name('prestasisiswa.generatepdfprestasi');
 Route::get('grafikjaraktempuhview', [ViewAdmWalasKaprogController::class, 'grafikjaraktempuh'])->name('admwalas.grafikjaraktempuh');
+Route::post('/grafikjaraktempuh/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfgrafikjaraktempuh');
+
 
 // Logout admin
 Route::post('/homepageadmin/logout', function () {

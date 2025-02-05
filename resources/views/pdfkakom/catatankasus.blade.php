@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Persentase Sosial Ekonomi</title>
+    <title>CATATAN KASUS SISWA</title>
     <style>
-       body {
+        body {
             font-family: Arial, sans-serif;
             font-size: 12px;
         }
@@ -44,32 +44,38 @@
 </head>
 <body>
 
-<div class="title">PERSENTASE SOSIAL EKONOMI</div><br><br>
+    <div class="title">CATATAN KASUS SISWA</div>
+
+    <table class="info-table">
+    @foreach ($walasList as $index => $walas)
+        <tr>
+            <td>Wali Kelas</td>
+            <td>: {{ $walas->nama ?? 'Tidak Ada Data' }}</td>
+        </tr>
+        @endforeach
+        <tr>
+    <td>Tahun Pelajaran</td>
+    <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
+        </tr>
+    </table>
+
     <table>
-        <thead>
-            <tr>
+        <tr>
                 <th>No</th>
-                <th>Jenis Sosial Ekonomi</th>
-                <th>Jumlah</th>
-                <th>Persentase</th>
+                <th>Nama Siswa</th>
+                <th>Kasus</th>
+                <th>Tindak Lanjut</th>
                 <th>Keterangan</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($persentasesosialekonomi as $idx => $data)
-                <tr>
-                    <td>{{ $idx + 1 }}</td>
-                    <td>{{ $data->jenis_sosial_ekonomi }}</td>
-                    <td>{{ $data->jumlah }}</td>
-                    <td>{{ $data->persentase }}</td>
+        </tr>
+        @foreach ($catatankasus as $idx => $data)
+            <tr>
+            <td>{{ $idx + 1 }}</td>
+                    <td>{{ $data->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                    <td>{{ $data->kasus }}</td>
+                    <td>{{ $data->tindak_lanjut }}</td>
                     <td>{{ $data->keterangan }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Tidak ada data</td>
-                </tr>
-            @endforelse
-        </tbody>
+            </tr>
+        @endforeach
     </table>
 
 </body>

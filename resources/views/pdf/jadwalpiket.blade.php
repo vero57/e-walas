@@ -56,8 +56,8 @@
             <td>: {{ $walas->nama ?? '-' }}</td>
         </tr>
         <tr>
-            <td>Tahun Pelajaran</td>
-            <td>: {{ date('Y') }}</td>
+    <td>Tahun Pelajaran</td>
+    <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
         </tr>
     </table>
 

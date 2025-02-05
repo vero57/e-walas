@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestasi Siswa</title>
+    <title>Agenda Wali Kelas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,25 +40,19 @@
             width: 100%;
             text-align: left;
         }
-        .img-container img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
     </style>
 </head>
 <body>
-    <div class="title">PRESTASI SISWA</div>
+
+    <div class="title">AGENDA WALI KELAS</div>
 
     <table class="info-table">
+    @foreach ($walasList as $index => $walas)
         <tr>
             <td>Wali Kelas</td>
-            <td>: {{ $walas->nama ?? '-' }}</td>
+            <td>: {{ $walas->nama ?? 'Tidak Ada Data' }}</td>
         </tr>
-        <tr>
-            <td>Kelas</td>
-            <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
-        </tr>
+        @endforeach
         <tr>
     <td>Tahun Pelajaran</td>
     <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
@@ -66,53 +60,39 @@
     </table>
 
     <table>
-    <tr>
-        <th>No</th>
-        <th>Nama Siswa</th>
-        <th>Jenis Prestasi</th>
-        <th>Nama Prestasi</th>
-        <th>Tanggal</th>
-        <th>Sertifikat</th>
-        <th>Dokumentasi</th>
-    </tr>
-    @foreach($prestasisiswa as $index => $item)
         <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
-            <td>{{ $item->jenis_prestasi }}</td>
-            <td>{{ $item->nama_prestasi }}</td>
-            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-            <td>
-    @if($item->sertifikat_base64)
-        <img src="{{ $item->sertifikat_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
-
-<td>
-    @if($item->dokumentasi_base64)
-        <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
+            <th>No</th>
+            <th>Hari</th>
+            <th>Tanggal</th>
+            <th>Nama Kegiatan</th>
+            <th>Hasil</th>
+            <th>Waktu</th>
+            <th>Keterangan</th>
         </tr>
-    @endforeach
-</table>
-
+        @foreach ($agendaList as $idx => $agenda)
+            <tr>
+                <td>{{ $idx + 1 }}</td>
+                <td>{{ $agenda->hari }}</td>
+                <td>{{ \Carbon\Carbon::parse($agenda->tanggal)->format('d-m-Y') }}</td>
+                <td>{{ $agenda->nama_kegiatan }}</td>
+                <td>{{ $agenda->hasil }}</td>
+                <td>{{ $agenda->waktu }}</td>
+                <td>{{ $agenda->keterangan }}</td>
+            </tr>
+        @endforeach
+    </table>
 
     <div class="signature">
         <table>
             <tr>
                 <td>Mengetahui,</td>
                 <td></td>
-                <td>{{ date('d F Y') }}</td>
+                <td>Cibinong, ..................... 20...</td>
             </tr>
             <tr>
-                <td>Wali Kelas</td>
+                <td>Waka. Bidang Akademik,</td>
                 <td></td>
-                <td>Waka. Bidang Akademik</td>
+                <td>Wali Kelas</td>
             </tr>
             <tr><td colspan="3"><br><br><br></td></tr>
             <tr>
@@ -120,7 +100,13 @@
                 <td></td>
                 <td>(_________________)</td>
             </tr>
+            <tr>
+                <td>NIP: ......................</td>
+                <td></td>
+                <td>NIP: ......................</td>
+            </tr>
         </table>
     </div>
+
 </body>
 </html>
