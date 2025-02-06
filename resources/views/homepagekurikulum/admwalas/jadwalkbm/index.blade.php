@@ -23,6 +23,10 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -86,6 +90,18 @@
                 transform: translateY(-100%);
             }
         }
+
+    .table-bordered {
+        border: 1px solid #000;
+    }
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #000;
+    }
+    .text-center {
+        text-align: center;
+    }
+
     </style>
 </head>
 
@@ -107,15 +123,19 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-
-       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
-       <div class="user-info d-flex align-items-center">
+      <nav id="navmenu" class="navmenu">
+        <ul>
+        
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <div class="user-info d-flex align-items-center">
             @if(session()->has('kurikulum_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
@@ -124,91 +144,109 @@
                     <span>{{ $kurikulum->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutkurikulum') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
         </div>
-
     </div>
   </header>
 
-  <main class="main">
-
-    <!-- Hero Section -->
+<main class="main">
     <section id="hero" class="hero section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div>
-
-              <h1 class="mb-4">
-               Selamat datang Kurikulum <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a>
+        <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+            <!-- Header dengan Title, Pencarian, dan Tombol -->
+            <div class="mb-4">
+                <h2 class="font-weight-bold">Jadwal KBM</h2>
+                <hr class="my-3">
+                <div class="d-flex align-items-center justify-content-start gap-2">
+                    <a href="{{ route('jadwalkbm.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i> Unduh
+                    </a>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <i class="bi bi-cloud-upload"></i> Unggah Data
+                    </button>
+                </div>
             </div>
-            </div>
-          </div>
+            
+            @if ($jadwalKbms->isEmpty())
+                <div class="alert alert-info">Data jadwal belum tersedia.</div>
+            @else
+                <table>
+                    <tr>
+                        <td>Kelas</td>
+                        <td>: {{ $rombel->nama_kelas }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tahun Pelajaran</td>
+                        <td>: {{ date('Y') }}</td>
+                    </tr>
+                    <tr>
+                    @foreach ($jadwalKbms as $jadwal)
+                    <h5>Nama Wali Kelas : {{ $jadwal->walas->nama }}</h5>
+                    @endforeach
+                    </tr>
+                </table>
+                <br>
 
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
-          </div>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan="2">Senin</th>
+                            <th colspan="2">Selasa</th>
+                            <th colspan="2">Rabu</th>
+                            <th colspan="2">Kamis</th>
+                            <th colspan="2">Jumat</th>
+                        </tr>
+                        <tr>
+                            <th>Jam Ke</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                            <th>Mapel</th>
+                            <th>Guru</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for ($jam = 1; $jam <= 12; $jam++)
+                            <tr>
+                                <td>{{ $jam }}</td>
+                                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
+                                    @php
+                                        // Menemukan jadwal yang sesuai untuk hari dan jam tertentu
+                                        $jadwalHari = $jadwal->$hari ? collect(json_decode($jadwal->$hari, true))->firstWhere('jam', $jam) : null;
+                                    @endphp
+                                    <td>
+                                        @if ($jadwalHari)
+                                            {{ $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($jadwalHari)
+                                            {{ $gurus[$jadwalHari['guru_id']]->nama ?? '-' }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endfor
+                    </tbody>
+                </table>
+            @endif
         </div>
-
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-    <h4>Tahun Ajaran</h4>
-    <p class="mb-0">
-        <a href="/tahunajarandata">Lihat data Tahun Ajaran di Sini</a>
-    </p>
-</div>
-
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Administrasi Walas</h4>
-        <p class="mb-0">
-        <a href="/kurikulumwalas">Lihat Data Administrasi Walas di Sini</a>
-    </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-
-    </section><!-- /Hero Section -->
-
+    </section>
 </main>
+
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>
@@ -262,6 +300,16 @@
                 }, 2000); // Tunda selama 2 detik sebelum animasi
             }
         };
+    </script>
+
+<script>
+        // Menampilkan pesan selama 2 detik dan kemudian menghilangkannya
+        setTimeout(function() {
+            var messageElement = document.getElementById('message');
+            if (messageElement) {
+                messageElement.style.display = 'none';
+            }
+        }, 2000); // 2000 ms = 2 detik
     </script>
 
 </body>

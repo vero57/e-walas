@@ -72,6 +72,9 @@ use App\Http\Controllers\ViewAdmWalasKaprogController;
 use App\Http\Controllers\DetailKelasKaprogController;
 use App\Http\Controllers\AdmWalasViewKepsekController;
 use App\Http\Controllers\ViewAdmWalasKepsekController;
+use App\Http\Controllers\ViewAdmWalasKurikulumController;
+use App\Http\Controllers\AdmWalasKurikulumViewController;
+use App\Http\Controllers\KurikulumWalasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -284,7 +287,7 @@ Route::resource('kakomrombel', KakomRombelController::class);
 Route::resource('kurikulumpage', KurikulumIndexController::class)->name('index', 'homepagekurikulum.index');;
 Route::resource('tahunajarandata', TaDataController::class);
 Route::resource('rombelpage', RombelDataController::class);
-Route::resource('kinerjaguru', KinerjaGuruController::class);
+Route::resource('kurikulumwalas', KurikulumWalasController::class);
 
 // Route Siswa Halaman
     Route::get('/siswapage', [SiswaPageController::class, 'index'])->name('homepagesiswa.index');
@@ -457,7 +460,6 @@ Route::post('/prestasisiswaview/generatepdf', [ViewAdmWalasKaprogController::cla
 Route::get('grafikjaraktempuhview', [ViewAdmWalasKaprogController::class, 'grafikjaraktempuh'])->name('admwalas.grafikjaraktempuh');
 Route::post('/grafikjaraktempuhview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfgrafikjaraktempuh');
 
-
 // Kakom View TA 
 Route::get('/detailkelasview/{walas_id}', [KakomRombelController::class, 'showDetail'])->name('rombel.showDetail');
 
@@ -485,8 +487,27 @@ Route::get('grafikjaraktempuhviewkepsek', [ViewAdmWalasKepsekController::class, 
 // Kepsek View TA 
 Route::get('/detailkelasviewkepsek/{walas_id}', [KepsekRombelController::class, 'showDetailKepsek'])->name('rombel.showDetailKepsek');
 
+// Route Kurikulum Walas Data 
+Route::resource('admwalasviewkurikulum', AdmWalasKurikulumViewController::class);
+Route::get('agendawalasviewkurikulum', [ViewAdmWalaskurikulumController::class, 'agendawalaskurikulum'])->name('admwalas.agendawalaskurikulum');
+Route::get('identiaskelasviewkurikulum', [ViewAdmWalaskurikulumController::class, 'identitaskelaskurikulum'])->name('admwalas.identitaskelaskurikulum');
+Route::get('lembarpengesahanviewkurikulum', [ViewAdmWalaskurikulumController::class, 'lembarpengesahankurikulum'])->name('admwalas.lembarpengesahankurikulum');
+Route::get('strukturorganisasikelasviewkurikulum', [ViewAdmWalaskurikulumController::class, 'strukturorganisasikelaskurikulum'])->name('admwalas.strukturorganisasikelaskurikulum');
+Route::get('jadwalkbmviewkurikulum', [ViewAdmWalaskurikulumController::class, 'jadwalkbmkurikulum'])->name('admwalas.jadwalkbmkurikulum');
+Route::get('presensisviewkurikulum', [ViewAdmWalaskurikulumController::class, 'presensiskurikulum'])->name('admwalas.presensiskurikulum');
+Route::get('piketkelasviewkurikulum', [ViewAdmWalaskurikulumController::class, 'piketkelaskurikulum'])->name('admwalas.piketkelaskurikulum');
+Route::get('serahterimaraporviewkurikulum', [ViewAdmWalaskurikulumController::class, 'serahterimaraporkurikulum'])->name('admwalas.serahterimaraporkurikulum');
+Route::get('catatankasusviewkurikulum', [ViewAdmWalaskurikulumController::class, 'catatankasuskurikulum'])->name('admwalas.catatankasuskurikulum');
+Route::get('daftarpesertadidikviewkurikulum', [ViewAdmWalaskurikulumController::class, 'daftarpesertadidikkurikulum'])->name('admwalas.daftarpesertadidikkurikulum');
+Route::get('rekapitulasijumlahsiswaviewkurikulum', [ViewAdmWalaskurikulumController::class, 'rekapitulasipdidikkurikulum'])->name('admwalas.rekapitulasipdidikkurikulum');
+Route::get('homevisitviewkurikulum', [ViewAdmWalaskurikulumController::class, 'homevisitkurikulum'])->name('admwalas.homevisitkurikulum');
+Route::get('bukutamuviewkurikulum', [ViewAdmWalaskurikulumController::class, 'bukutamuortukurikulum'])->name('admwalas.bukutamuortukurikulum');
+Route::get('persentasesosialekonomiviewkurikulum', [ViewAdmWalaskurikulumController::class, 'persentasesosialekonomikurikulum'])->name('admwalas.persentasesosialekonomikurikulum');
+Route::get('rentangpendapatanortuviewkurikulum', [ViewAdmWalaskurikulumController::class, 'rentangpendapatanortukurikulum'])->name('admwalas.rentangpendapatanortukurikulum');
+Route::get('prestasisiswaviewkurikulum', [ViewAdmWalaskurikulumController::class, 'prestasisiswakurikulum'])->name('admwalas.prestasisiswakurikulum');
+Route::get('grafikjaraktempuhviewkurikulum', [ViewAdmWalaskurikulumController::class, 'grafikjaraktempuhkurikulum'])->name('admwalas.grafikjaraktempuhkurikulum');
 
-// Kurikulum View TA
+// Kurikulum View Kurikulum
 Route::get('/detailkelasviewkurikulum/{walas_id}', [KepsekRombelController::class, 'showDetailKepsek'])->name('rombel.showDetailKurikulum');
 
 
