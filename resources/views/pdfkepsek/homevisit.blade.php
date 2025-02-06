@@ -53,16 +53,18 @@
     <table class="info-table">
         <tr>
             <td>Kelas</td>
-            <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
+            <td>: {{ optional($rombel)->nama_kelas ?? '-' }}</td>
         </tr>
-        <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
         <tr>
-    <td>Tahun Pelajaran</td>
-    <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
+            <td>Wali Kelas</td>
+            <td>: {{ optional($walas)->nama ?? 'Tidak Ada Data' }}</td>
+        </tr>
+        <tr>
+            <td>Tahun Pelajaran</td>
+            <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
         </tr>
     </table>
+
 
     <table>
     <tr>
@@ -103,27 +105,35 @@
 </table>
 
 @php
-\Carbon\Carbon::setLocale('id');
-@endphp
+        $wakaKurikulum = \App\Models\Kurikulum::first(); // Ambil satu data Waka Kurikulum
+        \Carbon\Carbon::setLocale('id');
+    @endphp
+
     <div class="signature">
-        <table>
-            <tr>
-                <td>Mengetahui,</td>
-                <td></td>
-                <td>Cibinong, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</td>
-            </tr>
-            <tr>
-                <td>Wali Kelas</td>
-                <td></td>
-                <td>Waka. Bidang Akademik</td>
-            </tr>
-            <tr><td colspan="3"><br><br><br></td></tr>
-            <tr>
-                <td>(_________________)</td>
-                <td></td>
-                <td>(_________________)</td>
-            </tr>
-        </table>
-    </div>
+    <table style="border: none; width: 100%;">
+        <tr>
+            <td style="text-align: center;">Mengetahui,</td>
+            <td></td>
+            <td style="text-align: center;">Cibinong, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">Waka. Bidang Akademik,</td>
+            <td></td>
+            <td style="text-align: center;">Wali Kelas,</td>
+        </tr>
+        <tr><td colspan="3"><br><br><br></td></tr>
+        <tr>
+            <td style="text-align: center;">({{ optional($wakaKurikulum)->nama ?? '_________________' }})</td>
+            <td></td>
+            <td style="text-align: center;">({{ optional($walas)->nama ?? '_________________' }})</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">NIP: {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+            <td></td>
+            <td style="text-align: center;">NIP: {{ optional($walas)->nip ?? '......................' }}</td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>

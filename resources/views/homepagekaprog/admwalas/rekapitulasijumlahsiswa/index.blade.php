@@ -181,9 +181,9 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <a href="{{ route('admwalas.rekapitulasipdidik', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-                <i class="bi bi-download"></i> Unduh PDF
-            </a>
+                <a href="{{ route('admwalas.rekapitulasipdidik', ['export' => 'pdf', 'walas_id' => $walasIdSelected ?? null]) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <i class="bi bi-download"></i> Unduh PDF
+                </a>
             </div>
         </div>
         <br><br>

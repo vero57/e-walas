@@ -187,11 +187,13 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
-                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdf') }}">
+                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdfkepsekpendapatanortu') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
+                    <input type="hidden" name="walas_id" id="walasIdSelected" value="{{ $walasIdSelected }}">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
-                    <i class="bi bi-download"></i> Unduh PDF</button>
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </button>
                 </form>
 
                     <!-- Search Box -->
@@ -253,51 +255,47 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-    <script>
+<script>
         document.addEventListener("DOMContentLoaded", function () {
-            var ctx = document.getElementById('pendapatanChart').getContext('2d');
-            var dataPendapatan = @json($dataPendapatan);
+    var ctx = document.getElementById('pendapatanChart').getContext('2d');
+    var dataPendapatan = @json($dataPendapatan);  // Data yang sudah difilter berdasarkan walas_id
 
-            new Chart(ctx, {
-                type: 'line', // Bisa diubah menjadi 'pie' atau 'doughnut'
-                data: {
-                    labels: Object.keys(dataPendapatan),
-                    datasets: [{
-                        label: 'Jumlah Siswa',
-                        data: Object.values(dataPendapatan),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)',
-                            'rgba(0, 128, 0, 0.5)',
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(0, 128, 0, 1)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            stepSize: 1
-                        }
-                    }
-                }
-            });
-        });
-
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Object.keys(dataPendapatan),
+            datasets: [{
+                label: 'Jumlah Siswa',
+                data: Object.values(dataPendapatan),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(0, 128, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(0, 128, 0, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+});
     </script>
 </div>
 

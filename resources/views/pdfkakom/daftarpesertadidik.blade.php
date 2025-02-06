@@ -80,28 +80,33 @@
         </tr>
     </table>
 
+    @php
+        $wakaKurikulum = \App\Models\Kurikulum::first(); // Ambil satu data Waka Kurikulum
+        \Carbon\Carbon::setLocale('id');
+    @endphp
+
     <div class="signature">
-        <table>
+        <table style="border: none; width: 100%;">
             <tr>
-                <td>Mengetahui,</td>
+                <td style="text-align: center;">Mengetahui,</td>
                 <td></td>
-                <td>Cibinong, ..................... 20...</td>
+                <td style="text-align: center;">Cibinong, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
-                <td>Waka. Bidang Akademik,</td>
+                <td style="text-align: center;">Waka. Bidang Akademik,</td>
                 <td></td>
-                <td>Wali Kelas</td>
+                <td style="text-align: center;">Wali Kelas,</td>
             </tr>
             <tr><td colspan="3"><br><br><br></td></tr>
             <tr>
-                <td>(_________________)</td>
+                <td style="text-align: center;">({{ optional($wakaKurikulum)->nama ?? '_________________' }})</td>
                 <td></td>
-                <td>(_________________)</td>
+                <td style="text-align: center;">({{ optional($walasList->where('id', $walasIdSelected)->first())->nama ?? '_________________' }})</td>
             </tr>
             <tr>
-                <td>NIP: ......................</td>
+                <td style="text-align: center;">NIP: {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
                 <td></td>
-                <td>NIP: ......................</td>
+                <td style="text-align: center;">NIP: {{ optional($walasList->where('id', $walasIdSelected)->first())->nip ?? '......................' }}</td>
             </tr>
         </table>
     </div>

@@ -181,9 +181,9 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 
-        <a href="{{ route('persentasesosialekonomi.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-            <i class="bi bi-download"></i> Unduh PDF
-        </a>
+            <a href="{{ route('admwalas.persentasesosialekonomikepsek', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
+                <i class="bi bi-download"></i> Unduh PDF
+            </a>
             </div>
         </div>
         <br><br>

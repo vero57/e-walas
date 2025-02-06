@@ -157,7 +157,7 @@
             <div class="d-flex align-items-center justify-content-start">
                 <form id="exportForm" method="POST" action="{{ route('homevisit.generatepdfhomevisit') }}">
                     @csrf
-                    <input type="hidden" id="chartData" name="chartImage">
+                    <input type="hidden" name="walas_id" value="{{ $walasIdSelected }}">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
                         <i class="bi bi-download"></i> Unduh PDF
                     </button>

@@ -214,6 +214,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var ctx = document.getElementById("jarakChart").getContext("2d");
 
+    // Data yang sudah difilter berdasarkan walas yang login
     var dataJarak = @json(array_values($dataJarak));
     var labelsJarak = @json(array_keys($dataJarak));
 

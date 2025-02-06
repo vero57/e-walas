@@ -477,12 +477,16 @@ Route::get('catatankasusviewkepsek', [ViewAdmWalasKepsekController::class, 'cata
 Route::get('daftarpesertadidikviewkepsek', [ViewAdmWalasKepsekController::class, 'daftarpesertadidikkepsek'])->name('admwalas.daftarpesertadidikkepsek');
 Route::get('rekapitulasijumlahsiswaviewkepsek', [ViewAdmWalasKepsekController::class, 'rekapitulasipdidikkepsek'])->name('admwalas.rekapitulasipdidikkepsek');
 Route::get('homevisitviewkepsek', [ViewAdmWalasKepsekController::class, 'homevisitkepsek'])->name('admwalas.homevisitkepsek');
+Route::post('/homevisitviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekhomevisit'])->name('homevisit.generatepdfkepsekhomevisit');
 Route::get('bukutamuviewkepsek', [ViewAdmWalasKepsekController::class, 'bukutamuortukepsek'])->name('admwalas.bukutamuortukepsek');
+Route::post('/bukutamuviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekbukutamuortu'])->name('bukutamuortu.generatepdfkepsekbukutamuortu');
 Route::get('persentasesosialekonomiviewkepsek', [ViewAdmWalasKepsekController::class, 'persentasesosialekonomikepsek'])->name('admwalas.persentasesosialekonomikepsek');
 Route::get('rentangpendapatanortuviewkepsek', [ViewAdmWalasKepsekController::class, 'rentangpendapatanortukepsek'])->name('admwalas.rentangpendapatanortukepsek');
+Route::post('/rentangpendapatanortuviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekpendapatanortu'])->name('pendapatanortu.generatepdfkepsekpendapatanortu');
 Route::get('prestasisiswaviewkepsek', [ViewAdmWalasKepsekController::class, 'prestasisiswakepsek'])->name('admwalas.prestasisiswakepsek');
 Route::post('/prestasisiswaviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekprestasi'])->name('prestasisiswa.generatepdfkepsekprestasi');
 Route::get('grafikjaraktempuhviewkepsek', [ViewAdmWalasKepsekController::class, 'grafikjaraktempuhkepsek'])->name('admwalas.grafikjaraktempuhkepsek');
+Route::post('/ggrafikjaraktempuhviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfkepsekgrafikjaraktempuh');
 
 // Kepsek View TA 
 Route::get('/detailkelasviewkepsek/{walas_id}', [KepsekRombelController::class, 'showDetailKepsek'])->name('rombel.showDetailKepsek');

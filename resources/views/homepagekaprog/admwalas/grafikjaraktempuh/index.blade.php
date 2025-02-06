@@ -175,78 +175,76 @@
     </div>
   </header>
 
-<main class="main">
+  <main class="main">
 
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
+<!-- Hero Section -->
+<section id="hero" class="hero section">
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-        <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
             <h2 class="font-weight-bold">Grafik Jarak Tempuh</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
                 <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdfgrafikjaraktempuh') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
+                    <input type="hidden" name="walas_id" value="{{ $walasIdSelected }}">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
-                    <i class="bi bi-download"></i> Unduh PDF</button>
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </button>
                 </form>
             </div>
         </div>
 
-    <!-- Pesan jika data tidak ditemukan -->
-    @if(isset($message))
-        <div class="alert alert-warning text-center">
-            {{ $message }}
+        @if(isset($message))
+            <div class="alert alert-warning text-center">
+                {{ $message }}
+            </div>
+        @endif
+
+        <div class="container">
+            <h2>Grafik Jarak Tempuh Siswa</h2>
+            <canvas id="jarakChart"></canvas>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById("jarakChart").getContext("2d");
+
+                var dataJarak = @json(array_values($dataJarak));
+                var labelsJarak = @json(array_keys($dataJarak));
+
+                var jarakChart = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: labelsJarak,
+                        datasets: [{
+                            label: "Jumlah Siswa",
+                            data: dataJarak,
+                            backgroundColor: "rgba(54, 162, 235, 0.6)",
+                            borderColor: "rgba(54, 162, 235, 1)",
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+
+                document.getElementById("exportPdfButton").addEventListener("click", function () {
+                    var imageData = document.getElementById("jarakChart").toDataURL("image/png");
+                    document.getElementById("chartData").value = imageData;
+                    document.getElementById("exportForm").submit();
+                });
+            });
+            </script>
         </div>
-    @endif
-
-    <div class="container">
-    <h2>Grafik Jarak Tempuh Siswa</h2>
-
-    <canvas id="jarakChart"></canvas>
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    var ctx = document.getElementById("jarakChart").getContext("2d");
-
-    var dataJarak = @json(array_values($dataJarak));
-    var labelsJarak = @json(array_keys($dataJarak));
-
-    var jarakChart = new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: labelsJarak,
-            datasets: [{
-                label: "Jumlah Siswa",
-                data: dataJarak,
-                backgroundColor: "rgba(54, 162, 235, 0.6)",
-                borderColor: "rgba(54, 162, 235, 1)",
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
-            }
-        }
-    });
-
-    // Event untuk tombol export PDF
-    document.getElementById("exportPdfButton").addEventListener("click", function () {
-        var imageData = document.getElementById("jarakChart").toDataURL("image/png");
-        document.getElementById("chartData").value = imageData;
-        document.getElementById("exportForm").submit();
-    });
-});
-</script>
-
+    </div>
+</section>
 </main>
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>

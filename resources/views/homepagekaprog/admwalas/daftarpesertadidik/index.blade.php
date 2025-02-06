@@ -181,7 +181,7 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex flex-wrap align-items-center justify-content-start">
                 <!-- Tombol Unduh PDF -->
-                <a href="{{ route('admwalas.daftarpesertadidik', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                <a href="{{ route('admwalas.daftarpesertadidik', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
                     <i class="bi bi-download"></i> Unduh PDF
                 </a>
                     <!-- Search Box -->

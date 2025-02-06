@@ -153,9 +153,9 @@
             <h2 class="font-weight-bold">Identitas Kelas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <a href="{{ route('admwalas.identitaskelas') }}?export=pdf" class="btn btn-outline-secondary me-2 mb-2">
-                <i class="bi bi-download"></i>Unduh Data
-                </a>
+            <a href="{{ route('admwalas.identitaskelas') }}?export=pdf&walas_id={{ $walasIdSelected }}" class="btn btn-outline-secondary me-2 mb-2">
+                <i class="bi bi-download"></i> Unduh Data
+            </a>
             </div>
         <br>
 
