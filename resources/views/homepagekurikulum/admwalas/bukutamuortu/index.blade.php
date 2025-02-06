@@ -23,6 +23,10 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -67,6 +71,11 @@
             background-color: #2ecc71; /* Hijau */
         }
 
+        .button-style {
+            display: flex;
+            gap: 10px; /* Mengatur jarak antar tombol */
+        }
+
         /* Animasi slide down */
         @keyframes slideDown {
             from {
@@ -86,6 +95,9 @@
                 transform: translateY(-100%);
             }
         }
+
+
+        
     </style>
 </head>
 
@@ -107,15 +119,20 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-
+      <nav id="navmenu" class="navmenu">
+        <ul>
+        
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
        <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
-       <div class="user-info d-flex align-items-center">
+     <div class="user-info d-flex align-items-center">
             @if(session()->has('kurikulum_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
@@ -124,7 +141,7 @@
                     <span>{{ $kurikulum->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutkurikulum') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
@@ -133,80 +150,100 @@
     </div>
   </header>
 
-  <main class="main">
+<main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
+       <!-- Hero Section -->
+       <section id="hero" class="hero section">
+    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Header dengan Title, Pencarian, dan Tombol -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold">Buku Tamu Orangtua/Wali Murid</h2>
+            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
+            <div class="d-flex align-items-center justify-content-start">
+                <!-- Form Cari Administrasi -->
+                <form id="exportForm" method="POST" action="">
+                    @csrf
+                    <input type="hidden" id="chartData" name="chartImage">
+                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </button>
+                </form>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div>
-
-              <h1 class="mb-4">
-               Selamat datang Kurikulum <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a>
+                    <!-- Search Box -->
+                <div class="searchBox">
+                    <input class="searchInput" type="text" placeholder="  Cari Penyerahan Rapot">
+                    <button class="searchButton" href="#">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
             </div>
-            </div>
-          </div>
+        <br><br>
+        <div class="container mt-4">
+    <h4>Daftar History Buku Tamu Orangtua</h4>
 
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
-            </div>
-          </div>
+    <!-- Pesan jika data tidak ditemukan -->
+    @if(isset($message))
+        <div class="alert alert-warning text-center">
+            {{ $message }}
         </div>
+    @endif
 
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-    <h4>Tahun Ajaran</h4>
-    <p class="mb-0">
-        <a href="/tahunajarandata">Lihat data Tahun Ajaran di Sini</a>
-    </p>
+    <!-- Tabel Data -->
+@if($bukutamu->isNotEmpty())
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Nama Siswa</th>
+                <th>Nama Ortu</th>
+                <th>Keperluan</th>
+                <th>Tindak Lanjut</th>
+                <th>Solusi</th>
+                <th>Foto Dokumen</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($bukutamu as $index => $bukutamuortu)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $bukutamuortu->tanggal }}</td>
+                    <td>{{ $bukutamuortu->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                    <td>{{ $bukutamuortu->nama_orang_tua }}</td>
+                    <td>{{ $bukutamuortu->kasus }}</td>
+                    <td>{{ $bukutamuortu->tindak_lanjut }}</td>
+                    <td>{{ $bukutamuortu->solusi }}</td>
+                    <td>
+                        @if($bukutamuortu->dokumentasi_url)
+                            <img src="{{ asset('storage/'.$bukutamuortu->dokumentasi_url) }}" 
+                                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @else
+                            <p>No image</p>
+                        @endif
+                    </td>
+                    <td class="text-center" colspan="4">
+                        <div class="d-flex justify-content-center">
+                            <a href="/hapusbukutamuortu/{{ $bukutamuortu->id }}" class="btn btn-primary btn-sm me-2">
+                                Hapus
+                            </a>
+                            <a href="{{ route('bukutamuortu.edit', $bukutamuortu->id) }}" class="btn btn-danger btn-sm">
+                                Edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <tr>
+        <td colspan="8" class="text-center">Data masih kosong</td>
+    </tr>
+@endif
+
+</tbody>
 </div>
-
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Administrasi Walas</h4>
-        <p class="mb-0">
-        <a href="/kurikulumwalas">Lihat Data Administrasi Walas di Sini</a>
-    </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-
-    </section><!-- /Hero Section -->
 
 </main>
   
@@ -235,6 +272,20 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.getElementById("exportPdfButton").addEventListener("click", function() {
+        // Jika ada grafik Chart.js yang ingin disertakan, ambil datanya
+        var chartCanvas = document.getElementById("chartCanvas"); // Gantilah dengan ID chart yang benar
+        if (chartCanvas) {
+            var chartImage = chartCanvas.toDataURL("image/png"); // Convert chart ke base64
+            document.getElementById("chartData").value = chartImage;
+        }
+
+        // Submit form setelah data gambar (jika ada) di-set
+        document.getElementById("exportForm").submit();
+    });
+</script>
 
   <script>
         window.onload = function() {

@@ -336,71 +336,59 @@ class ViewAdmWalasKaprogController extends Controller
 
     public function piketkelas(Request $request)
     {
-        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
-
-        // Periksa apakah session 'kakom_id' ada
+        // Pastikan user login sebagai kakom
         if (!session()->has('kakom_id')) {
             return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        // Ambil data kakom yang sedang login
         $kakom = Kakom::find(session('kakom_id'));
-
-        // Periksa apakah data kakom ditemukan
         if (!$kakom) {
             return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
         }
 
+        // Ambil daftar walas berdasarkan kompetensi kakom
         $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id')->toArray();
-
-        // Ambil data walas berdasarkan walas_id yang sesuai
         $walasList = Walas::whereIn('id', $walasIds)->get();
 
-        // Ambil data agenda kegiatan walas berdasarkan walas_id yang sesuai
-        $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
-        // Ambil data kelompok berdasarkan 'walas_id'
-        $piket = JadwalPiket::whereIn('walas_id', $walasIds)->get();
-    
-        // Ambil data siswa yang terhubung dengan kelompok menggunakan model DetailJadwalPiket
-        $detailpiket = DetailJadwalPiket::whereIn('jadwalpikets_id', $piket->pluck('id'))->get();
+        // Ambil walas_id yang dipilih dari query parameter
+        $walasIdSelected = $request->query('walas_id');
 
-        // Ambil data rombel berdasarkan 'walas_id'
-        $rombel = Rombel::where('walas_id', $walasIds)->first();
-        
-        // Periksa apakah rombel ditemukan
-        if (!$rombel) {
-            return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
+        // Jika walas_id dipilih tetapi tidak valid, kembalikan ke daftar walas
+        if ($walasIdSelected && !in_array($walasIdSelected, $walasIds)) {
+            return redirect('/kaprogwalas')->with('error', 'Walas tidak valid.');
         }
 
-        // Ambil data siswa berdasarkan rombel_id yang sama dengan rombel
-        $siswas = Siswa::where('rombels_id', $rombel->id)->get();
-    
+        // Filter data berdasarkan walas_id yang dipilih
+        if ($walasIdSelected) {
+            $piket = JadwalPiket::where('walas_id', $walasIdSelected)->get();
+            $detailpiket = DetailJadwalPiket::whereIn('jadwalpikets_id', $piket->pluck('id'))->get();
+            $rombel = Rombel::where('walas_id', $walasIdSelected)->first();
+            $siswas = $rombel ? Siswa::where('rombels_id', $rombel->id)->get() : collect();
+        } else {
+            $piket = collect();
+            $detailpiket = collect();
+            $siswas = collect();
+            $rombel = null;
+        }
+
         $data = $piket->map(function ($item) use ($detailpiket) {
-            // Ambil siswa yang terhubung berdasarkan jadwalpikets_id
             $siswas = $detailpiket->where('jadwalpikets_id', $item->id)->map(function ($detailpiket) {
-                return \App\Models\Siswa::find($detailpiket->siswas_id); // Ambil data siswa berdasarkan siswas_id
+                return Siswa::find($detailpiket->siswas_id);
             });
-        
             return [
                 'id' => $item->id,
                 'nama_hari' => $item->nama_hari,
-                'siswas' => $siswas, // Menyimpan objek siswa yang terhubung
+                'siswas' => $siswas,
             ];
         })->toArray();
-        
 
-        if ($walasIdSelected) {
-            $piket = $piket->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
-        }
-
-        if (request()->has('export') && request()->get('export') === 'pdf') {
-            $pdf = Pdf::loadView('pdfkakom.jadwalpiket', compact( 'walasList','data', 'siswas', 'rombel'));
+        if ($request->has('export') && $request->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkakom.jadwalpiket', compact('walasList', 'data', 'siswas', 'rombel'));
             return $pdf->stream('Jadwal_Piket.pdf');
         }
 
-        // Return view dengan data yang difilter
-        return view("homepagekaprog.admwalas.jadwalpiket.index", compact('walasList', 'walasIds', 'kakom', 'piket', 'detailpiket', 'data', 'siswas'));
+        return view('homepagekaprog.admwalas.jadwalpiket.index', compact('walasList', 'kakom', 'piket', 'detailpiket', 'data', 'siswas'));
     }
 
     public function serahterimarapor(Request $request)

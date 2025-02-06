@@ -574,7 +574,7 @@
                         <button type="button" class="custom-btn mt-2" data-bs-toggle="modal" data-bs-target="#errorModal">Kesalahan data?</button>
                     </div>
 
-                    <!-- Modal -->
+                    <!-- Modal untuk Perubahan Nomor Ayah -->
                     <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -585,10 +585,15 @@
                                 <div class="modal-body text-center">
                                     <p>Silakan hubungi Walas untuk merubah data.</p>
                                     <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+
+                                    <!-- Input Manual Nama Siswa & Nomor Telepon Baru -->
+                                    <input type="text" id="studentNameAyah" class="form-control mb-2" placeholder="Masukkan Nama Siswa">
+                                    <input type="text" id="newPhoneNumberAyah" class="form-control mb-2" placeholder="Masukkan Nomor Baru (Contoh : 6248109804234)">
+
                                     @if($walas && $walas->no_wa)
-                                        <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" class="btn btn-secondary mt-3">
-                                            <i class="fab fa-whatsapp"></i> Hubungi Walas
-                                        </a>
+                                        <button onclick="sendWhatsAppMessageAyah()" class="btn btn-success mt-3">
+                                            <i class="fab fa-whatsapp"></i> Kirim ke Walas
+                                        </button>
                                     @endif
                                 </div>
                                 <div class="modal-footer">
@@ -671,34 +676,37 @@
                     </div>
                     <div class="col-md-6">
                         <label for="no_wa_ibu" class="form-label">Nomor WhatsApp Ibu</label>
-                        <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 081234567890" value="{{ old('no_wa_ibu', $biodata->no_wa_ibu ?? '') }}" required>
+                        <input type="text" name="no_wa_ibu" id="no_wa_ibu" class="form-control" maxlength="15" placeholder="Contoh: 6281234567890" value="{{ old('no_wa_ibu', $biodata->no_wa_ibu ?? '') }}" required>
                         <button type="button" class="custom-btn mt-2" data-bs-toggle="modal" data-bs-target="#errorModal2">Kesalahan data?</button>
                     </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="errorModal2" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title" id="errorModalLabel">Kesalahan Data Nomor WhatsApp Ibu?</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <p>Silakan hubungi Walas untuk merubah data.</p>
-                                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
-                                    @if($walas && $walas->no_wa)
-                                        <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" class="btn btn-secondary mt-3">
-                                            <i class="fab fa-whatsapp"></i> Hubungi Walas
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
+                    <!-- Modal untuk Perubahan Nomor Ibu -->
+                        <div class="modal fade" id="errorModal2" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger text-white">
+                                        <h5 class="modal-title" id="errorModalLabel">Kesalahan Data Nomor WhatsApp Ibu?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <p>Silakan hubungi Walas dengan mengisi data untuk merubah data.</p>
+                                        <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                                        
+                                        <input type="text" id="studentNameIbu" class="form-control mb-2" placeholder="Masukkan Nama Siswa">
+                                        <input type="text" id="newPhoneNumberIbu" class="form-control mb-2" placeholder="Masukkan Nomor Baru (Contoh : 62412384091)">
+                                        
+                                        @if($walas && $walas->no_wa)
+                                            <button onclick="sendWhatsAppMessageIbu()" class="btn btn-secondary mt-3">
+                                                <i class="fab fa-whatsapp"></i> Kirim ke Walas
+                                            </button>
+                                        @endif
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
                 </div>
                 <br><br>
                 <h4 class="text-bold">Rentang Pendapatan Kedua Orangtua</h4>
@@ -875,6 +883,65 @@
     } else {
         pekerjaanInput.style.display = "none";
     }
+}
+</script>
+
+<script>
+function sendWhatsAppMessageAyah() {
+    var studentName = document.getElementById("studentNameAyah").value.trim();
+    var phoneNumber = document.getElementById("newPhoneNumberAyah").value.trim();
+    
+    if (studentName === "" || phoneNumber === "" || isNaN(phoneNumber)) {
+        alert("Masukkan nama dan nomor telepon yang valid!");
+        return;
+    }
+
+    var walasPhoneNumber = "{{ $walas->no_wa ?? '' }}"; // Ambil nomor WA Walas
+
+    if (walasPhoneNumber === "") {
+        alert("Nomor WhatsApp Walas tidak tersedia.");
+        return;
+    }
+
+    var message = encodeURIComponent(
+        "Mengubah Nomor Telepon Orang Tua\n\n" +
+        "Nama Siswa: " + studentName + "\n" +
+        "No Telp yang dirubah: Ayah\n" +
+        "No Telp Baru: " + phoneNumber
+    );
+
+    var waUrl = "https://wa.me/" + walasPhoneNumber + "?text=" + message;
+    window.open(waUrl, "_blank");
+}
+</script>
+
+
+<script>
+function sendWhatsAppMessageIbu() {
+    var studentName = document.getElementById("studentNameIbu").value.trim();
+    var phoneNumber = document.getElementById("newPhoneNumberIbu").value.trim();
+    
+    if (studentName === "" || phoneNumber === "" || isNaN(phoneNumber)) {
+        alert("Masukkan nama dan nomor telepon yang valid!");
+        return;
+    }
+
+    var walasPhoneNumber = "{{ $walas->no_wa ?? '' }}"; // Ambil nomor WA Walas
+
+    if (walasPhoneNumber === "") {
+        alert("Nomor WhatsApp Walas tidak tersedia.");
+        return;
+    }
+
+    var message = encodeURIComponent(
+        "Mengubah Nomor Telepon Orang Tua\n\n" +
+        "Nama Siswa: " + studentName + "\n" +
+        "No Telp yang dirubah: Ibu\n" +
+        "No Telp Baru: " + phoneNumber
+    );
+
+    var waUrl = "https://wa.me/" + walasPhoneNumber + "?text=" + message;
+    window.open(waUrl, "_blank");
 }
 </script>
 

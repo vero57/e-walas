@@ -28,29 +28,30 @@ use App\Models\PersentaseSosialEkonomi;
 use App\Models\BiodataSiswa;
 use App\Models\PrestasiSiswa;
 use App\Models\Kepsek;
+use App\Models\Kurikulum;
 use Illuminate\Support\Facades\DB;
 
-class ViewAdmWalasKepsekController extends Controller
+class ViewAdmWalasKurikulumController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function agendawalaskepsek(Request $request)
+    public function agendawalaskurikulum(Request $request)
     {
         // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
-        $kepsek = Auth::guard('kepseks')->user();  
+        $kurikulum = Auth::guard('kurikulums')->user();  
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
         }
 
         // Ambil semua ID walas
@@ -73,28 +74,28 @@ class ViewAdmWalasKepsekController extends Controller
         $agendaList = $agendaList->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.agendawalas.index", compact('walasList', 'walasIds', 'kepsek', 'agendaList'));
+        return view("homepagekurikulum.admwalas.agendawalas.index", compact('walasList', 'walasIds', 'kurikulum', 'agendaList'));
     }
 
-    public function identitaskelaskepsek(Request $request)
+    public function identitaskelaskurikulum(Request $request)
     {
-         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-         $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+          // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
+        $kurikulum = Auth::guard('kurikulums')->user();  
 
-         // Periksa apakah session 'kepsek_id' ada
-         if (!session()->has('kepsek_id')) {
-             return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
-         }
- 
-         // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-         $kepsek = Kepsek::find(session('kepsek_id'));
- 
-         // Periksa apakah data kepsek ditemukan
-         if (!$kepsek) {
-             return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
-         }
- 
-         // Ambil semua ID walas
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
+
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
+
+        // Ambil semua ID walas
         $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
 
         // Ambil data walas berdasarkan ID yang sesuai
@@ -113,32 +114,32 @@ class ViewAdmWalasKepsekController extends Controller
         $identiasKelasList = $identiasKelasList->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.identitaskelas.index", compact('walasList', 'walasIds', 'kepsek', 'identiasKelasList'));
+        return view("homepagekurikulum.admwalas.identitaskelas.index", compact('walasList', 'walasIds', 'kurikulum', 'identiasKelasList'));
     } 
 
-    public function lembarpengesahankepsek(Request $request)
+    public function lembarpengesahankurikulum(Request $request)
     {
-        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-        $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+        // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
+        $kurikulum = Auth::guard('kurikulums')->user();  
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
         }
 
         // Ambil semua ID walas
-       $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+        $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
 
-       // Ambil data walas berdasarkan ID yang sesuai
-       $walasList = Walas::whereIn('id', $walasIds)->get();
+        // Ambil data walas berdasarkan ID yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
 
        // Ambil data agenda kegiatan walas berdasarkan walas_id yang sesuai
        $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
@@ -157,32 +158,33 @@ class ViewAdmWalasKepsekController extends Controller
         $lembarPengesahan = $lembarPengesahan->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.lembarpengesahan.index", compact('walasList', 'walasIds', 'kepsek', 'lembarPengesahan'));
+        return view("homepagekurikulum.admwalas.lembarpengesahan.index", compact('walasList', 'walasIds', 'kurikulum', 'lembarPengesahan'));
     } 
 
-    public function strukturorganisasikelaskepsek(Request $request)
+    public function strukturorganisasikelaskurikulum(Request $request)
     {
-         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-         $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+          // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
+        $kurikulum = Auth::guard('kurikulums')->user();  
 
-         // Periksa apakah session 'kepsek_id' ada
-         if (!session()->has('kepsek_id')) {
-             return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
-         }
- 
-         // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-         $kepsek = Kepsek::find(session('kepsek_id'));
- 
-         // Periksa apakah data kepsek ditemukan
-         if (!$kepsek) {
-             return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
-         }
- 
-         // Ambil semua ID walas
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
+
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
+
+        // Ambil semua ID walas
         $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
 
-        // Ambil data walas berdasarkan walas_id yang sesuai
+        // Ambil data walas berdasarkan ID yang sesuai
         $walasList = Walas::whereIn('id', $walasIds)->get();
+
 
         // Ambil data agenda kegiatan walas berdasarkan walas_id yang sesuai
         $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
@@ -196,29 +198,31 @@ class ViewAdmWalasKepsekController extends Controller
         $strukturOrganisasi = $strukturOrganisasi->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.strukturorganisasi.index", compact('walasList', 'walasIds', 'kepsek', 'strukturOrganisasi'));
+        return view("homepagekurikulum.admwalas.strukturorganisasi.index", compact('walasList', 'walasIds', 'kurikulum', 'strukturOrganisasi'));
     } 
 
-    public function jadwalkbmkepsek(Request $request)
+    public function jadwalkbmkurikulum(Request $request)
     {
         // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
-        $kepsek = Auth::guard('kepseks')->user();
+        $kurikulum = Auth::guard('kurikulums')->user();  
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
         }
 
         // Ambil semua ID walas
         $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+
+        // Ambil data walas berdasarkan ID yang sesuai
         $walasList = Walas::whereIn('id', $walasIds)->get();
 
         // Ambil walas_id dari URL query parameter
@@ -269,32 +273,32 @@ class ViewAdmWalasKepsekController extends Controller
         }
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.jadwalkbm.index", compact('walasList', 'walasIds', 'kepsek', 'jadwalKbms', 'rombel', 'siswa'));
+        return view("homepagekurikulum.admwalas.jadwalkbm.index", compact('walasList', 'walasIds', 'kurikulum', 'jadwalKbms', 'rombel', 'siswa'));
     }
 
 
-    public function presensiskepsek(Request $request)
+    public function presensiskurikulum(Request $request)
     {
-        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-        $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+        // Menggunakan guard 'kurikulums' untuk mendapatkan data kurikulum yang login
+        $kurikulum = Auth::guard('kurikulums')->user();  
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = Kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
         }
 
         // Ambil semua ID walas
         $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
 
-        // Ambil data walas berdasarkan walas_id yang sesuai
+        // Ambil data walas berdasarkan ID yang sesuai
         $walasList = Walas::whereIn('id', $walasIds)->get();
 
         // Ambil data walas_id yang dipilih dari query parameter
@@ -315,29 +319,26 @@ class ViewAdmWalasKepsekController extends Controller
             ->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.presensi.index", compact('walasList', 'walasIds', 'kepsek', 'presensis'));
+        return view("homepagekurikulum.admwalas.presensi.index", compact('walasList', 'walasIds', 'kurikulum', 'presensis'));
     }
 
-    public function piketkelaskepsek(Request $request)
+    public function piketkelaskurikulum(Request $request)
     {
-         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-         $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+        // Menggunakan guard 'kurikulums' untuk mendapatkan data kurikulum yang login
+        $kurikulum = Auth::guard('kurikulums')->user();
 
-         // Periksa apakah session 'kepsek_id' ada
-         if (!session()->has('kepsek_id')) {
-             return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
-         }
- 
-         // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-         $kepsek = Kepsek::find(session('kepsek_id'));
- 
-         // Periksa apakah data kepsek ditemukan
-         if (!$kepsek) {
-             return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
-         }
- 
-         // Ambil semua ID walas
-         $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = kurikulum::find(session('kurikulum_id'));
+
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
 
         // Ambil walas_id yang dipilih dari query parameter
         $walasIdSelected = $request->query('walas_id');
@@ -381,25 +382,26 @@ class ViewAdmWalasKepsekController extends Controller
         })->toArray();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.jadwalpiket.index", compact('walasList', 'kepsek', 'piket', 'detailpiket', 'data', 'siswas'));
+        return view("homepagekurikulum.admwalas.jadwalpiket.index", compact('walasList', 'kurikulum', 'piket', 'detailpiket', 'data', 'siswas'));
     }
 
-    public function serahterimaraporkepsek(Request $request)
+
+    public function serahterimaraporkurikulum(Request $request)
     {
         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-        $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+        $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
         }
 
         // Ambil semua ID walas
@@ -420,25 +422,25 @@ class ViewAdmWalasKepsekController extends Controller
         $rapor = $rapor->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.daftarpenyerahanrapot.index", compact('walasList', 'walasIds', 'kepsek', 'rapor'));
+        return view("homepagekurikulum.admwalas.daftarpenyerahanrapot.index", compact('walasList', 'walasIds', 'kurikulum', 'rapor'));
     }
 
-    public function catatankasuskepsek(Request $request)
+    public function catatankasuskurikulum(Request $request)
     {
         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-        $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+        $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
         }
 
         // Ambil semua ID walas
@@ -459,25 +461,25 @@ class ViewAdmWalasKepsekController extends Controller
         $catatankasus = $catatankasus->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.catatankasus.index", compact('walasList', 'walasIds', 'kepsek', 'catatankasus'));
+        return view("homepagekurikulum.admwalas.catatankasus.index", compact('walasList', 'walasIds', 'kurikulum', 'catatankasus'));
     }
 
-    public function daftarpesertadidikkepsek(Request $request)
+    public function daftarpesertadidikkurikulum(Request $request)
     {
-        // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
-        $kepsek = Auth::guard('kepseks')->user();
+        // Menggunakan guard 'kurikulums' untuk mendapatkan data kurikulum yang login
+        $kurikulum = Auth::guard('kurikulums')->user();
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
         }
 
         // Ambil semua ID walas dalam bentuk array
@@ -506,26 +508,26 @@ class ViewAdmWalasKepsekController extends Controller
         });
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.daftarpesertadidik.index", compact('walasList', 'walasIds', 'kepsek', 'daftarPDidik', 'jenisKelaminCount'));
+        return view("homepagekurikulum.admwalas.daftarpesertadidik.index", compact('walasList', 'walasIds', 'kurikulum', 'daftarPDidik', 'jenisKelaminCount'));
     }
 
 
-    public function rekapitulasipdidikkepsek(Request $request)
+    public function rekapitulasipdidikkurikulum(Request $request)
     {
         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-        $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+        $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-        // Periksa apakah session 'kepsek_id' ada
-        if (!session()->has('kepsek_id')) {
-            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('kurikulum_id')) {
+            return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-        $kepsek = Kepsek::find(session('kepsek_id'));
+        // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+        $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-        // Periksa apakah data kepsek ditemukan
-        if (!$kepsek) {
-            return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+        // Periksa apakah data kurikulum ditemukan
+        if (!$kurikulum) {
+            return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
         }
 
         // Ambil semua ID walas
@@ -546,25 +548,25 @@ class ViewAdmWalasKepsekController extends Controller
         $rekapitulasiPDidik = $rekapitulasiPDidik->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.rekapitulasijumlahsiswa.index", compact('walasList', 'walasIds', 'kepsek', 'rekapitulasiPDidik'));
+        return view("homepagekurikulum.admwalas.rekapitulasijumlahsiswa.index", compact('walasList', 'walasIds', 'kurikulum', 'rekapitulasiPDidik'));
     }
 
-    public function homevisitkepsek(Request $request)
+    public function homevisitkurikulum(Request $request)
     {
        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-       $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+       $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-       // Periksa apakah session 'kepsek_id' ada
-       if (!session()->has('kepsek_id')) {
-           return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+       // Periksa apakah session 'kurikulum_id' ada
+       if (!session()->has('kurikulum_id')) {
+           return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
        }
 
-       // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-       $kepsek = Kepsek::find(session('kepsek_id'));
+       // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+       $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-       // Periksa apakah data kepsek ditemukan
-       if (!$kepsek) {
-           return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kurikulum) {
+           return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
        // Ambil semua ID walas
@@ -585,25 +587,25 @@ class ViewAdmWalasKepsekController extends Controller
         $homevisit = $homevisit->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.homevisit.index", compact('walasList', 'walasIds', 'kepsek', 'homevisit'));
+        return view("homepagekurikulum.admwalas.homevisit.index", compact('walasList', 'walasIds', 'kurikulum', 'homevisit'));
     }
 
-    public function bukutamuortukepsek(Request $request)
+    public function bukutamuortukurikulum(Request $request)
     {
          // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-       $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+       $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-       // Periksa apakah session 'kepsek_id' ada
-       if (!session()->has('kepsek_id')) {
-           return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+       // Periksa apakah session 'kurikulum_id' ada
+       if (!session()->has('kurikulum_id')) {
+           return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
        }
 
-       // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-       $kepsek = Kepsek::find(session('kepsek_id'));
+       // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+       $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-       // Periksa apakah data kepsek ditemukan
-       if (!$kepsek) {
-           return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kurikulum) {
+           return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
        // Ambil semua ID walas
@@ -624,25 +626,25 @@ class ViewAdmWalasKepsekController extends Controller
         $bukutamu = $bukutamu->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.bukutamuortu.index", compact('walasList', 'walasIds', 'kepsek', 'bukutamu'));
+        return view("homepagekurikulum.admwalas.bukutamuortu.index", compact('walasList', 'walasIds', 'kurikulum', 'bukutamu'));
     }
 
-    public function persentasesosialekonomikepsek(Request $request)
+    public function persentasesosialekonomikurikulum(Request $request)
     {
         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-       $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+       $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-       // Periksa apakah session 'kepsek_id' ada
-       if (!session()->has('kepsek_id')) {
-           return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+       // Periksa apakah session 'kurikulum_id' ada
+       if (!session()->has('kurikulum_id')) {
+           return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
        }
 
-       // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-       $kepsek = Kepsek::find(session('kepsek_id'));
+       // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+       $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-       // Periksa apakah data kepsek ditemukan
-       if (!$kepsek) {
-           return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kurikulum) {
+           return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
        // Ambil semua ID walas
@@ -663,25 +665,25 @@ class ViewAdmWalasKepsekController extends Controller
         $persentasesosialekonomi = $persentasesosialekonomi->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.persentasesosialekonomi.index", compact('walasList', 'walasIds', 'kepsek', 'persentasesosialekonomi'));
+        return view("homepagekurikulum.admwalas.persentasesosialekonomi.index", compact('walasList', 'walasIds', 'kurikulum', 'persentasesosialekonomi'));
     }
 
-    public function rentangpendapatanortukepsek(Request $request)
+    public function rentangpendapatanortukurikulum(Request $request)
     {
          // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-       $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+       $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-       // Periksa apakah session 'kepsek_id' ada
-       if (!session()->has('kepsek_id')) {
-           return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+       // Periksa apakah session 'kurikulum_id' ada
+       if (!session()->has('kurikulum_id')) {
+           return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
        }
 
-       // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-       $kepsek = Kepsek::find(session('kepsek_id'));
+       // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+       $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-       // Periksa apakah data kepsek ditemukan
-       if (!$kepsek) {
-           return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kurikulum) {
+           return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
        // Ambil semua ID walas
@@ -725,25 +727,25 @@ class ViewAdmWalasKepsekController extends Controller
         }
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.pendapatanortu.index", compact('walasList', 'walasIds', 'kepsek','dataPendapatan', 'pendapatan', 'walasIdSelected'));
+        return view("homepagekurikulum.admwalas.pendapatanortu.index", compact('walasList', 'walasIds', 'kurikulum','dataPendapatan', 'pendapatan', 'walasIdSelected'));
     }
 
-    public function prestasisiswakepsek(Request $request)
+    public function prestasisiswakurikulum(Request $request)
     {
          // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-       $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+       $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-       // Periksa apakah session 'kepsek_id' ada
-       if (!session()->has('kepsek_id')) {
-           return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+       // Periksa apakah session 'kurikulum_id' ada
+       if (!session()->has('kurikulum_id')) {
+           return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
        }
 
-       // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-       $kepsek = Kepsek::find(session('kepsek_id'));
+       // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+       $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-       // Periksa apakah data kepsek ditemukan
-       if (!$kepsek) {
-           return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kurikulum) {
+           return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
        // Ambil semua ID walas
@@ -764,25 +766,25 @@ class ViewAdmWalasKepsekController extends Controller
         $prestasisiswa = $prestasisiswa->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kepsek', 'prestasisiswa'));
+        return view("homepagekurikulum.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kurikulum', 'prestasisiswa'));
     }
 
-    public function grafikjaraktempuhkepsek(Request $request)
+    public function grafikjaraktempuhkurikulum(Request $request)
     {
         // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-       $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+       $kurikulum = Auth::guard('kurikulums')->user();  // ini akan mendapatkan data kurikulum yang sedang login
 
-       // Periksa apakah session 'kepsek_id' ada
-       if (!session()->has('kepsek_id')) {
-           return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+       // Periksa apakah session 'kurikulum_id' ada
+       if (!session()->has('kurikulum_id')) {
+           return redirect('/loginkurikulum')->with('error', 'Silakan login terlebih dahulu.');
        }
 
-       // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-       $kepsek = Kepsek::find(session('kepsek_id'));
+       // Ambil data kurikulum berdasarkan 'kurikulum_id' yang ada di session
+       $kurikulum = kurikulum::find(session('kurikulum_id'));
 
-       // Periksa apakah data kepsek ditemukan
-       if (!$kepsek) {
-           return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+       // Periksa apakah data kurikulum ditemukan
+       if (!$kurikulum) {
+           return redirect('/loginkurikulum')->with('error', 'Data Kaprog tidak ditemukan.');
        }
 
        // Ambil semua ID walas
@@ -840,7 +842,7 @@ class ViewAdmWalasKepsekController extends Controller
         $grafikjaraktempuh = $grafikjaraktempuh->get();
 
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.grafikjaraktempuh.index", compact('walasList', 'walasIds', 'kepsek', 'grafikjaraktempuh', 'dataJarak'));
+        return view("homepagekurikulum.admwalas.grafikjaraktempuh.index", compact('walasList', 'walasIds', 'kurikulum', 'grafikjaraktempuh', 'dataJarak'));
     }
 
     /**

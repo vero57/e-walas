@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong - Kurikulum</title>
+  <title>E Walas SMKN 1 Cibinong - Walas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="images/logokampak.png" rel="icon">
+  <link href="../../../images/logokampak.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -18,14 +18,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"rel="stylesheet"/>
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="../../../assets/css/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: iLanding
@@ -86,6 +90,9 @@
                 transform: translateY(-100%);
             }
         }
+
+
+        
     </style>
 </head>
 
@@ -107,106 +114,98 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminwalas" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
 
-
-       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
-       <div class="user-info d-flex align-items-center">
-            @if(session()->has('kurikulum_id'))
-                <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
-                
-                <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekurikulum" class="text-decoration-none">
-                    <span>{{ $kurikulum->nama }}</span>  <!-- Nama Walas yang sedang login -->
-                </a>
-            @endif
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
-                @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
-            </form>
-        </div>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+        
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <form action="{{ route('logoutwalas') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn-getstarted">Logout</button>
+                                </form>
+      
 
     </div>
   </header>
 
-  <main class="main">
+<main class="main">
 
-    <!-- Hero Section -->
+      <!-- Edit Form Catatan Kasus Siswa -->
     <section id="hero" class="hero section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div>
-
-              <h1 class="mb-4">
-               Selamat datang Kurikulum <br>
-                <span class="accent-text">SMK Negeri 1 Cibinong</span>
-              </h1>
-
-              <p class="mb-4 mb-md-5">
-               Sudah Siap Beroperasi Hari Ini?
-              </p>
-
-              <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a>
+        <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+            <!-- Header dengan Title -->
+            <div class="mb-4">
+                <h2 class="font-weight-bold">Edit Catatan Kasus Siswa</h2>
+                <hr class="my-3">
             </div>
-            </div>
-          </div>
 
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
+            <!-- Formulir Edit Catatan Kasus dalam Card -->
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Edit Catatan Kasus</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('catatankasus.update', $catatan->id) }}" method="POST">
+                            @csrf
+                            @method('PUT') <!-- Gunakan metode PUT untuk update -->
 
+                            <!-- Wali Kelas -->
+                            <div class="mb-3">
+                                <label for="walas_id" class="form-label">Wali Kelas:</label>
+                                <input type="text" class="form-control" value="{{ $walas->nama }}" disabled>
+                                <input type="hidden" name="walas_id" value="{{ $walas->id }}">
+                            </div>
+
+                            <!-- Siswa -->
+                            <div class="mb-3">
+                                <label for="siswas_id" class="form-label">Pilih Siswa:</label>
+                                <select name="siswas_id" id="siswas_id" class="form-control" required>
+                                    @foreach ($siswas as $s)
+                                        <option value="{{ $s->id }}" 
+                                            {{ $catatan->siswas_id == $s->id ? 'selected' : '' }}>
+                                            {{ $s->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Kasus -->
+                            <div class="mb-3">
+                                <label for="kasus" class="form-label">Kasus Siswa:</label>
+                                <input type="text" name="kasus" id="kasus" class="form-control" 
+                                    value="{{ $catatan->kasus }}" required>
+                            </div>
+
+                            <!-- Tindak Lanjut -->
+                            <div class="mb-3">
+                                <label for="tindak_lanjut" class="form-label">Tindak Lanjut:</label>
+                                <input type="text" name="tindak_lanjut" id="tindak_lanjut" class="form-control" 
+                                    value="{{ $catatan->tindak_lanjut }}" required>
+                            </div>
+
+                            <!-- Keterangan -->
+                            <div class="mb-3">
+                                <label for="keterangan" class="form-label">Keterangan:</label>
+                                <textarea name="keterangan" id="keterangan" class="form-control" required>{{ $catatan->keterangan }}</textarea>
+                            </div>
+
+                            <!-- Tombol Simpan -->
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
+    </section>
 
-        <div class="row stats-row gy-4 mt-5 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-trophy"></i>
-      </div>
-      <div class="stat-content">
-    <h4>Tahun Ajaran</h4>
-    <p class="mb-0">
-        <a href="/tahunajarandata">Lihat data Tahun Ajaran di Sini</a>
-    </p>
-</div>
-
-    </div>
-  </div>
-  <div class="col-lg-3 col-md-6">
-    <div class="stat-item text-center">
-      <div class="stat-icon">
-        <i class="bi bi-briefcase"></i>
-      </div>
-      <div class="stat-content">
-        <h4>Administrasi Walas</h4>
-        <p class="mb-0">
-        <a href="/kurikulumwalas">Lihat Data Administrasi Walas di Sini</a>
-    </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-
-    </section><!-- /Hero Section -->
 
 </main>
   
@@ -226,15 +225,15 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="/../../assets/vendor/aos/aos.js"></script>
+  <script src="/../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="/../../assets/js/main.js"></script>
 
   <script>
         window.onload = function() {
