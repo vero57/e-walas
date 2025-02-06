@@ -724,58 +724,73 @@ $homevisit = $homevisit->get();
         return view("homepagekaprog.admwalas.bukutamuortu.index", compact('walasList', 'walasIds', 'kakom', 'bukutamu'));
     }
     public function generatePDFbukutamuortu(Request $request)
-{
-    // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-    $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
+    {
+        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        $kakom = Auth::guard('kakoms')->user();
 
-    // Periksa apakah session 'kakom_id' ada
-    if (!session()->has('kakom_id')) {
-        return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kakom_id' ada
+        if (!session()->has('kakom_id')) {
+            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
+        $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
+
+        // Ambil data walas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+
+        // Ambil walas_id yang dipilih dari query parameter (jika ada)
+        $walasIdSelected = $request->query('walas_id');
+
+        // Jika tidak ada walas_id yang dipilih, gunakan default walas pertama dari daftar
+        if (!$walasIdSelected && $walasList->isNotEmpty()) {
+            $walasIdSelected = $walasList->first()->id;
+        }
+
+        // Ambil data walas yang dipilih
+        $walas = Walas::find($walasIdSelected);
+        if (!$walas) {
+            return redirect()->back()->with('error', 'Data Wali Kelas tidak ditemukan.');
+        }
+
+        // Ambil data rombel berdasarkan walas_id yang dipilih
+        $rombel = Rombel::where('walas_id', $walasIdSelected)->first();
+        if (!$rombel) {
+            return redirect()->back()->with('error', 'Rombel tidak ditemukan.');
+        }
+
+        $bukutamu = BukuTamuOrangtua::query();
+
+        if ($walasIdSelected) {
+            // Filter berdasarkan walas_id yang dipilih
+            $bukutamu = $bukutamu->where('walas_id', $walasIdSelected);
+        } else {
+            // Jika tidak ada walasIdSelected, tampilkan semua data berdasarkan kompetensi kakom
+            $bukutamu = $bukutamu->whereIn('walas_id', $walasIds);
+        }
+
+        $bukutamu = $bukutamu->get();
+
+
+        // Konversi gambar ke base64 jika ada dokumentasi
+        foreach ($bukutamu as $item) {
+            $item->dokumentasi_base64 = $this->convertToBase64($item->dokumentasi_url);
+        }
+
+        // Load view PDF dengan data yang difilter
+        $pdf = Pdf::loadView('pdfkakom.bukutamuortu', compact('rombel', 'walas', 'kakom', 'bukutamu'));
+
+        return $pdf->stream('Buku_Tamu_Ortu.pdf');
     }
 
-    // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
-    $kakom = Kakom::find(session('kakom_id'));
-
-    // Periksa apakah data kakom ditemukan
-    if (!$kakom) {
-        return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
-    }
-
-    // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
-    $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
-
-    // Ambil data walas berdasarkan walas_id yang sesuai
-    $walasList = Walas::whereIn('id', $walasIds)->get();
-
-    // Ambil data agenda kegiatan walas berdasarkan walas_id yang sesuai
-    $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
-    $bukutamu = BukuTamuOrangtua::whereIn('walas_id', $walasIds);
-
-    if ($walasIdSelected) {
-        $bukutamu = $bukutamu->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
-    }
-    
-    $rombel = Rombel::whereIn('walas_id', $walasIds)->first();
-            
-    
-    if (!$rombel) {
-        return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
-    }
-
-    // Ambil data agenda sesuai filter walas_id
-    $bukutamu = $bukutamu->get();
-
-    $dokumImage = $request->input('dokumImage');
-
-    foreach ($bukutamu as $item) {
-        $item->dokumentasi_base64 = $this->convertToBase64($item->dokumentasi_url);
-    }
-
-    // Load view PDF
-    $pdf = Pdf::loadView('pdfkakom.bukutamuortu', compact('rombel','walasList', 'walasIds', 'kakom', 'bukutamu', 'dokumImage'));
-
-    return $pdf->stream('Buku_Tamu_Ortu.pdf');
-}
 
     public function persentasesosialekonomi(Request $request)
     {
