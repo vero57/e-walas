@@ -67,7 +67,7 @@ class JadwalKbmController extends Controller
                 'gurus' => $gurus
             ];
             $pdf = Pdf::loadView('pdf.jadwalkbm', $data)->setPaper('A4', 'portrait');
-            return $pdf->download('Jadwal_KBM.pdf');
+            return $pdf->stream('Jadwal_KBM.pdf');
         }
     
         return view('admwalas.jadwalkbm.index', compact('jadwalKbms', 'mapels', 'gurus', 'walas', 'rombels', 'rombel', 'siswa'));

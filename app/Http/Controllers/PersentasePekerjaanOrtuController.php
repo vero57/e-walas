@@ -52,7 +52,7 @@ class PersentasePekerjaanOrtuController extends Controller
 
         if (request()->has('export') && request()->get('export') === 'pdf') {
             $pdf = Pdf::loadView('pdf.persentasesosialekonomi', compact('walas', 'siswas', 'rombel', 'persentasesosialekonomi'));
-            return $pdf->download('Persentase Sosial Ekonomi.pdf');
+            return $pdf->stream('Persentase Sosial Ekonomi.pdf');
         }
         // Kirim data walas, siswa, dan rekapitulasi jumlah siswa ke view
         return view('admwalas.persentasesosialekonomi.index', compact('walas', 'persentasesosialekonomi', 'siswas'));

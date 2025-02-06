@@ -42,6 +42,12 @@
   ======================================================== -->
 
   <style>
+    #pendapatanChart {
+    max-width: 4000px; /* Atur lebar maksimum */
+    height: 400px; /* Pastikan proporsi tetap */
+    display: block;
+    margin: 0 auto; /* Pusatkan jika perlu */
+}
         /* Kotak pesan */
         .alert {
             position: fixed;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Visit Report</title>
+    <title>Jadwal KBM</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,24 +40,17 @@
             width: 100%;
             text-align: left;
         }
-        .img-container img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
     </style>
 </head>
 <body>
-    <div class="title">LAPORAN HOME VISIT</div>
+
+    <div class="title">JADWAL KEGIATAN BELAJAR MENGAJAR (KBM)</div>
 
     <table class="info-table">
         <tr>
             <td>Kelas</td>
-            <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
+            <td>: {{ $jadwalKbms->first()->rombel->nama_kelas ?? '-' }}</td>
         </tr>
-        <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
         <tr>
     <td>Tahun Pelajaran</td>
     <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
@@ -65,57 +58,43 @@
     </table>
 
     <table>
-    <tr>
-        <th>No</th>
-        <th>Tanggal</th>
-        <th>Nama Peserta Didik</th>
-        <th>Keperluan</th>
-        <th>Solusi</th>
-        <th>Tindak Lanjut</th>
-        <th>Foto Surat</th>
-        <th>Dokumentasi</th>
-    </tr>
-    @foreach($homevisit as $index => $item)
         <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $item->tanggal }}</td>
-            <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
-            <td>{{ $item->kasus }}</td>
-            <td>{{ $item->solusi }}</td>
-            <td>{{ $item->tindak_lanjut }}</td>
-            <td>
-    @if($item->bukti_base64)
-        <img src="{{ $item->bukti_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
-
-<td>
-    @if($item->dokumentasi_base64)
-        <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
+            <th rowspan="2">Jam Ke</th>
+            @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $hari)
+                <th colspan="2">{{ $hari }}</th>
+            @endforeach
         </tr>
-    @endforeach
-</table>
+        <tr>
+            @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $hari)
+                <th>Mapel</th>
+                <th>Guru</th>
+            @endforeach
+        </tr>
+        @for ($jam = 1; $jam <= 12; $jam++)
+            <tr>
+                <td>{{ $jam }}</td>  {{-- Tambahkan kolom "Jam Ke" di kiri --}}
+                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat'] as $hari)
+                    @php
+                        $jadwalHari = collect(json_decode($jadwalKbms->first()->$hari, true) ?? [])->firstWhere('jam', $jam);
+                    @endphp
+                    <td>{{ $jadwalHari ? $mapels[$jadwalHari['mapel_id']]->nama_mapel ?? '-' : '-' }}</td>
+                    <td>{{ $jadwalHari ? $gurus[$jadwalHari['guru_id']]->nama ?? '-' : '-' }}</td>
+                @endforeach
+            </tr>
+        @endfor
+    </table>
 
-@php
-\Carbon\Carbon::setLocale('id');
-@endphp
     <div class="signature">
         <table>
             <tr>
                 <td>Mengetahui,</td>
                 <td></td>
-                <td>Cibinong, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</td>
+                <td>Cibinong, ..................... 20...</td>
             </tr>
             <tr>
-                <td>Wali Kelas</td>
+                <td>Waka. Bidang Akademik,</td>
                 <td></td>
-                <td>Waka. Bidang Akademik</td>
+                <td>Wali Kelas</td>
             </tr>
             <tr><td colspan="3"><br><br><br></td></tr>
             <tr>
@@ -123,7 +102,13 @@
                 <td></td>
                 <td>(_________________)</td>
             </tr>
+            <tr>
+                <td>NIP: ......................</td>
+                <td></td>
+                <td>NIP: ......................</td>
+            </tr>
         </table>
     </div>
+
 </body>
 </html>

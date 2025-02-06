@@ -55,7 +55,7 @@ $identitaskelas = IdentitasKelas::with(['walas10', 'walas11', 'walas12', 'walas1
 
     if ($request->get('export') == 'pdf') {
         $pdf = Pdf::loadView('pdf.identitaskelas', ['data' => $identitaskelas]);
-        return $pdf->download('Identitas_Kelas.pdf');
+        return $pdf->stream('Identitas_Kelas.pdf');
     }
 
     return view('admwalas.identitaskelas.index', compact('identitaskelas', 'walas', 'rombel'));

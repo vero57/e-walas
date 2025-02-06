@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Visit Report</title>
+    <title>Prestasi Siswa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,16 +48,16 @@
     </style>
 </head>
 <body>
-    <div class="title">LAPORAN HOME VISIT</div>
+    <div class="title">PRESTASI SISWA</div>
 
     <table class="info-table">
+    <td>Wali Kelas</td>
+    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
+</tr>
         <tr>
             <td>Kelas</td>
             <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
         </tr>
-        <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
         <tr>
     <td>Tahun Pelajaran</td>
     <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
@@ -67,25 +67,23 @@
     <table>
     <tr>
         <th>No</th>
+        <th>Nama Siswa</th>
+        <th>Jenis Prestasi</th>
+        <th>Nama Prestasi</th>
         <th>Tanggal</th>
-        <th>Nama Peserta Didik</th>
-        <th>Keperluan</th>
-        <th>Solusi</th>
-        <th>Tindak Lanjut</th>
-        <th>Foto Surat</th>
+        <th>Sertifikat</th>
         <th>Dokumentasi</th>
     </tr>
-    @foreach($homevisit as $index => $item)
+    @foreach($prestasisiswa as $index => $item)
         <tr>
             <td>{{ $index + 1 }}</td>
-            <td>{{ $item->tanggal }}</td>
             <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
-            <td>{{ $item->kasus }}</td>
-            <td>{{ $item->solusi }}</td>
-            <td>{{ $item->tindak_lanjut }}</td>
+            <td>{{ $item->jenis_prestasi }}</td>
+            <td>{{ $item->nama_prestasi }}</td>
+            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
             <td>
-    @if($item->bukti_base64)
-        <img src="{{ $item->bukti_base64 }}" style="width: 100%; max-width: 200px;">
+    @if($item->sertifikat_base64)
+        <img src="{{ $item->sertifikat_base64 }}" style="width: 100%; max-width: 200px;">
     @else
         <p>No image</p>
     @endif
@@ -102,15 +100,13 @@
     @endforeach
 </table>
 
-@php
-\Carbon\Carbon::setLocale('id');
-@endphp
+
     <div class="signature">
         <table>
             <tr>
                 <td>Mengetahui,</td>
                 <td></td>
-                <td>Cibinong, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</td>
+                <td>{{ date('d F Y') }}</td>
             </tr>
             <tr>
                 <td>Wali Kelas</td>

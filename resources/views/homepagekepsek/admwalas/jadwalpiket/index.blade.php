@@ -281,7 +281,7 @@
         <br>
 
         <div>
-        <a href="{{ route('jadwalpiket.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary"   style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
+        <a href="{{ route('admwalas.piketkelaskepsek', ['export' => 'pdf']) }}" class="btn btn-outline-secondary"   style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
     <i class="bi bi-download"></i> Unduh PDF
 </a>
 </div>

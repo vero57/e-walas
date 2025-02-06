@@ -51,12 +51,10 @@
     <div class="title">PRESTASI SISWA</div>
 
     <table class="info-table">
-    @foreach ($walasList as $index => $walas)
         <tr>
-            <td>Wali Kelas</td>
-            <td>: {{ $walas->nama ?? 'Tidak Ada Data' }}</td>
-        </tr>
-        @endforeach
+    <td>Wali Kelas</td>
+    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
+</tr>
         <tr>
             <td>Kelas</td>
             <td>: {{ $rombel->nama_kelas ?? '-' }}</td>

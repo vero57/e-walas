@@ -55,12 +55,9 @@
             <td>Kelas</td>
             <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
         </tr>
-        @foreach ($walasList as $index => $walas)
-        <tr>
-            <td>Wali Kelas</td>
-            <td>: {{ $walas->nama ?? 'Tidak Ada Data' }}</td>
-        </tr>
-        @endforeach
+        <td>Wali Kelas</td>
+    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
+</tr>
         <tr>
     <td>Tahun Pelajaran</td>
     <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
@@ -99,8 +96,10 @@
 </table>
 
 
-@php
+        @php
+    $wakaKurikulum = \App\Models\Kurikulum::first(); // Ambil satu data Waka Kurikulum
 \Carbon\Carbon::setLocale('id');
+$walas = $walasList->where('id', $rombel->walas_id)->first();
 @endphp
     <div class="signature">
         <table>
@@ -110,17 +109,24 @@
                 <td>Cibinong, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
-                <td>Wali Kelas</td>
-                <td></td>
-                <td>Waka. Bidang Akademik</td>
-            </tr>
-            <tr><td colspan="3"><br><br><br></td></tr>
-            <tr>
-                <td>(_________________)</td>
-                <td></td>
-                <td>(_________________)</td>
-            </tr>
-        </table>
+            <td>Waka. Bidang Akademik,</td>
+            <td></td>
+            <td>Wali Kelas</td>
+        </tr>
+        <tr><td colspan="3"><br><br><br></td></tr>
+        <tr>
+            <td>({{ $wakaKurikulum->nama ?? '_________________' }})</td>
+            <td></td>
+            <td>({{ $walas->nama ?? '_________________' }})</td>
+        </tr>
+        <tr>
+            <td>NIP: {{ $wakaKurikulum->nip ?? '......................' }}</td>
+            <td></td>
+            <td>NIP: {{ $walas->nip ?? '......................' }}</td>
+        </tr>
+    </table>
+</div>
+
     </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Visit Report</title>
+    <title>Buku Tamu Ortu</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-    <div class="title">LAPORAN HOME VISIT</div>
+    <div class="title">BUKU TAMU ORTU</div>
 
     <table class="info-table">
         <tr>
@@ -69,28 +69,21 @@
         <th>No</th>
         <th>Tanggal</th>
         <th>Nama Peserta Didik</th>
+        <th>Nama Orang Tua/Wali</th>
         <th>Keperluan</th>
         <th>Solusi</th>
         <th>Tindak Lanjut</th>
-        <th>Foto Surat</th>
         <th>Dokumentasi</th>
     </tr>
-    @foreach($homevisit as $index => $item)
+    @foreach($bukutamu as $index => $item)
         <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $item->tanggal }}</td>
             <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+            <td>{{ $item->nama_orang_tua }}</td>
             <td>{{ $item->kasus }}</td>
             <td>{{ $item->solusi }}</td>
             <td>{{ $item->tindak_lanjut }}</td>
-            <td>
-    @if($item->bukti_base64)
-        <img src="{{ $item->bukti_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
-
 <td>
     @if($item->dokumentasi_base64)
         <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
@@ -101,6 +94,7 @@
         </tr>
     @endforeach
 </table>
+
 
 @php
 \Carbon\Carbon::setLocale('id');

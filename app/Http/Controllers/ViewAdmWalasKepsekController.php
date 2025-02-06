@@ -29,6 +29,7 @@ use App\Models\BiodataSiswa;
 use App\Models\PrestasiSiswa;
 use App\Models\Kepsek;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ViewAdmWalasKepsekController extends Controller
 {
@@ -72,6 +73,11 @@ class ViewAdmWalasKepsekController extends Controller
         // Eksekusi query dan ambil data agenda
         $agendaList = $agendaList->get();
 
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkepsek.agendawalas', compact('walasList', 'walasIds', 'kepsek', 'agendaList'));
+            return $pdf->stream('Agenda_Walas.pdf');
+        }
+
         // Return view dengan data yang difilter
         return view("homepagekepsek.admwalas.agendawalas.index", compact('walasList', 'walasIds', 'kepsek', 'agendaList'));
     }
@@ -111,6 +117,11 @@ class ViewAdmWalasKepsekController extends Controller
 
         // Ambil data agenda sesuai filter walas_id
         $identiasKelasList = $identiasKelasList->get();
+
+        if ($request->get('export') == 'pdf') {
+            $pdf = Pdf::loadView('pdfkepsek.identitaskelas', ['data' => $identiasKelasList]);
+            return $pdf->stream('Identitas_Kelas.pdf');
+        }
 
         // Return view dengan data yang difilter
         return view("homepagekepsek.admwalas.identitaskelas.index", compact('walasList', 'walasIds', 'kepsek', 'identiasKelasList'));
@@ -265,7 +276,7 @@ class ViewAdmWalasKepsekController extends Controller
                 'gurus' => $gurus
             ];
             $pdf = Pdf::loadView('pdf.jadwalkbm', $data)->setPaper('A4', 'portrait');
-            return $pdf->download('Jadwal_KBM.pdf');
+            return $pdf->stream('Jadwal_KBM.pdf');
         }
 
         // Return view dengan data yang difilter
@@ -338,6 +349,7 @@ class ViewAdmWalasKepsekController extends Controller
 
         // Ambil semua ID walas
         $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+        // Ambil data walas berdasarkan walas_id yang sesuai
         $walasList = Walas::whereIn('id', $walasIds)->get();
 
         // Ambil data agenda kegiatan walas berdasarkan walas_id yang sesuai
@@ -348,12 +360,8 @@ class ViewAdmWalasKepsekController extends Controller
         // Ambil data siswa yang terhubung dengan kelompok menggunakan model DetailJadwalPiket
         $detailpiket = DetailJadwalPiket::whereIn('jadwalpikets_id', $piket->pluck('id'))->get();
 
-        if ($walasIdSelected) {
-            $rombel = Rombel::where('walas_id', $walasIdSelected)->first();
-        } else {
-            $rombel = null;
-        }
-        
+        // Ambil data rombel berdasarkan 'walas_id'
+        $rombel = Rombel::whereIn('walas_id', $walasIds)->first();
         
         // Periksa apakah rombel ditemukan
         if (!$rombel) {
@@ -381,13 +389,18 @@ class ViewAdmWalasKepsekController extends Controller
             $piket = $piket->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
         }
 
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkepsek.jadwalpiket', compact( 'walasList','data', 'siswas', 'rombel'));
+            return $pdf->stream('Jadwal_Piket.pdf');
+        }
+
         // Return view dengan data yang difilter
-        return view("homepagekepsek.admwalas.jadwalpiket.index", compact('walasList', 'walasIds', 'kepsek', 'piket', 'detailpiket', 'data', 'siswas'));
+        return view("homepagekepsek.admwalas.jadwalpiket.index", compact('walasList', 'walasIds', 'kepsek', 'piket', 'detailpiket', 'data', 'siswas','rombel'));
     }
 
     public function serahterimaraporkepsek(Request $request)
     {
-        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        
         $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
 
         // Periksa apakah session 'kepsek_id' ada
@@ -761,12 +774,76 @@ class ViewAdmWalasKepsekController extends Controller
             $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
         }
 
-        // Ambil data agenda sesuai filter walas_id
+        // Ambil data agenda sesuai filter walas_ids
         $prestasisiswa = $prestasisiswa->get();
 
         // Return view dengan data yang difilter
         return view("homepagekepsek.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kepsek', 'prestasisiswa'));
     }
+    public function generatePDFkepsekprestasi(Request $request)
+{
+     // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+     $kepsek = Auth::guard('kepseks')->user();  // ini akan mendapatkan data kepsek yang sedang login
+
+     // Periksa apakah session 'kepsek_id' ada
+     if (!session()->has('kepsek_id')) {
+         return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+     }
+
+     // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
+     $kepsek = Kepsek::find(session('kepsek_id'));
+
+     // Periksa apakah data kepsek ditemukan
+     if (!$kepsek) {
+         return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+     }
+
+     // Ambil semua ID walas
+    $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+
+    // Ambil data walas berdasarkan walas_id yang sesuai
+    $walasList = Walas::whereIn('id', $walasIds)->get();
+
+      // Ambil data agenda kegiatan walas berdasarkan walas_id yang sesuai
+      $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
+      $prestasisiswa = PrestasiSiswa::whereIn('walas_id', $walasIds);
+
+      if ($walasIdSelected) {
+          $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
+      }
+
+      // Ambil data agenda sesuai filter walas_ids
+      $prestasisiswa = $prestasisiswa->get();
+
+    // Ambil base64 dari request (grafik chart)
+    $sertifImage = $request->input('sertifImage');
+    $dokumImage = $request->input('dokumImage');
+
+    // Konversi gambar bukti_url dan dokumentasi_url ke base64
+    foreach ($prestasisiswa as $item) {
+        $item->sertifikat_base64 = $this->convertToBase64($item->sertifikat_url);
+        $item->dokumentasi_base64 = $this->convertToBase64($item->dokumentasi_url);
+    }
+
+    // Load view PDF
+    $pdf = Pdf::loadView('pdfkepsek.prestasisiswa', compact('walasList', 'walasIds', 'kepsek', 'prestasisiswa', 'sertifImage', 'dokumImage'));
+
+    return $pdf->stream('Prestasi_Siswa.pdf');
+}
+
+// Fungsi untuk mengubah gambar ke base64
+private function convertToBase64($path)
+{
+    $fullPath = storage_path("app/public/" . $path);
+    
+    if (file_exists($fullPath)) {
+        $imageData = file_get_contents($fullPath);
+        $mimeType = mime_content_type($fullPath);
+        return 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
+    }
+
+    return null;
+}
 
     public function grafikjaraktempuhkepsek(Request $request)
     {

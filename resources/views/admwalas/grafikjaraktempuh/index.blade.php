@@ -42,6 +42,13 @@
   ======================================================== -->
 
   <style>
+   #jarakChart {
+    max-width: 4000px; /* Atur lebar maksimum */
+    height: 400px; /* Pastikan proporsi tetap */
+    display: block;
+    margin: 0 auto; /* Pusatkan jika perlu */
+}
+
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -198,7 +205,6 @@
     @endif
 
     <div class="container">
-    <h2>Grafik Jarak Tempuh Siswa</h2>
 
     <canvas id="jarakChart"></canvas>
 

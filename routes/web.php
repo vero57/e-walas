@@ -446,16 +446,16 @@ Route::get('catatankasusview', [ViewAdmWalasKaprogController::class, 'catatankas
 Route::get('daftarpesertadidikview', [ViewAdmWalasKaprogController::class, 'daftarpesertadidik'])->name('admwalas.daftarpesertadidik');
 Route::get('rekapitulasijumlahsiswaview', [ViewAdmWalasKaprogController::class, 'rekapitulasipdidik'])->name('admwalas.rekapitulasipdidik');
 Route::get('homevisitview', [ViewAdmWalasKaprogController::class, 'homevisit'])->name('admwalas.homevisit');
-Route::post('/homevisit/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFhomevisit'])->name('homevisit.generatepdfhomevisit');
+Route::post('/homevisitview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFhomevisit'])->name('homevisit.generatepdfhomevisit');
 Route::get('bukutamuview', [ViewAdmWalasKaprogController::class, 'bukutamuortu'])->name('admwalas.bukutamuortu');
-Route::post('/bukutamuortu/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFbukutamuortu'])->name('bukutamuortu.generatepdfbukutamuortu');
+Route::post('/bukutamuview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFbukutamuortu'])->name('bukutamuortu.generatepdfbukutamuortu');
 Route::get('persentasesosialekonomiview', [ViewAdmWalasKaprogController::class, 'persentasesosialekonomi'])->name('admwalas.persentasesosialekonomi');
 Route::get('rentangpendapatanortuview', [ViewAdmWalasKaprogController::class, 'rentangpendapatanortu'])->name('admwalas.rentangpendapatanortu');
-Route::post('/pendapatanortu/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFpendapatanortu'])->name('pendapatanortu.generatepdfpendapatanortu');
+Route::post('/rentangpendapatanortuview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFpendapatanortu'])->name('pendapatanortu.generatepdfpendapatanortu');
 Route::get('prestasisiswaview', [ViewAdmWalasKaprogController::class, 'prestasisiswa'])->name('admwalas.prestasisiswa');
-Route::post('/prestasisiswa/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFprestasi'])->name('prestasisiswa.generatepdfprestasi');
+Route::post('/prestasisiswaview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFprestasi'])->name('prestasisiswa.generatepdfprestasi');
 Route::get('grafikjaraktempuhview', [ViewAdmWalasKaprogController::class, 'grafikjaraktempuh'])->name('admwalas.grafikjaraktempuh');
-Route::post('/grafikjaraktempuh/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfgrafikjaraktempuh');
+Route::post('/grafikjaraktempuhview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfgrafikjaraktempuh');
 
 
 // Kakom View TA 
@@ -479,6 +479,7 @@ Route::get('bukutamuviewkepsek', [ViewAdmWalasKepsekController::class, 'bukutamu
 Route::get('persentasesosialekonomiviewkepsek', [ViewAdmWalasKepsekController::class, 'persentasesosialekonomikepsek'])->name('admwalas.persentasesosialekonomikepsek');
 Route::get('rentangpendapatanortuviewkepsek', [ViewAdmWalasKepsekController::class, 'rentangpendapatanortukepsek'])->name('admwalas.rentangpendapatanortukepsek');
 Route::get('prestasisiswaviewkepsek', [ViewAdmWalasKepsekController::class, 'prestasisiswakepsek'])->name('admwalas.prestasisiswakepsek');
+Route::post('/prestasisiswaviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekprestasi'])->name('prestasisiswa.generatepdfkepsekprestasi');
 Route::get('grafikjaraktempuhviewkepsek', [ViewAdmWalasKepsekController::class, 'grafikjaraktempuhkepsek'])->name('admwalas.grafikjaraktempuhkepsek');
 
 // Kepsek View TA 

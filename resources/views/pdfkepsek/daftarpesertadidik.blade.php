@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda Wali Kelas</title>
+    <title>Daftar Peserta Didik</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,39 +44,40 @@
 </head>
 <body>
 
-    <div class="title">AGENDA WALI KELAS</div>
-
-    <table class="info-table">
-    <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
-        <tr>
-    <td>Tahun Pelajaran</td>
-    <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
-        </tr>
-    </table>
+    <div class="title">DAFTAR PESERTA DIDIK</div>
 
     <table>
         <tr>
             <th>No</th>
-            <th>Hari</th>
-            <th>Tanggal</th>
-            <th>Nama Kegiatan</th>
-            <th>Hasil</th>
-            <th>Waktu</th>
+            <th>Nama Siswa</th>
+            <th>NIS</th>
+            <th>NISN</th>
+            <th>Jenis Kelamin</th>
             <th>Keterangan</th>
+            <th>Tanggal</th>
         </tr>
-        @foreach ($agendaList as $idx => $agenda)
+        @foreach ($daftarPDidik as $idx => $data)
             <tr>
                 <td>{{ $idx + 1 }}</td>
-                <td>{{ $agenda->hari }}</td>
-                <td>{{ \Carbon\Carbon::parse($agenda->tanggal)->format('d-m-Y') }}</td>
-                <td>{{ $agenda->nama_kegiatan }}</td>
-                <td>{{ $agenda->hasil }}</td>
-                <td>{{ $agenda->waktu }}</td>
-                <td>{{ $agenda->keterangan }}</td>
+                <td>{{ $data->siswa->nama }}</td>
+                <td>{{ $data->nis }}</td>
+                <td>{{ $data->nisn }}</td>
+                <td>{{ $data->jenis_kelamin }}</td>
+                <td>{{ $data->keterangan }}</td>
+                <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d-m-Y') }}</td>
             </tr>
         @endforeach
+    </table>
+
+    <table class="info-table">
+        <tr>
+            <td>Jumlah Laki-laki</td>
+            <td>: {{ $jenisKelaminCount['Laki-laki'] ?? 0 }}</td>
+        </tr>
+        <tr>
+            <td>Jumlah Perempuan</td>
+            <td>: {{ $jenisKelaminCount['Perempuan'] ?? 0 }}</td>
+        </tr>
     </table>
 
     <div class="signature">

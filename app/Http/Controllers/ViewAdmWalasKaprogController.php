@@ -278,8 +278,6 @@ class ViewAdmWalasKaprogController extends Controller
         'gurus' => Guru::pluck('nama', 'id'),
     ]);
 }
-
-
     
 
     public function presensis(Request $request)
@@ -660,8 +658,8 @@ if ($walasIdSelected) {
     $homevisit = $homevisit->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
 }
 // Ambil data rombel berdasarkan 'walas_id'
-$rombel = Rombel::where('walas_id', $walasIds)->first();
-        
+$rombel = Rombel::whereIn('walas_id', $walasIds)->first();
+
 // Periksa apakah rombel ditemukan
 if (!$rombel) {
     return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
@@ -757,7 +755,7 @@ $homevisit = $homevisit->get();
         $bukutamu = $bukutamu->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
     }
     
-    $rombel = Rombel::where('walas_id', $walasIds)->first();
+    $rombel = Rombel::whereIn('walas_id', $walasIds)->first();
             
     
     if (!$rombel) {
@@ -815,7 +813,7 @@ $homevisit = $homevisit->get();
         $persentasesosialekonomi = $persentasesosialekonomi->get();
         if (request()->has('export') && request()->get('export') === 'pdf') {
             $pdf = Pdf::loadView('pdfkakom.persentasesosialekonomi', compact('walasList', 'walasIds', 'kakom', 'persentasesosialekonomi'));
-            return $pdf->download('Persentase Sosial Ekonomi.pdf');
+            return $pdf->stream('Persentase Sosial Ekonomi.pdf');
         }
 
         // Return view dengan data yang difilter
@@ -968,7 +966,7 @@ $homevisit = $homevisit->get();
         $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); 
     }
 
-    $rombel = Rombel::where('walas_id', $walasIds)->first();
+    $rombel = Rombel::whereIn('walas_id', $walasIds)->first();
         
         // Periksa apakah rombel ditemukan
         if (!$rombel) {

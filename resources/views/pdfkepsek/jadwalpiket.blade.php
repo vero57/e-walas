@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Visit Report</title>
+    <title>Jadwal Piket</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,24 +40,24 @@
             width: 100%;
             text-align: left;
         }
-        .img-container img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
     </style>
 </head>
 <body>
-    <div class="title">LAPORAN HOME VISIT</div>
+
+    <div class="title">JADWAL PIKET KELAS</div>
 
     <table class="info-table">
         <tr>
             <td>Kelas</td>
-            <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
+            <td>: {{ $data->rombel->nama_kelas ?? '-' }}</td>
         </tr>
-        <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
+        @forelse ($piket ?? [] as $idx => $data)
+        <tr>
+            <td>Wali Kelas</td>
+            <td>: {{ $data->walas->nama }}</td>
+        </tr>
+        @empty
+        @endforelse
         <tr>
     <td>Tahun Pelajaran</td>
     <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
@@ -65,57 +65,38 @@
     </table>
 
     <table>
-    <tr>
-        <th>No</th>
-        <th>Tanggal</th>
-        <th>Nama Peserta Didik</th>
-        <th>Keperluan</th>
-        <th>Solusi</th>
-        <th>Tindak Lanjut</th>
-        <th>Foto Surat</th>
-        <th>Dokumentasi</th>
-    </tr>
-    @foreach($homevisit as $index => $item)
         <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $item->tanggal }}</td>
-            <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
-            <td>{{ $item->kasus }}</td>
-            <td>{{ $item->solusi }}</td>
-            <td>{{ $item->tindak_lanjut }}</td>
-            <td>
-    @if($item->bukti_base64)
-        <img src="{{ $item->bukti_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
-
-<td>
-    @if($item->dokumentasi_base64)
-        <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
+            <th>Hari</th>
+            <th>Anggota Piket</th>
         </tr>
-    @endforeach
-</table>
+        @foreach ($data as $item)
+            <tr>
+                <td>{{ ucfirst($item['nama_hari']) }}</td>
+                <td>
+                    @if ($item['siswas']->isNotEmpty())
+                        <!-- Menampilkan siswa dengan pemisah baris -->
+                        @foreach ($item['siswas'] as $siswa)
+                            {{ $siswa->nama }}<br>
+                        @endforeach
+                    @else
+                        -
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    </table>
 
-@php
-\Carbon\Carbon::setLocale('id');
-@endphp
     <div class="signature">
         <table>
             <tr>
                 <td>Mengetahui,</td>
                 <td></td>
-                <td>Cibinong, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</td>
+                <td>Cibinong, ..................... 20...</td>
             </tr>
             <tr>
-                <td>Wali Kelas</td>
+                <td>Waka. Bidang Akademik,</td>
                 <td></td>
-                <td>Waka. Bidang Akademik</td>
+                <td>Wali Kelas</td>
             </tr>
             <tr><td colspan="3"><br><br><br></td></tr>
             <tr>
@@ -123,7 +104,13 @@
                 <td></td>
                 <td>(_________________)</td>
             </tr>
+            <tr>
+                <td>NIP: ......................</td>
+                <td></td>
+                <td>NIP: ......................</td>
+            </tr>
         </table>
     </div>
+
 </body>
 </html>

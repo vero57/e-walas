@@ -180,7 +180,7 @@
             <h2 class="font-weight-bold">Prestasi Siswa</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <form id="exportForm" method="POST" action="{{ route('prestasisiswa.generatepdf') }}">
+                <form id="exportForm" method="POST" action="{{ route('prestasisiswa.generatepdfkepsekprestasi') }}">
                     @csrf
                     <input type="hidden" id="Data" name="Image">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda Wali Kelas</title>
+    <title>Rekapitulasi Jumlah Siswa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,40 +44,27 @@
 </head>
 <body>
 
-    <div class="title">AGENDA WALI KELAS</div>
-
-    <table class="info-table">
-    <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
-        <tr>
-    <td>Tahun Pelajaran</td>
-    <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
-        </tr>
-    </table>
-
+    <div class="title">REKAPITULASI JUMLAH SISWA</div>
+    
     <table>
         <tr>
             <th>No</th>
-            <th>Hari</th>
-            <th>Tanggal</th>
-            <th>Nama Kegiatan</th>
-            <th>Hasil</th>
-            <th>Waktu</th>
+            <th>Bulan</th>
+            <th>Jumlah Siswa Awal</th>
+            <th>Jumlah Siswa Akhir</th>
             <th>Keterangan</th>
         </tr>
-        @foreach ($agendaList as $idx => $agenda)
+        @foreach ($rekapitulasiPDidik as $idx => $data)
             <tr>
                 <td>{{ $idx + 1 }}</td>
-                <td>{{ $agenda->hari }}</td>
-                <td>{{ \Carbon\Carbon::parse($agenda->tanggal)->format('d-m-Y') }}</td>
-                <td>{{ $agenda->nama_kegiatan }}</td>
-                <td>{{ $agenda->hasil }}</td>
-                <td>{{ $agenda->waktu }}</td>
-                <td>{{ $agenda->keterangan }}</td>
+                <td>{{ $data->bulan }}</td>
+                <td>{{ $data->jumlah_awal_siswa }}</td>
+                <td>{{ $data->jumlah_akhir_siswa }}</td>
+                <td>{{ $data->keterangan }}</td>
             </tr>
         @endforeach
-    </table>
+    </table><br><br><br><br><br>
+
 
     <div class="signature">
         <table>

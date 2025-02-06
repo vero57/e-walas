@@ -51,7 +51,7 @@ class StrukturOrganisasiController extends Controller
         }
 
         $pdf = Pdf::loadView('pdf.strukturorganisasi', ['struktur' => $struktur]);
-        return $pdf->download('Struktur_Organisasi.pdf');
+        return $pdf->stream('Struktur_Organisasi.pdf');
     }
 
     return view("admwalas.strukturorganisasi.index", compact('struktur', 'walaslogin', 'rombel'));

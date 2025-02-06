@@ -82,32 +82,38 @@
             </tr>
         @endforeach
     </table>
+    
+    @php
+    $wakaKurikulum = \App\Models\Kurikulum::first(); 
+    \Carbon\Carbon::setLocale('id');
+@endphp
 
-    <div class="signature">
-        <table>
-            <tr>
-                <td>Mengetahui,</td>
-                <td></td>
-                <td>Cibinong, ..................... 20...</td>
-            </tr>
-            <tr>
-                <td>Waka. Bidang Akademik,</td>
-                <td></td>
-                <td>Wali Kelas</td>
-            </tr>
-            <tr><td colspan="3"><br><br><br></td></tr>
-            <tr>
-                <td>(_________________)</td>
-                <td></td>
-                <td>(_________________)</td>
-            </tr>
-            <tr>
-                <td>NIP: ......................</td>
-                <td></td>
-                <td>NIP: ......................</td>
-            </tr>
-        </table>
-    </div>
+<div class="signature">
+    <table>
+        <tr>
+            <td>Mengetahui,</td>
+            <td></td>
+            <td>Cibinong, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</td>
+        </tr>
+        <tr>
+            <td>Waka. Bidang Akademik,</td>
+            <td></td>
+            <td>Wali Kelas</td>
+        </tr>
+        <tr><td colspan="3"><br><br><br></td></tr>
+        <tr>
+            <td>({{ $wakaKurikulum->nama ?? '_________________' }})</td>
+            <td></td>
+            <td>({{ $walas->nama ?? '_________________' }})</td>
+        </tr>
+        <tr>
+            <td>NIP: {{ $wakaKurikulum->nip ?? '......................' }}</td>
+            <td></td>
+            <td>NIP: {{ $walas->nip ?? '......................' }}</td>
+        </tr>
+    </table>
+</div>
+
 
 </body>
 </html>

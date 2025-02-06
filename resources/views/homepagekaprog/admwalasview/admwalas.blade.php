@@ -254,7 +254,7 @@ table td {
                 <td>3</td>
                 <td>Struktur Organisasi Kelas</td>
                 <td>
-                    <a href="{{ route('admwalas.strukturorganisasikelas') }}?walas_id={{ $walas->id }}">
+                    <a href="#">
                             <i class="fas fa-edit edit-icon" title="Detail Struktur Organisasi"></i>
                         </a>
                     </a>
@@ -264,7 +264,7 @@ table td {
                 <td>4</td>
                 <td>Jadwal KBM</td>
                 <td>
-                    <a href="{{ route('admwalas.jadwalkbm') }}?walas_id={{ $walas->id }}">
+                    <a href="#">
                                 <i class="fas fa-edit edit-icon" title="Detail Jadwal KBM"></i>
                             </a>
                         </a>

@@ -27,4 +27,5 @@ class JadwalPiket extends Model
     {
         return $this->belongsTo(Walas::class, 'walas_id', 'id');
     }
+
 }

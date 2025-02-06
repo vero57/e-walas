@@ -51,12 +51,9 @@
             <td>Kelas</td>
             <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
         </tr>
-        @foreach ($walasList as $index => $walas)
-        <tr>
-            <td>Wali Kelas</td>
-            <td>: {{ $walas->nama ?? 'Tidak Ada Data' }}</td>
-        </tr>
-        @endforeach
+        <td>Wali Kelas</td>
+    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
+</tr>
         <tr>
     <td>Tahun Pelajaran</td>
     <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>

@@ -68,7 +68,7 @@ class JadwalPiketController extends Controller
 
         if (request()->has('export') && request()->get('export') === 'pdf') {
             $pdf = Pdf::loadView('pdf.jadwalpiket', compact('walas', 'data', 'siswas', 'rombel'));
-            return $pdf->download('Jadwal_Piket.pdf');
+            return $pdf->stream('Jadwal_Piket.pdf');
         }
         
         // Kirim data kelompok dan walas ke view
