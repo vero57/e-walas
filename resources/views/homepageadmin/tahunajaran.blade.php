@@ -24,7 +24,7 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+  
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -154,6 +154,12 @@
     color: white;
     background-color: #6c757d;
 }
+
+.table-danger {
+    background-color: #dc3545 !important; /* Merah khas Bootstrap */
+    color: white !important; /* Warna teks putih */
+}
+
 </style>
 </head>
 
@@ -187,12 +193,21 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
-                                </form>
-      
-
+       <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
+  <div class="user-info d-flex align-items-center">
+              @if(session()->has('admin_id'))
+                  <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
+                  
+                  <!-- Tautkan nama walas ke /userprofile -->
+                  <a href="/profileadmin" class="text-decoration-none">
+                      <span>{{ $admin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                  </a>
+              @endif
+      <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+          @csrf
+          <button type="submit" class="btn-getstarted">Logout</button>
+      </form>
+    </div>
     </div>
   </header>
 
@@ -237,6 +252,35 @@
                         </td>
                         <td>
                             <span class="badge bg-success">AKTIF</span>
+                        </td>
+                        <td>
+                            <!-- Aksi -->
+                            <div class="d-inline-flex gap-2">
+                                <a href="/rombel" class="btn btn-sm btn-primary text-white">
+                                    <i class="bi bi-info-circle text-white"></i> Detail
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table Keluar Rombel -->
+        <div class="table-container">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-danger">
+                    <tr>
+                        <th scope="col">Data Siswa Keluar Rombel</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="/rombel" class="text-decoration-none fw-bold text-primary table-link-hover">
+                                2024/2025 - GANJIL
+                            </a>
                         </td>
                         <td>
                             <!-- Aksi -->

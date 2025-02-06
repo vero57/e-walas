@@ -154,6 +154,8 @@ Route::get ('/guru_search', [GuruPageController::class,'guru_search']);
 Route::resource('tahunajaran', TahunAjaranController::class);
 
 Route::post('/siswa-import', [DataSiswaWalasController::class, 'import']);
+Route::post('/siswa-import-admin', [ShowDetailRombelController::class, 'importsiswaadmin']);
+Route::get('/siswa-download-template-admin', [ShowDetailRombelController::class, 'downloadTemplateAdmin'])->name('siswa.download-template-admin');
 Route::get('/siswa-download-template', [DataSiswaWalasController::class, 'downloadTemplate'])->name('siswa.download-template');
 Route::post('/walas-import', [WaliKelasPageController::class, 'import']);
 Route::get('/walas-download-template', [WaliKelasPageController::class, 'downloadTemplate'])->name('walas.download-template');
@@ -514,6 +516,9 @@ Route::get('grafikjaraktempuhviewkurikulum', [ViewAdmWalaskurikulumController::c
 // Kurikulum View Kurikulum
 Route::get('/detailkelasviewkurikulum/{walas_id}', [KepsekRombelController::class, 'showDetailKepsek'])->name('rombel.showDetailKurikulum');
 
+
+// CRUD TA 
+Route::post('/keluar-rombel/save', [DataSiswaWalasController::class, 'saveKeterangan'])->name('keluar-rombel.save');
 
 // Logout admin
 Route::post('/homepageadmin/logout', function () {

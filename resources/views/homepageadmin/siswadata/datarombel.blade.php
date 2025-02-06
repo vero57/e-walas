@@ -529,11 +529,11 @@
             <div class="modal-body">
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
-                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                    <a href="{{ route('siswa.download-template-admin') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                 </div>
 
                 <!-- Form Unggah Data -->
-                <form action="/siswa-import" method="post" enctype="multipart/form-data">
+                <form action="/siswa-import-admin" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>

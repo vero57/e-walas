@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rombel;
 use App\Models\Walas;
+use App\Imports\SiswaImport;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -33,6 +34,17 @@ class ShowDetailRombelController extends Controller
        $rombels = Rombel::all();
     
         return view('homepageadmin.siswadata.datarombel', compact('siswas', 'walas', 'rombel', 'rombels'));
+    }
+
+    public function importsiswaadmin(Request $request){
+        Excel::import(new SiswaImport, $request->file('file'));
+        return back();
+    }
+
+    public function downloadTemplate()
+    {
+        $pathToFile = storage_path('app/public/template_siswa.xlsx'); // Sesuaikan dengan lokasi file template Excel
+        return response()->download($pathToFile);
     }
     
 

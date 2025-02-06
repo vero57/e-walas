@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Models\Kakom;
-use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -19,7 +18,7 @@ class KakomImport implements ToModel, WithHeadingRow
         return new Kakom([
         'nama' => $row['nama'],
         'no_wa' => $row['no_wa'],
-        'password' => Hash::make($row['password']),
+        'password' => $row['password'],
         'kompetensi' => $row['kompetensi'],
         ]);
     }
