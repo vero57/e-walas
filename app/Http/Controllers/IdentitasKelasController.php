@@ -64,35 +64,36 @@ $identitaskelas = IdentitasKelas::with(['walas10', 'walas11', 'walas12', 'walas1
 
     public function create()
     {
-         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-     $walaslogin = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
-       
-     // Periksa apakah session 'walas_id' ada
-     if (!session()->has('walas_id')) {
-         return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
-     }
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $walaslogin = Auth::guard('walas')->user();  
 
-     // Ambil data walas berdasarkan 'walas_id' yang ada di session
-     $walaslogin = Walas::find(session('walas_id'));
-     
-     // Periksa apakah data walas ditemukan
-     if (!$walaslogin) {
-         return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
-     }
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
 
-    // Ambil data rombel yang dimiliki walas yang sedang login
-    $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walaslogin = Walas::find(session('walas_id'));
 
-    // Periksa apakah rombel ditemukan
-    if (!$rombel) {
-        return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
-    }
+        // Periksa apakah data walas ditemukan
+        if (!$walaslogin) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+
+       // Ambil data rombel berdasarkan 'walas_id'
+       $rombel = Rombel::where('walas_id', $walaslogin->id)->first();
     
-        // Mengambil data wali kelas dan siswa
+       // Periksa apakah rombel ditemukan
+       if (!$rombel) {
+           return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
+       }
+   
+       // Ambil data siswa berdasarkan rombel_id yang sama dengan rombel
+       $siswas = Siswa::where('rombels_id', $rombel->id)->get();
+        // Mengambil data wali kelas
         $walas = Walas::all();
-        $siswas = Siswa::all();
 
-        // Mengembalikan view dan mengirimkan data wali kelas dan siswa
+        // Mengembalikan view dan mengirimkan data yang sudah difilter
         return view('admwalas.identitaskelas.create', compact('walas', 'siswas', 'rombel', 'walaslogin'));
     }
 
@@ -105,11 +106,11 @@ $identitaskelas = IdentitasKelas::with(['walas10', 'walas11', 'walas12', 'walas1
             'walas_id' => 'required|exists:walas,id',
             'program_keahlian' => 'required|in:SIJA,TKJ,RPL,DKV,DPIB,TKP,TP,TFLM,TKR,TOI',
             'kompetensi_keahlian' => 'required|in:SIJA,TKJ,RPL,DKV,DPIB,TKP,TP,TFLM,TKR,TOI',
-            'walas_id_10' => 'required|exists:walas,id',
+            'walas_id_10' => 'nullable|exists:walas,id',
             'walas_id_11' => 'nullable|exists:walas,id',
             'walas_id_12' => 'nullable|exists:walas,id',
             'walas_id_13' => 'nullable|exists:walas,id',
-            'siswas_id_10' => 'required|exists:siswas,id',
+            'siswas_id_10' => 'nullable|exists:siswas,id',
             'siswas_id_11' => 'nullable|exists:siswas,id',
             'siswas_id_12' => 'nullable|exists:siswas,id',
             'siswas_id_13' => 'nullable|exists:siswas,id',

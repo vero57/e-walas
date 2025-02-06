@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password',255);
             $table->string('image_url',255)->nullable();
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
+            $table->enum('keterangan', ['naik_kelas', 'tidak_naik_kelas', 'pindah_sekolah'])->default('naik_kelas')->nullable();
             $table->timestamps();
         });
     }

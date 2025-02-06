@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use App\Imports\SiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TahunAjaranController extends Controller
 {
@@ -11,7 +16,24 @@ class TahunAjaranController extends Controller
      */
     public function index()
     {
-        return view('homepageadmin.tahunajaran');
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $admin = Auth::guard('admins')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+    
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('admin_id')) {
+            return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+        }
+  
+        // Ambil data kurikulum berdasarkan 'admin_id' yang ada di session
+        $admin = Admin::find(session('admin_id'));
+        
+        // Periksa apakah data kurikulum ditemukan
+        if (!$admin) {
+            return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
+        }
+  
+      // Kirim data siswa, rombels, dan walas ke view
+      return view('homepageadmin.tahunajaran', compact('admin'));
     }
 
     /**

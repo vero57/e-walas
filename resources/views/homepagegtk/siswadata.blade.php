@@ -409,6 +409,7 @@
                 <th>WhatsApp</th>
                 <th>Foto</th>
                 <th>Status</th>
+                <th>Keterangan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -432,6 +433,24 @@
                     @endif
                 </td>
                     <td>{{ $data->status }}</td>
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <!-- Button untuk memilih keterangan -->
+                            <button type="button" class="btn btn-primary" id="btnKeterangan" onclick="showSelect(this)">
+                                Naik Kelas
+                            </button>
+
+                            <!-- Select pilihan keterangan (default: hidden) -->
+                            <select name="keterangan" id="selectKeterangan" class="form-control d-none" onchange="updateButton(this)">
+                                <option value="naik_kelas">Naik Kelas</option>
+                                <option value="tidak_naik_kelas">Tidak Naik Kelas</option>
+                                <option value="pindah_sekolah">Pindah Sekolah</option>
+                            </select>
+
+                            <!-- Button Simpan (default: hidden) -->
+                            <button type="button" class="btn btn-success d-none" onclick="saveSelection(this)">Simpan</button>
+                        </div>
+                    </td>
                     <td>
                 <div class="d-flex justify-content-center">
                 <a href="{{ route('homepagegtk.biodatasiswa', $data->siswa_id) }}" class="btn btn-info btn-sm me-2">
@@ -610,6 +629,70 @@
             }
         };
     </script>
+  
+  <script>
+    // Menampilkan select dan tombol simpan ketika tombol diklik
+    function showSelect(button) {
+        let container = button.parentElement;
+        let select = container.querySelector("select");
+        let saveButton = container.querySelector(".btn-success");
+
+        // Sembunyikan tombol dan tampilkan select
+        button.classList.add("d-none");
+        select.classList.remove("d-none");
+        saveButton.classList.remove("d-none");
+    }
+
+    // Mengubah teks tombol sesuai dengan pilihan select
+    function updateButton(select) {
+        let container = select.parentElement;
+        let button = container.querySelector(".btn-primary");
+
+        // Ubah teks button sesuai pilihan
+        button.textContent = select.options[select.selectedIndex].text;
+    }
+
+    // Menyimpan pilihan keterangan ke localStorage
+    function saveSelection(button) {
+        let container = button.parentElement;
+        let select = container.querySelector("select");
+        let mainButton = container.querySelector(".btn-primary");
+
+        // Ambil nilai yang dipilih
+        let selectedValue = select.value;
+        let selectedText = select.options[select.selectedIndex].text;
+
+        // Update button utama & sembunyikan select dan tombol simpan
+        mainButton.textContent = selectedText;
+        mainButton.classList.remove("d-none");
+        select.classList.add("d-none");
+        button.classList.add("d-none");
+
+        // Simpan pilihan keterangan ke localStorage
+        localStorage.setItem("selectedKeterangan", selectedValue);
+    }
+
+    // Set pilihan keterangan saat halaman dimuat
+    window.onload = function() {
+        let selectedKeterangan = localStorage.getItem("selectedKeterangan");
+
+        if (selectedKeterangan) {
+            let select = document.getElementById("selectKeterangan");
+            let button = document.getElementById("btnKeterangan");
+
+            // Pilih opsi yang disimpan di localStorage
+            let option = select.querySelector(`option[value="${selectedKeterangan}"]`);
+            if (option) {
+                option.selected = true;
+                button.textContent = option.textContent;
+            }
+
+            // Sembunyikan select dan tampilkan tombol utama
+            select.classList.add("d-none");
+            button.classList.remove("d-none");
+        }
+    };
+</script>
 
 </body>
 
