@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_keluar_rombel', function (Blueprint $table) {
+        Schema::create('keluar_rombels', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('nama_siswa');
             $table->foreign('nama_siswa')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
-            $table->unsignedBigInteger('keterangan');
-            $table->foreign('keterangan')->references('id')->on('siswas')->onDelete('cascade')->onUpdate ('cascade');
+            $table->enum('keterangan', ['naik_kelas', 'tidak_naik_kelas', 'pindah_sekolah']);
             $table->unsignedBigInteger('rombels_id');
             $table->foreign('rombels_id')->references('id')->on('rombels')->onDelete('cascade')->onUpdate ('cascade');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_keluar_rombel');
+        Schema::dropIfExists('keluar_rombels');
     }
 };

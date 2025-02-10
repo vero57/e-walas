@@ -383,268 +383,101 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Siswa Kelas : {{ $rombel->nama_kelas }}</h2>
-            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Siswa -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
-                    <!-- Tombol Siswa Tidak Naik Kelas -->
-                    <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target=#modalSiswaTidakNaik>
-                        <i class="bi bi-arrow-down-circle"></i> Siswa Tidak Naik Kelas
-                    </button>
+            @forelse ($kelasGroup as $namaKelas => $keluarSiswa)
+                <h2 class="font-weight-bold">Daftar Siswa Keluar Rombel Kelas: {{ $namaKelas }} </h2>
+                <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
+            @empty
+                <p class="text-muted">Tidak ada siswa yang keluar dari rombel.</p>
+            @endforelse
 
-                    <!-- Search Box -->
-                    <form action="{{ url('siswadata_search') }}" method="GET">
-                        <div class="input-box">
-                            <i class="uil uil-search"></i>
-                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
-                                <button class="button" type="submit">Cari</button>
-                        </div>
-                    </form>
+            <div class="d-flex align-items-center justify-content-start">
+                <!-- Tombol Tambah Data -->
+                <div class="d-flex-container">
+                </div>
             </div>
         </div>
-        <br>
-           <!-- Jumlah Total Siswa -->
-           <div class="text-end mb-4">
-            <span class="text-muted">
-                Jumlah Total: <strong>{{ $siswas->count() }} Siswa</strong>
-            </span>
-        </div>
-
         <div class="container mt-4">
    <!-- Tab Navigation -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="anggota-tab" data-bs-toggle="tab" data-bs-target="#anggota" type="button" role="tab" aria-controls="anggota" aria-selected="true">
-            Anggota Kelas
+        <button class="nav-link active" id="tidak-naik-tab" data-bs-toggle="tab" data-bs-target="#tidak-naik" type="button" role="tab" aria-controls="tidak-naik" aria-selected="true">
+            Tidak Naik Kelas
         </button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="walas-tab" data-bs-toggle="tab" data-bs-target="#walas" type="button" role="tab" aria-controls="walas" aria-selected="false">
-            Wali Kelas
+        <button class="nav-link" id="pindah-tab" data-bs-toggle="tab" data-bs-target="#pindah" type="button" role="tab" aria-controls="pindah" aria-selected="false">
+            Pindah Sekolah
         </button>
     </li>
 </ul>
 
 <!-- Tab Content -->
 <div class="tab-content" id="myTabContent">
-    <!-- Tab 1: Data Anggota Kelas -->
-    <div class="tab-pane fade show active" id="anggota" role="tabpanel" aria-labelledby="anggota-tab">
+    <!-- Tab 1: Tidak Naik Kelas -->
+    <div class="tab-pane fade show active" id="tidak-naik" role="tabpanel" aria-labelledby="tidak-naik-tab">
         <div class="table-container">
             <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Kelas</th>
-                            <th>Jenis Kelamin</th>
-                            <th>WhatsApp</th>
-                            <th>Foto</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($siswas as $data)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama }}</td>
-                                <td>{{ $data->rombel ? $data->rombel->nama_kelas : 'Tidak ada rombel' }}</td>
-                                <td>{{ $data->jenis_kelamin }}</td>
-                                <td>
-                                    <a href="https://wa.me/{{ $data->no_wa }}" target="_blank">
-                                        <i class="bi bi-whatsapp" style="font-size: 20px; color: green;"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    @if(!empty($data->image_url) && $data->image_url != null)
-                                        <img src="{{ asset('storage/'.$data->image_url) }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
-                                    @else
-                                        <div class="rounded-circle d-flex justify-content-center align-items-center" 
-                                            style="width: 50px; height: 50px; background-color: #E86E7A; color: white; font-size: 20px;">
-                                            {{ strtoupper(substr($data->nama, 0, 2)) }}
-                                        </div>
-                                    @endif
-                                </td>
-                                <td>{{ $data->status }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center">Tidak ada data siswa.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Tab 2: Data Wali Kelas -->
-        <div class="tab-pane fade" id="walas" role="tabpanel" aria-labelledby="walas-tab">
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Wali Kelas</th>
-                            <th>No WhatsApp</th>
-                            <th>Kelas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>{{ $walas->nama ?? 'Tidak ada wali kelas' }}</td>
-                            <td>
-                                @if ($walas && $walas->no_wa)
-                                    <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank">
-                                        <i class="bi bi-whatsapp" style="font-size: 20px; color: green;"></i>
-                                    </a>
-                                @else
-                                    <span class="text-muted">No WhatsApp tidak tersedia</span>
-                                @endif
-                            </td>
-                            <td>{{ $rombel->nama_kelas }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal untuk menampilkan data siswa tidak naik -->
-<div class="modal fade" id="modalSiswaTidakNaik" tabindex="-1" aria-labelledby="modalSiswaTidakNaikLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalSiswaTidakNaikLabel">Daftar Siswa Tidak Naik Kelas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    @foreach ($siswa_tidak_naik as $siswa)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ $siswa->nama }} <!-- Sekarang bisa akses properti nama -->
-                            <select class="form-select select-rombel" data-id="{{ $siswa->id }}">
-                                    <option value="">Pilih Rombel</option>
-                                    @foreach ($rombels as $rombel)
-                                        <option value="{{ $rombel->nama_kelas }}">{{ $rombel->nama_kelas }}</option>
-                                    @endforeach
-                                </select>
-                            <button class="btn btn-success btn-sm tambah-siswa" data-id="{{ $siswa->id }}">   
-                                <i class="fas fa-plus">+</i>
-                            </button>
-                        </li>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Siswa</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $no = 1; @endphp
+                    @foreach ($kelasGroup as $namaKelas => $keluarSiswa)
+                        @foreach ($keluarSiswa as $data)
+                            @if ($data->keterangan == 'tidak_naik_kelas')
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $data->siswa->nama ?? 'Tidak Ada Nama' }}</td>
+                                    <td>{{ $data->keterangan ?? '-' }}</td>
+                                </tr>
+                            @endif
+                        @endforeach
                     @endforeach
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-            </div>
+                    @if ($no == 1)
+                        <tr>
+                            <td colspan="3" class="text-center">Tidak ada siswa yang tidak naik kelas.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
 
-
-<!-- Modal Unggah Data -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Siswa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Tombol Download Template -->
-                <div class="mb-3">
-                    <a href="{{ route('siswa.download-template-admin') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
-                </div>
-
-                <!-- Form Unggah Data -->
-                <form action="/siswa-import-admin" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
-                    </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Unggah</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Data Siswa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="studentName" class="form-label">Nama Siswa</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukan Nama Siswa" name="nama" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="rombelsId" class="form-label">Rombels</label>
-                        <select class="form-select" id="rombelsId" name="rombels_id" required>
-                            <option selected disabled>Pilih Rombel</option>
-                            @foreach ($rombels as $rombel)
-                                <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="studentWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="number" class="form-control" id="studentWhatsApp" placeholder="Masukkan nomor WhatsApp" name="no_wa" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="passwowrd" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Foto Siswa</label>
-                        <input type="file" class="form-control" id="teacherPhoto" name="image_url" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" aria-label="Pilih Gender" name="status" required>
-                            <option selected disabled>Pilih Status</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="nonaktif">Non Aktif</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherGender" class="form-label">Pilih Gender</label>
-                        <select class="form-select" id="teacherGender" aria-label="Pilih Gender" name="jenis_kelamin" required>
-                            <option selected disabled>Pilih Gender</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-success">Tambah</button>
-                    </div>
-                </form>
-            </div>
+    <!-- Tab 2: Pindah Sekolah -->
+    <div class="tab-pane fade" id="pindah" role="tabpanel" aria-labelledby="pindah-tab">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Siswa</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $no = 1; @endphp
+                    @foreach ($kelasGroup as $namaKelas => $keluarSiswa)
+                        @foreach ($keluarSiswa as $data)
+                            @if ($data->keterangan == 'pindah_sekolah')
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $data->siswa->nama ?? 'Tidak Ada Nama' }}</td>
+                                    <td>{{ $data->keterangan ?? '-' }}</td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endforeach
+                    @if ($no == 1)
+                        <tr>
+                            <td colspan="3" class="text-center">Tidak ada siswa yang pindah sekolah.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -709,38 +542,6 @@
             }
         };
     </script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(".tambah-siswa").click(function () {
-            let siswaId = $(this).data("id");
-            let namaKelas = $(this).siblings(".select-rombel").val();
-
-            if (namaKelas) {
-                $.ajax({
-                    url: "{{ route('siswa.tambah.ke.rombel') }}",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        siswa_id: siswaId,
-                        nama_kelas: namaKelas
-                    },
-                    success: function (response) {
-                        alert(response.message);
-                        location.reload();
-                    },
-                    error: function (xhr) {
-                        alert("Gagal memindahkan siswa: " + xhr.responseJSON.message);
-                    }
-                });
-            } else {
-                alert("Pilih rombel tujuan terlebih dahulu.");
-            }
-        });
-    });
-</script>
-
 
 </body>
 

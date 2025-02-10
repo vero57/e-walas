@@ -2,7 +2,20 @@
 
 namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+use Carbon\Carbon;
+use App\Models\Siswa;
+use App\Models\Walas;
+use App\Models\Rombel;
+use App\Models\KeluarRombel;
+use App\Imports\SiswaImport;
+use App\Models\BiodataSiswa;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class KeluarRombelController extends Controller
 {
@@ -25,9 +38,52 @@ class KeluarRombelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $walas = Auth::guard('walas')->user();
+
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walas = Walas::find(session('walas_id'));
+
+        // Periksa apakah data walas ditemukan
+        if (!$walas) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+
+        $siswa = Siswa::findOrFail($id); // Ambil data siswa berdasarkan ID
+
+        if (!$siswa) {
+            return back()->with('error', 'Siswa tidak ditemukan');
+        }
+
+        // Validasi input
+        $validated = $request->validate([
+            'keterangan' => 'required',
+            'nama_kelas' => 'required|string',
+        ]);
+
+        // Cari rombels_id berdasarkan nama_kelas
+        $rombels = Rombel::where('nama_kelas', $validated['nama_kelas'])->first();
+
+        if (!$rombels) {
+            return back()->with('error', 'Kelas tidak ditemukan');
+        }
+
+        // Simpan data ke model KeluarRombel
+        $keluarRombel = new KeluarRombel();
+        $keluarRombel->nama_siswa = $siswa->id;  // Menyimpan ID siswa
+        $keluarRombel->keterangan = $validated['keterangan'];  // Menyimpan keterangan
+        $keluarRombel->rombels_id = $rombels->id;  // Menyimpan rombels_id berdasarkan nama_kelas
+        $keluarRombel->save();  // Menyimpan ke database
+
+        // Kembalikan respon sukses
+        return back()->with('success', 'Keterangan Siswa berhasil Dirubah');
     }
 
     /**

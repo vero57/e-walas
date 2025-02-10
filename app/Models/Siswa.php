@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Rombel;
 
 class Siswa extends Model
 {
@@ -61,9 +62,30 @@ class Siswa extends Model
         return $this->hasMany(DaftarPesertaDidik::class, 'nama_siswa', 'id');
     }
 
-
     public function detailPresensis()
     {
         return $this->hasMany(DetailPresensi::class, 'siswa_id');
     }
+
+    public function keluarRombel()
+    {
+        return $this->hasOne(KeluarRombel::class, 'siswa_id'); // Menghubungkan Siswa dengan KeluarRombel berdasarkan siswa_id
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updated(function ($siswa) {
+            if ($siswa->status == 'nonaktif') {
+                Alumni::create([
+                    'nama_siswa' => $siswa->id, 
+                    'status' => $siswa->status,
+                ]);
+
+                $siswa->delete(); // Hapus dari siswas setelah pindah ke alumni
+            }
+        });
+    }
+
 }

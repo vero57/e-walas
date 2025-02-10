@@ -177,6 +177,22 @@ class WaliKelasPageController extends Controller
 
     public function walas_search(Request $request)
     {
+        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+        $admin = Auth::guard('admins')->user();  // ini akan mendapatkan data kurikulum yang sedang login
+    
+        // Periksa apakah session 'kurikulum_id' ada
+        if (!session()->has('admin_id')) {
+            return redirect('/loginadmin')->with('error', 'Silakan login terlebih dahulu.');
+        }
+  
+        // Ambil data kurikulum berdasarkan 'admin_id' yang ada di session
+        $admin = Admin::find(session('admin_id'));
+        
+        // Periksa apakah data kurikulum ditemukan
+        if (!$admin) {
+            return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
+        }
+
         $search_text = $request->keyword;
         $keywords = explode(' ', $search_text); 
         $walasQuery = Walas::query();
@@ -187,7 +203,7 @@ class WaliKelasPageController extends Controller
     
         $walasdata = $walasQuery->get();
     
-        return view('homepageadmin.walikelasdata.index', compact('walasdata'));
+        return view('homepageadmin.walikelasdata.index', compact('walasdata', 'admin'));
     }
 
 }

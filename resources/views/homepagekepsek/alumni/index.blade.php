@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong- Kepala Sekolah</title>
+  <title>E Walas SMKN 1 Cibinong - Kepala Sekolah</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -23,7 +23,13 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" 
+  rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+  <!-- Unicons CSS -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 
 
   <!-- Main CSS File -->
@@ -89,71 +95,186 @@
             }
         }
 
-        
-    </style>
-
-    <!-- Style Tambahan -->
-<style>
-/* Search Box */
-.searchBox {
-    position: relative;
+        /* Style untuk modal */
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgba(0, 0, 255, 0.2); /* Bayangan biru */
+    padding: 20px;
 }
 
-.searchInput {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 5px 35px 5px 15px;
-    outline: none;
+/* Style form dalam 2 kolom */
+.modal-body form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom */
+    gap: 20px;
 }
 
-.searchButton {
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
+/* Mengatur elemen yang membentang penuh */
+.modal-body form .mb-3 {
+    grid-column: span 1;
+}
+
+.modal-body form .mb-3:last-child {
+    grid-column: span 2; /* Password dan NIP membentang 2 kolom */
+}
+
+/* Style untuk tombol secara umum */
+.modal-footer {
+    justify-content: flex-start; /* Posisi ke kiri */
+    padding-right: 100px;
+}
+
+.modal-footer button {
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Efek transisi halus */
+}
+
+/* Tombol Tutup */
+.modal-footer .btn-secondary {
+    background-color: #6c757d; /* Warna default */
     border: none;
-    background: none;
-    cursor: pointer;
-    color: #777;
 }
 
-/* Table Link Hover */
-.table-link-hover:hover {
-    color: #0056b3;
-    text-decoration: underline;
+/* Hover Tombol Tutup */
+.modal-footer .btn-secondary:hover {
+    background-color: #adb5bd; /* Warna lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
 }
 
-/* Table */
-.table-container {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+/* Tombol Tambah Data */
+.modal-footer .btn-success {
+    background-color: #0d6efd; /* Biru muda */
+    border: none;
 }
 
-.table th, .table td {
-    vertical-align: middle;
+/* Hover Tombol Tambah Data */
+.modal-footer .btn-success:hover {
+    background-color: #70b0ff; /* Biru yang lebih muda saat hover */
+    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.4); /* Bayangan biru saat hover */
 }
 
-.badge {
-    font-size: 0.9em;
-    padding: 5px 10px;
+/* Style input dan select */
+.modal-body input,
+.modal-body select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px;
 }
 
-/* Button Hover */
-.btn-warning:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
+/* Style untuk file upload */
+.modal-body input[type="file"] {
+    padding: 5px;
 }
 
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
+.modal-dialog {
+    max-width: 800px; /* Lebar maksimum modal */
+    width: 90%;       /* Lebar modal relatif */
 }
 
-.btn-outline-secondary:hover {
-    color: white;
-    background-color: #6c757d;
+.d-flex-container {
+    display: flex;
+    align-items: center;  /* Menjaga semua elemen dalam container sejajar secara vertikal */
+    gap: 10px;  /* Menambah jarak antar elemen */
 }
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+</style>
+
+<style>
+
+.input-box {
+  position: relative;
+  height: 55px;
+  max-width: 900px;
+  width: 100%;
+  background: #fff;
+  margin: 0 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.input-box i,
+.input-box .button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-box i {
+  left: 20px;
+  font-size: 30px;
+  color: #707070;
+}
+.input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  padding: 0 155px 0 65px;
+  background-color: transparent;
+}
+.input-box .button {
+  right: 25px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  background-color:  #0d83fd;
+  cursor: pointer;
+}
+.input-box .button:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.button {
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol menjadi putih */
+    font-weight: bold; /* Membuat teks menjadi tebal/bold */
+    border: 2px solid #007bff; /* Warna border yang sesuai dengan tombol */
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+    padding: 10px 20px; /* Menambahkan padding agar tombol lebih besar */
+    font-size: 16px; /* Ukuran font lebih besar */
+    cursor: pointer; /* Menampilkan kursor pointer ketika dihover */
+    transition: background-color 0.3s ease; /* Efek transisi pada background saat hover */
+}
+
+/* Efek hover */
+.button:hover {
+    background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
+    border-color: #0056b3; /* Mengubah warna border saat hover */
+}
+
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .input-box {
+    height: 66px;
+    margin: 0 8px;
+  }
+  .input-box i {
+    left: 12px;
+    font-size: 25px;
+  }
+  .input-box input {
+    padding: 0 112px 0 50px;
+  }
+  .input-box .button {
+    right: 12px;
+    font-size: 14px;
+    padding: 8px 18px;
+  }
+}
+
 </style>
 </head>
 
@@ -175,7 +296,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kaprogpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/homepagekepsek" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -183,98 +304,67 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        
+        <li><a href="/kepsekta" >Tahun Akademik</a></li>
+          <li><a href="/alumnidatakepsek" class="active">Alumni</a></li>
+          <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
+            </ul>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
       <div class="user-info d-flex align-items-center">
-            @if(session()->has('kakom_id'))
+            @if(session()->has('kepsek_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekakom" class="text-decoration-none">
-                    <span>{{ $kakom->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                <a href="/profilekepsek" class="text-decoration-none">
+                    <span>{{ $kepsek->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
-            <form action="{{ route('logoutkakom') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
         </div>
-      
-
     </div>
   </header>
 
-  <main class="main">
+<main class="main">
 
-<!-- Hero Section -->
-<section id="hero" class="hero section">
+       <!-- Hero Section -->
+       <section id="hero" class="hero section">
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Rombel</h2>
+            <h2 class="font-weight-bold">Alumni Data</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-        </div>
+            <div class="d-flex align-items-center justify-content-start">
 
-        <!-- Tabel Data Rombel -->
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="thead-dark">
+            </div>
+        </div>
+        <div class="table-container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th>Tingkat</th>
-                        <th>Kompetensi</th>
-                        <th>Nama Kelas</th>
-                        <th>Wali Kelas</th>
-                        <th>No WhatsApp</th>
-                        <th>Informasi</th>
-                        <th class="text-center">Aksi</th>
+                        <th>No</th>
+                        <th>Nama Alumni</th>
+                        <th>Nomor WhatsApp</th>
+                        <th>Jurusan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($vwrombels as $idx => $data)
+                    @foreach ($alumni as $idx => $data)
                         <tr>
                             <td>{{ $idx + 1 }}</td>
-                            <td>{{ $data->tingkat }}</td>
-                            <td>{{ $data->kompetensi }}</td>
-                            <td>{{ $data->nama_kelas }}</td>
-                            <td>{{ $data->walas_nama }}</td>
-                            <td class="text-center">
-                                @if ($data->no_wa)
-                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $data->no_wa) }}" target="_blank">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-                                             alt="WhatsApp" width="30">
-                                    </a>
-                                @else
-                                    <span class="text-muted">Tidak Ada Data</span>
-                                @endif
-                            </td>
+                            <td>{{ $data->nama }}</td>
                             <td>
-                                <a href="{{ route('rombel.showDetail', ['walas_id' => $data->walas_id]) }}" 
-                                   class="btn btn-sm btn-info text-white">
-                                    <i class="bi bi-info-circle text-white"></i> Detail Kelas
+                                <a href="https://wa.me/{{ $data->no_wa }}" target="_blank" class="btn btn-success">
+                                    <i class="fa-brands fa-whatsapp"></i> Chat Alumni
                                 </a>
                             </td>
-                            <td class="text-center">
-                                <!-- Tombol Aksi -->
-                                <div class="btn-group">
-                                    <!-- Tombol Edit -->
-                                    <button class="btn btn-outline-secondary btn-sm" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    
-                                    <!-- Tombol Download -->
-                                    <button class="btn btn-outline-primary btn-sm mx-1" title="Download">
-                                        <i class="bi bi-download"></i>
-                                    </button>
-                                    
-                                    <!-- Tombol Delete -->
-                                    <button class="btn btn-outline-danger btn-sm" title="Hapus">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
+                            <td>{{ $data->rombel->kompetensi ?? 'Tidak ada data' }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -283,15 +373,17 @@
     </div>
 </section>
 
+<!-- Modal Unggah Data -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
         </div>
     </div>
-
-
+</div>
 </section>
 
 </main>
-
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>
@@ -345,6 +437,29 @@
                 }, 2000); // Tunda selama 2 detik sebelum animasi
             }
         };
+
+        document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-btn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Mengambil data dari atribut data-*
+            const id = button.getAttribute('data-id');
+            const tingkat = button.getAttribute('data-tingkat');
+            const kompetensi = button.getAttribute('data-kompetensi');
+            const nama_kelas = button.getAttribute('data-nama_kelas');
+            const walas_id = button.getAttribute('data-walas_id');
+
+            // Mengisi data ke dalam modal
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-tingkat').value = tingkat;
+            document.getElementById('edit-kompetensi').value = kompetensi;
+            document.getElementById('edit-nama_kelas').value = nama_kelas;
+            document.getElementById('edit-walas_id').value = walas_id;
+        });
+    });
+});
+
     </script>
 
 </body>

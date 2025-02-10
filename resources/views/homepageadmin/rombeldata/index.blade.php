@@ -385,9 +385,9 @@
                 <td>
                     <!-- Aksi -->
                     <div class="d-inline-flex gap-2">
-                       <a href="{{ route('detail.kelas', ['walas_id' => $data->walas_id]) }}" class="btn btn-sm btn-info text-white">
+                    <a href="{{ route('detail.kelas', ['rombel_id' => $data->rombel_id]) }}" class="btn btn-sm btn-info text-white">
                             <i class="bi bi-info-circle text-white"></i> Detail Kelas
-                       </a>
+                    </a>
                     </div>
                 </td>
                 <td class="text-center align-middle">

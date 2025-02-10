@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Request;
 use App\Models\Rombel;
 use App\Models\Walas;
@@ -10,23 +11,100 @@ use Carbon\Carbon;
 use App\Imports\RombelImport;
 use Maatwebsite\Excel\Facades\Excel;
 
-
 class RombelPageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Mengambil data dari tabel walas
-    $walas = DB::table('walas')->select('id', 'nama')->get();
+    {
+        // Mengambil data dari tabel walas
+        $walas = DB::table('walas')->select('id', 'nama')->get();
 
-    // Mengirim data ke view
-    return view('homepageadmin.rombeldata.index', [
-        'vwrombels' => DB::table('vwrombels')->get(),
-        'walas' => $walas // Kirim data wali kelas ke view
-    ]);
-}
+        // Mengirim data ke view
+        return view('homepageadmin.rombeldata.index', [
+            'vwrombels' => DB::table('vwrombels')->get(),
+            'walas' => $walas // Kirim data wali kelas ke view
+        ]);
+    }
+
+    public function naikKelas()
+    {
+        DB::transaction(function () {
+            $updatedStudents = [];
+            $rombels = DB::table('rombels')->get();
+
+            // Hapus semua siswa dengan keterangan 'tidak_naik_kelas' sebelum naik kelas
+            DB::table('siswas')->where('keterangan', 'tidak_naik_kelas')->delete();
+            dump("Siswa dengan keterangan 'tidak_naik_kelas' telah dihapus.");
+
+            foreach ($rombels as $rombel) {
+                $currentRombelId = $rombel->id;
+                $currentNamaKelas = $rombel->nama_kelas;
+                $walas_id = $rombel->walas_id; // Ambil walas dari rombel lama
+
+                // Ambil tingkat kelas dari nama_kelas (misal: X RPL 1 → X)
+                $kelas_split = explode(' ', $currentNamaKelas, 2);
+                $currentTingkat = $kelas_split[0] ?? ''; // X, XI, XII
+                $kompetensi = $kelas_split[1] ?? ''; // RPL 1, TKJ 2, SIJA 3
+
+                // Tentukan kelas baru
+                if ($currentTingkat === 'X') {
+                    $new_kelas = 'XI ' . $kompetensi;
+                } elseif ($currentTingkat === 'XI') {
+                    $new_kelas = 'XII ' . $kompetensi;
+                } else {
+                    continue; // Jika XII, biarkan saja (tidak naik)
+                }
+
+                // Cek apakah rombel baru sudah ada
+                $rombels_baru = DB::table('rombels')->where('nama_kelas', $new_kelas)->first();
+
+                // Jika belum ada, buat otomatis
+                if (!$rombels_baru) {
+                    $rombels_baru_id = DB::table('rombels')->insertGetId([
+                        'nama_kelas' => $new_kelas,
+                        'walas_id' => $walas_id, // Pakai walas yang sama dari rombel lama
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ]);
+
+                    dump("Rombel baru $new_kelas dibuat dengan walas ID: $walas_id.");
+                } else {
+                    $rombels_baru_id = $rombels_baru->id;
+                }
+
+                dump("Pindahkan siswa dari $currentNamaKelas ke $new_kelas");
+
+                // Update data siswa ke rombel baru
+                DB::table('siswas')->where('rombels_id', $currentRombelId)
+                    ->update([
+                        'rombels_id' => $rombels_baru_id,
+                        'keterangan' => 'naik_kelas'
+                    ]);
+
+                // 🛠 **Perbaiki Kompetensi yang Acak-acakan**
+                if (Schema::hasColumn('kompetensi', 'rombels_id')) {
+                    DB::table('kompetensi')->where('rombels_id', $currentRombelId)
+                        ->update(['rombels_id' => $rombels_baru_id]);
+
+                    dump("Kompetensi dari $currentNamaKelas tetap di $new_kelas.");
+                }
+
+                $updatedStudents[] = [
+                    'dari_kelas' => $currentNamaKelas,
+                    'ke_kelas' => $new_kelas
+                ];
+            }
+
+            // Nonaktifkan siswa kelas XIII (sudah lulus)
+            DB::table('siswas')->whereIn('rombels_id', function ($query) {
+                $query->select('id')->from('rombels')->where('nama_kelas', 'like', 'XIII%');
+            })->update(['status' => 'aktif']);
+
+            dump("Siswa kelas XIII yang sudah lulus telah dinonaktifkan.");
+        });
+    }
 
 public function import(Request $request){
     Excel::import(new RombelImport, $request->file('file'));

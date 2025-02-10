@@ -388,7 +388,6 @@
                 <th>WhatsApp</th>
                 <th>NIP</th>
                 <th>Foto</th>
-                <th>Detail</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -416,13 +415,6 @@
                                 {{ strtoupper(substr($data->nama, 0, 2)) }}
                             </div>
                         @endif
-                    </td>
-                    <td>
-                        <div class="d-inline-flex gap-2">
-                            <button class="btn btn-sm btn-info text-white">
-                                <i class="bi bi-info-circle text-white"></i> Detail Kelas
-                            </button>
-                        </div>
                     </td>
                     <td>
                         <div class="d-flex justify-content-center">

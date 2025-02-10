@@ -233,7 +233,43 @@ class SiswaDataPageAdminController extends Controller
             // Kirim data siswa hasil pencarian dan data lainnya ke view
             return view('homepagegtk.siswadata', compact( 'walas', 'rombels', 'rombel', 'siswa'));
         }
+
+        public function tambahKeRombel(Request $request)
+        {
+            $request->validate([
+                'siswa_id' => 'required|exists:siswas,id',
+                'nama_kelas' => 'required|exists:rombels,nama_kelas', // Validasi berdasarkan nama_kelas
+            ]);
         
+            try {
+                // Cari rombel_id berdasarkan nama_kelas
+                $rombel = Rombel::where('nama_kelas', $request->nama_kelas)->first();
+        
+                if (!$rombel) {
+                    return response()->json([
+                        'message' => 'Rombel tidak ditemukan.'
+                    ], 404);
+                }
+        
+                // Update rombels_id siswa
+                DB::table('siswas')->where('id', $request->siswa_id)->update([
+                    'rombels_id' => $rombel->id, // Gunakan id rombel hasil pencarian
+                    'keterangan' => 'tidak_naik_kelas'
+                ]);
+        
+                // Hapus siswa dari keluar_rombel
+                DB::table('keluar_rombels')->where('nama_siswa', $request->siswa_id)->delete();
+        
+                return response()->json([
+                    'message' => 'Siswa berhasil dipindahkan ke rombel baru dan dihapus dari keluar_rombel!'
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                ], 500);
+            }
+        }
+          
     }
     
 
