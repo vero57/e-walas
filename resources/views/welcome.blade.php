@@ -73,9 +73,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-md-6 order-2 order-md-1 text-center text-md-left">
-				<h1 class="text-white font-weight-bold mb-4">E - Walas Website SMK Negeri 1 Cibinong</h1>
-				<p class="text-white normal-text mb-1">Buat buku E-Walas lebih mudah dan efisien hanya dalam satu platform yang terintegrasi, memungkinkan Anda mengakses berbagai fitur secara praktis.</p>
-        <p class="text-white normal-text mt-1">Dengan menggunakan satu sistem yang lengkap, Anda dapat dengan mudah mengelola, membuat, dan mempublikasikan buku E-Walas dengan proses yang lebih sederhana dan cepat.</p>
+				<h1 class="text-white font-weight-bold mb-4">E - Walas SMK Negeri 1 Cibinong</h1>
+				<p class="text-white normal-text mb-1">Kelola Administrasi Walas lebih mudah dan efisien hanya dalam satu platform yang terintegrasi, memungkinkan Anda mengakses berbagai fitur secara praktis.</p>
+        <p class="text-white normal-text mt-1">Dengan menggunakan satu sistem yang lengkap, Anda dapat dengan mudah mengelola, membuat, dan mempublikasikan Administrasi Walas dengan proses yang lebih sederhana dan cepat.</p>
 				<br>
 				<a href="#penjelasan1" class="btn btn-main-md">Pelajari Lebih Lanjut</a>
 			</div>
@@ -165,10 +165,10 @@ FACEBOOK: https://www.facebook.com/themefisher
 			<div class="col-lg-6 mr-auto align-self-center">
 				<div class="feature-content">
 					<!-- Feature Title -->
-					<h2>Buat rekapan data e walas lebih mudah dan praktis hanya dalam <a
-							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">1 platform</a></h2>
+					<h2>Buat Rekap Administrasi Lebih Mudah dan Praktis Hanya Dalam <a
+							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">1 Platform</a></h2>
 					<!-- Feature Description -->
-					<p class="desc">E-Walas adalah platform digital yang dirancang untuk membantu wali kelas dalam mengelola informasi terkait siswa. Hal ini membantu walas dan siswa dalam melihat dan membuat data terkait perbukuan walas</p>
+					<p class="desc">E-Walas adalah platform digital yang dirancang untuk membantu wali kelas dalam mengelola informasi terkait siswa dan administratif. Hal ini membantu walas dan siswa dalam melihat dan membuat data terkait perbukuan walas</p>
 				</div>
 				<!-- Testimonial Quote -->
 				<!-- <div class="testimonial">
@@ -194,10 +194,10 @@ FACEBOOK: https://www.facebook.com/themefisher
 			<div class="col-lg-6 ml-auto align-self-center">
 				<div class="feature-content">
 					<!-- Feature Title -->
-					<h2>Mengelola Data Siswa Lebih Cepat dan Praktis Hanya dengan <a
-							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">E-Walas Website</a></h2>
+					<h2>Mengelola Data Siswa Lebih Aman dan Mengurangi Kertas Hanya dengan <a
+							href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">E-Walas</a></h2>
 					<!-- Feature Description -->
-					<p>E-Walas adalah solusi digital inovatif untuk wali kelas, memungkinkan pengelolaan data siswa menjadi lebih terstruktur dan efisien. Dengan fitur-fitur lengkap, platform ini mempermudah walas dan siswa dalam mengakses informasi, mencatat data penting, hingga menyusun laporan, semuanya dalam satu tempat yang mudah digunakan.</p>
+					<p>E-Walas adalah solusi digital inovatif untuk wali kelas, memungkinkan pengelolaan data siswa menjadi lebih terstruktur dan efisien. Dengan fitur-fitur lengkap, platform ini mempermudah walas dan siswa dalam mengakses informasi hingga mencatat data penting semuanya dalam satu website yang mudah digunakan.</p>
 				</div>
 			</div>
 			<div class="col-lg-6 mr-auto justify-content-center">
@@ -243,11 +243,11 @@ FACEBOOK: https://www.facebook.com/themefisher
 							<!-- Service 01 -->
 							<div class="service-item">
 								<!-- Icon -->
-								<i class="ti-bookmark"></i>
+                <i class="ti-panel"></i>
 								<!-- Heading -->
-								<h3>Easy Prototyping</h3>
+								<h3>Mudah Kelola Data Siswa</h3>
 								<!-- Description -->
-								<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
+								<p>Biodata, Presensi, jadwal, hingga catatan kasus tersimpan rapi.</p>
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-12">
@@ -256,9 +256,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 								<!-- Icon -->
 								<i class="ti-pulse"></i>
 								<!-- Heading -->
-								<h3>Sensor Bridge</h3>
+								<h3>Akses Kapan Saja </h3>
 								<!-- Description -->
-								<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
+								<p>Data bisa dibuka dari mana saja.</p>
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-12">
@@ -267,20 +267,20 @@ FACEBOOK: https://www.facebook.com/themefisher
 								<!-- Icon -->
 								<i class="ti-bar-chart"></i>
 								<!-- Heading -->
-								<h3>Strategist</h3>
+								<h3>Lebih Profesional </h3>
 								<!-- Description -->
-								<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
+								<p>Administrasi wali kelas lebih modern dan tertata.</p>
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-12">
 							<!-- Service 01 -->
 							<div class="service-item">
 								<!-- Icon -->
-								<i class="ti-panel"></i>
+                <i class="ti-bookmark"></i>
 								<!-- Heading -->
-								<h3>Art Direction</h3>
+								<h3>Data Aman & Tidak Hilang</h3>
 								<!-- Description -->
-								<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
+								<p>Tersimpan digital, tidak perlu banyak dokumen fisik</p>
 							</div>
 						</div>
 					</div>
@@ -299,81 +299,29 @@ FACEBOOK: https://www.facebook.com/themefisher
 <footer>
   <div class="footer-main">
     <div class="container">
-      <div class="row">
-      <div class="col-lg-4 col-md-12 m-md-auto align-self-center">
-        <div class="block d-flex flex-column align-items-center">
-          <a href=""><img src="images/logokampak2.png" alt="footer-logo" width="330" height="150"></a>
-          <!-- Social Site Icons -->
-          <ul class="social-icon list-inline d-flex justify-content-center mt-3">
-            <li class="list-inline-item">
-              <a href="https://www.facebook.com/themefisher"><i class="ti-facebook"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://twitter.com/themefisher"><i class="ti-twitter"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.instagram.com/themefisher/"><i class="ti-instagram"></i></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-        <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
-          <div class="block-2">
-            <!-- heading -->
-            <h6>E-Walas</h6>
-            <!-- links -->
-            <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#penjelasan1">Tentang</a></li>
-              <li><a href="#fitur">Fitur</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
-          <div class="block-2">
-            <!-- heading -->
-            <h6>Resources</h6>
-            <!-- links -->
-            <ul>
-              <li><a href="sign-up.html">Singup</a></li>
-              <li><a href="#login">Login</a></li>
-              <li><a href="blog.html">Blog</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
-          <div class="block-2">
-            <!-- heading -->
-            <h6>Company</h6>
-            <!-- links -->
-            <ul>
-              <li><a href="career.html">Career</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="team.html">Investor</a></li>
-              <li><a href="privacy.html">Terms</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
-          <div class="block-2">
-            <!-- heading -->
-            <h6>Company</h6>
-            <!-- links -->
-            <ul>
-              <li><a href="about.html">About</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="team.html">Team</a></li>
-              <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            </ul>
+      <div class="row align-items-center"> 
+        <div class="col-lg-6 col-md-12">
+          <div class="d-flex align-items-center">
+            <a href="">
+              <img src="images/logologin.png" alt="footer-logo" width="100" height="100" style="margin-right: 15px;">
+            </a>
+            <h1 style="font-weight: bold; text-transform: uppercase; margin-bottom: 0; display: inline-block; vertical-align: middle; white-space: nowrap;">SMKN 1 CIBINONG</h1>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="text-center bg-dark py-1">
-    <small class="text-secondary">Copyright &copy; <script>document.write(new Date().getFullYear())</script>. Designed &amp; Developed by <a href="https://themefisher.com/">SIJA SMKN 1 Cibinong</a></small class="text-secondary">
+    <small class="text-secondary">
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script>. 
+      Designed &amp; Developed by <a href="https://themefisher.com/">SIJA SMKN 1 Cibinong</a>
+    </small>
   </div>
 </footer>
+
+
+
+
 
 
   <!-- To Top -->
