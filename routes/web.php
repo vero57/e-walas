@@ -75,6 +75,10 @@ use App\Http\Controllers\ViewAdmWalasKepsekController;
 use App\Http\Controllers\ViewAdmWalasKurikulumController;
 use App\Http\Controllers\AdmWalasKurikulumViewController;
 use App\Http\Controllers\KurikulumWalasController;
+use App\Http\Controllers\KeluarRombelController;
+use App\Http\Controllers\KeluarRombelViewController;
+use App\Http\Controllers\SiswaDataPageAdminController;
+use App\Http\Controllers\AlumniDataController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -106,8 +110,7 @@ Route::post('/loginsiswa', [LoginSiswaController::class, 'store'])->name('logins
 Route::resource('adminpage', PageAdminController::class)->name('index', 'homepageadmin.index');
 Route::resource('wargasekolah', WargaSekolahController::class);
 Route::resource('detailkelas', SiswaDataPageAdminController::class);
-Route::get('/rombeldetail/{walas_id}', [ShowDetailRombelController::class, 'showDetail'])->name('detail.kelas');
-
+Route::get('/rombeldetail/{rombel_id}', [ShowDetailRombelController::class, 'showDetail'])->name('detail.kelas');
 
 // CRUD WALAS
 Route::resource('walas', WaliKelasPageController::class);
@@ -183,6 +186,7 @@ Route::get('/rombels/{id}/edit', [RombelPageController::class, 'edit'])->name('r
 Route::get('/hapusrombel/{id}', [RombelPageController::class, 'hapusrombel'])->name('hapusrombel');
 Route::get('/rombel/hapusrombel/{id}', [RombelPageController::class, 'hapusrombel']);
 Route::get ('/rombel_search', [RombelPageController::class,'rombel_search']);
+Route::get('/test-naik-kelas', [RombelPageController::class, 'naikKelas']);
 
 // CRUD MAPEL
 Route::resource('datamapel', MapelPageController::class);
@@ -225,6 +229,8 @@ Route::get('/profilekakom/{id}/edit', [ProfileKakomController::class, 'edit'])->
 Route::put('/profilekakom/{id}', [ProfileKakomController::class, 'update'])->name('profilekaprog.update');
 
 Route::get ('/siswadata_search', [DataSiswaWalasController::class,'siswadata_search']);
+
+Route::post('/siswa/tambah-ke-rombel', [SiswaDataPageAdminController::class, 'tambahKeRombel'])->name('siswa.tambah.ke.rombel');
 
 Route::post('/siswadata/tambah/store', [DataSiswaWalasController::class, 'store'])
 // Menambahkan middleware auth:walas
@@ -515,6 +521,16 @@ Route::get('/detailkelasviewkurikulum/{walas_id}', [KepsekRombelController::clas
 
 // CRUD TA 
 Route::post('/keluar-rombel/save', [DataSiswaWalasController::class, 'saveKeterangan'])->name('keluar-rombel.save');
+Route::post('/siswadata/simpan-keterangan/{id}', [KeluarRombelController::class, 'store'])->name('siswadata.simpanKeterangan');
+Route::resource('keluarrombeldata', KeluarRombelViewController::class);
+Route::get('/keluarrombeldetail/{rombels_id}', [KeluarRombelViewController::class, 'showSiswaKeluarRombel'])
+    ->name('detail.keluarormbel');
+
+// Route Alumni 
+Route::get('/alumni', [AlumniDataController::class, 'pengaturanalumni'])->name('alumni.index');
+Route::get('/alumnidatakepsek', [AlumniDataController::class, 'pengaturanalumnikepsek'])->name('alumnikepsek.index');
+Route::get('/alumnidatakakom', [AlumniDataController::class, 'pengaturanalumnikakom'])->name('alumnikakom.index');
+Route::get('/alumnidatakurikulum', [AlumniDataController::class, 'pengaturanalumnikurikulum'])->name('alumnikurikulum.index');
 
 // Logout admin
 Route::post('/homepageadmin/logout', function () {

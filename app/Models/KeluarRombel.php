@@ -3,15 +3,36 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class KeluarRombel extends Model
 {
-     // Tentukan nama tabel jika tidak menggunakan nama default
-     protected $table = 'data_keluar_rombel'; // Sesuaikan dengan nama tabel di database
-     // Kolom yang dapat diisi
-     protected $fillable = [
+    use HasFactory;
+    protected $fillable = [
         'nama_siswa',
         'keterangan',
-        'rombels_id',
+        'rombels_id'
     ];
+
+    // Definisikan enum jika menggunakan enum type
+    const KETERANGAN = [
+        'naik_kelas' => 'Naik Kelas',
+        'tidak_naik_kelas' => 'Tidak Naik Kelas',
+        'pindah_sekolah' => 'Pindah Sekolah'
+    ];
+    
+    public $timestamps = false;
+
+    public function rombel()
+    {
+        return $this->belongsTo(Rombel::class, 'rombels_id', 'id');
+    }
+
+    // Relasi ke tabel Siswa
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'nama_siswa', 'id');
+    }
+
 }
+

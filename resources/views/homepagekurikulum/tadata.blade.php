@@ -183,7 +183,13 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        
+        <li><a href="/tahunajarandata" class="active">Tahun Akademik</a></li>
+          <li><a href="/alumnidatakurikulum" >Alumni</a></li>
+          <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
+            </ul>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

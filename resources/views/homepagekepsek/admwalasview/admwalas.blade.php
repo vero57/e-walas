@@ -248,7 +248,7 @@ table td {
                 <td>3</td>
                 <td>Struktur Organisasi Kelas</td>
                 <td>
-                    <a href="#">
+                    <a href="{{ route('admwalas.strukturorganisasikelaskepsek') }}?walas_id={{ $walas->id }}">
                             <i class="fas fa-edit edit-icon" title="Detail Struktur Organisasi"></i>
                         </a>
                     </a>

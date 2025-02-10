@@ -22,40 +22,40 @@ class DataSiswaWalasController extends Controller
     public function index()
     {
         // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-        $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+        $walas = Auth::guard('walas')->user();  
 
         // Periksa apakah session 'walas_id' ada
         if (!session()->has('walas_id')) {
             return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        // Ambil data walas berdasarkan 'walas_id' di session
         $walas = Walas::find(session('walas_id'));
         
-        // Periksa apakah data walas ditemukan
         if (!$walas) {
             return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
         }
 
-        // Ambil data rombel yang dimiliki walas yang sedang login
+        // Ambil nama_kelas dari rombel yang dimiliki walas ini
         $rombel = Rombel::where('walas_id', $walas->id)->first();
 
-        // Periksa apakah rombel ditemukan
         if (!$rombel) {
             return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
         }
 
+        // Ambil data siswa yang memiliki nama_kelas yang sama
         $siswa = DB::table('vwsiswas')
-            ->where('id', $rombel->id)  // Pastikan kolom yang digunakan sesuai dengan relasi rombel
-            ->get();  // Mengambil satu data saja
+            ->leftJoin('keluar_rombels', 'vwsiswas.siswa_id', '=', 'keluar_rombels.nama_siswa')
+            ->where('vwsiswas.nama_kelas', $rombel->nama_kelas) // Filter berdasarkan nama_kelas
+            ->select('vwsiswas.*', 'keluar_rombels.keterangan')
+            ->get();
 
         // Ambil semua data rombels
         $rombels = Rombel::all();
 
-        // Kirim data siswa, rombels, dan walas ke view
+        // Kirim data ke view
         return view("homepagegtk.siswadata", compact('siswa', 'rombels', 'rombel', 'walas'));
     }
-
 
     public function import(Request $request){
         Excel::import(new SiswaImport, $request->file('file'));

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rombel;
 use App\Models\Walas;
+use App\Models\KeluarRombel;
 use App\Imports\SiswaImport;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
@@ -17,24 +18,37 @@ class ShowDetailRombelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function showDetail($walas_id)
+    public function showDetail($rombel_id)
     {
-        $rombel = Rombel::where('walas_id', $walas_id)->with('walas')->first();
+        // Ambil data rombel berdasarkan rombel_id
+        $rombel = Rombel::where('id', $rombel_id)->with('walas')->first();
     
         if (!$rombel) {
-            return redirect('/rombels')->with('error', 'Rombel tidak ditemukan untuk wali kelas ini.');
+            return redirect('/rombels')->with('error', 'Rombel tidak ditemukan.');
         }
     
         // Ambil data siswa berdasarkan rombel_id
         $siswas = Siswa::where('rombels_id', $rombel->id)->get();
     
-        // Data wali kelas
-        $walas = Rombel::where('walas_id', $walas_id)->with('walas')->get();
-        // Ambil semua data rombels
-       $rombels = Rombel::all();
+        // Ambil wali kelas berdasarkan relasi di model Rombel
+        $walas = $rombel->walas;
     
-        return view('homepageadmin.siswadata.datarombel', compact('siswas', 'walas', 'rombel', 'rombels'));
+        // Ambil semua data rombels
+        $rombels = Rombel::with('walas')->get();
+    
+        // Ambil nama_kompetensi dari rombel yang dipilih
+        $kompetensi = $rombel->kompetensi;
+    
+        $siswa_tidak_naik_ids = KeluarRombel::whereHas('rombel', function($query) use ($kompetensi) {
+            $query->where('kompetensi', $kompetensi);
+        })->pluck('nama_siswa');
+    
+        // Mengambil objek Siswa lengkap, bukan hanya nama
+        $siswa_tidak_naik = Siswa::whereIn('id', $siswa_tidak_naik_ids)->get();
+    
+        return view('homepageadmin.siswadata.datarombel', compact('siswas', 'rombel', 'rombels', 'walas', 'siswa_tidak_naik_ids', 'siswa_tidak_naik'));
     }
+    
 
     public function importsiswaadmin(Request $request){
         Excel::import(new SiswaImport, $request->file('file'));

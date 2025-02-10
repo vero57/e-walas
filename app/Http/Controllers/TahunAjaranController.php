@@ -31,9 +31,22 @@ class TahunAjaranController extends Controller
         if (!$admin) {
             return redirect('/loginadmin')->with('error', 'Data Admin tidak ditemukan.');
         }
+
+        $today = date('Y-m-d');
+        $year = date('Y');
+        $month = date('m');
+        $day = date('d');
+
+        if ($month >= 7 && $day >= 7) {
+            $tahunAjaran = "$year/" . ($year + 1);
+            $status = "GANJIL";
+        } else {
+            $tahunAjaran = ($year - 1) . "/$year";
+            $status = "GENAP";
+        }
   
       // Kirim data siswa, rombels, dan walas ke view
-      return view('homepageadmin.tahunajaran', compact('admin'));
+      return view('homepageadmin.tahunajaran', compact('admin', 'tahunAjaran', 'status'));
     }
 
     /**
