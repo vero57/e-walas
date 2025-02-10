@@ -258,8 +258,15 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
         document.addEventListener("DOMContentLoaded", function () {
     var ctx = document.getElementById('pendapatanChart').getContext('2d');
-    var dataPendapatan = @json($dataPendapatan);  // Data yang sudah difilter berdasarkan walas_id
+    // Pastikan dataPendapatan sesuai dengan walasIdSelected
+    var dataPendapatan = @json($dataPendapatan);
 
+    // Cek jika dataPendapatan kosong atau tidak, dan jika ada perubahan walasIdSelected
+    if (!dataPendapatan || Object.keys(dataPendapatan).length === 0) {
+        alert('Data pendapatan tidak ditemukan untuk Walas yang dipilih.');
+        return; // Tidak lanjut jika tidak ada data
+    }
+    
     new Chart(ctx, {
         type: 'line',
         data: {

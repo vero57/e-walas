@@ -24,7 +24,10 @@ use App\Models\DetailJadwalPiket;
 use App\Models\DaftarPesertaDidik;
 use Illuminate\Support\Facades\DB;
 use App\Models\AgendaKegiatanWalas;
+use App\Models\BeritaAcaraKenaikan;
+use App\Models\BeritaAcaraKelulusan;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BeritaAcaraSerahTerima;
 use App\Models\DaftarSerahTerimaRapor;
 use App\Models\PersentaseSosialEkonomi;
 use App\Models\RekapitulasiJumlahSiswa;
@@ -973,46 +976,46 @@ $dataPendapatan = [
     }
 
 
-public function prestasisiswa(Request $request)
-{
-    // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-    $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
+    public function prestasisiswa(Request $request)
+    {
+        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
 
-    // Periksa apakah session 'kakom_id' ada
-    if (!session()->has('kakom_id')) {
-        return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kakom_id' ada
+        if (!session()->has('kakom_id')) {
+            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
+        $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
+
+        // Ambil data walas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+
+        // Ambil data walas_id yang dipilih dari URL query parameter (bisa null)
+        $walasIdSelected = $request->query('walas_id', null); // Default ke null jika tidak ada query parameter
+
+        // Filter data prestasi siswa berdasarkan walas_id yang dipilih (jika ada)
+        $prestasisiswa = PrestasiSiswa::whereIn('walas_id', $walasIds);
+
+        if ($walasIdSelected) {
+            $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
+        }
+
+        // Ambil data prestasi siswa sesuai filter walas_id
+        $prestasisiswa = $prestasisiswa->get();
+
+        // Return view dengan data yang difilter
+        return view("homepagekaprog.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kakom', 'prestasisiswa', 'walasIdSelected'));
     }
-
-    // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
-    $kakom = Kakom::find(session('kakom_id'));
-
-    // Periksa apakah data kakom ditemukan
-    if (!$kakom) {
-        return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
-    }
-
-    // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
-    $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
-
-    // Ambil data walas berdasarkan walas_id yang sesuai
-    $walasList = Walas::whereIn('id', $walasIds)->get();
-
-    // Ambil data walas_id yang dipilih dari URL query parameter (bisa null)
-    $walasIdSelected = $request->query('walas_id', null); // Default ke null jika tidak ada query parameter
-
-    // Filter data prestasi siswa berdasarkan walas_id yang dipilih (jika ada)
-    $prestasisiswa = PrestasiSiswa::whereIn('walas_id', $walasIds);
-
-    if ($walasIdSelected) {
-        $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
-    }
-
-    // Ambil data prestasi siswa sesuai filter walas_id
-    $prestasisiswa = $prestasisiswa->get();
-
-    // Return view dengan data yang difilter
-    return view("homepagekaprog.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kakom', 'prestasisiswa', 'walasIdSelected'));
-}
 
 public function generatePDFprestasi(Request $request)
 {
@@ -1229,6 +1232,116 @@ private function convertToBase64($path)
                 ->setPaper('A4', 'landscape');
             return $pdf->stream('Jarak_rumah_Siswa.pdf');
         }
+
+
+        public function beritaacarakenaikan(Request $request)
+    {
+        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
+
+        // Periksa apakah session 'kakom_id' ada
+        if (!session()->has('kakom_id')) {
+            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
+        $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
+
+        // Ambil data walas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+
+        // Ambil data walas_id yang dipilih dari URL query parameter (bisa null)
+        $walasIdSelected = $request->query('walas_id', null); // Default ke null jika tidak ada query parameter
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaAcara = BeritaAcaraKenaikan::where('walas_id', $walasIdSelected)->get();
+
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkakom.beritaacarakenaikan', compact('walasIdSelected', 'beritaAcara'));
+            return $pdf->stream('Berita_Acara.pdf');
+        }
+
+        return view('homepagekaprog.admwalas.beritaacarakenaikan.index', compact('walasList', 'walasIds', 'kakom', 'walasIdSelected','beritaAcara'));
+    }
+
+    public function beritaacarakelulusan(Request $request)
+    {
+        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
+
+        // Periksa apakah session 'kakom_id' ada
+        if (!session()->has('kakom_id')) {
+            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
+        $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
+
+        // Ambil data walas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+
+        // Ambil data walas_id yang dipilih dari URL query parameter (bisa null)
+        $walasIdSelected = $request->query('walas_id', null); // Default ke null jika tidak ada query parameter
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaAcaraKelulusan = BeritaAcaraKelulusan::where('walas_id', $walasIdSelected)->get();
+
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkakom.beritaacarakelulusan', compact('walasIdSelected', 'beritaAcaraKelulusan'));
+            return $pdf->stream('Berita_Acara.pdf');
+        }
+
+        return view('homepagekaprog.admwalas.beritaacarakelulusan.index', compact('walasList', 'walasIds', 'kakom', 'walasIdSelected','beritaAcaraKelulusan'));
+    }
+
+    public function beritaacaraserahterima(Request $request)
+    {
+        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        $kakom = Auth::guard('kakoms')->user();  // ini akan mendapatkan data kakom yang sedang login
+
+        // Periksa apakah session 'kakom_id' ada
+        if (!session()->has('kakom_id')) {
+            return redirect('/loginkaprog')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kakom berdasarkan 'kakom_id' yang ada di session
+        $kakom = Kakom::find(session('kakom_id'));
+
+        // Periksa apakah data kakom ditemukan
+        if (!$kakom) {
+            return redirect('/loginkaprog')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil data walas_id dari tabel rombel berdasarkan 'kompetensi' yang sama dengan kakom
+        $walasIds = Rombel::where('kompetensi', $kakom->kompetensi)->pluck('walas_id');
+
+        // Ambil data walas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+
+        // Ambil data walas_id yang dipilih dari URL query parameter (bisa null)
+        $walasIdSelected = $request->query('walas_id', null); // Default ke null jika tidak ada query parameter
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaacaraserahterima = BeritaAcaraSerahTerima::where('walas_id', $walasIdSelected)->get();
+
+        return view('homepagekaprog.admwalas.beritaacaraserahterima.index', compact('walasList', 'walasIds', 'kakom', 'walasIdSelected','beritaacaraserahterima'));
+    }
 
     /**
      * Show the form for creating a new resource.

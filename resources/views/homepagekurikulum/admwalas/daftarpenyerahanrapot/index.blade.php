@@ -156,7 +156,7 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
+                
                 <a href="{{ route('serahterimarapor.download-template') }}" class="btn btn-outline-secondary" download>
                     <i class="bi bi-cloud-download"></i> Download File
                 </a>

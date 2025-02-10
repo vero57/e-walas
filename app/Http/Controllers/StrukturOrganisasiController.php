@@ -49,10 +49,11 @@ class StrukturOrganisasiController extends Controller
         if ($struktur->isEmpty()) {
             return redirect()->route('strukturorganisasi.index')->with('error', 'Data tidak tersedia untuk diunduh.');
         }
-
-        $pdf = Pdf::loadView('pdf.strukturorganisasi', ['struktur' => $struktur]);
+    
+        $pdf = Pdf::loadView('pdf.strukturorganisasi', compact('struktur','walaslogin'));
         return $pdf->stream('Struktur_Organisasi.pdf');
     }
+    
 
     return view("admwalas.strukturorganisasi.index", compact('struktur', 'walaslogin', 'rombel'));
 }

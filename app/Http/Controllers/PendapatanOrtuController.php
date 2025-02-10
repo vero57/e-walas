@@ -66,6 +66,11 @@ class PendapatanOrtuController extends Controller
     $pendapatan = BiodataSiswa::select('id', 'nama_lengkap', 'pendapatan_ortu')->get();
     $walas = Walas::find(session('walas_id'));
 
+     // Ambil data siswa hanya untuk walas yang sedang login
+     $pendapatan = BiodataSiswa::select('id', 'nama_lengkap', 'pendapatan_ortu')
+     ->where('walas_id', $walas->id)
+     ->get();
+
     $dataPendapatan = [
         'Kurang dari Rp1.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Kurang dari Rp1.000.000,00')->count(),
         'Rp1.000.000,00 - Rp3.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp1.000.000,00 - Rp3.000.000,00')->count(),

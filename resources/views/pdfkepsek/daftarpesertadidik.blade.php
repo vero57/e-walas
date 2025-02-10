@@ -104,9 +104,9 @@
                 <td style="text-align: center;">({{ optional($walasList->where('id', $walasIdSelected)->first())->nama ?? '_________________' }})</td>
             </tr>
             <tr>
-                <td style="text-align: center;">NIP: {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+                <td style="text-align: center;">NIP  {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
                 <td></td>
-                <td style="text-align: center;">NIP: {{ optional($walasList->where('id', $walasIdSelected)->first())->nip ?? '......................' }}</td>
+                <td style="text-align: center;">NIP  {{ optional($walasList->where('id', $walasIdSelected)->first())->nip ?? '......................' }}</td>
             </tr>
         </table>
     </div>

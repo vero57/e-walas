@@ -155,9 +155,7 @@
             <h2 class="font-weight-bold">Daftar Home Visit</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
+                
                 <a href="/homevisitcreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>

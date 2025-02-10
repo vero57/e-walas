@@ -109,9 +109,9 @@
                 <td style="text-align: center;">({{ optional($walas)->nama ?? '_________________' }})</td> <!-- Memperbaiki penggunaan $walas -->
             </tr>
             <tr>
-                <td style="text-align: center;">NIP: {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+                <td style="text-align: center;">NIP  {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
                 <td></td>
-                <td style="text-align: center;">NIP: {{ optional($walas)->nip ?? '......................' }}</td> <!-- Memperbaiki penggunaan $walas -->
+                <td style="text-align: center;">NIP  {{ optional($walas)->nip ?? '......................' }}</td> <!-- Memperbaiki penggunaan $walas -->
             </tr>
     </table>
 </div>

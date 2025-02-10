@@ -180,7 +180,7 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
+                
                 <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdf') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">

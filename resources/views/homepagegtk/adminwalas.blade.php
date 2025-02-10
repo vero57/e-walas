@@ -196,19 +196,7 @@ table td {
             <h2 class="font-weight-bold">Daftar Administrasi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
-
+                
                     <!-- Search Box -->
                 <div class="searchBox">
                     <input class="searchInput" type="text" placeholder="  Cari Administrasi">
@@ -222,7 +210,7 @@ table td {
         
         <!-- Jumlah Total GTK -->
         <div class="text-end mb-4">
-            <span class="text-muted">Jumlah Total: <strong>15 Administrasi</strong></span>
+            <span class="text-muted">Jumlah Total: <strong>20 Administrasi</strong></span>
         </div>
 
         <div class="container mt-4">
@@ -393,71 +381,37 @@ table td {
                 </a>
                 </td>
             </tr>
+            <tr>
+                <td>18</td>
+                <td>Berita Acara Kenaikan Kelas</td>
+                <td>
+                    <a href="/beritaacarakenaikan">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>Berita Acara Kelulusan</td>
+                <td>
+                    <a href="/beritaacarakelulusan">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>Berita Acara Serah Terima</td>
+                <td>
+                    <a href="/beritaacaraserahterima">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
 </section>
-
-<!-- Modal Unggah Data -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Administrasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Unggah</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Data Administrasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="teacherName" class="form-label">Nama Administrasi</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukkan nama Administrasi">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherPhoto" class="form-label">Foto Administrasi</label>
-                        <input type="file" class="form-control" id="teacherPhoto">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="text" class="form-control" id="teacherWhatsApp" placeholder="Masukkan nomor WhatsApp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherInfo" class="form-label">Informasi</label>
-                        <textarea class="form-control" id="teacherInfo" rows="3" placeholder="Masukkan informasi tambahan"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-success">Tambah Data</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
     </div>
@@ -478,28 +432,7 @@ table td {
 
   </footer>
 
-  <!-- modal -->
-<div class="modal fade" id="semesterModal" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="semesterModalLabel">Pilih Semester</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Silakan pilih semester untuk melihat rencana kegiatan walas.</p>
-                <div class="d-flex justify-content-around">
-                    <a href="{{ route('rencana_kegiatan_walas.index', ['semester' => 'ganjil']) }}" class="btn btn-primary">
-                        Semester Ganjil
-                    </a>
-                    <a href="{{ route('rencana_kegiatan_walas.index', ['semester' => 'genap']) }}" class="btn btn-secondary">
-                        Semester Genap
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+   
 
 
   <!-- Scroll Top -->

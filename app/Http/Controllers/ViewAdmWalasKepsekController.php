@@ -2,34 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Walas;
-use App\Models\Kakom;
-use App\Models\Rombel;
-use App\Models\AgendaKegiatanWalas;
-use App\Models\IdentitasKelas;
-use App\Models\LembarPengesahan;
-use App\Models\StrukturOrganisasiKelas;
-use App\Models\JadwalKbm;
-use App\Models\Mapel;
 use App\Models\Guru;
+use App\Models\Kakom;
+use App\Models\Mapel;
 use App\Models\Siswa;
-use App\Models\Presensi;
-use App\Models\JadwalPiket;
-use App\Models\DetailJadwalPiket;
-use App\Models\DaftarSerahTerimaRapor;
-use App\Models\CatatanKasusSiswa;
-use App\Models\DaftarPesertaDidik;
-use App\Models\RekapitulasiJumlahSiswa;
-use App\Models\HomeVisit;
-use App\Models\BukuTamuOrangtua;
-use App\Models\PersentaseSosialEkonomi;
-use App\Models\BiodataSiswa;
-use App\Models\PrestasiSiswa;
+use App\Models\Walas;
 use App\Models\Kepsek;
-use Illuminate\Support\Facades\DB;
+use App\Models\Rombel;
+use App\Models\Presensi;
+use App\Models\HomeVisit;
+use App\Models\JadwalKbm;
+use App\Models\JadwalPiket;
+use App\Models\BiodataSiswa;
+use Illuminate\Http\Request;
+use App\Models\PrestasiSiswa;
+use App\Models\IdentitasKelas;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\BukuTamuOrangtua;
+use App\Models\LembarPengesahan;
+use App\Models\CatatanKasusSiswa;
+use App\Models\DetailJadwalPiket;
+use App\Models\DaftarPesertaDidik;
+use Illuminate\Support\Facades\DB;
+use App\Models\AgendaKegiatanWalas;
+use App\Models\BeritaAcaraKenaikan;
+use App\Models\BeritaAcaraKelulusan;
+use Illuminate\Support\Facades\Auth;
+use App\Models\BeritaAcaraSerahTerima;
+use App\Models\DaftarSerahTerimaRapor;
+use App\Models\PersentaseSosialEkonomi;
+use App\Models\RekapitulasiJumlahSiswa;
+use App\Models\StrukturOrganisasiKelas;
 
 class ViewAdmWalasKepsekController extends Controller
 {
@@ -922,15 +925,14 @@ $walas = Walas::find($walasIdSelected);
         $query->where('walas_id', $walasIdSelected);
     }
 
-    // Kelompokkan data berdasarkan rentang pendapatan
     $dataPendapatan = [
-        'Kurang dari Rp1.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Kurang dari Rp1.000.000,00')->count(),
-        'Rp1.000.000,00 - Rp3.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp1.000.000,00 - Rp3.000.000,00')->count(),
-        'Rp3.000.000,00 - Rp5.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp3.000.000,00 - Rp5.000.000,00')->count(),
-        'Rp5.000.000,00 - Rp10.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp5.000.000,00 - Rp10.000.000,00')->count(),
-        'Rp10.000.000,00 - Rp25.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp10.000.000,00 - Rp25.000.000,00')->count(),
-        'Rp25.000.000,00 - Rp50.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp25.000.000,00 - Rp50.000.000,00')->count(),
-        'Lebih dari Rp50.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Lebih dari Rp50.000.000,00')->count(),
+        'Kurang dari Rp1.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Kurang dari Rp1.000.000,00')->where('walas_id', $walasIdSelected)->count(),
+        'Rp1.000.000,00 - Rp3.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp1.000.000,00 - Rp3.000.000,00')->where('walas_id', $walasIdSelected)->count(),
+        'Rp3.000.000,00 - Rp5.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp3.000.000,00 - Rp5.000.000,00')->where('walas_id', $walasIdSelected)->count(),
+        'Rp5.000.000,00 - Rp10.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp5.000.000,00 - Rp10.000.000,00')->where('walas_id', $walasIdSelected)->count(),
+        'Rp10.000.000,00 - Rp25.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp10.000.000,00 - Rp25.000.000,00')->where('walas_id', $walasIdSelected)->count(),
+        'Rp25.000.000,00 - Rp50.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Rp25.000.000,00 - Rp50.000.000,00')->where('walas_id', $walasIdSelected)->count(),
+        'Lebih dari Rp50.000.000,00' => BiodataSiswa::where('pendapatan_ortu', 'Lebih dari Rp50.000.000,00')->where('walas_id', $walasIdSelected)->count(),
     ];
 
     // Ambil data siswa hanya untuk walas yang sedang login
@@ -977,43 +979,43 @@ $walas = Walas::find($walasIdSelected);
 
 
     public function prestasisiswakepsek(Request $request)
-{
-    // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
-    $kepsek = Auth::guard('kepseks')->user();  // Mendapatkan data kepsek yang sedang login
+    {
+        // Menggunakan guard 'kakoms' untuk mendapatkan data kakom yang login
+        $kepsek = Auth::guard('kepseks')->user();  // Mendapatkan data kepsek yang sedang login
 
-    // Periksa apakah session 'kepsek_id' ada
-    if (!session()->has('kepsek_id')) {
-        return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        // Periksa apakah session 'kepsek_id' ada
+        if (!session()->has('kepsek_id')) {
+            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
+        $kepsek = Kepsek::find(session('kepsek_id'));
+
+        // Periksa apakah data kepsek ditemukan
+        if (!$kepsek) {
+            return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
+        }
+
+        // Ambil semua ID walas
+        $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+
+        // Ambil data walas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+
+        // Ambil data prestasi siswa berdasarkan walas_id yang dipilih
+        $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
+        $prestasisiswa = PrestasiSiswa::whereIn('walas_id', $walasIds);
+
+        if ($walasIdSelected) {
+            $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
+        }
+
+        // Ambil data prestasi siswa sesuai filter walas_ids
+        $prestasisiswa = $prestasisiswa->get();
+
+        // Return view dengan data yang difilter
+        return view("homepagekepsek.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kepsek', 'prestasisiswa', 'walasIdSelected'));
     }
-
-    // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
-    $kepsek = Kepsek::find(session('kepsek_id'));
-
-    // Periksa apakah data kepsek ditemukan
-    if (!$kepsek) {
-        return redirect('/loginkepsek')->with('error', 'Data Kaprog tidak ditemukan.');
-    }
-
-    // Ambil semua ID walas
-    $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
-
-    // Ambil data walas berdasarkan walas_id yang sesuai
-    $walasList = Walas::whereIn('id', $walasIds)->get();
-
-    // Ambil data prestasi siswa berdasarkan walas_id yang dipilih
-    $walasIdSelected = $request->query('walas_id'); // Ambil walas_id dari URL query parameter
-    $prestasisiswa = PrestasiSiswa::whereIn('walas_id', $walasIds);
-
-    if ($walasIdSelected) {
-        $prestasisiswa = $prestasisiswa->where('walas_id', $walasIdSelected); // Filter berdasarkan walas_id yang dipilih
-    }
-
-    // Ambil data prestasi siswa sesuai filter walas_ids
-    $prestasisiswa = $prestasisiswa->get();
-
-    // Return view dengan data yang difilter
-    return view("homepagekepsek.admwalas.prestasisiswa.index", compact('walasList', 'walasIds', 'kepsek', 'prestasisiswa', 'walasIdSelected'));
-}
 
         public function generatePDFkepsekprestasi(Request $request)
         {
@@ -1122,9 +1124,8 @@ private function convertToBase64($path)
             'Lebih dari 50 km' => 0,
         ];
     
-        // Ambil semua data jarak tempuh dari database
-        $jarakSiswa = BiodataSiswa::pluck('jarak_rumah');
-    
+        $jarakSiswa = BiodataSiswa::where('walas_id', $walasIdSelected)->pluck('jarak_rumah');
+
         foreach ($jarakSiswa as $jarak) {
             preg_match('/\d+(\.\d+)?/', $jarak, $matches); // Ambil angka dari string (termasuk desimal)
             $km = isset($matches[0]) ? floatval($matches[0]) : null;
@@ -1214,6 +1215,132 @@ private function convertToBase64($path)
         return $pdf->stream('Jarak_rumah_Siswa.pdf');
     }
     
+
+    public function beritaacarakenaikankepsek(Request $request)
+    {
+        // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
+        $kepsek = Auth::guard('kepseks')->user();  
+    
+        // Periksa apakah session 'kepsek_id' ada
+        if (!session()->has('kepsek_id')) {
+            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        }
+    
+        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
+        $kepsek = Kepsek::find(session('kepsek_id'));
+    
+        // Periksa apakah data kepsek ditemukan
+        if (!$kepsek) {
+            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
+    
+        // Ambil semua ID walas
+        $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+    
+        // Ambil data wali kelas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+    
+        // Ambil data walas_id yang dipilih dari query parameter
+        $walasIdSelected = $request->query('walas_id', null);  
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaAcara = BeritaAcaraKenaikan::where('walas_id', $walasIdSelected)->get();
+
+        // Ambil data walas berdasarkan walas_id yang dipilih
+        $walas = Walas::find($walasIdSelected);
+
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkepsek.beritaacarakenaikan', compact('walasIdSelected', 'beritaAcara','walas'));
+            return $pdf->stream('Berita_Acara.pdf');
+        }
+
+        return view('homepagekepsek.admwalas.beritaacarakenaikan.index', compact('walasList', 'walasIds', 'kepsek', 'walasIdSelected','beritaAcara','walas'));
+    }
+
+    public function beritaacarakelulusankepsek(Request $request)
+    {
+        
+        // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
+        $kepsek = Auth::guard('kepseks')->user();  
+    
+        // Periksa apakah session 'kepsek_id' ada
+        if (!session()->has('kepsek_id')) {
+            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        }
+    
+        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
+        $kepsek = Kepsek::find(session('kepsek_id'));
+    
+        // Periksa apakah data kepsek ditemukan
+        if (!$kepsek) {
+            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
+    
+        // Ambil semua ID walas
+        $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+    
+        // Ambil data wali kelas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+    
+        // Ambil data walas_id yang dipilih dari query parameter
+        $walasIdSelected = $request->query('walas_id', null);  
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaAcara = BeritaAcaraKenaikan::where('walas_id', $walasIdSelected)->get();
+
+        // Ambil data walas berdasarkan walas_id yang dipilih
+        $walas = Walas::find($walasIdSelected);
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaAcaraKelulusan = BeritaAcaraKelulusan::where('walas_id', $walasIdSelected)->get();
+
+        if (request()->has('export') && request()->get('export') === 'pdf') {
+            $pdf = Pdf::loadView('pdfkepsek.beritaacarakelulusan', compact('walasIdSelected', 'beritaAcaraKelulusan', 'walas'));
+            return $pdf->stream('Berita_Acara.pdf');
+        }
+
+        return view('homepagekepsek.admwalas.beritaacarakelulusan.index', compact('walasList', 'walasIds', 'kepsek', 'walasIdSelected','beritaAcaraKelulusan', 'walas'));
+    }
+
+    public function beritaacaraserahterimakepsek(Request $request)
+    {
+        
+        // Menggunakan guard 'kepseks' untuk mendapatkan data kepsek yang login
+        $kepsek = Auth::guard('kepseks')->user();  
+    
+        // Periksa apakah session 'kepsek_id' ada
+        if (!session()->has('kepsek_id')) {
+            return redirect('/loginkepsek')->with('error', 'Silakan login terlebih dahulu.');
+        }
+    
+        // Ambil data kepsek berdasarkan 'kepsek_id' yang ada di session
+        $kepsek = Kepsek::find(session('kepsek_id'));
+    
+        // Periksa apakah data kepsek ditemukan
+        if (!$kepsek) {
+            return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
+        }
+    
+        // Ambil semua ID walas
+        $walasIds = Walas::pluck('id'); // Mengambil hanya ID dalam bentuk array
+    
+        // Ambil data wali kelas berdasarkan walas_id yang sesuai
+        $walasList = Walas::whereIn('id', $walasIds)->get();
+    
+        // Ambil data walas_id yang dipilih dari query parameter
+        $walasIdSelected = $request->query('walas_id', null);  
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaAcara = BeritaAcaraKenaikan::where('walas_id', $walasIdSelected)->get();
+
+        // Ambil data walas berdasarkan walas_id yang dipilih
+        $walas = Walas::find($walasIdSelected);
+
+        //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
+        $beritaacaraserahterima = BeritaAcaraSerahTerima::where('walas_id', $walasIdSelected)->get();
+
+        return view('homepagekepsek.admwalas.beritaacaraserahterima.index', compact('walasList', 'walasIds', 'kepsek', 'walasIdSelected','beritaacaraserahterima'));
+    }
 
     /**
      * Show the form for creating a new resource.

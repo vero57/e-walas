@@ -106,9 +106,9 @@
                 <td style="text-align: center;">({{ optional($walasSelected)->nama ?? '_________________' }})</td>
             </tr>
             <tr>
-                <td style="text-align: center;">NIP: {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+                <td style="text-align: center;">NIP  {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
                 <td></td>
-                <td style="text-align: center;">NIP: {{ optional($walasSelected)->nip ?? '......................' }}</td>
+                <td style="text-align: center;">NIP  {{ optional($walasSelected)->nip ?? '......................' }}</td>
             </tr>
         </table>
     </div>

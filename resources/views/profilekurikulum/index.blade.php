@@ -267,7 +267,7 @@ h1 .accent-text {
     <div class="profile-info-container">
         <p><strong>Name:</strong> {{ $kurikulum->nama }}</p>
         <p><strong>Phone:</strong> {{ $kurikulum->no_wa }}</p>
-        <p><strong>NIP:</strong> {{ $kurikulum->nip }}</p>
+        <p><strong>NIP </strong> {{ $kurikulum->nip }}</p>
         <p><strong>Password:</strong> {{ $kurikulum->password }}</p>
 
         <!-- Tombol Edit -->

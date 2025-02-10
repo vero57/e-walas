@@ -196,11 +196,6 @@ table td {
             <h2 class="font-weight-bold">Daftar Administrasi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
                     <!-- Search Box -->
                 <div class="searchBox">
                     <input class="searchInput" type="text" placeholder="  Cari Administrasi">
@@ -470,28 +465,7 @@ table td {
 
   </footer>
 
-  <!-- modal -->
-<div class="modal fade" id="semesterModal" tabindex="-1" aria-labelledby="semesterModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="semesterModalLabel">Pilih Semester</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Silakan pilih semester untuk melihat rencana kegiatan walas.</p>
-                <div class="d-flex justify-content-around">
-                    <a href="{{ route('rencana_kegiatan_walas.index', ['semester' => 'ganjil']) }}" class="btn btn-primary">
-                        Semester Ganjil
-                    </a>
-                    <a href="{{ route('rencana_kegiatan_walas.index', ['semester' => 'genap']) }}" class="btn btn-secondary">
-                        Semester Genap
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+   
 
 
   <!-- Scroll Top -->
