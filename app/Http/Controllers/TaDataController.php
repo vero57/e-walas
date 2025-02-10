@@ -29,7 +29,20 @@ class TaDataController extends Controller
             return redirect('/loginkurikulum')->with('error', 'Data kurikulum tidak ditemukan.');
         }
 
-        return view('homepagekurikulum.tadata', compact('kurikulum'));
+        $today = date('Y-m-d');
+        $year = date('Y');
+        $month = date('m');
+        $day = date('d');
+  
+        if ($month >= 7 && $day >= 7) {
+            $tahunAjaran = "$year/" . ($year + 1);
+            $status = "GANJIL";
+        } else {
+            $tahunAjaran = ($year - 1) . "/$year";
+            $status = "GENAP";
+        }
+
+        return view('homepagekurikulum.tadata', compact('kurikulum', 'tahunAjaran', 'status'));
     }
 
     /**

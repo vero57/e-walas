@@ -35,7 +35,21 @@ class KakomTAController extends Controller
         // Ambil semua rombel yang memiliki kompetensi yang sama dengan kompetensi kakom yang sedang login
         $kompetensi = Rombel::where('kompetensi', $kompetensi_kakom)->get();
 
-        return view ('homepagekaprog.tahunakademik', compact('kakom', 'kompetensi_kakom', 'kompetensi'));
+        $today = date('Y-m-d');
+        $year = date('Y');
+        $month = date('m');
+        $day = date('d');
+  
+        if ($month >= 7 && $day >= 7) {
+            $tahunAjaran = "$year/" . ($year + 1);
+            $status = "GANJIL";
+        } else {
+            $tahunAjaran = ($year - 1) . "/$year";
+            $status = "GENAP";
+        }
+  
+
+        return view ('homepagekaprog.tahunakademik', compact('kakom', 'kompetensi_kakom', 'kompetensi', 'tahunAjaran', 'status'));
     }
 
     /**

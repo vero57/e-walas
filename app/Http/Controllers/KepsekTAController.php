@@ -34,8 +34,20 @@ class KepsekTAController extends Controller
           return redirect('/loginkepsek')->with('error', 'Data Kepala Sekolah tidak ditemukan.');
       }
 
+      $today = date('Y-m-d');
+      $year = date('Y');
+      $month = date('m');
+      $day = date('d');
 
-      return view ('homepagekepsek.tahunakademik', compact('kepsek'));
+      if ($month >= 7 && $day >= 7) {
+          $tahunAjaran = "$year/" . ($year + 1);
+          $status = "GANJIL";
+      } else {
+          $tahunAjaran = ($year - 1) . "/$year";
+          $status = "GENAP";
+      }
+
+      return view ('homepagekepsek.tahunakademik', compact('kepsek', 'tahunAjaran', 'status'));
     }
 
     /**
