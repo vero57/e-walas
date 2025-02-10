@@ -244,29 +244,55 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <a href="/kakomrombel" class="text-decoration-none fw-bold text-primary table-link-hover">
-                        2024/2025 - GANJIL
-                    </a>
-                </td>
-                <td>
-                    <span class="badge bg-success">AKTIF</span>
-                </td>
-                <td>
-                    <!-- Aksi -->
-                    <div class="d-inline-flex gap-2">
-    <a href="/kakomrombel" class="btn btn-sm btn-primary text-white">
-        <i class="bi bi-info-circle text-white "></i> Detail
-    </a>
-</div>
-
-                </td>
-            </tr>
-        </tbody>
+                    <tr>
+                    <td>
+                        <a href="/rombel" class="text-decoration-none fw-bold text-primary table-link-hover">
+                            {{ $tahunAjaran }} - {{ $status }}
+                        </a>
+                    </td>
+                        <td>
+                            <span class="badge bg-success">AKTIF</span>
+                        </td>
+                        <td>
+                            <!-- Aksi -->
+                            <div class="d-inline-flex gap-2">
+                                <a href="/rombel" class="btn btn-sm btn-primary text-white">
+                                    <i class="bi bi-info-circle text-white"></i> Detail
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
     </table>
 </div>
-
+ <!-- Table Keluar Rombel -->
+ <div class="table-container">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-danger">
+                    <tr>
+                        <th scope="col">Data Siswa Keluar Rombel</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="/keluarrombeldatakakom" class="text-decoration-none fw-bold text-primary table-link-hover">
+                                2024/2025 - GANJIL
+                            </a>
+                        </td>
+                        <td>
+                            <!-- Aksi -->
+                            <div class="d-inline-flex gap-2">
+                                <a href="/keluarrombeldatakakom" class="btn btn-sm btn-primary text-white">
+                                    <i class="bi bi-info-circle text-white"></i> Detail
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 </section>
 
 </main>

@@ -79,6 +79,9 @@ use App\Http\Controllers\KeluarRombelController;
 use App\Http\Controllers\KeluarRombelViewController;
 use App\Http\Controllers\SiswaDataPageAdminController;
 use App\Http\Controllers\AlumniDataController;
+use App\Http\Controllers\KeluarRombelViewKepsek;
+use App\Http\Controllers\KeluarRombelViewKurikulumController;
+use App\Http\Controllers\KeluarRombelViewKakomController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -523,8 +526,21 @@ Route::get('/detailkelasviewkurikulum/{walas_id}', [KepsekRombelController::clas
 Route::post('/keluar-rombel/save', [DataSiswaWalasController::class, 'saveKeterangan'])->name('keluar-rombel.save');
 Route::post('/siswadata/simpan-keterangan/{id}', [KeluarRombelController::class, 'store'])->name('siswadata.simpanKeterangan');
 Route::resource('keluarrombeldata', KeluarRombelViewController::class);
+
+// Keluar Rombel View
+Route::resource('keluarrombeldata', KeluarRombelViewController::class);
 Route::get('/keluarrombeldetail/{rombels_id}', [KeluarRombelViewController::class, 'showSiswaKeluarRombel'])
     ->name('detail.keluarormbel');
+Route::resource('keluarrombeldatakepsek', KeluarRombelViewKepsek::class);
+Route::get('/keluarrombeldetailkepsek/{rombels_id}', [KeluarRombelViewKepsek::class, 'showSiswaKeluarRombelkepsek'])
+        ->name('detail.keluarormbelkepsek');
+Route::resource('keluarrombeldatakurikulum', KeluarRombelViewKurikulumController::class);
+Route::get('/keluarrombeldetailkurikulum/{rombels_id}', [KeluarRombelViewKurikulumController::class, 'showSiswaKeluarRombelkurikulum'])
+        ->name('detail.keluarormbelkurikulum');
+Route::resource('keluarrombeldatakakom', KeluarRombelViewKakomController::class);
+Route::get('/keluarrombeldetailkakom/{rombels_id}', [KeluarRombelViewKakomController::class, 'showSiswaKeluarRombelKakom'])
+                ->name('detail.keluarormbelkakom');
+
 
 // Route Alumni 
 Route::get('/alumni', [AlumniDataController::class, 'pengaturanalumni'])->name('alumni.index');
