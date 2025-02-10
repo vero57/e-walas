@@ -178,13 +178,10 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                    <a href="{{ route('admwalas.agendawalas', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-                <i class="bi bi-download"></i> Unduh PDF
-            </a>
+                
+                <a href="{{ route('admwalas.agendawalas', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </a>
             
                     <!-- Search Box -->
                 <div class="searchBox">

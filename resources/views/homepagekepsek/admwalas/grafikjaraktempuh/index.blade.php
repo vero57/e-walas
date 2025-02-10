@@ -187,7 +187,7 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 <!-- Tombol Unggah Data -->
-                <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdf') }}">
+                <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdfkepsekgrafikjaraktempuh') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
@@ -214,6 +214,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var ctx = document.getElementById("jarakChart").getContext("2d");
 
+    // Data yang sudah difilter berdasarkan walas yang login
     var dataJarak = @json(array_values($dataJarak));
     var labelsJarak = @json(array_keys($dataJarak));
 

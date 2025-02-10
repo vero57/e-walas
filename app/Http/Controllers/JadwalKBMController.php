@@ -61,14 +61,15 @@ class JadwalKbmController extends Controller
         $gurus = Guru::all()->keyBy('id');
     
         if ($request->input('export') === 'pdf') {
-            $data = [
-                'jadwalKbms' => $jadwalKbms,
-                'mapels' => $mapels,
-                'gurus' => $gurus
-            ];
-            $pdf = Pdf::loadView('pdf.jadwalkbm', $data)->setPaper('A4', 'portrait');
+            if ($jadwalKbms->isEmpty()) {
+                return back()->with('error', 'Jadwal belum tersedia, tidak bisa mengunduh PDF.');
+            }
+        
+            $pdf = Pdf::loadView('pdf.jadwalkbm', compact('jadwalKbms', 'mapels', 'gurus', 'walas'))
+                      ->setPaper('A4', 'portrait');
             return $pdf->stream('Jadwal_KBM.pdf');
         }
+        
     
         return view('admwalas.jadwalkbm.index', compact('jadwalKbms', 'mapels', 'gurus', 'walas', 'rombels', 'rombel', 'siswa'));
     }

@@ -176,71 +176,70 @@
   </header>
 
 <main class="main">
-
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
-    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-        <!-- Header dengan Title, Pencarian, dan Tombol -->
-        <div class="mb-4">
-            <h2 class="font-weight-bold">Pendapatan Ortu</h2>
-            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdfpendapatanortu') }}">
-                    @csrf
-                    <input type="hidden" id="chartData" name="chartImage">
-                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
-                    <i class="bi bi-download"></i> Unduh PDF</button>
-                </form>
-
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+        <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+            <!-- Header with Title, Search, and Buttons -->
+            <div class="mb-4">
+                <h2 class="font-weight-bold">Pendapatan Ortu</h2>
+                <hr class="my-3">
+                <div class="d-flex align-items-center justify-content-start">
+                    <!-- Form for Exporting Data -->
+                    <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdfpendapatanortu') }}">
+                        @csrf
+                        <input type="hidden" id="chartData" name="chartImage">
+                        <input type="hidden" name="walas_id" id="walasIdSelected" value="{{ $walasIdSelected }}">
+                        <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                            <i class="bi bi-download"></i> Unduh PDF
+                        </button>
+                    </form>
                     <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Agenda Walas">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
+                    <div class="searchBox">
+                        <input class="searchInput" type="text" placeholder=" Cari Agenda Walas">
+                        <button class="searchButton" href="#">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    <!-- Pesan jika data tidak ditemukan -->
-    @if(isset($message))
-        <div class="alert alert-warning text-center">
-            {{ $message }}
-        </div>
-    @endif
+            <!-- Display Message if Data is Not Found -->
+            @if(isset($message))
+                <div class="alert alert-warning text-center">
+                    {{ $message }}
+                </div>
+            @endif
 
-    <div class="container">
-    <h2>Data Pendapatan Orang Tua</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Siswa</th>
-                <th>Pendapatan Orang Tua</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($pendapatan as $data)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $data->nama_lengkap }}</td>
-                <td>{{ $data->pendapatan_ortu }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-</div>
-<br>
-<div class="container">
-    <h2>Grafik Pendapatan Orang Tua</h2>
-<br>
-    <canvas id="pendapatanChart"></canvas>
+            <!-- Data Table for Pendapatan -->
+            <div class="container">
+                <h2>Data Pendapatan Orang Tua</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Siswa</th>
+                            <th>Pendapatan Orang Tua</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($pendapatan as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->nama_lengkap }}</td>
+                            <td>{{ $data->pendapatan_ortu }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
+            <!-- Chart Section -->
+            <div class="container">
+                <h2>Grafik Pendapatan Orang Tua</h2>
+                <br>
+                <canvas id="pendapatanChart"></canvas>
 
-    <script>
+                <script>
 document.addEventListener("DOMContentLoaded", function () {
     var canvas = document.getElementById("pendapatanChart");
 
@@ -253,55 +252,66 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var ctx = document.getElementById('pendapatanChart').getContext('2d');
-            var dataPendapatan = @json($dataPendapatan);
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var ctx = document.getElementById('pendapatanChart').getContext('2d');
+    
+    // Pastikan dataPendapatan sesuai dengan walasIdSelected
+    var dataPendapatan = @json($dataPendapatan);
 
-            new Chart(ctx, {
-                type: 'line', // Bisa diubah menjadi 'pie' atau 'doughnut'
-                data: {
-                    labels: Object.keys(dataPendapatan),
-                    datasets: [{
-                        label: 'Jumlah Siswa',
-                        data: Object.values(dataPendapatan),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)',
-                            'rgba(0, 128, 0, 0.5)',
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(0, 128, 0, 1)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            stepSize: 1
-                        }
-                    }
+    // Cek jika dataPendapatan kosong atau tidak, dan jika ada perubahan walasIdSelected
+    if (!dataPendapatan || Object.keys(dataPendapatan).length === 0) {
+        alert('Data pendapatan tidak ditemukan untuk Walas yang dipilih.');
+        return; // Tidak lanjut jika tidak ada data
+    }
+
+    // Membuat grafik dengan data yang telah terfilter
+    new Chart(ctx, {
+        type: 'line', // Bisa diubah menjadi 'pie' atau 'doughnut'
+        data: {
+            labels: Object.keys(dataPendapatan), // Label berdasarkan kategori pendapatan
+            datasets: [{
+                label: 'Jumlah Siswa',
+                data: Object.values(dataPendapatan), // Data jumlah siswa untuk masing-masing kategori
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(0, 128, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(0, 128, 0, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true, // Pastikan nilai Y mulai dari 0
+                    stepSize: 1
                 }
-            });
-        });
+            }
+        }
+    });
+});
+</script>
 
-    </script>
-</div>
-
+            </div>
+        </div>
+    </section>
 </main>
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>

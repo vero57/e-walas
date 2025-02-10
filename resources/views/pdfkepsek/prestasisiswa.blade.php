@@ -51,75 +51,84 @@
     <div class="title">PRESTASI SISWA</div>
 
     <table class="info-table">
-    <td>Wali Kelas</td>
-    <td>: {{ $walasList->first()->nama ?? 'Tidak Ada Data' }}</td>
-</tr>
-        <tr>
-            <td>Kelas</td>
-            <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
-        </tr>
-        <tr>
-    <td>Tahun Pelajaran</td>
-    <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
-        </tr>
-    </table>
-
-    <table>
     <tr>
-        <th>No</th>
-        <th>Nama Siswa</th>
-        <th>Jenis Prestasi</th>
-        <th>Nama Prestasi</th>
-        <th>Tanggal</th>
-        <th>Sertifikat</th>
-        <th>Dokumentasi</th>
+        <td>Wali Kelas</td>
+        <td>: {{ optional($walasList->firstWhere('id', $walasIdSelected))->nama ?? 'Tidak Ada Data' }}</td>
     </tr>
-    @foreach($prestasisiswa as $index => $item)
-        <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
-            <td>{{ $item->jenis_prestasi }}</td>
-            <td>{{ $item->nama_prestasi }}</td>
-            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-            <td>
-    @if($item->sertifikat_base64)
-        <img src="{{ $item->sertifikat_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
-
-<td>
-    @if($item->dokumentasi_base64)
-        <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
-    @else
-        <p>No image</p>
-    @endif
-</td>
-        </tr>
-    @endforeach
+    <tr>
+        <td>Kelas</td>
+        <td>: {{ $rombel->nama_kelas ?? '-' }}</td>
+    </tr>
+    <tr>
+        <td>Tahun Pelajaran</td>
+        <td>: {{ (date('n') >= 7 ? date('Y') : date('Y') - 1) . '/' . (date('n') >= 7 ? date('Y') + 1 : date('Y')) }}</td>
+    </tr>
 </table>
 
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Nama Siswa</th>
+            <th>Jenis Prestasi</th>
+            <th>Nama Prestasi</th>
+            <th>Tanggal</th>
+            <th>Sertifikat</th>
+            <th>Dokumentasi</th>
+        </tr>
+        @foreach($prestasisiswa as $index => $item)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $item->siswa->nama ?? 'Siswa Tidak Ditemukan' }}</td>
+                <td>{{ $item->jenis_prestasi }}</td>
+                <td>{{ $item->nama_prestasi }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                <td>
+                    @if($item->sertifikat_base64)
+                        <img src="{{ $item->sertifikat_base64 }}" style="width: 100%; max-width: 200px;">
+                    @else
+                        <p>No image</p>
+                    @endif
+                </td>
+                <td>
+                    @if($item->dokumentasi_base64)
+                        <img src="{{ $item->dokumentasi_base64 }}" style="width: 100%; max-width: 200px;">
+                    @else
+                        <p>No image</p>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    </table>
+    @php
+        $wakaKurikulum = \App\Models\Kurikulum::first(); // Ambil satu data Waka Kurikulum
+        \Carbon\Carbon::setLocale('id');
+    @endphp
 
     <div class="signature">
-        <table>
-            <tr>
-                <td>Mengetahui,</td>
-                <td></td>
-                <td>{{ date('d F Y') }}</td>
-            </tr>
-            <tr>
-                <td>Wali Kelas</td>
-                <td></td>
-                <td>Waka. Bidang Akademik</td>
-            </tr>
-            <tr><td colspan="3"><br><br><br></td></tr>
-            <tr>
-                <td>(_________________)</td>
-                <td></td>
-                <td>(_________________)</td>
-            </tr>
-        </table>
-    </div>
+    <table style="border: none; width: 100%;">
+        <tr>
+            <td style="text-align: center;">Mengetahui,</td>
+            <td></td>
+            <td style="text-align: center;">Cibinong, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">Waka. Bidang Akademik,</td>
+            <td></td>
+            <td style="text-align: center;">Wali Kelas,</td>
+        </tr>
+        <tr><td colspan="3"><br><br><br></td></tr>
+        <tr>
+            <td style="text-align: center;">({{ optional($wakaKurikulum)->nama ?? '_________________' }})</td>
+            <td></td>
+            <td style="text-align: center;">({{ optional($walasList->firstWhere('id', $walasIdSelected))->nama ?? '_________________' }})</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">NIP  {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+            <td></td>
+            <td style="text-align: center;">NIP  {{ optional($walasList->firstWhere('id', $walasIdSelected))->nip ?? '......................' }}</td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>

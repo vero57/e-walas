@@ -186,8 +186,7 @@
             <h2 class="font-weight-bold">Grafik Jarak Tempuh</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
+                
                 <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdf') }}">
     @csrf
     <input type="hidden" id="chartData" name="chartImage">
@@ -210,22 +209,37 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var ctx = document.getElementById("jarakChart").getContext("2d");
+    var ctx = document.getElementById('pendapatanChart').getContext('2d');
+    var dataPendapatan = @json($dataPendapatan);  // Pastikan data sudah sesuai dengan walas_id yang login
 
-    var dataJarak = @json(array_values($dataJarak));
-    var labelsJarak = @json(array_keys($dataJarak));
-
-    var jarakChart = new Chart(ctx, {
-        type: "line",
+    new Chart(ctx, {
+        type: 'line',
         data: {
-            labels: labelsJarak,
+            labels: Object.keys(dataPendapatan),
             datasets: [{
-                label: "Jumlah Siswa",
-                data: dataJarak,
-                backgroundColor: "rgba(54, 162, 235, 0.6)",
-                borderColor: "rgba(54, 162, 235, 1)",
+                label: 'Jumlah Siswa',
+                data: Object.values(dataPendapatan),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                    'rgba(0, 128, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(0, 128, 0, 1)',
+                ],
                 borderWidth: 1
             }]
         },
@@ -236,15 +250,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-
-    // Event untuk tombol export PDF
-    document.getElementById("exportPdfButton").addEventListener("click", function () {
-        var imageData = document.getElementById("jarakChart").toDataURL("image/png");
-        document.getElementById("chartData").value = imageData;
-        document.getElementById("exportForm").submit();
-    });
 });
 </script>
+
 
 </main>
   

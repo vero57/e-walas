@@ -163,12 +163,12 @@
                 <!-- Form Cari Administrasi -->
                 <form id="exportForm" method="POST" action="{{ route('bukutamuortu.generatepdfbukutamuortu') }}">
                     @csrf
-                    <input type="hidden" id="chartData" name="chartImage">
-                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                    <!-- Pastikan walas_idSelected tersedia -->
+                    <input type="hidden" name="walas_id" value="{{ $walasIdSelected }}">
+                    <button type="submit" class="btn btn-outline-secondary me-2 mb-2">
                         <i class="bi bi-download"></i> Unduh PDF
                     </button>
                 </form>
-
 
                     <!-- Search Box -->
                 <div class="searchBox">

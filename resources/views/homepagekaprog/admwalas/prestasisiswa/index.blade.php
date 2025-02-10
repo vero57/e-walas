@@ -180,13 +180,14 @@
             <h2 class="font-weight-bold">Prestasi Siswa</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <form id="exportForm" method="POST" action="{{ route('prestasisiswa.generatepdfprestasi') }}">
-                    @csrf
-                    <input type="hidden" id="Data" name="Image">
-                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
-                        <i class="bi bi-download"></i> Unduh PDF
-                    </button>
-                </form>
+            <form id="exportForm" method="POST" action="{{ route('prestasisiswa.generatepdfprestasi') }}">
+        @csrf
+        <!-- Menyembunyikan walas_id yang sudah dipilih -->
+        <input type="hidden" id="walasIdSelected" name="walas_id" value="{{ $walasIdSelected ?? '' }}">
+    
+        <button type="submit" class="btn btn-primary mt-3">Unduh PDF</button>
+    </form>
+
 
                 <!-- Search Box -->
                 <div class="searchBox">

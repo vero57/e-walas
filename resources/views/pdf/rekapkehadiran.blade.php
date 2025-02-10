@@ -26,6 +26,11 @@
         th {
             background-color: #ddd;
         }
+        .signature {
+            margin-top: 30px;
+            width: 100%;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -209,5 +214,36 @@
 @endforeach
     </table>
     @endif
+
+    @php
+        $wakaKurikulum = \App\Models\Kurikulum::first(); // Ambil satu data Waka Kurikulum
+        \Carbon\Carbon::setLocale('id');
+    @endphp
+
+    <div class="signature">
+        <table style="border: none; width: 100%;">
+            <tr>
+                <td style="text-align: center;">Mengetahui,</td>
+                <td></td>
+                <td style="text-align: center;">Cibinong, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Waka. Bidang Akademik,</td>
+                <td></td>
+                <td style="text-align: center;">Wali Kelas,</td>
+            </tr>
+            <tr><td colspan="3"><br><br><br></td></tr>
+            <tr>
+                <td style="text-align: center;">({{ optional($wakaKurikulum)->nama ?? '_________________' }})</td>
+                <td></td>
+                <td style="text-align: center;">({{ optional($walas)->nama ?? '_________________' }})</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">NIP  {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+                <td></td>
+                <td style="text-align: center;">NIP  {{ optional($walas)->nip ?? '......................' }}</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

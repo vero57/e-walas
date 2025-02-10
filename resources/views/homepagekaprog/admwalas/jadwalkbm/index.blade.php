@@ -164,9 +164,7 @@
                     <a href="{{ route('jadwalkbm.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary">
                         <i class="bi bi-download"></i> Unduh
                     </a>
-                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                        <i class="bi bi-cloud-upload"></i> Unggah Data
-                    </button>
+                    
                     <a href="{{ route('jadwalkbm.create') }}" class="btn btn-primary">
                         <i class="bi bi-plus"></i> Tambah
                     </a>

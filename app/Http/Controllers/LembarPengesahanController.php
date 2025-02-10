@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class LembarPengesahanController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.f
      */
     public function index()
     {

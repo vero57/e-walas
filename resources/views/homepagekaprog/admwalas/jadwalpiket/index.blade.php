@@ -281,9 +281,10 @@
         <br>
 
         <div>
-        <a href="{{ route('admwalas.piketkelas', ['export' => 'pdf']) }}" class="btn btn-outline-secondary"   style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
+        <a href="{{ route('admwalas.piketkelas', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary" style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
     <i class="bi bi-download"></i> Unduh PDF
 </a>
+
 </div>
         @foreach (array_chunk($data, 3) as $row)
         <div class="row mt-4">

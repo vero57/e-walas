@@ -104,29 +104,30 @@
     @endphp
 
     <div class="signature">
-        <table style="border: none; width: 100%;">
-            <tr>
-                <td style="text-align: left;">Mengetahui,</td>
-                <td></td>
-                <td style="text-align: right;">Cibinong, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Waka. Bidang Akademik,</td>
-                <td></td>
-                <td style="text-align: right;">Wali Kelas</td>
-            </tr>
-            <tr><td colspan="3"><br><br><br></td></tr>
-            <tr>
-                <td style="text-align: left;">({{ optional($wakaKurikulum)->nama ?? '_________________' }})</td>
-                <td></td>
-                <td style="text-align: right;">({{ optional($walas)->nama ?? '_________________' }})</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">NIP: {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
-                <td></td>
-                <td style="text-align: right;">NIP: {{ optional($walas)->nip ?? '......................' }}</td>
-            </tr>
-        </table>
-    </div>
+    <table style="border: none; width: 100%;">
+        <tr>
+            <td style="text-align: center;">Mengetahui,</td>
+            <td></td>
+            <td style="text-align: center;">Cibinong, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">Waka. Bidang Akademik,</td>
+            <td></td>
+            <td style="text-align: center;">Wali Kelas,</td>
+        </tr>
+        <tr><td colspan="3"><br><br><br></td></tr>
+        <tr>
+            <td style="text-align: center;">({{ optional($wakaKurikulum)->nama ?? '_________________' }})</td>
+            <td></td>
+            <td style="text-align: center;">({{ optional($walas)->nama ?? '_________________' }})</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">NIP  {{ optional($wakaKurikulum)->nip ?? '......................' }}</td>
+            <td></td>
+            <td style="text-align: center;">NIP  {{ optional($walas)->nip ?? '......................' }}</td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>

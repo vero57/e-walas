@@ -178,10 +178,7 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
+                
                 <a href="/agendawalascreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>

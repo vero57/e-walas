@@ -155,14 +155,12 @@
             <h2 class="font-weight-bold">Presensi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
                 <div class="d-flex-container">
-                <a href="{{ route('admwalas.presensis', ['semester' => 'genap', 'export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                <a href="{{ route('admwalas.presensis', ['semester' => 'genap', 'export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
                     <i class="bi bi-download"></i> Unduh PDF Sem.Genap
                 </a>
-                        <a href="{{ route('admwalas.presensis', ['semester' => 'ganjil', 'export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-                            <i class="bi bi-download"></i> Unduh PDF Sem.Ganjil
-                        </a>
-
-
+                <a href="{{ route('admwalas.presensis', ['semester' => 'ganjil', 'export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <i class="bi bi-download"></i> Unduh PDF Sem.Ganjil
+                </a>
                     <!-- Search Box -->
                 <div class="searchBox">
                     <input class="searchInput" type="text" placeholder="  Cari Administrasi">

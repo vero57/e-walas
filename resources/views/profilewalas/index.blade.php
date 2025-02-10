@@ -268,7 +268,7 @@ h1 .accent-text {
         <p><strong>Name:</strong> {{ $walas->nama }}</p>
         <p><strong>Jenis Kelamin:</strong> {{ $walas->jenis_kelamin }}</p>
         <p><strong>Phone:</strong> {{ $walas->no_wa }}</p>
-        <p><strong>NIP:</strong> {{ $walas->nip }}</p>
+        <p><strong>NIP </strong> {{ $walas->nip }}</p>
         <p><strong>Password:</strong> {{ $walas->password }}</p>
         <br>
         <!-- Tombol Edit -->
