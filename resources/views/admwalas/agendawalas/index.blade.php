@@ -177,8 +177,6 @@
             <h2 class="font-weight-bold">Agenda Kegiatan Walas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                
                 <a href="/agendawalascreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
@@ -186,13 +184,7 @@
                 <i class="bi bi-download"></i> Unduh PDF
             </a>
             
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Agenda Walas">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
+            
             </div>
         </div>
         <br><br>

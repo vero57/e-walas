@@ -55,7 +55,7 @@ class ShowDetailRombelController extends Controller
         return back();
     }
 
-    public function downloadTemplate()
+    public function downloadTemplateAdmin()
     {
         $pathToFile = storage_path('app/public/template_siswa.xlsx'); // Sesuaikan dengan lokasi file template Excel
         return response()->download($pathToFile);

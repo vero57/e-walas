@@ -165,15 +165,6 @@
                 <a href="/penyerahanrapotcreate" class="btn btn-primary">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Penyerahan Rapot">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         <br><br>

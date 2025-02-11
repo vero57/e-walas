@@ -158,7 +158,7 @@
 
 <div class="container">
 
-    <form action="{{ route('beritaacarakenaikan.update', $beritaAcara->id) }}" method="POST">
+    <form action="{{ route('beritaacarakelulusan.update', $beritaAcaraKelulusan->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -171,17 +171,17 @@
 
         <div class="mb-3">
             <label for="waktu_tanggal" class="form-label">Tanggal & Waktu</label>
-            <input type="datetime-local" name="waktu_tanggal" class="form-control" value="{{ $beritaAcara->waktu_tanggal->format('Y-m-d\TH:i') }}">
+            <input type="datetime-local" name="waktu_tanggal" class="form-control" value="{{ $beritaAcaraKelulusan->waktu_tanggal->format('Y-m-d\TH:i') }}">
         </div>
 
         <div class="mb-3">
             <label for="tempat" class="form-label">Tempat</label>
-            <input type="text" name="tempat" class="form-control" maxlength="20" value="{{ $beritaAcara->tempat }}">
+            <input type="text" name="tempat" class="form-control" maxlength="20" value="{{ $beritaAcaraKelulusan->tempat }}">
         </div>
 
         <div class="mb-3">
             <label for="jumlah_peserta_rapat" class="form-label">Jumlah Peserta Rapat</label>
-            <input type="text" name="jumlah_peserta_rapat" class="form-control" maxlength="5" value="{{ $beritaAcara->jumlah_peserta_rapat }}">
+            <input type="text" name="jumlah_peserta_rapat" class="form-control" maxlength="5" value="{{ $beritaAcaraKelulusan->jumlah_peserta_rapat }}">
         </div>
 
         <div class="mb-3">
@@ -189,34 +189,29 @@
             <select name="rombels_id" id="rombels_id" class="form-control">
                 <option value="">Pilih Rombel</option>
                 @foreach ($rombels as $r)
-                    <option value="{{ $r->id }}" {{ $beritaAcara->rombels_id == $r->id ? 'selected' : '' }}>{{ $r->nama_kelas }}</option>
+                    <option value="{{ $r->id }}" {{ $beritaAcaraKelulusan->rombels_id == $r->id ? 'selected' : '' }}>{{ $r->nama_kelas }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="mb-3">
-            <label for="kelas_baru" class="form-label">Kelas Baru</label>
-            <input type="text" name="kelas_baru" class="form-control" value="{{ $beritaAcara->kelas_baru }}">
-        </div>
-
-        <div class="mb-3">
             <label for="laki_laki_lulus" class="form-label">Laki-laki Lulus</label>
-            <input type="text" name="laki_laki_lulus" class="form-control" maxlength="5" value="{{ $beritaAcara->laki_laki_lulus }}">
+            <input type="text" name="laki_laki_lulus" class="form-control" maxlength="5" value="{{ $beritaAcaraKelulusan->laki_laki_lulus }}">
         </div>
 
         <div class="mb-3">
             <label for="perempuan_lulus" class="form-label">Perempuan Lulus</label>
-            <input type="text" name="perempuan_lulus" class="form-control" maxlength="5" value="{{ $beritaAcara->perempuan_lulus }}">
+            <input type="text" name="perempuan_lulus" class="form-control" maxlength="5" value="{{ $beritaAcaraKelulusan->perempuan_lulus }}">
         </div>
 
         <div class="mb-3">
             <label for="laki_laki_tidaklulus" class="form-label">Laki-laki Tidak Lulus</label>
-            <input type="text" name="laki_laki_tidaklulus" class="form-control" maxlength="5" value="{{ $beritaAcara->laki_laki_tidaklulus }}">
+            <input type="text" name="laki_laki_tidaklulus" class="form-control" maxlength="5" value="{{ $beritaAcaraKelulusan->laki_laki_tidaklulus }}">
         </div>
 
         <div class="mb-3">
             <label for="perempuan_tidaklulus" class="form-label">Perempuan Tidak Lulus</label>
-            <input type="text" name="perempuan_tidaklulus" class="form-control" maxlength="5" value="{{ $beritaAcara->perempuan_tidaklulus }}">
+            <input type="text" name="perempuan_tidaklulus" class="form-control" maxlength="5" value="{{ $beritaAcaraKelulusan->perempuan_tidaklulus }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>

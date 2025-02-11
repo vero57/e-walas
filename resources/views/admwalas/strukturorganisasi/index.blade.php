@@ -178,7 +178,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminwalas" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -223,7 +223,7 @@
             </a>
             @foreach ($struktur as $data)
                 <a href="{{ route('strukturorganisasi.edit', $data->id) }}" class="btn btn-warning me-2 mb-2">
-                    <i class="bi bi-pencil"></i> Edit {{ $data->id }}
+                    <i class="bi bi-pencil"></i> Edit
                 </a>
             @endforeach
                 <!-- Tombol Unduh PDF -->

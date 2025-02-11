@@ -219,13 +219,7 @@
         </li>
     </ul>
 </div>
-                    <!-- Search Box -->
-                    <div class="searchBox">
-                        <input class="searchInput" type="text" name="" placeholder="  Cari Rombel">
-                        <button class="searchButton">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </div>
