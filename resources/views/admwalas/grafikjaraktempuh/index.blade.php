@@ -212,16 +212,16 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var ctx = document.getElementById('pendapatanChart').getContext('2d');
-    var dataPendapatan = @json($dataPendapatan);  // Pastikan data sudah sesuai dengan walas_id yang login
+    var ctx = document.getElementById('chartImage').getContext('2d');
+    var dataJarak = @json($dataJarak);  // Pastikan data sudah sesuai dengan walas_id yang login
 
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Object.keys(dataPendapatan),
+            labels: Object.keys(dataJarak),
             datasets: [{
                 label: 'Jumlah Siswa',
-                data: Object.values(dataPendapatan),
+                data: Object.values(dataJarak),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',

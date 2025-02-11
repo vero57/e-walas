@@ -179,7 +179,7 @@
 
                         <!-- Tanggal -->
                         <div class="mb-3">
-                            <label for="tanggal" class="form-label">Tanggal:</label>
+                            <label for="tanggal" class="form-label">Tanggal Kegiatan:</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control" required>
                         </div>
 
@@ -209,14 +209,14 @@
 
                         <!-- Tanggal -->
                         <div class="mb-3">
-                            <label for="tanggalttd" class="form-label">Tanggal Tanda Tangan:</label>
+                            <label for="tanggalttd" class="form-label">Tanggal Input Data:</label>
                             <input type="date" name="tanggalttd" id="tanggalttd" class="form-control" required>
                         </div>
 
                         <!-- Foto Tanda Tangan -->
                         <div class="mb-3">
-                            <label for="ttdwalas_url" class="form-label">Masukkan Foto Tanda Tangan di sini:</label>
-                            <input type="file" name="ttdwalas_url" id="ttdwalas_url" class="form-control" accept="image/*" required>
+                            <label for="ttdwalas_url" class="form-label">Masukkan Dokumentasi sini (Optional):</label>
+                            <input type="file" name="ttdwalas_url" id="ttdwalas_url" class="form-control" accept="image/*">
                         </div>
 
                         <!-- Tombol Simpan -->

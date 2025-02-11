@@ -773,6 +773,19 @@
 
 <script>
   function togglePekerjaanInput() {
+    var pekerjaanAyah = document.querySelector('input[name="pekerjaan_ayah"]:checked').value;
+    var pekerjaanInput = document.getElementById("pekerjaan_ayah_lainnya");
+
+    if (pekerjaanAyah === "Lainnya") {
+        pekerjaanInput.style.display = "block";
+    } else {
+        pekerjaanInput.style.display = "none";
+    }
+}
+</script>
+
+<script>
+  function togglePekerjaanInput() {
     var pekerjaanibu = document.querySelector('input[name="pekerjaan_ibu"]:checked').value;
     var pekerjaanInput = document.getElementById("pekerjaan_ibu_lainnya");
 

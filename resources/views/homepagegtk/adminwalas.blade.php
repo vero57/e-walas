@@ -197,13 +197,6 @@ table td {
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
 

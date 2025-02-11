@@ -168,12 +168,14 @@
 
                                <!-- Siswa -->
                                 <div class="mb-3">
-                                    <label for="nama_siswa" class="form-label">Pilih Siswa:</label>
-                                    <select name="nama_siswa" id="nama_siswa" class="form-control" required>
-                                        <option value="" disabled selected>Pilih Siswa</option>
+                                    <label for="siswa_id" class="form-label">Pilih Siswa:</label>
+                                    <select name="nama_siswa" id="siswa_id" class="form-control" required>
+                                        <option value="" disabled>
+                                            {{ old('siswa_id') ? $siswas->firstWhere('id', old('siswa_id'))->nama ?? 'Pilih Siswa' : 'Pilih Siswa' }}
+                                        </option>
                                         @foreach ($siswas as $s)
                                             <option value="{{ $s->id }}" 
-                                                @if($s->id == $daftarPesertaDidik->siswa_id) selected @endif
+                                                {{ old('siswa_id', $daftarPesertaDidik->siswa_id) == $s->id ? 'selected' : '' }}
                                                 data-nis="{{ $s->biodataSiswa->nis ?? '' }}" 
                                                 data-nisn="{{ $s->biodataSiswa->nisn ?? '' }}">
                                                 {{ $s->nama }}

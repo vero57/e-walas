@@ -219,8 +219,8 @@ FACEBOOK: https://www.facebook.com/themefisher
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="section-title">
-					<h2>Fitur Unggulan </h2>
-					<p><a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">E-Walas</a> Berikut adalah beberapa fitur unggulan dari website E-Walas</p>
+					<h2>Keunggulan E - Walas </h2>
+					<p><a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/"></a> Berikut adalah beberapa fitur unggulan dari website E-Walas</p>
 				</div>
 			</div>
 		</div>

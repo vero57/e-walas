@@ -158,7 +158,7 @@
 
 <div class="container">
 
-    <form action="{{ route('beritaacarakenaikan.update', $beritaAcara->id) }}" method="POST">
+    <form action="{{ route('beritaacarakelulusan.update', $beritaAcaraKelulusan->id) }}" method="POST">
         @csrf
         @method('PUT')
 

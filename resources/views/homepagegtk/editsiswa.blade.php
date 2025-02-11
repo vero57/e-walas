@@ -268,7 +268,7 @@
             <!-- Password -->
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password (Kosongkan jika tidak ingin diubah)">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Wajib Mengisi Password Lama/Update Password">
             </div>
 
             <!-- Foto Siswa -->
@@ -283,11 +283,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="Status" class="form-label">Status</label>
-                <select class="form-select" id="Status" name="status" required>
-                    <option value="aktif" {{ $siswa->status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                    <option value="nonaktif" {{ $siswa->status == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
-                </select>
+                <label for="Status" class="form-label"></label>
+                <input type="hidden" id="Status" name="status" value="aktif">
             </div>
 
             <!-- Tombol Submit -->

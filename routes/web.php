@@ -452,7 +452,7 @@ Route::get('/hapusprestasisiswainput/{id}', [PrestasiSiswaInputController::class
 Route::put('/prestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'update'])->name('prestasisiswainput.update');
 
 
-// Route Kaprog Walas Data bl
+// Route Kaprog Walas Data 
 Route::resource('admwalasview', AdmWalasViewController::class);
 Route::get('agendawalasview', [ViewAdmWalasKaprogController::class, 'agendawalas'])->name('admwalas.agendawalas');
 Route::get('identiaskelasview', [ViewAdmWalasKaprogController::class, 'identitaskelas'])->name('admwalas.identitaskelas');

@@ -326,13 +326,13 @@ private function convertToBase64($path)
     /**
      * Remove the specified resource from storage.
      */
-    public function hapusrekapjumlahsiswa(string $id)
+    public function hapusprestasisiswa(string $id)
     {
-        $prestasisiswa = RekapitulasiJumlahSiswa::find($id);
+        $prestasisiswa = PrestasiSiswa::find($id);
         if ($prestasisiswa) {
             $prestasisiswa->delete();
-            return redirect('/rekapjumlahsiswa')->with('success', 'Data Rekaptiulasi Berhasil Dihapus ');
+            return redirect('/prestasisiswa')->with('success', 'Data Prestasi Siswa Berhasil Dihapus ');
         }
-        return redirect('/rekapjumlahsiswa')->with('error', 'Data Rekapitulasi not found!');
+        return redirect('/prestasisiswa')->with('error', 'Data Prestasi Siswa not found!');
     }
 }

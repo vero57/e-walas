@@ -230,11 +230,11 @@
                     </td>
                     <td class="text-center" colspan="4">
                         <div class="d-flex justify-content-center">
-                            <a href="/hapusbukutamuortu/{{ $bukutamuortu->id }}" class="btn btn-primary btn-sm me-2">
-                                Hapus
-                            </a>
-                            <a href="{{ route('bukutamuortu.edit', $bukutamuortu->id) }}" class="btn btn-danger btn-sm">
+                        <a href="{{ route('bukutamuortu.edit', $bukutamuortu->id) }}" class="btn btn-primary btn-sm">
                                 Edit
+                            </a>
+                            <a href="/hapusbukutamuortu/{{ $bukutamuortu->id }}" class="btn btn-danger btn-sm me-2">
+                                Hapus
                             </a>
                         </div>
                     </td>

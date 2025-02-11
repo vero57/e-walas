@@ -78,52 +78,55 @@ class AgendaKegiatanWalasController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Periksa apakah session 'walas_id' ada
-    if (!session()->has('walas_id')) {
-        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    {
+        // Periksa apakah session 'walas_id' ada
+        if (!session()->has('walas_id')) {
+            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data walas berdasarkan 'walas_id' yang ada di session
+        $walas = Walas::find(session('walas_id'));
+
+        // Periksa apakah data walas ditemukan
+        if (!$walas) {
+            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+        }
+        // Validasi input
+        $request->validate([
+            'hari' => 'required',
+            'tanggal' => 'required',
+            'nama_kegiatan' => 'required', // perbaiki typo: 'nama_kegaitan' -> 'nama_kegiatan'
+            'hasil' => 'required',
+            'waktu' => 'required',
+            'keterangan' => 'required',
+            'tanggalttd' => 'required',
+            'ttdwalas_url' => 'nullable|image|max:5000',
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('ttdwalas_url')) {
+            $imagePath = $request->file('ttdwalas_url')->store('ttdwalas/Photos', 'public');
+        }
+
+
+        // Simpan data ke database, termasuk path gambar
+        AgendaKegiatanWalas::create([
+            'walas_id' => $walas->id, // Menyimpan ID wali kelas yang sedang login
+            'hari' => $request->hari,
+            'tanggal' => $request->tanggal,
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'hasil' => $request->hasil,
+            'waktu' => $request->waktu,
+            'keterangan' => $request->keterangan,
+            'tanggalttd' => $request->tanggalttd,
+            'ttdwalas_url' => $imagePath, // Simpan path gambar di database
+        ]);
+
+        // Redirect kembali dengan data terbaru
+        return redirect('/agendawalas')->with([
+            'success' => 'Agenda Wali Kelas berhasil ditambahkan!',
+        ]);
     }
-
-    // Ambil data walas berdasarkan 'walas_id' yang ada di session
-    $walas = Walas::find(session('walas_id'));
-
-    // Periksa apakah data walas ditemukan
-    if (!$walas) {
-        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
-    }
-    // Validasi input
-    $request->validate([
-        'hari' => 'required',
-        'tanggal' => 'required',
-        'nama_kegiatan' => 'required', // perbaiki typo: 'nama_kegaitan' -> 'nama_kegiatan'
-        'hasil' => 'required',
-        'waktu' => 'required',
-        'keterangan' => 'required',
-        'tanggalttd' => 'required',
-        'ttdwalas_url' => 'nullable|image|max:5000',
-    ]);
-
-    // Proses penyimpanan file gambar di folder walasfoto/Photos
-    $imagePath = $request->file('ttdwalas_url')->store('ttdwalas/Photos', 'public'); // Simpan gambar di folder yang diinginkan
-
-    // Simpan data ke database, termasuk path gambar
-    AgendaKegiatanWalas::create([
-        'walas_id' => $walas->id, // Menyimpan ID wali kelas yang sedang login
-        'hari' => $request->hari,
-        'tanggal' => $request->tanggal,
-        'nama_kegiatan' => $request->nama_kegiatan,
-        'hasil' => $request->hasil,
-        'waktu' => $request->waktu,
-        'keterangan' => $request->keterangan,
-        'tanggalttd' => $request->tanggalttd,
-        'ttdwalas_url' => $imagePath, // Simpan path gambar di database
-    ]);
-
-    // Redirect kembali dengan data terbaru
-    return redirect('/agendawalas')->with([
-        'success' => 'Agenda Wali Kelas berhasil ditambahkan!',
-    ]);
-}
 
     
 
@@ -172,15 +175,14 @@ class AgendaKegiatanWalasController extends Controller
 {
     // Validasi input
     $request->validate([
-        'walas_id' => 'required|exists:walas,id',
-        'hari' => 'required|string',
-        'tanggal' => 'required|date',
-        'nama_kegiatan' => 'required|string',
-        'hasil' => 'required|string',
-        'waktu' => 'required|date_format:H:i',
-        'keterangan' => 'required|string',
-        'tanggalttd' => 'required|date',
-        'ttdwalas_url' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'hari' => 'required',
+            'tanggal' => 'required',
+            'nama_kegiatan' => 'required', // perbaiki typo: 'nama_kegaitan' -> 'nama_kegiatan'
+            'hasil' => 'required',
+            'waktu' => 'required',
+            'keterangan' => 'required',
+            'tanggalttd' => 'required',
+            'ttdwalas_url' => 'nullable|image|max:5000',
     ]);
 
     $agendawalas = AgendaKegiatanWalas::findOrFail($id);
