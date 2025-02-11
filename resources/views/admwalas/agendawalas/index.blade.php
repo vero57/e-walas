@@ -177,14 +177,14 @@
             <h2 class="font-weight-bold">Agenda Kegiatan Walas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                
                 <a href="/agendawalascreate" class="btn btn-primary me-2 mb-2">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
                     <a href="{{ route('agendawalas.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i> Unduh PDF
             </a>
+            
+            
             </div>
         </div>
         <br><br>

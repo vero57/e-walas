@@ -200,7 +200,6 @@ table td {
             </div>
         </div>
 
-        
         <!-- Jumlah Total GTK -->
         <div class="text-end mb-4">
             <span class="text-muted">Jumlah Total: <strong>20 Administrasi</strong></span>

@@ -208,6 +208,18 @@
     <canvas id="jarakChart"></canvas>
 
 
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("jarakChart");
+
+    document.getElementById("exportPdfButton").addEventListener("click", function () {
+        var imageData = canvas.toDataURL("image/png"); // Ubah grafik jadi base64
+        document.getElementById("chartData").value = imageData; // Simpan base64 ke input hidden
+        
+        document.getElementById("exportForm").submit(); // Kirim form
+    });
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>

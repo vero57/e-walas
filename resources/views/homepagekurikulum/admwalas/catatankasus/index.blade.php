@@ -190,13 +190,6 @@
                 <a href="{{ route('catatankasus.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i> Unduh PDF
             </a>
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Catatan Kasus">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         <br><br>

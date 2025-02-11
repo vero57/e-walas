@@ -196,13 +196,7 @@
                     </button>
                 </form>
 
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Agenda Walas">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
+                     
             </div>
         </div>
 

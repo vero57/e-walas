@@ -114,7 +114,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/homepagekaprog" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -165,13 +165,6 @@
                  <a href="{{ route('rencana_kegiatan_walas.index', $semester == 'ganjil' ? 'genap' : 'ganjil') }}" class="btn btn-secondary ms-2">
                      {{ $semester == 'ganjil' ? 'Genap' : 'Ganjil' }}
                 </a>
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Administrasi">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
 

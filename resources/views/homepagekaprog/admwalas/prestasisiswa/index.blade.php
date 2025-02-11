@@ -187,15 +187,6 @@
     
         <button type="submit" class="btn btn-primary mt-3">Unduh PDF</button>
     </form>
-
-
-                <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Catatan Kasus">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
         </div>
         <br><br>
         <div class="container mt-4">

@@ -56,14 +56,14 @@ class JadwalPiketController extends Controller
             // Ambil siswa yang terhubung berdasarkan jadwalpikets_id
             $siswas = $detailpiket->where('jadwalpikets_id', $item->id)->map(function ($detailpiket) {
                 return \App\Models\Siswa::find($detailpiket->siswas_id); // Ambil data siswa berdasarkan siswas_id
-            });
-        
+            })->filter(); // Filter untuk menghapus nilai null
+                
             return [
                 'id' => $item->id,
                 'nama_hari' => $item->nama_hari,
                 'siswas' => $siswas, // Menyimpan objek siswa yang terhubung
             ];
-        })->toArray();
+        })->toArray();        
         
 
         if (request()->has('export') && request()->get('export') === 'pdf') {

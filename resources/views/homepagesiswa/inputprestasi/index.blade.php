@@ -139,7 +139,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminwalas" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -188,15 +188,6 @@
                 <a href="/prestasisiswainputcreate" class="btn btn-primary">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
-
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Catatan Kasus">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         <br><br>

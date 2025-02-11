@@ -160,14 +160,6 @@
                 <a href="{{ route('serahterimarapor.download-template') }}" class="btn btn-outline-secondary" download>
                     <i class="bi bi-cloud-download"></i> Download File
                 </a>
-
-                    <!-- Search Box -->
-                <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="  Cari Penyerahan Rapot">
-                    <button class="searchButton" href="#">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
         </div>
         <br><br>

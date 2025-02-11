@@ -207,12 +207,6 @@
         </li>
     </ul>
 </div>
-                    <!-- Search Box -->
-                    <div class="searchBox">
-                        <input class="searchInput" type="text" name="" placeholder="  Cari Wali Kelas">
-                        <button class="searchButton" href="#">
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
