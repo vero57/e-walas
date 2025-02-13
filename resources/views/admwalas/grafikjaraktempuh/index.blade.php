@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     new Chart(ctx, {
         type: 'line',
-        data: {
+        data: { 
             labels: Object.keys(dataJarak),
             datasets: [{
                 label: 'Jumlah Siswa',

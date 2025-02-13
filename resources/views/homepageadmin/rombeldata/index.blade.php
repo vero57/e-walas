@@ -395,7 +395,6 @@
                     <a href="{{ route('rombels.edit', $data->rombel_id) }}" class="btn rounded-circle shadow-sm edit-btn">
                         <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
                     </a>
-                    
                     <!-- Tombol Delete -->
                     <a href="/hapusrombel/{{$data->rombel_id}}" class="btn rounded-circle shadow-sm" 
                             style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">

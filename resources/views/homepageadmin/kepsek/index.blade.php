@@ -337,7 +337,6 @@
             <h2 class="font-weight-bold">Daftar Kepala Sekolah</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kepala Sekolah -->
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">

@@ -402,9 +402,6 @@
                     <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target=#modalSiswaTidakNaik>
                         <i class="bi bi-arrow-down-circle"></i> Siswa Tidak Naik Kelas
                     </button>
-
-                    <!-- Search Box -->
-                    
             </div>
         </div>
         <br>

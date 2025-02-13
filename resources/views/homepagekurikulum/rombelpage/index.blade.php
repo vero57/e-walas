@@ -154,152 +154,119 @@
     </div>
   </header>
 
-<main class="main">
-
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
-    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-        <!-- Header dengan Title, Pencarian, dan Tombol -->
-        <div class="mb-4">
-            <h2 class="font-weight-bold">Rombel Data</h2>
-            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kurikulum -->
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                   <!-- Tombol Filter Data -->
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Filter Data
-    </button>
-    <ul class="dropdown-menu">
-        <!-- Filter Kelas -->
-        <li>
-            <h6 class="dropdown-header">Pilih Kelas</h6>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <label for="kelas" class="form-label">Kelas</label>
-                    <select id="kelas" class="form-select" onchange="filterKelas()">
-                        <option value="">Pilih Kelas</option>
-                        <option value="X">Kelas X</option>
-                        <option value="XI">Kelas XI</option>
-                        <option value="XII">Kelas XII</option>
-                    </select>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Filter Jurusan -->
-        <li>
-            <h6 class="dropdown-header">Pilih Jurusan</h6>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <label for="jurusan" class="form-label">Jurusan</label>
-                    <select id="jurusan" class="form-select" onchange="filterJurusan()">
-                        <option value="">Pilih Jurusan</option>
-                        <option value="SIJA">SIJA</option>
-                        <option value="TKJ">TKJ</option>
-                        <option value="RPL">RPL</option>
-                        <option value="DPIB">DPIB</option>
-                        <option value="TKP">TKP</option>
-                        <option value="TP">TP</option>
-                        <option value="TOI">TOI</option>
-                        <option value="TKR">TKR</option>
-                        <option value="DKV">DKV</option>
-                        <option value="TFLM">TFLM</option>
-                    </select>
-                </li>
-            </ul>
-        </li>
-
-        <li><hr class="dropdown-divider"></li>
-        <li>
-            <button class="dropdown-item" onclick="applyFilters()">Terapkan Filter</button>
-        </li>
-    </ul>
-</div>
-
+  <main class="main">
+    <section id="hero" class="hero section">
+        <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+            <div class="mb-4">
+                <h2 class="font-weight-bold">Rombel Data</h2>
+                <hr class="my-3">
+                <div class="d-flex align-items-center justify-content-start">
+                    <div class="d-flex-container">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filter Data
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h6 class="dropdown-header">Pilih Kelas</h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <label for="kelas" class="form-label">Kelas</label>
+                                            <select id="kelas" class="form-select">
+                                                <option value="">Pilih Kelas</option>
+                                                <option value="X">Kelas X</option>
+                                                <option value="XI">Kelas XI</option>
+                                                <option value="XII">Kelas XII</option>
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Pilih Jurusan</h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <label for="jurusan" class="form-label">Jurusan</label>
+                                            <select id="jurusan" class="form-select">
+                                                <option value="">Pilih Jurusan</option>
+                                                <option value="SIJA">SIJA</option>
+                                                <option value="TKJ">TKJ</option>
+                                                <option value="RPL">RPL</option>
+                                                <option value="DPIB">DPIB</option>
+                                                <option value="TKP">TKP</option>
+                                                <option value="TP">TP</option>
+                                                <option value="TOI">TOI</option>
+                                                <option value="TKR">TKR</option>
+                                                <option value="DKV">DKV</option>
+                                                <option value="TFLM">TFLM</option>
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <button class="dropdown-item" onclick="applyFilters()">Terapkan Filter</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th>Tingkat</th>
+                            <th>Kompetensi</th>
+                            <th>Nama Kelas</th>
+                            <th>Wali Kelas</th>
+                            <th>No WhatsApp</th>
+                            <th>Informasi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($vwrombels as $idx => $data)
+                            <tr>
+                                <td>{{ $idx + 1 . '. ' }}</td>
+                                <td>{{ $data->tingkat }}</td>
+                                <td>{{ $data->kompetensi }}</td>
+                                <td>{{ $data->nama_kelas }}</td>
+                                <td>{{ $data->walas_nama }}</td>
+                                <td>
+                                    @if ($data->no_wa)
+                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $data->no_wa) }}" target="_blank">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30">
+                                        </a>
+                                    @else
+                                        Tidak Ada Data
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="d-inline-flex gap-2">
+                                        <a href="{{ route('rombel.showDetailKurikulum', ['walas_id' => $data->walas_id]) }}" class="btn btn-sm btn-info text-white">
+                                            <i class="bi bi-info-circle text-white"></i> Detail Kelas
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <button class="btn rounded-circle shadow-sm" style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
+                                    </button>
+                                    <button class="btn rounded-circle shadow-sm mx-1" style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
+                                    </button>
+                                    <button class="btn rounded-circle shadow-sm" style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
+                                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <div class="table-container">
-            <table class="table">
-            <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">No</th>
-            <th>Tingkat</th>
-            <th>Kompetensi</th>
-            <th>Nama Kelas</th>
-            <th>Wali Kelas</th>
-            <th>No WhatsApp</th>
-            <th>Informasi</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($vwrombels as $idx => $data)
-            <tr>
-                <td>
-                    <div class="d-flex px-2 py-1">
-                        {{ $idx + 1 . '. ' }}
-                    </div>
-                </td>
-                <td>{{ $data->tingkat }}</td>
-                <td>{{ $data->kompetensi }}</td>
-                <td>{{ $data->nama_kelas }}</td>
-                <td>{{ $data->walas_nama }}</td>
-                <td>
-                @if ($data->no_wa)
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $data->no_wa) }}" target="_blank">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30">
-                        </a>
-                    @else
-                        Tidak Ada Data
-                    @endif
-                </td>
-                <td>
-                        <!-- Aksi -->
-                        <div class="d-inline-flex gap-2">
-                            <a href="{{ route('rombel.showDetailKurikulum', ['walas_id' => $data->walas_id]) }}" class="btn btn-sm btn-info text-white">
-                                <i class="bi bi-info-circle text-white"></i> Detail Kelas
-                            </a>
-                        </div>
-                    </td>
-                </td>
-                <td class="text-center align-middle">
-                    <!-- Tombol Edit -->
-                    <button class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
-                    <!-- Tombol Delete -->
-                    <button class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-        </div>
-    </div>
-</section>
-
-    </div>
-</section>
-
-
+    </section>
 </main>
   
     <div class="container copyright text-center mt-4">
@@ -380,6 +347,30 @@ function applyFilters() {
 }
 
 </script>
+
+<script>
+    function applyFilters() {
+        let selectedKelas = document.getElementById('kelas').value;
+        let selectedJurusan = document.getElementById('jurusan').value;
+        
+        let rows = document.querySelectorAll('.table tbody tr');
+        rows.forEach(row => {
+            let kelas = row.children[1].textContent.trim(); // Tingkat (Kelas)
+            let jurusan = row.children[2].textContent.trim(); // Kompetensi (Jurusan)
+            
+            let kelasMatch = selectedKelas === "" || kelas === selectedKelas;
+            let jurusanMatch = selectedJurusan === "" || jurusan === selectedJurusan;
+            
+            if (kelasMatch && jurusanMatch) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
 </body>
 
 </html>
+
+

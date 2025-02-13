@@ -216,6 +216,46 @@
             <h2 class="font-weight-bold">Daftar Rombel</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
         </div>
+        <div class="d-flex-container">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filter Data
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h6 class="dropdown-header">Pilih Kelas</h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <label for="kelas" class="form-label">Kelas</label>
+                                            <select id="kelas" class="form-select">
+                                                <option value="">Pilih Kelas</option>
+                                                <option value="X">Kelas X</option>
+                                                <option value="XI">Kelas XI</option>
+                                                <option value="XII">Kelas XII</option>
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">Pilih Jurusan</h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <label for="jurusan" class="form-label">Jurusan</label>
+                                            <select id="jurusan" class="form-select">
+                                                <option value="">Pilih Jurusan</option>
+                                                <option value="RPL">RPL</option>
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <button class="dropdown-item" onclick="applyFilters()">Terapkan Filter</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br><br>
 
         <!-- Tabel Data Rombel -->
         <div class="table-responsive">
@@ -346,6 +386,80 @@
             }
         };
     </script>
+    <script>
+        window.onload = function() {
+            // Cek jika ada pesan error
+            var errorAlert = document.getElementById('alertError');
+            var successAlert = document.getElementById('alertSuccess');
+
+            // Jika ada pesan error, sembunyikan setelah 2 detik dengan animasi
+            if (errorAlert) {
+                setTimeout(function() {
+                    errorAlert.style.animation = 'slideUp 0.5s ease-out'; // Animasi naik
+                    setTimeout(function() {
+                        errorAlert.style.display = 'none'; // Sembunyikan setelah animasi selesai
+                    }, 500); // Durasi animasi
+                }, 2000); // Tunda selama 2 detik sebelum animasi
+            }
+
+            // Jika ada pesan success, sembunyikan setelah 2 detik dengan animasi
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.style.animation = 'slideUp 0.5s ease-out'; // Animasi naik
+                    setTimeout(function() {
+                        successAlert.style.display = 'none'; // Sembunyikan setelah animasi selesai
+                    }, 500); // Durasi animasi
+                }, 2000); // Tunda selama 2 detik sebelum animasi
+            }
+        };
+    </script>
+
+<script>
+    // Fungsi untuk menangani perubahan pilihan Kelas
+function filterKelas() {
+    let kelas = document.getElementById("kelas").value;
+    console.log("Kelas yang dipilih: " + kelas);
+    // Anda bisa menambahkan logika untuk memfilter data berdasarkan kelas yang dipilih
+}
+
+// Fungsi untuk menangani perubahan pilihan Jurusan
+function filterJurusan() {
+    let jurusan = document.getElementById("jurusan").value;
+    console.log("Jurusan yang dipilih: " + jurusan);
+    // Anda bisa menambahkan logika untuk memfilter data berdasarkan jurusan yang dipilih
+}
+
+// Fungsi untuk menerapkan filter
+function applyFilters() {
+    let kelas = document.getElementById("kelas").value;
+    let jurusan = document.getElementById("jurusan").value;
+    console.log("Terapkan Filter - Kelas: " + kelas + ", Jurusan: " + jurusan);
+    // Implementasikan logika untuk menampilkan data berdasarkan filter yang diterapkan
+}
+
+</script>
+
+<script>
+    function applyFilters() {
+        let selectedKelas = document.getElementById('kelas').value;
+        let selectedJurusan = document.getElementById('jurusan').value;
+        
+        let rows = document.querySelectorAll('.table tbody tr');
+        rows.forEach(row => {
+            let kelas = row.children[1].textContent.trim(); // Tingkat (Kelas)
+            let jurusan = row.children[2].textContent.trim(); // Kompetensi (Jurusan)
+            
+            let kelasMatch = selectedKelas === "" || kelas === selectedKelas;
+            let jurusanMatch = selectedJurusan === "" || jurusan === selectedJurusan;
+            
+            if (kelasMatch && jurusanMatch) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
 
 </body>
 

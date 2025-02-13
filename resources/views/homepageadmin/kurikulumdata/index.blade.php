@@ -393,7 +393,10 @@
             <h2 class="font-weight-bold">Daftar Kurikulum</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
+<<<<<<< HEAD
                 <!-- Form Cari Kurikulum -->
+=======
+>>>>>>> 4c722aab52633eb13508c2fe679a262cc1f3a15b
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
@@ -473,7 +476,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
