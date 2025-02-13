@@ -214,7 +214,6 @@
         <tbody>
             @forelse ($agendaList ?? [] as $idx => $data)
                 <tr>
-                <h5>Nama Wali Kelas : {{ $data->walas->nama }}</h5>
                     <td>{{ $idx + 1 }}</td>
                     <td>{{ $data->hari }}</td>
                     <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d-m-Y') }}</td>
