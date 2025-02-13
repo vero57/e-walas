@@ -238,7 +238,7 @@
         <tbody>
                     <tr>
                     <td>
-                        <a href="/rombel" class="text-decoration-none fw-bold text-primary table-link-hover">
+                        <a href="/kakomrombel" class="text-decoration-none fw-bold text-primary table-link-hover">
                             {{ $tahunAjaran }} - {{ $status }}
                         </a>
                     </td>
@@ -248,7 +248,7 @@
                         <td>
                             <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
-                                <a href="/rombel" class="btn btn-sm btn-primary text-white">
+                                <a href="/kakomrombel" class="btn btn-sm btn-primary text-white">
                                     <i class="bi bi-info-circle text-white"></i> Detail
                                 </a>
                             </div>

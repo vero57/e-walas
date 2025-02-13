@@ -217,7 +217,7 @@
 
                         <!-- Foto Tanda Tangan -->
                         <div class="mb-3">
-                            <label for="ttdwalas_url" class="form-label">Masukkan Foto Tanda Tangan Baru (Opsional):</label>
+                            <label for="ttdwalas_url" class="form-label">Masukkan Foto Dokumentasi (Opsional):</label>
                             <input type="file" name="ttdwalas_url" id="ttdwalas_url" class="form-control" accept="image/*">
                             @if($agendawalas->ttdwalas_url)
                                 <img src="{{ asset('storage/'.$agendawalas->ttdwalas_url) }}" alt="Foto Tanda Tangan" class="mt-2" width="100">

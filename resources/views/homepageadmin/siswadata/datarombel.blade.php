@@ -402,15 +402,6 @@
                     <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target=#modalSiswaTidakNaik>
                         <i class="bi bi-arrow-down-circle"></i> Siswa Tidak Naik Kelas
                     </button>
-
-                    <!-- Search Box -->
-                    <form action="{{ url('siswadata_search') }}" method="GET">
-                        <div class="input-box">
-                            <i class="uil uil-search"></i>
-                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
-                                <button class="button" type="submit">Cari</button>
-                        </div>
-                    </form>
             </div>
         </div>
         <br>

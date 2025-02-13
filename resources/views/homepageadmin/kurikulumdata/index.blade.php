@@ -393,11 +393,6 @@
             <h2 class="font-weight-bold">Daftar Kurikulum</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kurikulum -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
@@ -477,38 +472,6 @@
         </div>
     </div>
 </section>
-
-<!-- Modal Unggah Data -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel">Unggah Data Kurikulum</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Tombol Download Template -->
-                <div class="mb-3">
-                    <a href="{{ route('kurikulum.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
-                </div>
-
-                <!-- Form Unggah Data -->
-                <form action="/kurikulum-import" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
-                    </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Unggah</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
