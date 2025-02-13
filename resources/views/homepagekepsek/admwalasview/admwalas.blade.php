@@ -232,7 +232,7 @@ table td {
                 </a>
                 </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>3</td>
                 <td>Struktur Organisasi Kelas</td>
                 <td>
@@ -251,7 +251,7 @@ table td {
                             </a>
                         </a>
                 </td>
-            </tr>
+            </tr> -->
             <tr>
                 <td>5</td>
                 <td>Jadwal Kegiatan Piket Kelas</td>

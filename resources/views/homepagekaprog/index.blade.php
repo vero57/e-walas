@@ -201,7 +201,7 @@
       <div class="stat-content">
         <h4>Tahun Akademik</h4>
         <p class="mb-0">
-        <a href="/kakomta">Kelola Tahun Akademik di Sini</a>
+        <a href="/kakomta">Monitoring Tahun Akademik di Sini</a>
     </p>
       </div>
     </div>

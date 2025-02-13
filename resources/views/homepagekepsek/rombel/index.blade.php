@@ -281,7 +281,6 @@
             <th>Wali Kelas</th>
             <th>No WhatsApp</th>
             <th>Informasi</th>
-            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -313,25 +312,7 @@
                             </a>
                         </div>
                     </td>
-                <td class="text-center align-middle">
-                    <!-- Tombol Edit -->
-                    <button class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
-                    <!-- Tombol Delete -->
-                    <button class="btn rounded-circle shadow-sm" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-                </td>
+                
             </tr>
         @endforeach
     </tbody>

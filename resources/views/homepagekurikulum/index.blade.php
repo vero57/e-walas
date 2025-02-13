@@ -181,9 +181,9 @@
         <i class="bi bi-trophy"></i>
       </div>
       <div class="stat-content">
-    <h4>Tahun Ajaran</h4>
-    <p class="mb-0">
-        <a href="/tahunajarandata">Lihat data Tahun Ajaran di Sini</a>
+      <h4>Administrasi Walas</h4>
+        <p class="mb-0">
+        <a href="/kurikulumwalas">Lihat Data Administrasi Walas di Sini</a>
     </p>
 </div>
 
@@ -195,9 +195,10 @@
         <i class="bi bi-briefcase"></i>
       </div>
       <div class="stat-content">
-        <h4>Administrasi Walas</h4>
-        <p class="mb-0">
-        <a href="/kurikulumwalas">Lihat Data Administrasi Walas di Sini</a>
+        
+    <h4>Tahun Akademik</h4>
+    <p class="mb-0">
+        <a href="/tahunajarandata">Monitoring Tahun Akademik di Sini</a>
     </p>
       </div>
     </div>
