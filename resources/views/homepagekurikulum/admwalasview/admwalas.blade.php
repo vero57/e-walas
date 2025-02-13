@@ -253,7 +253,7 @@ table td {
                 </td>
             </tr> -->
             <tr>
-                <td>4</td>
+                <td>3</td>
                 <td>Jadwal Kegiatan Piket Kelas</td>
                 <td>
                 <a href="{{ route('admwalas.piketkelaskurikulum') }}?walas_id={{ $walas->id }}">
@@ -265,7 +265,7 @@ table td {
            
         </tr>
             <tr>
-                <td>5</td>
+                <td>4</td>
                 <td>Kehadiran Peserta Didik</td>
                 <td>
                     <a href="{{ route('admwalas.presensiskurikulum') }}?walas_id={{ $walas->id }}">
@@ -274,7 +274,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>6</td>
+                <td>5</td>
                 <td>Daftar Penyerahan/Pengembalian Rapor Siswa</td>
                 <td>
                 <a href="{{ route('admwalas.serahterimaraporkurikulum') }}?walas_id={{ $walas->id }}">
@@ -283,7 +283,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>7</td>
+                <td>6</td>
                 <td>Catatan Kasus Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.catatankasuskurikulum') }}?walas_id={{ $walas->id }}">
@@ -292,7 +292,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>8</td>
+                <td>7</td>
                 <td>Agenda Kegiatan Walas</td>
                 <td>
                     <!-- Link untuk mengarahkan ke halaman dengan walas_id -->
@@ -302,7 +302,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>9</td>
+                <td>8</td>
                 <td>Daftar Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.daftarpesertadidikkurikulum') }}?walas_id={{ $walas->id }}">
@@ -311,7 +311,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>10</td>
+                <td>9</td>
                 <td>Rekapitulasi Jumlah Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.rekapitulasipdidikkurikulum') }}?walas_id={{ $walas->id }}">
@@ -320,7 +320,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>11</td>
+                <td>10</td>
                 <td>Home Visit</td>
                 <td>
                     <a href="{{ route('admwalas.homevisitkurikulum') }}?walas_id={{ $walas->id }}">
@@ -329,7 +329,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>12</td>
+                <td>11</td>
                 <td>Buku Tamu Orang Tua/Wali Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.bukutamuortukurikulum') }}?walas_id={{ $walas->id }}">
@@ -338,7 +338,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>13</td>
+                <td>12</td>
                 <td>Persentase Sosial Ekonomi</td>
                 <td>
                 <a href="{{ route('admwalas.persentasesosialekonomikurikulum') }}?walas_id={{ $walas->id }}">
@@ -347,7 +347,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>14</td>
+                <td>13</td>
                 <td>Rentang Pendapatan Orang Tua</td>
                 <td>
                 <a href="{{ route('admwalas.rentangpendapatanortukurikulum') }}?walas_id={{ $walas->id }}">
@@ -356,7 +356,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>15</td>
+                <td>14</td>
                 <td>Prestasi Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.prestasisiswakurikulum') }}?walas_id={{ $walas->id }}">
@@ -365,7 +365,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>16</td>
+                <td>15</td>
                 <td>Grafik Jarak Tempuh Siswa</td>
                 <td>
                 <a href="{{ route('admwalas.grafikjaraktempuhkurikulum') }}?walas_id={{ $walas->id }}">
@@ -374,7 +374,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>18</td>
+                <td>16</td>
                 <td>Berita Acara Kenaikan Kelas</td>
                 <td>
                     <a href="{{ route ('admwalas.beritaacarakenaikankurikulum')}}?walas_id={{ $walas->id }}">
@@ -383,7 +383,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>19</td>
+                <td>17</td>
                 <td>Berita Acara Kelulusan</td>
                 <td>
                     <a href="{{ route ('admwalas.beritaacarakelulusankurikulum')}}?walas_id={{ $walas->id }}">
@@ -392,7 +392,7 @@ table td {
                 </td>
             </tr>
             <tr>
-                <td>20</td>
+                <td>18</td>
                 <td>Berita Acara Serah Terima</td>
                 <td>
                     <a href="{{ route ('admwalas.beritaacaraserahterimakurikulum')}}?walas_id={{ $walas->id }}">
