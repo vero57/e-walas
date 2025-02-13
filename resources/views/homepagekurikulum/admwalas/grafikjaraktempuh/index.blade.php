@@ -42,6 +42,12 @@
   ======================================================== -->
 
   <style>
+    #jarakChart {
+    max-width: 4000px; /* Atur lebar maksimum */
+    height: 400px; /* Pastikan proporsi tetap */
+    display: block;
+    margin: 0 auto; /* Pusatkan jika perlu */
+}
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -179,9 +185,7 @@
             <h2 class="font-weight-bold">Grafik Jarak Tempuh</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                
-                <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdf') }}">
+            <form id="exportForm" method="POST" action="{{ route('grafikjaraktempuh.generatepdfkurikulumgrafikjaraktempuh') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">

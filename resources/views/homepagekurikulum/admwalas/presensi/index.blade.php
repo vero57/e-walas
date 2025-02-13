@@ -154,12 +154,13 @@
         <div class="mb-4">
             <h2 class="font-weight-bold">Presensi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-                <div class="d-flex-container">
-                    <a href="{{ route('presensi.index', ['semester' => 'genap', 'export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+            <div class="d-flex-container">
+                <a href="{{ route('admwalas.presensiskurikulum', ['semester' => 'genap', 'export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
                     <i class="bi bi-download"></i> Unduh PDF Sem.Genap
-                        <a href="{{ route('presensi.index', ['semester' => 'ganjil', 'export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-                            <i class="bi bi-download"></i> Unduh PDF Sem.Ganjil
-                        </a>
+                </a>
+                <a href="{{ route('admwalas.presensiskurikulum', ['semester' => 'ganjil', 'export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <i class="bi bi-download"></i> Unduh PDF Sem.Ganjil
+                </a>
             </div>
         </div><br>
 
@@ -176,7 +177,6 @@
                 <th>Walas</th>
                 <th>Kelas</th>
                 <th>Tanggal</th>
-                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -186,9 +186,6 @@
                     <td>{{ $presensi->walas ? $presensi->walas->nama : '-' }}</td>
                     <td>{{ $presensi->kelas }}</td>
                     <td>{{ $presensi->tanggal }}</td>
-                    <td>
-                        <a href="{{ route('detailpresensi.index', $presensi->id) }}" class="btn btn-info">Detail</a>
-                    </td>
                 </tr>
             @endforeach
         </tbody>

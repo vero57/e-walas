@@ -161,10 +161,11 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
-                <form id="exportForm" method="POST" action="">
+                <form id="exportForm" method="POST" action="{{ route('bukutamuortu.generatepdfkurikulumbukutamuortu') }}">
                     @csrf
-                    <input type="hidden" id="chartData" name="chartImage">
-                    <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
+                    <!-- Pastikan walas_idSelected tersedia -->
+                    <input type="hidden" name="walas_id" value="{{ $walasIdSelected }}">
+                    <button type="submit" class="btn btn-outline-secondary me-2 mb-2">
                         <i class="bi bi-download"></i> Unduh PDF
                     </button>
                 </form>
@@ -193,7 +194,6 @@
                 <th>Tindak Lanjut</th>
                 <th>Solusi</th>
                 <th>Foto Dokumen</th>
-                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -213,16 +213,6 @@
                         @else
                             <p>No image</p>
                         @endif
-                    </td>
-                    <td class="text-center" colspan="4">
-                        <div class="d-flex justify-content-center">
-                            <a href="/hapusbukutamuortu/{{ $bukutamuortu->id }}" class="btn btn-primary btn-sm me-2">
-                                Hapus
-                            </a>
-                            <a href="{{ route('bukutamuortu.edit', $bukutamuortu->id) }}" class="btn btn-danger btn-sm">
-                                Edit
-                            </a>
-                        </div>
                     </td>
                 </tr>
             @endforeach

@@ -167,11 +167,9 @@
                                  <div class="mb-3">
                                     <label for="walas_id" class="form-label">Pilih Wali Kelas:</label>
                                     <select name="walas_id" id="walas_id" class="form-select" required>
-                                        <option value="" disabled selected>Pilih Wali Kelas</option>
-                                        @foreach ($walas as $w)
-                                            <option value="{{ $w->id }}">{{ $w->nama }}</>
-                                        </option>
-                                        @endforeach
+                                    @foreach ($walas as $wali)
+                                    <option value="{{ $wali->id }}" {{ old('walas_id', $prestasisiswa->walas_id ?? '') == $wali->id ? 'selected' : '' }}>{{ $wali->nama }}</option>
+                                    @endforeach
                                     </select>
                                 </div>
 

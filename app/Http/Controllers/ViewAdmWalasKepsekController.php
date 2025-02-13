@@ -400,13 +400,12 @@ class ViewAdmWalasKepsekController extends Controller
     // Ambil data siswa berdasarkan rombels_id yang sesuai
     $siswas = $rombel ? Siswa::where('rombels_id', $rombel->id)->get() : collect([]);
 
-    // Filter data piket hanya berdasarkan walas_id yang dipilih
     $data = $piket->map(function ($item) use ($detailpiket) {
-        // Ambil siswa berdasarkan jadwalpikets_id
+        // Ambil siswa yang terhubung berdasarkan jadwalpikets_id
         $siswas = $detailpiket->where('jadwalpikets_id', $item->id)->map(function ($detailpiket) {
             return \App\Models\Siswa::find($detailpiket->siswas_id); // Ambil data siswa berdasarkan siswas_id
-        });
-
+        })->filter(); // Filter untuk menghapus nilai null
+            
         return [
             'id' => $item->id,
             'nama_hari' => $item->nama_hari,
@@ -414,9 +413,8 @@ class ViewAdmWalasKepsekController extends Controller
         ];
     })->toArray();
 
-    // Ambil data walas berdasarkan walas_id yang dipilih
-$walas = Walas::find($walasIdSelected);
-
+            // Ambil data walas berdasarkan walas_id yang dipilih
+        $walas = Walas::find($walasIdSelected);
 
     if ($request->get('export') == 'pdf') {
         $pdf = Pdf::loadView('pdfkepsek.jadwalpiket', compact('walasList', 'data', 'siswas', 'rombel', 'walas'));
@@ -882,7 +880,7 @@ $walas = Walas::find($walasIdSelected);
 
     // Jika request untuk export ke PDF
     if ($request->has('export') && $request->get('export') === 'pdf') {
-        $pdf = Pdf::loadView('pdfkakom.persentasesosialekonomi', compact('walasList', 'walasIds', 'kepsek', 'persentasesosialekonomi', 'walas', 'walasIdSelected'));
+        $pdf = Pdf::loadView('pdfkurikulum.persentasesosialekonomi', compact('walasList', 'walasIds', 'kepsek', 'persentasesosialekonomi', 'walas', 'walasIdSelected'));
         return $pdf->stream('Persentase_Sosial_Ekonomi.pdf');
     }
 

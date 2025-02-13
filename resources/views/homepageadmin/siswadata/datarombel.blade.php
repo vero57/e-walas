@@ -404,13 +404,7 @@
                     </button>
 
                     <!-- Search Box -->
-                    <form action="{{ url('siswadata_search') }}" method="GET">
-                        <div class="input-box">
-                            <i class="uil uil-search"></i>
-                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
-                                <button class="button" type="submit">Cari</button>
-                        </div>
-                    </form>
+                    
             </div>
         </div>
         <br>
@@ -567,6 +561,15 @@
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
                     <a href="{{ route('siswa.download-template-admin') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                </div>
+                <div class="mb-3">
+                    <h6>
+                Ketentuan Unggah Excel : <br>
+                Rombel WAJIB diketik lengkap. Contoh : X RPL 1 <br>
+                Jenis kelamin WAJIB diketik Laki-laki / Perempuan <br>
+                No WA  WAJIB menggunakan (') contoh : '628512345678 <br>
+                Password Default = 12345678
+                Status = aktif / nonaktif</h6>
                 </div>
 
                 <!-- Form Unggah Data -->

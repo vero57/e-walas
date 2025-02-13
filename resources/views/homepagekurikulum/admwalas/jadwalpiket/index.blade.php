@@ -281,8 +281,8 @@
         <br>
 
         <div>
-        <a href="{{ route('jadwalpiket.index', ['export' => 'pdf']) }}" class="btn btn-outline-secondary"   style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
-    <i class="bi bi-download"></i> Unduh PDF
+        <a href="{{ route('admwalas.piketkelaskurikulum', ['export' => 'pdf', 'walas_id' => $walasIdSelected ?? '']) }}" class="btn btn-outline-secondary" style="font-size: 20px; padding: 5px 5px; width: auto; max-width: 150px;">
+            <i class="bi bi-download"></i> Unduh PDF
 </a>
 </div>
         @foreach (array_chunk($data, 3) as $row)

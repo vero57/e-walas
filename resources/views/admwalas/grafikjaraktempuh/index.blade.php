@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var ctx = document.getElementById('chartImage').getContext('2d');
+    var ctx = document.getElementById('jarakChart').getContext('2d');
     var dataJarak = @json($dataJarak);  // Pastikan data sudah sesuai dengan walas_id yang login
 
     new Chart(ctx, {

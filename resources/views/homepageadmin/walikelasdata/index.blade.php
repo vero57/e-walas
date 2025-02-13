@@ -453,6 +453,12 @@
                 <div class="mb-3">
                     <a href="{{ route('walas.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                 </div>
+                <div class="mb-3">
+                    <h6>Ketentuan Unggah Excel : <br>
+                        Jenis kelamin WAJIB diketik Laki-laki / Perempuan <br>
+                        No WA  WAJIB menggunakan ('62) contoh : '628512345678 <br>
+                        Password Default = 12345678</h6>
+                </div>
 
                 <!-- Form Unggah Data -->
                 <form action="/walas-import" method="post" enctype="multipart/form-data">

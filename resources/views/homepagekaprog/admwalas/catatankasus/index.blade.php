@@ -180,13 +180,7 @@
             <h2 class="font-weight-bold">Catatan Kasus Siswa</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
                 
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <a href="/catatankasuscreate" class="btn btn-primary me-2 mb-2">
-                    <i class="bi bi-plus"></i> Tambah
-                </a>
                 <a href="{{ route('admwalas.catatankasus', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
                     <i class="bi bi-download"></i> Unduh PDF
                 </a>
@@ -212,7 +206,6 @@
                 <th>Kasus</th>
                 <th>Tindak Lanjut</th>
                 <th>Keterangan</th>
-                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -223,14 +216,6 @@
                     <td>{{ $data->kasus }}</td>
                     <td>{{ $data->tindak_lanjut }}</td>
                     <td>{{ $data->keterangan }}</td>
-                    <td class="text-center" colspan="2">
-                        <div class="d-flex justify-content-center">
-                            <!-- Tombol Edit -->
-                            <a href="{{ route('catatankasus.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                            <!-- Tombol Delete -->
-                            <a href="/hapuscatatankasus/{{$data->id}}" class="btn btn-danger btn-sm">Hapus</a>
-                        </div>
-                    </td>
                 </tr>
             @empty
                 <tr>

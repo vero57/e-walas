@@ -391,15 +391,16 @@ public function presensis(Request $request)
         $rombel = null;
     }
 
-    // Menyiapkan data untuk PDF
     $data = $piket->map(function ($item) use ($detailpiket) {
+        // Ambil siswa yang terhubung berdasarkan jadwalpikets_id
         $siswas = $detailpiket->where('jadwalpikets_id', $item->id)->map(function ($detailpiket) {
-            return Siswa::find($detailpiket->siswas_id);
-        });
+            return \App\Models\Siswa::find($detailpiket->siswas_id); // Ambil data siswa berdasarkan siswas_id
+        })->filter(); // Filter untuk menghapus nilai null
+            
         return [
             'id' => $item->id,
             'nama_hari' => $item->nama_hari,
-            'siswas' => $siswas,
+            'siswas' => $siswas, // Menyimpan objek siswa yang terhubung
         ];
     })->toArray();
 
@@ -1264,8 +1265,11 @@ private function convertToBase64($path)
         //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
         $beritaAcara = BeritaAcaraKenaikan::where('walas_id', $walasIdSelected)->get();
 
+            // Ambil data walas berdasarkan walas_id yang dipilih
+            $walas = Walas::find($walasIdSelected);
+
         if (request()->has('export') && request()->get('export') === 'pdf') {
-            $pdf = Pdf::loadView('pdfkakom.beritaacarakenaikan', compact('walasIdSelected', 'beritaAcara'));
+            $pdf = Pdf::loadView('pdfkakom.beritaacarakenaikan', compact('walasIdSelected', 'beritaAcara', 'walas'));
             return $pdf->stream('Berita_Acara.pdf');
         }
 
@@ -1302,8 +1306,11 @@ private function convertToBase64($path)
         //$beritaAcara = BeritaAcaraKenaikan::with(['walas', 'rombel'])->get();
         $beritaAcaraKelulusan = BeritaAcaraKelulusan::where('walas_id', $walasIdSelected)->get();
 
+            // Ambil data walas berdasarkan walas_id yang dipilih
+            $walas = Walas::find($walasIdSelected);
+
         if (request()->has('export') && request()->get('export') === 'pdf') {
-            $pdf = Pdf::loadView('pdfkakom.beritaacarakelulusan', compact('walasIdSelected', 'beritaAcaraKelulusan'));
+            $pdf = Pdf::loadView('pdfkakom.beritaacarakelulusan', compact('walasIdSelected', 'beritaAcaraKelulusan', 'walas'));
             return $pdf->stream('Berita_Acara.pdf');
         }
 

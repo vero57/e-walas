@@ -42,6 +42,12 @@
   ======================================================== -->
 
   <style>
+     #pendapatanChart {
+    max-width: 4000px; /* Atur lebar maksimum */
+    height: 400px; /* Pastikan proporsi tetap */
+    display: block;
+    margin: 0 auto; /* Pusatkan jika perlu */
+}
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -179,13 +185,13 @@
             <h2 class="font-weight-bold">Pendapatan Ortu</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Administrasi -->
-                
-                <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdf') }}">
+            <form id="exportForm" method="POST" action="{{ route('pendapatanortu.generatepdfkurikulumpendapatanortu') }}">
                     @csrf
                     <input type="hidden" id="chartData" name="chartImage">
+                    <input type="hidden" name="walas_id" id="walasIdSelected" value="{{ $walasIdSelected }}">
                     <button type="button" id="exportPdfButton" class="btn btn-outline-secondary me-2 mb-2">
-                    <i class="bi bi-download"></i> Unduh PDF</button>
+                        <i class="bi bi-download"></i> Unduh PDF
+                    </button>
                 </form>
 
                      

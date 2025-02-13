@@ -205,7 +205,6 @@
                 <th>Kasus</th>
                 <th>Tindak Lanjut</th>
                 <th>Keterangan</th>
-                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -216,14 +215,6 @@
                     <td>{{ $data->kasus }}</td>
                     <td>{{ $data->tindak_lanjut }}</td>
                     <td>{{ $data->keterangan }}</td>
-                    <td class="text-center" colspan="2">
-                        <div class="d-flex justify-content-center">
-                            <!-- Tombol Edit -->
-                            <a href="{{ route('catatankasus.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
-                            <!-- Tombol Delete -->
-                            <a href="/hapuscatatankasus/{{$data->id}}" class="btn btn-danger btn-sm">Hapus</a>
-                        </div>
-                    </td>
                 </tr>
             @empty
                 <tr>

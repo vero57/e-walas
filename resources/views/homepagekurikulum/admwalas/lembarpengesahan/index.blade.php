@@ -143,9 +143,7 @@
     </div>
   </header>
 
-<main class="main">
-
-       <!-- Hero Section -->
+<!-- Hero Section -->
 <section id="hero" class="hero section">
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
@@ -160,6 +158,7 @@
         <tr>
             <th>No</th>
             <th>Foto Dokumen</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -187,6 +186,9 @@
                     @else
                         <p>No file</p>
                     @endif
+                </td>
+                <td>
+                    <a href="{{ asset('storage/'.$lembarpengesahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
                 </td>
             </tr>
         @endforeach

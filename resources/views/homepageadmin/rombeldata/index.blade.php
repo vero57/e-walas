@@ -395,12 +395,7 @@
                     <a href="{{ route('rombels.edit', $data->rombel_id) }}" class="btn rounded-circle shadow-sm edit-btn">
                         <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
+                    
                     <!-- Tombol Delete -->
                     <a href="/hapusrombel/{{$data->rombel_id}}" class="btn rounded-circle shadow-sm" 
                             style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
@@ -428,6 +423,13 @@
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
                     <a href="{{ route('rombel.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                </div>
+                <div class="mb-3">
+                Ketentuan Unggah Excel : <br>
+                Tingkat diketik romawi : X, XI, XII, XIII <br>
+                Nama kelas wajib diketik lengkap. Contoh : X RPL 1 <br>
+                Kompetensi wajib disingkat dan capslock : DKV, RPL, SIJA, TKJ, TKP, DPIB, TOI, TKR, TP, TFLM <br>
+                Walas wajib nama lengkap dan pastikan sudah terdaftar di user wali kelas <br>
                 </div>
 
                 <!-- Form Unggah Data -->

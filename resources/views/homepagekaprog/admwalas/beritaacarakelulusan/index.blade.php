@@ -176,7 +176,7 @@
             <h2 class="font-weight-bold">Berita Acara Kelulusan</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                    <a href="{{ route('beritaacarakelulusan.index', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <a href="{{ route('admwalas.beritaacarakelulusan', ['export' => 'pdf', 'walas_id' => $walasIdSelected]) }}" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i> Unduh PDF
             </a>
             

@@ -177,7 +177,6 @@
                 <th>Walas</th>
                 <th>Kelas</th>
                 <th>Tanggal</th>
-                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -187,9 +186,6 @@
                     <td>{{ $presensi->walas ? $presensi->walas->nama : '-' }}</td>
                     <td>{{ $presensi->kelas }}</td>
                     <td>{{ $presensi->tanggal }}</td>
-                    <td>
-                        <a href="{{ route('detailpresensi.index', $presensi->id) }}" class="btn btn-info">Detail</a>
-                    </td>
                 </tr>
             @endforeach
         </tbody>

@@ -214,12 +214,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="/hapuspenyerahanrapot/{{ $penyerahan->id }}" class="btn btn-danger btn-sm">
-                        Hapus
-                    </a>
-                    <a href="{{ route('penyerahanrapot.edit', $penyerahan->id) }}" class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
+                    
                     <a href="{{ asset('storage/'.$penyerahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
                 
                 </td>

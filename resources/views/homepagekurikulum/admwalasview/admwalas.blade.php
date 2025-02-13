@@ -373,6 +373,33 @@ table td {
                 </a>
                 </td>
             </tr>
+            <tr>
+                <td>18</td>
+                <td>Berita Acara Kenaikan Kelas</td>
+                <td>
+                    <a href="{{ route ('admwalas.beritaacarakenaikankurikulum')}}?walas_id={{ $walas->id }}">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>Berita Acara Kelulusan</td>
+                <td>
+                    <a href="{{ route ('admwalas.beritaacarakelulusankurikulum')}}?walas_id={{ $walas->id }}">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>Berita Acara Serah Terima</td>
+                <td>
+                    <a href="{{ route ('admwalas.beritaacaraserahterimakurikulum')}}?walas_id={{ $walas->id }}">
+                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                </a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

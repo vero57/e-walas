@@ -368,7 +368,7 @@
 
      <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
      <div class="user-info d-flex align-items-center">
-            <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>

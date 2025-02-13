@@ -187,7 +187,6 @@
                     <th>Tindak Lanjut</th>
                     <th>Foto Surat</th>
                     <th>Dokumentasi</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -219,16 +218,6 @@
                     @else
                         <p>No image</p>
                     @endif
-                </td>
-                <td class="text-center" colspan="4">
-                    <div class="d-flex justify-content-center">
-                        <a href="/hapushomevisit/{{ $homevisit->id }}" class="btn btn-primary btn-sm me-2">
-                            Hapus
-                        </a>
-                        <a href="{{ route('homevisit.edit', $homevisit->id) }}" class="btn btn-danger btn-sm">
-                            Edit
-                        </a>
-                    </div>
                 </td>
             </tr>
         @endforeach

@@ -436,6 +436,13 @@
                 <div class="mb-3">
                     <a href="{{ route('kakom.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                 </div>
+                <div class="mb-3">
+                    <h6>Ketentuan Unggah Excel : <br>
+                        Jenis kelamin WAJIB diketik Laki-laki / Perempuan <br>
+                        No WA  WAJIB menggunakan ('62) contoh : '628512345678 <br>
+                        Kompetensi wajib disingkat dan capslock : DKV, RPL, SIJA, TKJ, TKP, DPIB, TOI, TKR, TP, TFLM
+</h6>
+                </div>
 
                 <!-- Form Unggah Data -->
                 <form action="/kakom-import" method="post" enctype="multipart/form-data">

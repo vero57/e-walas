@@ -196,7 +196,6 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('lembarpengesahan.edit', $lembarpengesahan->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <a href="{{ asset('storage/'.$lembarpengesahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
                 </td>
             </tr>

@@ -173,13 +173,14 @@
         </div>
     @endif
 
-    <!-- Tabel Data -->
-    @if($rapor->isNotEmpty())
+     <!-- Tabel Data -->
+     @if($rapor->isNotEmpty())
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>No</th>
                     <th>Foto Dokumen</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -211,6 +212,11 @@
                     @else
                         <p>No file</p>
                     @endif
+                </td>
+                <td>
+                    
+                    <a href="{{ asset('storage/'.$penyerahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
+                
                 </td>
             </tr>
         @endforeach
