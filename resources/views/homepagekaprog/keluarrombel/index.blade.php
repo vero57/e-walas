@@ -293,7 +293,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/homepagekaprog" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -301,7 +301,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/kurikulumpage" >Beranda</a></li>
+        <li><a href="/homepagekaprog" >Beranda</a></li>
           <li><a href="/keluarrombeldata" class="active">Data Siswa Keluar Rombel</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -367,7 +367,7 @@
             <td>{{ $nama_kelas }}</td>
             <td>
                 @if($rombels_id)
-                    <a href="{{ route('detail.keluarormbelkurikulum', ['rombels_id' => $rombels_id]) }}" 
+                    <a href="{{ route('detail.keluarrombeldetailkakom', ['rombels_id' => $rombels_id]) }}" 
                        class="btn btn-sm btn-info text-white">
                         <i class="bi bi-info-circle text-white"></i> Detail Kelas
                     </a>

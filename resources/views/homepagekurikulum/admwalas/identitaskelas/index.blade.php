@@ -177,7 +177,6 @@
     </thead>
     <tbody>
         @foreach($identiasKelasList as $index => $identitas)
-        <h5>Nama Wali Kelas : {{ $identitas->walas->nama }}</h5>
         <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $identitas->program_keahlian }}</td>

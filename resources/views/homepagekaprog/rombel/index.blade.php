@@ -269,7 +269,6 @@
                         <th>Wali Kelas</th>
                         <th>No WhatsApp</th>
                         <th>Informasi</th>
-                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -295,25 +294,6 @@
                                    class="btn btn-sm btn-info text-white">
                                     <i class="bi bi-info-circle text-white"></i> Detail Kelas
                                 </a>
-                            </td>
-                            <td class="text-center">
-                                <!-- Tombol Aksi -->
-                                <div class="btn-group">
-                                    <!-- Tombol Edit -->
-                                    <button class="btn btn-outline-secondary btn-sm" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    
-                                    <!-- Tombol Download -->
-                                    <button class="btn btn-outline-primary btn-sm mx-1" title="Download">
-                                        <i class="bi bi-download"></i>
-                                    </button>
-                                    
-                                    <!-- Tombol Delete -->
-                                    <button class="btn btn-outline-danger btn-sm" title="Hapus">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </div>
                             </td>
                         </tr>
                     @endforeach
