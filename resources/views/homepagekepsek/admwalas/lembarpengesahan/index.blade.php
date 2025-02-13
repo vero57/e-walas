@@ -165,7 +165,6 @@
     </thead>
     <tbody>
         @foreach($lembarPengesahan as $index => $lembarpengesahan)
-        <h5>Nama Wali Kelas : {{ $lembarpengesahan->walas->nama }}</h5>
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>
