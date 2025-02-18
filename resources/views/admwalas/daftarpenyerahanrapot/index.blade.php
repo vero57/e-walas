@@ -152,13 +152,14 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Penyerahan/Pengembalian Rapot</h2>
+            <h2 class="font-weight-bold">Daftar Penyerahan atau Pengambilan Rapot</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
                 
                 <a href="{{ route('serahterimarapor.download-template') }}" class="btn btn-outline-secondary" download>
                     <i class="bi bi-cloud-download"></i> Download File
                 </a>
+                <br>
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
@@ -180,6 +181,7 @@
 
     <!-- Tabel Data -->
     @if($penyerahanrapot->isNotEmpty())
+    <div class="table-responsive mt-3">
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -218,16 +220,20 @@
                         <p>No file</p>
                     @endif
                 </td>
-                <td>
-                    <a href="/hapuspenyerahanrapot/{{ $penyerahan->id }}" class="btn btn-danger btn-sm">
-                        Hapus
-                    </a>
-                    <a href="{{ route('penyerahanrapot.edit', $penyerahan->id) }}" class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
-                    <a href="{{ asset('storage/'.$penyerahan->image_url) }}" class="btn btn-success btn-sm" download>Download</a>
-                
+                <td class="text-center text-md-start">
+                    <div class="d-flex flex-column flex-md-row gap-2">
+                        <a href="/hapuspenyerahanrapot/{{ $penyerahan->id }}" class="btn btn-danger btn-sm">
+                            Hapus
+                        </a>
+                        <a href="{{ route('penyerahanrapot.edit', $penyerahan->id) }}" class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                        <a href="{{ asset('storage/'.$penyerahan->image_url) }}" class="btn btn-success btn-sm" download>
+                            Download
+                        </a>
+                    </div>
                 </td>
+
             </tr>
         @endforeach
     @endif

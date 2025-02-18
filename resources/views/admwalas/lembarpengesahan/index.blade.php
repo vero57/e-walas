@@ -157,6 +157,7 @@
                 <a href="{{ route('lembarpengesahan.download-template') }}" class="btn btn-outline-secondary" download>
                     <i class="bi bi-cloud-download"></i> Download Lembar Pengesahan
                 </a>
+                <br>
                 <!-- Tombol Tambah Data -->
                 <div class="d-flex-container">
                     <a href="{{ route('lembarpengesahan.create') }}" class="btn btn-primary">
@@ -167,6 +168,7 @@
         </div>
         <br>
 
+        <div class="table-responsive mt-3">
         <table class="table table-bordered table-striped">
     <thead>
         <tr>

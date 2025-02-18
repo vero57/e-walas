@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>E Walas SMKN 1 Cibinong - Siswa</title>
+  <title>E Walas SMKN 1 Cibinong - Wali Kelas</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 

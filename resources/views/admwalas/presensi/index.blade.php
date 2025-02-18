@@ -154,15 +154,19 @@
         <div class="mb-4">
             <h2 class="font-weight-bold">Presensi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-                <div class="d-flex-container">
+                <!-- Wrapper untuk tombol -->
+            <div class="d-flex flex-wrap gap-2">
                 <a href="{{ route('presensi.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus"></i> Tambah
-                    <a href="{{ route('presensi.index', ['semester' => 'genap', 'export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                </a>
+                <a href="{{ route('presensi.index', ['semester' => 'genap', 'export' => 'pdf']) }}" 
+                    class="btn btn-outline-secondary">
                     <i class="bi bi-download"></i> Unduh PDF Sem.Genap
                 </a>
-                        <a href="{{ route('presensi.index', ['semester' => 'ganjil', 'export' => 'pdf']) }}" class="btn btn-outline-secondary me-2 mb-2">
-                            <i class="bi bi-download"></i> Unduh PDF Sem.Ganjil
-                        </a>
+                <a href="{{ route('presensi.index', ['semester' => 'ganjil', 'export' => 'pdf']) }}" 
+                    class="btn btn-outline-secondary">
+                    <i class="bi bi-download"></i> Unduh PDF Sem.Ganjil
+                </a>
             </div>
         </div><br>
 
@@ -172,6 +176,7 @@
         </div>
     @endif
 
+    <div class="table-responsive mt-3">
     <table class="table">
         <thead>
             <tr>

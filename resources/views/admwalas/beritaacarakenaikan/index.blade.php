@@ -207,6 +207,7 @@
     @php
         \Carbon\Carbon::setLocale('id');
     @endphp
+    <div class="table-responsive mt-3">
     <table class="table table-bordered">
         <thead>
             <tr>

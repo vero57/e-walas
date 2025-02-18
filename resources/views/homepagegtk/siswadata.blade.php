@@ -305,7 +305,70 @@
     background-color: #0056b3; /* Mengubah warna latar belakang saat hover */
     border-color: #0056b3; /* Mengubah warna border saat hover */
 }
+
+/* Pastikan tabel bisa di-scroll pada layar kecil */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Pastikan modal tidak terlalu besar di layar kecil */
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 90%;
+        margin: auto;
+    }
+}
+
+/* Sesuaikan elemen input dan tombol agar responsif */
+.input-box input {
+    width: 100%;
+}
+
+.input-box .button {
+    white-space: nowrap;
+}
+
+/* Agar tombol tetap sejajar dengan baik */
+.d-flex.gap-2 {
+    flex-wrap: wrap;
+}
+
+/* Responsif untuk tombol aksi */
+@media (max-width: 768px) {
+    .d-flex.justify-content-center.flex-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.modal-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-body .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.modal-body .col-md-6 {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .modal-body .col-md-6 {
+        width: 48%;
+    }
+}
+
+
+
 </style>
+
+
 </head>
 
 <body class="index-page">
@@ -358,46 +421,50 @@
   </header>
 
 <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+        <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
+            
+            <div class="row g-2 align-items-center">
+                <!-- Header Title -->
+                <div class="col-12 mb-4">
+                    <h2 class="font-weight-bold">Daftar Siswa</h2>
+                    <hr class="my-3">
+                </div>
 
-       <!-- Hero Section -->
-       <section id="hero" class="hero section">
-    <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
-        <!-- Header dengan Title, Pencarian, dan Tombol -->
-        <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Siswa</h2>
-            <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
-            <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Siswa -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
+                <div class="col-12 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <!-- Tombol Unggah Data & Tambah Data -->
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                            <i class="bi bi-cloud-upload"></i> Unggah Data
+                        </button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                            <i class="bi bi-plus"></i> Tambah
+                        </button>
+                    </div>
 
-                    <!-- Search Box -->
-                    <form action="{{ url('siswadata_search') }}" method="GET">
-                        <div class="input-box">
+                    <!-- Form Cari Siswa -->
+                    <form action="{{ url('siswadata_search') }}" method="GET" class="d-flex align-items-center">
+                        <div class="input-box d-flex align-items-center">
                             <i class="uil uil-search"></i>
-                                <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
-                                <button class="button" type="submit">Cari</button>
+                            <input type="text" name="keyword" placeholder="Cari Siswa..." value="{{ old('keyword', $keyword ?? '') }}" required />
+                            <button class="button" type="submit">Cari</button>
                         </div>
                     </form>
+                </div>
             </div>
-        </div>
-        
-        <!-- Jumlah Total Siswa -->
-        <div class="text-end mb-4">
-            <span class="text-muted">
-                Jumlah Total: <strong>{{ $siswa->count() }} Siswa</strong>
-            </span>
-        </div>
 
+            <!-- Jumlah Total Siswa -->
+            <div class="row mt-3">
+                <div class="col-12 text-center text-md-end">
+                    <span class="text-muted">
+                        Jumlah Total: <strong>{{ $siswa->count() }} Siswa</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Container Table dengan Scroll jika terlalu lebar -->
+<div class="d-flex align-items-center justify-content-start">
 <div class="table-container">
     <table class="table">
         <thead>
@@ -454,12 +521,12 @@
                         </div>
                     </td>
                     <td>
-                        <div class="d-flex justify-content-center">
-                            <a href="{{ route('homepagegtk.biodatasiswa', $data->siswa_id) }}" class="btn btn-info btn-sm me-2">
+                        <div class="d-flex justify-content-center flex-wrap gap-2">
+                            <a href="{{ route('homepagegtk.biodatasiswa', $data->siswa_id) }}" class="btn btn-info btn-sm">
                                 Biodata
                             </a>
-                            <a href="{{ route('siswa.edit', $data->siswa_id) }}" class="btn btn-primary btn-sm me-2">
-                                Edit 
+                            <a href="{{ route('siswa.edit', $data->siswa_id) }}" class="btn btn-primary btn-sm">
+                                Edit
                             </a>
                             <a href="/hapussiswa/{{$data->siswa_id}}" class="btn btn-danger btn-sm">
                                 Hapus
@@ -475,6 +542,9 @@
         </tbody>
     </table>
 </div>
+
+        </div>
+
 
 <!-- Modal Unggah Data -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -519,7 +589,7 @@
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addModalLabel">Tambah Data Siswa</h5>
@@ -528,48 +598,52 @@
             <div class="modal-body">
                 <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="mb-3">
-                        <label for="studentName" class="form-label">Nama Siswa</label>
-                        <input type="text" class="form-control" id="teacherName" placeholder="Masukan Nama Siswa" name="nama" required>
+                    <div class="container">
+                        <div class="row g-3">
+                            <div class="col-md-6 col-12">
+                                <label for="studentName" class="form-label">Nama Siswa</label>
+                                <input type="text" class="form-control" id="studentName" name="nama" placeholder="Masukkan Nama Siswa" required>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="rombelsId" class="form-label">Rombels</label>
+                                <select class="form-select" id="rombelsId" name="rombels_id" required>
+                                    <option selected disabled>Pilih Rombel</option>
+                                    @foreach ($rombels as $rombel)
+                                        <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="studentWhatsApp" class="form-label">WhatsApp</label>
+                                <input type="number" class="form-control" id="studentWhatsApp" name="no_wa" placeholder="Masukkan nomor WhatsApp" required>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="image" class="form-label">Foto Siswa</label>
+                                <input type="file" class="form-control" id="image" name="image_url" required>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" name="status" required>
+                                    <option selected disabled>Pilih Status</option>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="nonaktif">Non Aktif</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label for="gender" class="form-label">Pilih Gender</label>
+                                <select class="form-select" id="gender" name="jenis_kelamin" required>
+                                    <option selected disabled>Pilih Gender</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="rombelsId" class="form-label">Rombels</label>
-                        <select class="form-select" id="rombelsId" name="rombels_id" required>
-                            <option selected disabled>Pilih Rombel</option>
-                            @foreach ($rombels as $rombel)
-                                <option value="{{ $rombel->id }}">{{ $rombel->nama_kelas }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="studentWhatsApp" class="form-label">WhatsApp</label>
-                        <input type="number" class="form-control" id="studentWhatsApp" placeholder="Masukkan nomor WhatsApp" name="no_wa" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="passwowrd" class="form-control" id="password" name="password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Foto Siswa</label>
-                        <input type="file" class="form-control" id="teacherPhoto" name="image_url" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-select" id="status" aria-label="Pilih Gender" name="status" required>
-                            <option selected disabled>Pilih Status</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="nonaktif">Non Aktif</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="teacherGender" class="form-label">Pilih Gender</label>
-                        <select class="form-select" id="teacherGender" aria-label="Pilih Gender" name="jenis_kelamin" required>
-                            <option selected disabled>Pilih Gender</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex justify-content-between flex-wrap">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-success">Tambah</button>
                     </div>
@@ -578,7 +652,6 @@
         </div>
     </div>
 </div>
-
 
 
     </div>

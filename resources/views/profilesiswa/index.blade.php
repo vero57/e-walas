@@ -197,6 +197,83 @@ h1 .accent-text {
     background-color: #E7DDFF; /* Warna biru lebih gelap saat hover */
 }
 
+/* Container utama */
+.walas-info-container {
+    display: flex;
+    flex-wrap: wrap; /* Agar fleksibel di layar kecil */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Container untuk foto siswa */
+.walas-photo-container {
+    position: relative;
+    max-width: 200px;
+    text-align: center;
+}
+
+.walas-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Container informasi */
+.profile-info-container {
+    max-width: 400px;
+    text-align: left;
+}
+
+/* Tombol */
+.edit-button, .kembali-button {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.kembali-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Media Queries untuk HP */
+@media (max-width: 768px) {
+    .walas-info-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info-container {
+        max-width: 100%;
+    }
+
+    .edit-button, .kembali-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
     </style>
 </head>
 
@@ -236,44 +313,42 @@ h1 .accent-text {
 
   <main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
-        <h1 class="mb-4 text-center">
-            Profile Siswa <br>
-            <span class="accent-text">Berikut adalah Profile dari Siswa</span>
-        </h1>
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+    <h1 class="mb-4 text-center">
+        Profile Siswa <br>
+        <span class="accent-text">Berikut adalah Profile dari Siswa</span>
+    </h1>
 
-        <div class="walas-info-container">
-    <!-- Foto Besar dan Icon Edit -->
-    <div class="walas-photo-container position-relative">
-        <img src="{{ asset('storage/'.$siswa->image_url) }}" alt="Image" class="walas-photo">
-        <div class="edit-icon">
-            <i class="bi bi-pencil"></i>
+    <div class="walas-info-container">
+        <!-- Foto Besar dan Icon Edit -->
+        <div class="walas-photo-container position-relative">
+            <img src="{{ asset('storage/'.$siswa->image_url) }}" alt="Image" class="walas-photo">
+            <div class="edit-icon">
+                <i class="bi bi-pencil"></i>
+            </div>
+        </div>
+
+        <!-- Informasi Profile -->
+        <div class="profile-info-container">
+            <p><strong>Name:</strong> {{ $siswa->nama }}</p>
+            <p><strong>Kelas:</strong> {{ $siswa->rombel->nama_kelas }}</p>
+            <p><strong>Jenis Kelamin:</strong> {{ $siswa->jenis_kelamin }}</p>
+            <p><strong>Phone:</strong> {{ $siswa->no_wa }}</p>
+            <p><strong>Status:</strong> {{ $siswa->status }}</p>
+            <p><strong>Password:</strong> {{ $siswa->password }}</p>
+
+            <!-- Tombol Edit -->
+            <br>
+            <a href="{{ route('profilesiswa.edit', $siswa->id) }}" class="edit-button">Edit Data</a>
+            <a href="/siswapage" class="kembali-button">Kembali</a>
         </div>
     </div>
 
-   <!-- Informasi Profile -->
-    <div class="profile-info-container">
-        <p><strong>Name:</strong> {{ $siswa->nama }}</p>
-        <p><strong>Kelas:</strong> {{ $siswa->rombel->nama_kelas }}</p>
-        <p><strong>Jenis Kelamin:</strong> {{ $siswa->jenis_kelamin }}</p>
-        <p><strong>Phone:</strong> {{ $siswa->no_wa }}</p>
-        <p><strong>Status:</strong> {{ $siswa->status }}</p>
-        <p><strong>Password:</strong> {{ $siswa->password }}</p>
-
-        <!-- Tombol Edit -->
-        <br>
-         <a href="{{ route('profilesiswa.edit', $siswa->id) }}" class="edit-button" style="margin-right: 10px;">Edit Data</a>
-         <a href="/siswapage" class="kembali-button">Kembali</a>
-    </div>
-
-</div>
-
-        </div>
-
-    </section><!-- /Hero Section -->
+</section><!-- /Hero Section -->
 
 </main>
+
 
   
     <div class="container copyright text-center mt-4">

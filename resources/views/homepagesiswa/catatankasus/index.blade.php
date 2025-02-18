@@ -130,6 +130,24 @@
   button {
     border-radius: 5px; /* Menambahkan sudut melengkung pada tombol */
   }
+
+  .table-responsive {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+@media (min-width: 992px) { /* Desktop */
+    .table-responsive {
+        overflow-x: visible;
+        white-space: normal;
+    }
+
+    .table {
+        width: 100%;
+    }
+}
+
+
 </style>
 
 
@@ -183,89 +201,73 @@
     </div>
   </header>
 
-  <main class="main">
+<main class="main">
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 text-center text-lg-start">
+                    <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+                        <div class="company-badge mb-4">
+                            <i class="bi bi-gear-fill me-2"></i> Aman, Tertib, Unggul, Religius
+                        </div> 
 
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            
-             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-              <div class="company-badge mb-4">
-                <i class="bi bi-gear-fill me-2"></i>
-                    Aman, Tertib, Unggul, Religius
-              </div> 
+                        <h1 class="mb-4">
+                            Lihat Catatan Kasus <br>
+                            <span class="accent-text">Kasus Siswa</span>
+                        </h1>
+                    </div>
+                </div>
 
-              <h1 class="mb-4">
-               Lihat Catatan Kasus <br>
-                <span class="accent-text">Kasus Siswa</span>
-              </h1>
-
-              <!-- <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
-                    <i class="bi bi-play-circle me-1"></i>
-                    Tutorial Penggunaan Website
-                </a> 
-            </div> -->
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+                        <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
-
+            <!-- Tabel Catatan Kasus -->
+            <div class="table-responsive mt-3">
+            <table class="table table-striped w-100">
+            <div class="row justify-content-center mt-5" data-aos="fade-up" data-aos-delay="500">
+                <div class="col-lg-8 col-md-10">
+                    <h1 class="mb-4 text-center">Catatan Kasus</h1>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kasus</th>
+                                    <th>Tindak Lanjut</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($catatankasus ?? [] as $idx => $data)
+                                    <tr>
+                                        <td>{{ $idx + 1 }}</td>
+                                        <td>{{ $data->kasus }}</td>
+                                        <td>{{ $data->tindak_lanjut }}</td>
+                                        <td>{{ $data->keterangan }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center">Tidak ada Catatan Kasus.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-
-<div class="row stats-row gy-7 mt-9 justify-content-start align-items-start" data-aos="fade-up" data-aos-delay="500">
-    <div class="col-lg-4 col-md-8">
-        <br>
-        <h1 class="mb-4 text-center">
-               Catatan Kasus <br>
-                <span class="accent-text"></span>
-        </h1>
-        <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <th>No</th>
-                    <th>Kasus</th>
-                    <th>Tindak Lanjut</th>
-                    <th>Keterangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-            @forelse ($catatankasus ?? [] as $idx => $data)
-                <tr>
-                    <td>
-                        <div class="d-flex px-2 py-1">
-                            {{ $idx + 1 }}
-                        </div>
-                    </td>
-                    <td>{{ $data->kasus }}</td>
-                    <td>{{ $data->tindak_lanjut }}</td>
-                    <td>{{ $data->keterangan }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="8" class="text-center">Tidak ada Catatan Kasus.</td>
-                </tr>
-            @endforelse
-        </tbody>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-    </div>
-</div>
-
     </section><!-- /Hero Section -->
 
 </main>
+
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>

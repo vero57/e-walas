@@ -202,6 +202,7 @@
     @endif
 
     @if($prestasisiswa->isNotEmpty())
+    <div class="table-responsive">
     <table class="table table-bordered table-striped">
             <tr>
                 <th>No</th>
@@ -255,6 +256,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     <br>
 @endif
 

@@ -45,6 +45,24 @@ FACEBOOK: https://www.facebook.com/themefisher
   <!-- CUSTOM CSS -->
   <link href="css/style2.css" rel="stylesheet">
 
+<style>
+  @media (max-width: 768px) {
+  .footer-main .d-flex {
+    flex-direction: column; /* Susun elemen ke bawah di layar kecil */
+    text-align: center; /* Pusatkan teks */
+    align-items: center;
+  }
+
+  .footer-main img {
+    margin-bottom: 10px; /* Tambahkan jarak antara logo dan teks */
+  }
+
+  .footer-main h1 {
+    font-size: 1.2rem; /* Perkecil teks agar tidak melebar */
+  }
+}
+</style>
+
 </head>
 
 <body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
@@ -299,9 +317,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 <footer>
   <div class="footer-main">
     <div class="container">
-      <div class="row align-items-center"> 
+      <div class="row align-items-center text-lg-start text-center"> 
         <div class="col-lg-6 col-md-12">
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center justify-content-lg-start justify-content-center">
             <a href="">
               <img src="images/logologin.png" alt="footer-logo" width="100" height="100" style="margin-right: 15px;">
             </a>
@@ -318,10 +336,6 @@ FACEBOOK: https://www.facebook.com/themefisher
     </small>
   </div>
 </footer>
-
-
-
-
 
 
   <!-- To Top -->
