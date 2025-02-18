@@ -196,7 +196,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     @if($daftarPDidik->isNotEmpty())
     <table class="table table-bordered table-striped">
             <tr>
@@ -238,7 +238,7 @@
         </div>
     </div>
 @endif
-
+</div>
 </div>
 
 </main>

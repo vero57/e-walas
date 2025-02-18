@@ -183,6 +183,7 @@
 
     <!-- Tabel Data -->
 @if($bukutamu->isNotEmpty())
+<div class="table-responsive">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -226,7 +227,7 @@
 
 </tbody>
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

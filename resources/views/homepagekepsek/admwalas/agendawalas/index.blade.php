@@ -193,7 +193,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     @if($agendaList->isNotEmpty())
     <td>
     <table class="table table-bordered table-striped">
@@ -228,7 +228,7 @@
         </tbody>
     </table>
 @endif
-
+</div>
 </div>
 
 </main>

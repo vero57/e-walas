@@ -198,6 +198,7 @@
     @endif
 
     @if($rekapitulasiPDidik->isNotEmpty())
+    <div class="table-responsive">
     <table class="table table-bordered table-striped">
             <tr>
                 <th>No</th>
@@ -227,7 +228,7 @@
     </table>
     <br>
 @endif
-
+</div>
 </div>
 
 </main>

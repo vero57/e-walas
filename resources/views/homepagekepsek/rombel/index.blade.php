@@ -268,9 +268,7 @@
             </div>
         </div>
 
-
-        <div class="table-container">
-            <table class="table">
+        <div class="table-responsive">
             <table class="table">
     <thead>
         <tr>
@@ -317,7 +315,7 @@
         @endforeach
     </tbody>
 </table>
-
+</div>
         </div>
     </div>
 

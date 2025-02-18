@@ -198,7 +198,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     @if($prestasisiswa->isNotEmpty())
     <table class="table table-bordered table-striped">
             <tr>
@@ -247,7 +247,7 @@
 @endif
 
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

@@ -198,6 +198,7 @@
     @endif
 
     @if($agendaList->isNotEmpty())
+    <div class="table-responsive">
     <td>
     <table class="table table-bordered table-striped">
         <thead>
@@ -230,9 +231,8 @@
         </tbody>
     </table>
 @endif
-
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

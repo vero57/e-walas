@@ -393,10 +393,6 @@
             <h2 class="font-weight-bold">Daftar Kurikulum</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-<<<<<<< HEAD
-                <!-- Form Cari Kurikulum -->
-=======
->>>>>>> 4c722aab52633eb13508c2fe679a262cc1f3a15b
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
@@ -458,7 +454,7 @@
                     @endif
                 </td>
                 <td>
-                <div class="d-flex justify-content-center">
+                <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
                    <!-- Tombol Edit -->
                    <a href="{{ route('kurikulum.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
                         Edit

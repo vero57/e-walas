@@ -340,19 +340,15 @@
             <h2 class="font-weight-bold">Daftar Kepala Kompetensi</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kepala Kompetensi -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <i class="bi bi-cloud-upload"></i> Unggah
+                    </button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
-
+                </div>
+                    <div class="d-flex-container">
                     <form action="{{ url('kakom_search') }}" method="GET">
                         <div class="input-box">
                             <i class="uil uil-search"></i>
@@ -406,7 +402,7 @@
                     @endif
                 </td>
                 <td>
-                <div class="d-flex justify-content-center">
+                <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
                    <!-- Tombol Edit -->
                    <a href="{{ route('kakom.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
                         Edit

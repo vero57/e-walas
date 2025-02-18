@@ -188,22 +188,17 @@
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/tahunajaran" class="active">Tahun Ajaran</a></li>
-          <li><a href="/alumni" >Data Alumni</a></li>
+        <li><a href="/tahunajaran" class="active">Tahun Akademik</a></li>
+          <li><a href="/alumni">Alumni</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Tahun Ajaran 2024/2025 - Aktif</a></li>
+              <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
             </ul>
           </li>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-        
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+
        <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
   <div class="user-info d-flex align-items-center">
               @if(session()->has('admin_id'))

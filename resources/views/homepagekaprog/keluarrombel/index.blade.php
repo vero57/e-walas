@@ -367,7 +367,7 @@
             <td>{{ $nama_kelas }}</td>
             <td>
                 @if($rombels_id)
-                    <a href="{{ route('detail.keluarrombeldetailkakom', ['rombels_id' => $rombels_id]) }}" 
+                    <a href="{{ route('detail.keluarormbelkakom', ['rombels_id' => $rombels_id]) }}" 
                        class="btn btn-sm btn-info text-white">
                         <i class="bi bi-info-circle text-white"></i> Detail Kelas
                     </a>

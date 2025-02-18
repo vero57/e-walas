@@ -42,12 +42,19 @@
   ======================================================== -->
 
   <style>
+    .chart-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto; /* Aktifkan scroll horizontal jika diperlukan */
+    }
     #pendapatanChart {
-    max-width: 4000px; /* Atur lebar maksimum */
-    height: 400px; /* Pastikan proporsi tetap */
-    display: block;
-    margin: 0 auto; /* Pusatkan jika perlu */
-}
+        width: 100% !important;
+        height: auto !important;
+        max-width: 800px; /* Atur lebar maksimum */
+        aspect-ratio: 2 / 1; /* Jaga proporsi */
+        display: block;
+        margin: 0 auto;
+    }
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -230,12 +237,14 @@
 </div>
 </div>
 <br>
-<div class="container">
-    <h2>Grafik Pendapatan Orang Tua</h2>
-<br>
-    <canvas id="pendapatanChart"></canvas>
-
-
+    <div class="container">
+        <h2>Grafik Pendapatan Orang Tua</h2>
+    <br>
+    <div class="chart-container">
+        <canvas id="pendapatanChart"></canvas>
+    </div>
+        </div>
+        
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     var canvas = document.getElementById("pendapatanChart");

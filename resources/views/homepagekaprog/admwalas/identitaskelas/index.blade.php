@@ -158,7 +158,7 @@
             </a>
             </div>
         <br>
-
+<div class="table-responsive">
         <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -193,8 +193,7 @@
         @endforeach
     </tbody>
 </table>
-
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

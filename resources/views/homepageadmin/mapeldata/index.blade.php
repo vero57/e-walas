@@ -327,22 +327,19 @@
             <h2 class="font-weight-bold">Mata Pelajaran Data</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Kurikulum -->
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah 
-                </button>
                 <!-- Tombol Unduh Data -->
-                <a href="/mapel-export" class="btn btn-outline-secondary">
+                <!-- <a href="/mapel-export" class="btn btn-outline-secondary">
                         <i class="bi bi-download"></i> Unduh
-                    </a>
-                    <!-- Tombol Tambah Data -->
+                    </a> -->
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <i class="bi bi-cloud-upload"></i> Unggah
+                    </button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
+                </div>
+                    <div class="d-flex-container">
                     <form action="{{ url('mapel_search') }}" method="GET">
                         <div class="input-box">
                             <i class="uil uil-search"></i>
@@ -383,12 +380,6 @@
                    <a href="{{ route('mapel.edit', $data->id) }}" class="btn rounded-circle shadow-sm edit-btn">
                         <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
                     </a>
-                    <!-- Tombol Download -->
-                    <button class="btn rounded-circle shadow-sm mx-1" 
-                            style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
-                        <i class="bi bi-download" style="font-size: 20px; color: #6c757d;"></i>
-                    </button>
-
                     <!-- Tombol Delete -->
                     <a href="/hapusmapel/{{$data->id}}" class="btn rounded-circle shadow-sm" 
                             style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">

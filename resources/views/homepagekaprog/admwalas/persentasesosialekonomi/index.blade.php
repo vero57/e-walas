@@ -196,7 +196,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     @if($persentasesosialekonomi->isNotEmpty())
     <table class="table table-bordered table-striped">
             <tr>
@@ -227,7 +227,7 @@
     </table>
     <br>
 @endif
-
+</div>
 </div>
 
 </main>

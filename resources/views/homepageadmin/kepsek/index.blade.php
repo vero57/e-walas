@@ -395,7 +395,7 @@
                     @endif
                 </td>
                 <td>
-                <div class="d-flex justify-content-center">
+                <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
                    <!-- Tombol Edit -->
                    <a href="{{ route('kepsek.edit', $data->id) }}" class="btn btn-primary btn-sm me-2"">
                        Edit

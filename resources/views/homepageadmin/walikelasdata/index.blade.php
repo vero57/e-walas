@@ -40,6 +40,7 @@
   ======================================================== -->
 
 <style>
+    
         /* Kotak Pesan */
         .alert {
             position: fixed;
@@ -349,18 +350,14 @@
             <h2 class="font-weight-bold">Daftar Wali Kelas</h2>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                
-                <!-- Tombol Tambah Data dan Search Box -->
-                <div class="d-flex align-items-center ms-3"> <!-- Membungkus tombol dan search box dalam flex container -->
-                    <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#addModal">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <i class="bi bi-cloud-upload"></i> Unggah
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
-                    
+                </div>
                     <form action="{{ url('walas_search') }}" method="GET">
                         <div class="input-box">
                             <i class="uil uil-search"></i>
@@ -370,7 +367,6 @@
                     </form>
                 </div>
             </div>
-        </div>
 
         <div class="text-end mb-4">
     <span class="text-muted">
@@ -417,17 +413,17 @@
                         @endif
                     </td>
                     <td>
-                        <div class="d-flex justify-content-center">
-                            <!-- Tombol Edit -->
-                            <a href="{{ route('walas.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
-                                Edit
-                            </a>
-                            <!-- Tombol Delete -->
-                            <a href="/hapuswalas/{{$data->id}}" class="btn btn-danger btn-sm">
-                                Hapus
-                            </a>
-                        </div>
-                    </td>
+                    <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
+                        <!-- Tombol Edit -->
+                        <a href="{{ route('walas.edit', $data->id) }}" class="btn btn-primary btn-sm">
+                            Edit
+                        </a>
+                        <!-- Tombol Delete -->
+                        <a href="/hapuswalas/{{$data->id}}" class="btn btn-danger btn-sm">
+                            Hapus
+                        </a>
+                    </div>
+                </td>
                 </tr>
             @empty
                 <tr>

@@ -42,12 +42,19 @@
   ======================================================== -->
 
   <style>
+    .chart-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto; /* Aktifkan scroll horizontal jika diperlukan */
+    }
     #jarakChart {
-    max-width: 4000px; /* Atur lebar maksimum */
-    height: 400px; /* Pastikan proporsi tetap */
-    display: block;
-    margin: 0 auto; /* Pusatkan jika perlu */
-}
+        width: 100% !important;
+        height: auto !important;
+        max-width: 800px; /* Atur lebar maksimum */
+        aspect-ratio: 2 / 1; /* Jaga proporsi */
+        display: block;
+        margin: 0 auto;
+    }
         /* Kotak pesan */
         .alert {
             position: fixed;
@@ -202,10 +209,12 @@
     @endif
 
     <div class="container">
-    <h2>Grafik Jarak Tempuh Siswa</h2>
-
-    <canvas id="jarakChart"></canvas>
-
+            <h2>Grafik Jarak Tempuh Siswa</h2>
+            <br>
+            <div class="chart-container">
+            <canvas id="jarakChart"></canvas>
+            </div>
+        </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

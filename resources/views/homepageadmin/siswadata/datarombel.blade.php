@@ -383,25 +383,22 @@
     <div class="starter-section container" data-aos="fade-up" data-aos-delay="100">
         <!-- Header dengan Title, Pencarian, dan Tombol -->
         <div class="mb-4">
-            <h2 class="font-weight-bold">Daftar Siswa Kelas : {{ $rombel->nama_kelas }}</h2>
+            <h3 class="font-weight-bold">Daftar Siswa Kelas : {{ $rombel->nama_kelas }}</h3>
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
-                <!-- Form Cari Siswa -->
-                <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload"></i> Unggah Data
-                </button>
-                <!-- Tombol Tambah Data -->
-                <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
-                <div class="d-flex-container">
-                    <!-- Tombol Tambah Data -->
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <i class="bi bi-cloud-upload"></i> Unggah
+                    </button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
-                    <!-- Tombol Siswa Tidak Naik Kelas -->
                     <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target=#modalSiswaTidakNaik>
                         <i class="bi bi-arrow-down-circle"></i> Siswa Tidak Naik Kelas
                     </button>
+                </div>
+                    <!-- Tombol Siswa Tidak Naik Kelas -->
+                    <div class="d-flex-container">
             </div>
         </div>
         <br>

@@ -203,7 +203,8 @@
     @php
         \Carbon\Carbon::setLocale('id');
     @endphp
-    <table class="table table-bordered">
+    <div class="table-responsive">
+        <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
@@ -229,7 +230,7 @@
         </tbody>
     </table>
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

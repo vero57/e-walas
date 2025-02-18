@@ -180,7 +180,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     <!-- Tabel Data -->
 @if($bukutamu->isNotEmpty())
     <table class="table table-bordered table-striped">
@@ -226,7 +226,7 @@
 
 </tbody>
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

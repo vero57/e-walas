@@ -176,6 +176,7 @@
 
     <!-- Tabel Data -->
     @if($homevisit->isNotEmpty())
+    <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -227,7 +228,7 @@
         </table>
     @endif
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

@@ -173,7 +173,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     <!-- Tabel Data -->
     @if($homevisit->isNotEmpty())
         <table class="table table-bordered table-striped">
@@ -226,6 +226,7 @@
 
         </table>
     @endif
+</div>
 </div>
 
 </main>

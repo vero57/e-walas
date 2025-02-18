@@ -156,7 +156,7 @@
               </p>
 
               <div class="hero-buttons">
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
+                <a href="https://youtu.be/2VoAQcBg_ws?si=zCF1rcIR-LnuPOgl" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
                 </a>

@@ -196,7 +196,7 @@
             {{ $message }}
         </div>
     @endif
-
+    <div class="table-responsive">
     @if($rekapitulasiPDidik->isNotEmpty())
     <table class="table table-bordered table-striped">
             <tr>
@@ -227,9 +227,8 @@
     </table>
     <br>
 @endif
-
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">

@@ -200,6 +200,7 @@
     @endif
 
     @if($prestasisiswa->isNotEmpty())
+    <div class="table-responsive">
     <table class="table table-bordered table-striped">
             <tr>
                 <th>No</th>
@@ -247,7 +248,7 @@
 @endif
 
 </div>
-
+</div>
 </main>
   
     <div class="container copyright text-center mt-4">
