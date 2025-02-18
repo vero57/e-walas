@@ -244,15 +244,15 @@
     @csrf
     @method('PUT') <!-- Menyatakan bahwa ini adalah request PUT untuk update -->
     <div class="mb-3">
-        <label for="teacherName" class="form-label">Nama Kakom</label>
+        <label for="teacherName" class="form-label">Nama Kepala Sekolah</label>
         <input type="text" class="form-control" id="teacherName" name="nama" value="{{ old('nama', $kepsek->nama) }}" required>
     </div>
     <div class="mb-3">
-        <label for="teacherPhoto" class="form-label">Foto kakom</label>
+        <label for="teacherPhoto" class="form-label">Foto Kepala Sekolah</label>
         <input type="file" class="form-control" id="teacherPhoto" name="image_url">
         @if($kepsek->image_url)
             <div class="mt-2">
-                <img src="{{ asset('storage/' . $kepsek->image_url) }}" alt="Foto Kakom" class="img-thumbnail" style="width: 150px;">
+                <img src="{{ asset('storage/' . $kepsek->image_url) }}" alt="Foto Kepala Sekolah" class="img-thumbnail" style="width: 150px;">
             </div>
         @endif
     </div>

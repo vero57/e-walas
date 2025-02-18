@@ -204,6 +204,8 @@
     @endif
 
     <div class="container">
+    <div style="overflow-x: auto; white-space: nowrap; padding-bottom: 10px;">
+    <div style="position: relative; width: 1200px; height: 50vh;">
 
     <canvas id="jarakChart"></canvas>
 

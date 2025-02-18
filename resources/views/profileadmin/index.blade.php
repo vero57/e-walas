@@ -149,7 +149,8 @@
         }
 
         /* Styling untuk judul */
-h1 {
+  /* Styling untuk judul */
+  h1 {
     font-size: 36px;
     color: #333;
     margin-bottom: 20px;
@@ -197,20 +198,82 @@ h1 .accent-text {
     background-color: #E7DDFF; /* Warna biru lebih gelap saat hover */
 }
 
-.initials-logo {
-    width: 120px;
-    height: 120px;
-    background-color: #575BD4; /* Warna background */
-    color: #FFFFFF; /* Warna teks */
-    font-size: 32px;
-    font-weight: bold;
+/* Container utama */
+.walas-info-container {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap; /* Agar fleksibel di layar kecil */
     justify-content: center;
-    border-radius: 50%; /* Membuat bentuk lingkaran */
-    border: 1px solid #ddd; /* Border opsional */
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
 }
 
+/* Container untuk foto siswa */
+.walas-photo-container {
+    position: relative;
+    max-width: 200px;
+    text-align: center;
+}
+
+.walas-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Container informasi */
+.profile-info-container {
+    max-width: 400px;
+    text-align: left;
+}
+
+/* Tombol */
+.edit-button, .kembali-button {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.kembali-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Media Queries untuk HP */
+@media (max-width: 768px) {
+    .walas-info-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info-container {
+        max-width: 100%;
+    }
+
+    .edit-button, .kembali-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
 
     </style>
 </head>

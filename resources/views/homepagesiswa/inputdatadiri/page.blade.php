@@ -384,15 +384,17 @@
                               </iframe>
                           </div>
                           <td>
-                          <div class="mt-4">
-                          <h5>Foto Tampak Depan Rumah</h5>
-                          @if($biodata->fotorumah_url)
-                                <img src="{{ asset('storage/'.$biodata->fotorumah_url) }}" style="width: 450px; height: 250px; object-fit: cover; border-radius: 0;">
-                            @else
-                                <p>No image</p>
-                            @endif
-                          </td>
-                          
+                                <div class="mt-4 text-center">
+                                    <h5>Foto Tampak Depan Rumah</h5>
+                                    @if($biodata->fotorumah_url)
+                                        <img src="{{ asset('storage/'.$biodata->fotorumah_url) }}" 
+                                            class="img-fluid rounded" 
+                                            style="max-width: 100%; height: auto; object-fit: cover;">
+                                    @else
+                                        <p>No image</p>
+                                    @endif
+                                </div>
+                            </td>
                           <!-- Google Maps - Tampak Depan -->
                           <!-- <div class="mt-4">
                               <h5>Tampak Depan</h5>

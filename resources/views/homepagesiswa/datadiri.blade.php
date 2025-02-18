@@ -130,6 +130,22 @@
   button {
     border-radius: 5px; /* Menambahkan sudut melengkung pada tombol */
   }
+
+  .table-responsive {
+    background: white; 
+    border-radius: 15px; /* Membuat sudut melengkung */
+    padding: 5px; /* Memberi jarak di dalam div */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+
+    .biodata-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+}
+
 </style>
 </head>
 
@@ -221,41 +237,37 @@
             </div>
           </div>
         </div>
-
-        <div class="row stats-row gy-7 mt-9 justify-content-start align-items-start" data-aos="fade-up" data-aos-delay="500">
-    <div class="col-lg-4 col-md-8">
         <br>
-        <h1 class="mb-4 text-center">
-               Biodata Diri <br>
-                <span class="accent-text"></span>
-        </h1>
-        <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>No</th>
-      <th>Nama</th>
-      <th>Keterangan</th>
-      <th>Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr>
-                <td>1</td>
-                <td>{{ $siswa ? $siswa->nama : 'Nama Tidak Ada' }}</td>
-                <td>{{ $status }}</td>
-                <td>
-        <a href="/datadiripage" class="btn btn-info">Lihat Data</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <div class="table-responsive">
+        <div class="row stats-row gy-7 mt-9 justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="500">
+        <div class="col-lg-4 col-md-8 biodata-container">
+            <h1 class="mb-4 text-center">Biodata Diri</h1>
 
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>{{ $siswa ? $siswa->nama : 'Nama Tidak Ada' }}</td>
+                        <td>{{ $status ?? 'Tidak Ada Keterangan' }}</td>
+                        <td>
+                            <a href="{{ url('/datadiripage') }}" class="btn btn-info btn-sm">Lihat Data</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
 
-    </section><!-- /Hero Section -->
-
-</main>
   
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>

@@ -204,6 +204,7 @@
     @endif
 
     @if($rekapjumlahsiswa->isNotEmpty())
+    
     <table class="table table-bordered table-striped">
             <tr>
                 <th>No</th>

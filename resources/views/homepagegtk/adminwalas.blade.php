@@ -207,6 +207,7 @@ table td {
 
         <div class="container mt-4">
     <h3 class="text-center">Administrasi Walas</h3>
+    <div class="table-responsive">
     <table class="table table-striped table-bordered mt-3">
         <thead>
             <tr>

@@ -69,22 +69,22 @@ class DataSiswaWalasController extends Controller
     }
 
     public function biodata($id)
-    {
-        // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
-        $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
+{
+    // Menggunakan guard 'walas' untuk mendapatkan data walas yang login
+    $walas = Auth::guard('walas')->user();  // ini akan mendapatkan data walas yang sedang login
 
-        // Periksa apakah session 'walas_id' ada
-        if (!session()->has('walas_id')) {
-            return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
-        }
+    // Periksa apakah session 'walas_id' ada
+    if (!session()->has('walas_id')) {
+        return redirect('/logingtk')->with('error', 'Silakan login terlebih dahulu.');
+    }
 
-        // Ambil data walas berdasarkan 'walas_id' yang ada di session
-        $walas = Walas::find(session('walas_id'));
-        
-        // Periksa apakah data walas ditemukan
-        if (!$walas) {
-            return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
-        }
+    // Ambil data walas berdasarkan 'walas_id' yang ada di session
+    $walas = Walas::find(session('walas_id'));
+    
+    // Periksa apakah data walas ditemukan
+    if (!$walas) {
+        return redirect('/logingtk')->with('error', 'Data walas tidak ditemukan.');
+    }
 
     // Ambil data rombel yang dimiliki walas yang sedang login
     $rombel = Rombel::where('walas_id', $walas->id)->first();
@@ -94,17 +94,48 @@ class DataSiswaWalasController extends Controller
         return redirect('/walaspage')->with('error', 'Rombel tidak ditemukan untuk walas ini.');
     }
 
-        $siswa = Siswa::findOrFail($id); // Ambil data siswa berdasarkan ID
-        $biodatas = BiodataSiswa::where('siswas_id', $siswa->id)->get();
+    // Ambil data siswa berdasarkan ID
+    $siswa = Siswa::find($id); // Jika data siswa tidak ditemukan, return 404
+    if (is_null($siswa)) {
+        return back()->with('error', 'Siswa tidak ditemukan');
+    }
 
+    $biodatas = BiodataSiswa::where('siswas_id', $siswa->id)->get();
+
+    // Cek jika biodata siswa tidak ditemukan
+    if ($biodatas->isEmpty()) {
+        return back()->with('error', 'Data Biodata Siswa Tidak Ditemukan');
+    }
+
+    foreach ($biodatas as $item) {
+        $item->fotorumah_base64 = $this->convertToBase64($item->fotorumah_url);
+    }
+
+    if (request()->has('export') && request()->get('export') === 'pdf') {
+        $biodatas = BiodataSiswa::where('siswas_id', $siswa->id)->first(); // Ambil satu data
+        $biodatas->fotorumah_base64 = $this->convertToBase64($biodatas->fotorumah_url);
+    
+        $pdf = Pdf::loadView('pdf.pdfbiodatasiswa', compact('siswa', 'biodatas', 'walas', 'rombel'));
+        return $pdf->stream('Biodata_Siswa.pdf');
+    }
+    
+
+    // Kembalikan halaman dengan data siswa dan biodata
+    return view('homepagegtk.biodatasiswa', compact('siswa', 'biodatas', 'walas', 'rombel'));
+}
+
+
+    private function convertToBase64($path)
+    {
+        $fullPath = storage_path("app/public/" . $path);
         
-        if (request()->has('export') && request()->get('export') === 'pdf') {
-            $biodatas = BiodataSiswa::where('siswas_id', $siswa->id)->first();
-            $pdf = Pdf::loadView('pdf.pdfbiodatasiswa', compact('siswa', 'biodatas', 'walas', 'rombel'));
-            return $pdf->stream('Biodata_Siswa.pdf');
+        if (file_exists($fullPath)) {
+            $imageData = file_get_contents($fullPath);
+            $mimeType = mime_content_type($fullPath);
+            return 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
         }
 
-        return view('homepagegtk.biodatasiswa', compact('siswa', 'biodatas', 'walas', 'rombel'));
+        return null;
     }
 
     public function editbiodata($id)

@@ -374,6 +374,7 @@
     </span>
 </div>
         
+<div class="table-responsive mt-3">
 <div class="table-container">
     <table class="table">
         <thead>

@@ -231,6 +231,8 @@
 <div class="container">
     <h2>Grafik Pendapatan Orang Tua</h2>
 <br>
+<div style="overflow-x: auto; white-space: nowrap; padding-bottom: 10px;">
+        <div style="position: relative; width: 1200px; height: 50vh;">
     <canvas id="pendapatanChart"></canvas>
 
 
@@ -278,6 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     'rgba(0, 128, 0, 1)',
                 ],
                 borderWidth: 1
+                
             }]
         },
         options: {

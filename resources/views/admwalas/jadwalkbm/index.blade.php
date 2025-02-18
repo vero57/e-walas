@@ -185,6 +185,7 @@
                 </table>
                 <br>
 
+                <div class="table-responsive mt-3">
                 <table class="table table-bordered text-center">
                     <thead>
                         <tr>
@@ -228,12 +229,12 @@
                 <div class="alert alert-info">Data jadwal belum tersedia.</div>
             @endif
             <div class="d-flex-container">
-                    @foreach ($jadwalKbms as $jadwalKbm) <!-- Looping pada setiap jadwalKbm -->
-                        <a href="{{ route('jadwalkbm.edit', $jadwalKbm->id) }}" class="btn btn-warning">
-                            <i class="bi bi-pencil"></i> Edit
-                        </a>
-                    @endforeach
-                </div>
+                @if ($jadwalKbms->isNotEmpty())
+                    <a href="{{ route('jadwalkbm.edit', $jadwalKbms->first()->id) }}" class="btn btn-warning">
+                        <i class="bi bi-pencil"></i> Edit
+                    </a>
+                @endif
+            </div>
         </div>
     </section>
 </main>

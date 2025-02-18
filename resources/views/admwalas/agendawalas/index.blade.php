@@ -199,6 +199,7 @@
     @endif
 
     @if($agendawalas->isNotEmpty())
+    <div class="table-responsive mt-3">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>

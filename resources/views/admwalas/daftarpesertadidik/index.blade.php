@@ -203,6 +203,7 @@
     @endif
 
     @if($daftarpdidik->isNotEmpty())
+    <div class="table-responsive mt-3">
     <table class="table table-bordered table-striped">
             <tr>
                 <th>No</th>
