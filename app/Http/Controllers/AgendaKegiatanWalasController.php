@@ -177,7 +177,7 @@ class AgendaKegiatanWalasController extends Controller
     $request->validate([
             'hari' => 'required',
             'tanggal' => 'required',
-            'nama_kegiatan' => 'required', // perbaiki typo: 'nama_kegaitan' -> 'nama_kegiatan'
+            'nama_kegiatan' => 'required', 
             'hasil' => 'required',
             'waktu' => 'required',
             'keterangan' => 'required',

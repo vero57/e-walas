@@ -219,6 +219,7 @@
                         <div class="mb-3">
                             <label for="ttdwalas_url" class="form-label">Masukkan Foto Dokumentasi (Opsional):</label>
                             <input type="file" name="ttdwalas_url" id="ttdwalas_url" class="form-control" accept="image/*">
+                            <small id="fileWarning" class="text-danger d-none">Ukuran file tidak boleh lebih dari 1 MB!</small>
                             @if($agendawalas->ttdwalas_url)
                                 <img src="{{ asset('storage/'.$agendawalas->ttdwalas_url) }}" alt="Foto Tanda Tangan" class="mt-2" width="100">
                             @endif
@@ -289,6 +290,19 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("ttdwalas_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning");
+
+        if (file && file.size > 1 * 1024 * 1024) { // 1 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
 
 </body>
 

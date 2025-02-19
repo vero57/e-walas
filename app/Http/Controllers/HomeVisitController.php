@@ -168,7 +168,7 @@ private function convertToBase64($path)
             'solusi' => 'required',
             'tindak_lanjut' => 'required',
             'bukti_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
-            'dokumentasi_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
+            'dokumentasi_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024', // validasi file gambar
         ]);
 
         // simpan file ke storage

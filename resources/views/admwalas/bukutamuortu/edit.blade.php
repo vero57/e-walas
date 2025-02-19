@@ -235,6 +235,7 @@
                     <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
                     <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
                     <small>Jika tidak ingin mengubah gambar, biarkan kosong.</small>
+                    <small id="fileWarning" class="text-danger d-none">Ukuran file tidak boleh lebih dari 1 MB!</small>
                     @if($bukutamuortu->dokumentasi_url)
                         <div class="mt-2">
                             <img src="{{ asset('storage/' . $bukutamuortu->dokumentasi_url) }}" alt="Dokumentasi" class="img-thumbnail" width="100">
@@ -304,6 +305,19 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("dokumentasi_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning");
+
+        if (file && file.size > 1 * 1024 * 1024) { // 1 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
 
 </body>
 

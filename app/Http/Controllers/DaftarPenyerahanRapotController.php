@@ -137,7 +137,7 @@ public function update(Request $request, $id)
     // validasi input
     $request->validate([
         'walas_id' => 'required|exists:walas,id',
-        'image_url' => 'nullable|mimes:jpeg,png,jpg,gif,pdf|max:2048', // validasi file gambar
+        'image_url' => 'nullable|mimes:jpeg,png,jpg,gif,pdf,docx|max:2048', // validasi file gambar
     ]);
 
     // ambil data lama

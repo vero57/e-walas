@@ -107,8 +107,8 @@ class PrestasiSiswaInputController extends Controller
             'jenis_prestasi' => 'required',
             'nama_prestasi' => 'required|string|max:255',
             'tanggal' => 'required|date',
-            'sertifikat_url' => 'nullable',
-            'dokumentasi_url' => 'nullable',
+            'sertifikat_url' => 'nullable|mimes:jpeg,png,jpg,gif,pdf,docx|max:2048',
+            'dokumentasi_url' => 'nullable|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
 
         // Simpan file ke storage
