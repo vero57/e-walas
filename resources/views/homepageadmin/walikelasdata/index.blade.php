@@ -326,7 +326,7 @@
                   
                   <!-- Tautkan nama walas ke /userprofile -->
                   <a href="/profileadmin" class="text-decoration-none">
-                      <span>{{ $admin->nama }}</span>  <!-- Nama Walas yang sedang login -->
+                      <span>{{ $admin->nama }}</span>  <!-- Nama admin yang sedang login -->
                   </a>
               @endif
       <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">

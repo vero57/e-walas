@@ -179,7 +179,7 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Administrasi -->
                 
-                    <a href="{{ route('admwalas.agendawalaskepsek', ['export' => 'pdf', 'walas_id' => $walasIdSelected ?? '']) }}" class="btn btn-outline-secondary me-2 mb-2">
+                    <a href="{{ route('admwalas.agendawalaskurikulum', ['export' => 'pdf', 'walas_id' => $walasIdSelected ?? '']) }}" class="btn btn-outline-secondary me-2 mb-2">
                 <i class="bi bi-download"></i> Unduh PDF
             </a>
             
