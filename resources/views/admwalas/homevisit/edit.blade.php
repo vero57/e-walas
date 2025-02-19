@@ -210,6 +210,7 @@
                             <div class="mb-3">
                                 <label for="bukti_url" class="form-label">Foto Bukti:</label>
                                 <input type="file" name="bukti_url" id="bukti_url" class="form-control" accept="image/*">
+                                <small id="fileWarning1" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
                                 @if($homevisit->bukti_url)
                                     <img src="{{ asset('storage/'.$homevisit->bukti_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
                                 @endif
@@ -219,6 +220,7 @@
                             <div class="mb-3">
                                 <label for="dokumentasi_url" class="form-label">Foto Dokumentasi:</label>
                                 <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
+                                <small id="fileWarning2" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
                                 @if($homevisit->dokumentasi_url)
                                     <img src="{{ asset('storage/'.$homevisit->dokumentasi_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
                                 @endif
@@ -290,6 +292,33 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("bukti_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning1");
+
+        if (file && file.size > 2 * 1024 * 1024) { // 2 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
+
+<script>
+    document.getElementById("dokumentasi_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning2");
+
+        if (file && file.size > 1 * 1024 * 1024) { // 1 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
+
 
 </body>
 

@@ -151,7 +151,7 @@ private function convertToBase64($path)
              'tindak_lanjut' => 'required|string', // Validasi tindak lanjut
              'kasus' => 'required|string', // Validasi kasus
              'solusi' => 'required|string', // Validasi solusi
-             'dokumentasi_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
+             'dokumentasi_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024', // Validasi file gambar
          ]);
      
          // Simpan file ke storage
@@ -249,7 +249,7 @@ public function update(Request $request, $id)
         'kasus' => 'required',
         'solusi' => 'required',
         'tindak_lanjut' => 'required',
-        'dokumentasi_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar, nullable agar tidak harus upload ulang jika tidak ada perubahan
+        'dokumentasi_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024', // validasi file gambar, nullable agar tidak harus upload ulang jika tidak ada perubahan
     ]);
 
     // Ambil data HomeVisit berdasarkan ID

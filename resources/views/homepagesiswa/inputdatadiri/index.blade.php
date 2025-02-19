@@ -361,6 +361,7 @@
                   <div class="row mb-3">
                         <label for="fotorumah_url" class="form-label">Unggah Foto Tampak Depan Rumah (Gambar):</label>
                         <input type="file" name="fotorumah_url" id="fotorumah_url" class="form-control" required>
+                        <small id="fileWarning" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
                 </div>
 
                 <div class="row mb-3">
@@ -824,6 +825,20 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("fotorumah_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning");
+
+        if (file && file.size > 2 * 1024 * 1024) { // 2 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
+
 
 </body>
 

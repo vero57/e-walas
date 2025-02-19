@@ -169,8 +169,9 @@
 
             <!-- Foto -->
             <div class="mb-3">
-                <label for="image_url" class="form-label">Foto Dokumen:</label>
+                <label for="image_url" class="form-label">Unggah Dokumen:</label>
                 <input type="file" name="image_url" id="image_url" class="form-control">
+                <small id="fileWarning" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
                 @if($penyerahanrapot->image_url)
                     <img src="{{ asset('storage/'.$penyerahanrapot->image_url) }}" class="mt-2" style="width: 150px; height: 150px; object-fit: cover;">
                 @endif
@@ -238,6 +239,19 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("image_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning");
+
+        if (file && file.size > 2 * 1024 * 1024) { // 2 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
 
 </body>
 

@@ -171,10 +171,11 @@
                                 </select>
                             </div>
                             <!-- Foto -->
-                        <div class="mb-3">
-                            <label for="image_url" class="form-label">Masukkan foto dokumen di sini:</label>
-                            <input type="file" name="image_url" id="image_url" class="form-control" required>
-                        </div>
+                            <div class="mb-3">
+                                <label for="image_url" class="form-label">Masukkan foto dokumen di sini:</label>
+                                <input type="file" name="image_url" id="image_url" class="form-control" required>
+                                <small id="fileWarning" class="text-danger d-none">Ukuran file tidak boleh lebih dari 1 MB!</small>
+                            </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
                     </div>
@@ -239,6 +240,19 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("image_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning");
+
+        if (file && file.size > 1 * 1024 * 1024) { // 1 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
 
 </body>
 

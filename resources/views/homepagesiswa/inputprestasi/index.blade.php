@@ -224,13 +224,26 @@
                     <td>{{ $data->nama_prestasi }}</td>
                     <td>{{ $data->tanggal }}</td>
                     <td>
-                        @if($data->sertifikat_url)
-                            <img src="{{ asset('storage/'.$data->sertifikat_url) }}" 
-                                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                    @if($data->sertifikat_url)
+                        @php
+                            $fileExtension = pathinfo($data->sertifikat_url, PATHINFO_EXTENSION);
+                        @endphp
+                        
+                        @if(in_array(strtolower($fileExtension), ['jpeg', 'png', 'jpg', 'gif']))
+                            <!-- Preview for image files -->
+                            <img src="{{ asset('storage/'.$data->sertifikat_url) }}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 0;">
+                        @elseif(strtolower($fileExtension) == 'pdf')
+                            <!-- Preview for PDF files -->
+                            <object data="{{ asset('storage/'.$data->sertifikat_url) }}" type="application/pdf" width="150" height="150">
+                                <a href="{{ asset('storage/'.$data->sertifikat_url) }}" target="_blank">View PDF</a>
+                            </object>
                         @else
-                            <p>No image</p>
+                            <p>No preview available</p>
                         @endif
-                    </td>
+                    @else
+                        <p>No file</p>
+                    @endif
+                </td>
                     <td>
                         @if($data->dokumentasi_url)
                             <img src="{{ asset('storage/'.$data->dokumentasi_url) }}" 

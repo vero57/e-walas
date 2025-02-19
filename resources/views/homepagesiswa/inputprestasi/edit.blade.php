@@ -218,7 +218,8 @@
                                 <!-- Sertifikat (Gambar) -->
                                 <div class="mb-3">
                                     <label for="sertifikat_url" class="form-label">Unggah Sertifikat (Gambar):</label>
-                                    <input type="file" name="sertifikat_url" id="sertifikat_url" class="form-control" accept="image/*">
+                                    <input type="file" name="sertifikat_url" id="sertifikat_url" class="form-control" >
+                                    <small id="fileWarning1" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
                                     @if($prestasisiswa->sertifikat_url)
                                         <p class="mt-2">Sertifikat Lama: <a href="{{ asset('storage/' . $prestasisiswa->sertifikat_url) }}" target="_blank">Lihat Gambar</a></p>
                                     @endif
@@ -228,6 +229,7 @@
                                 <div class="mb-3">
                                     <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
                                     <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*">
+                                    <small id="fileWarning2" class="text-danger d-none">Ukuran file tidak boleh lebih dari 1 MB!</small>
                                     @if($prestasisiswa->dokumentasi_url)
                                         <p class="mt-2">Dokumentasi Lama: <a href="{{ asset('storage/' . $prestasisiswa->dokumentasi_url) }}" target="_blank">Lihat Gambar</a></p>
                                     @endif
@@ -360,6 +362,32 @@ document.getElementById('nama_siswa').addEventListener('change', function() {
                 });
             }
         });
+    });
+</script>
+
+<script>
+    document.getElementById("sertifikat_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning1");
+
+        if (file && file.size > 2 * 1024 * 1024) { // 2 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
+</script>
+
+<script>
+    document.getElementById("dokumentasi_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning2");
+
+        if (file && file.size > 1 * 1024 * 1024) { // 1 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
     });
 </script>
 

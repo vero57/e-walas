@@ -381,6 +381,8 @@
                 <label for="fotorumah_url" class="form-label">Unggah Foto Depan Rumah (Gambar):</label>
                         <input type="file" name="fotorumah_url" id="fotorumah_url" class="form-control" accept="image/*">
                         <small>Jika tidak ingin mengubah gambar, biarkan kosong.</small>
+                        <small id="fileWarning" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
+                </div>
                             @if($biodata->fotorumah_url)
                                 <div class="mt-2">
                                     <img src="{{ asset('storage/' . $biodata->fotorumah_url) }}" alt="Foto Rumah" class="img-thumbnail" width="100">
@@ -943,6 +945,19 @@ function sendWhatsAppMessageIbu() {
     var waUrl = "https://wa.me/" + walasPhoneNumber + "?text=" + message;
     window.open(waUrl, "_blank");
 }
+</script>
+
+<script>
+    document.getElementById("fotorumah_url").addEventListener("change", function () {
+        let file = this.files[0]; 
+        let warning = document.getElementById("fileWarning");
+
+        if (file && file.size > 2 * 1024 * 1024) { // 2 MB dalam bytes
+            warning.classList.remove("d-none"); // Munculkan peringatan
+        } else {
+            warning.classList.add("d-none"); // Sembunyikan peringatan
+        }
+    });
 </script>
 
 </body>
