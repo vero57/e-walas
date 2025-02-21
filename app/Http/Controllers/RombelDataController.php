@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kurikulum;
+use App\Models\Rombel;
+use App\Models\Walas;
+use App\Models\Kepsek;
+use App\Models\Siswa;
 
 class RombelDataController extends Controller
 {

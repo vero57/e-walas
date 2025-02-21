@@ -543,7 +543,7 @@ Route::get('grafikjaraktempuhviewkurikulum', [ViewAdmWalaskurikulumController::c
 Route::post('/grafikjaraktempuhviewkurikulum/generatepdf', [ViewAdmWalaskurikulumController::class, 'generatePDFkurikulumgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfkurikulumgrafikjaraktempuh');
 
 // Kurikulum View Kurikulum
-Route::get('/detailkelasviewkurikulum/{walas_id}', [KepsekRombelController::class, 'showDetailKepsek'])->name('rombel.showDetailKurikulum');
+Route::get('/detailkelasviewkurikulum/{walas_id}', [RombelDataController::class, 'showDetailKurikulum'])->name('rombel.showDetailKurikulum');
 
 
 // CRUD TA 
