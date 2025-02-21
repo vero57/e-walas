@@ -26,7 +26,7 @@ class SiswaImport implements ToCollection, WithHeadingRow
                     'rombels_id' => $rombel['id'],
                     'jenis_kelamin' => $row['jenis_kelamin'],
                     'no_wa' => $row['no_wa'],
-                    'password' => Hash::make($row['password']),
+                    'password' => $row['password'],
                     'status' => $row['status'],
                 ]);
             }else {
