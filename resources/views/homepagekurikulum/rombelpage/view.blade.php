@@ -353,7 +353,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kepsekpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -368,7 +368,7 @@
 
      <!-- Menampilkan ikon user dan informasi walas yang sedang login -->
      <div class="user-info d-flex align-items-center">
-            <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutkurikulum') }}" method="POST" class="ms-3">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
