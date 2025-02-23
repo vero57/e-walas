@@ -20,7 +20,7 @@ class KurikulumImport implements ToModel, WithHeadingRow
         return new Kurikulum([
             'nama' => $row['nama'],
             'no_wa' => $row['no_wa'],
-            'password' => Hash::make($row['password']),
+            'password' => $row['password'],
             'nip' => $row['nip'],
         ]);
     }
