@@ -95,7 +95,10 @@ FACEBOOK: https://www.facebook.com/themefisher
 				<p class="text-white normal-text mb-1">Kelola Administrasi Walas lebih mudah dan efisien hanya dalam satu platform yang terintegrasi, memungkinkan Anda mengakses berbagai fitur secara praktis.</p>
        			<p class="text-white normal-text mt-1">Dengan menggunakan satu sistem yang lengkap, Anda dapat dengan mudah mengelola, membuat, dan mempublikasikan Administrasi Walas dengan proses yang lebih sederhana dan cepat.</p>
 				<br>
-				<a href="#penjelasan1" class="btn btn-main-md">Pelajari Lebih Lanjut</a>
+				<a href="#penjelasan1" class="btn btn-main-md" data-bs-toggle="tooltip" data-bs-placement="top" title="Klik untuk mempelajari lebih lanjut">
+					Pelajari Lebih Lanjut
+				</a>
+
 			</div>
 			<div class="col-md-6 text-center order-1 order-md-2">
 				<img 
@@ -116,21 +119,21 @@ FACEBOOK: https://www.facebook.com/themefisher
       <h5 class="text-center">Pilih akun untuk masuk</h5>
       <div class="row">
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
-          <a href="/logingtk" class="button-link" target="_blank">
+          <a href="/logingtk" class="button-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Masuk sebagai Wali Kelas">
             <i class="ti-user text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
             <h3 class="text-capitalize">Wali Kelas</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
-          <a href="/loginadmin" class="button-link" target="_blank">
+          <a href="/loginadmin" class="button-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Masuk sebagai Admin">
             <i class="ti-shield text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
             <h3 class="text-capitalize">Admin</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-12 mt-5 mt-lg-0 text-center">
-          <a href="/loginkepsek" class="button-link" target="_blank">
+          <a href="/loginkepsek" class="button-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Masuk sebagai Kepala Sekolah">
             <i class="ti-crown text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
             <h3 class="text-capitalize">Kepala Sekolah</h3>
@@ -142,21 +145,21 @@ FACEBOOK: https://www.facebook.com/themefisher
 
       <div class="row">
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
-          <a href="/loginkaprog" class="button-link" target="_blank">
+          <a href="/loginkaprog" class="button-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Masuk sebagai Kepala Kompetensi">
             <i class="ti-briefcase text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
             <h3 class="text-capitalize">Kepala Kompetensi</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-6 mt-5 mt-md-0 text-center">
-          <a href="/loginkurikulum" class="button-link" target="_blank">
+          <a href="/loginkurikulum" class="button-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Masuk sebagai Kurikulum">
             <i class="ti-pencil-alt text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
             <h3 class="text-capitalize">Kurikulum</h3>
           </a>
         </div>
         <div class="col-lg-4 col-md-12 mt-5 mt-lg-0 text-center">
-          <a href="/loginsiswa" class="button-link" target="_blank">
+          <a href="/loginsiswa" class="button-link" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Masuk sebagai Siswa">
             <i class="ti-user text-primary"></i>
             <h5 class="mb-0 text-muted">Saya Seorang</h5>
             <h3 class="text-capitalize">Siswa</h3>

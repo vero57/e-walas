@@ -184,7 +184,7 @@
       <nav id="navmenu" class="navmenu">
         <ul>
         <li><a href="/kakomta" class="active">Tahun Akademik</a></li>
-          <li><a href="/alumnidatakakom" >Alumni</a></li>
+          <li><a href="/alumnidatakakom" data-bs-toggle="tooltip" data-bs-placement="top" title="Alumni Data" >Alumni</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
@@ -246,9 +246,9 @@
                             <span class="badge bg-success">AKTIF</span>
                         </td>
                         <td>
-                            <!-- Aksi -->
+                           <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
-                                <a href="/kakomrombel" class="btn btn-sm btn-primary text-white">
+                                <a href="/kakomrombel" class="btn btn-sm btn-primary text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Data">
                                     <i class="bi bi-info-circle text-white"></i> Detail
                                 </a>
                             </div>
@@ -276,7 +276,7 @@
                         <td>
                             <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
-                                <a href="/keluarrombeldatakakom" class="btn btn-sm btn-primary text-white">
+                                <a href="/keluarrombeldatakakom" class="btn btn-sm btn-primary text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Data">
                                     <i class="bi bi-info-circle text-white"></i> Detail
                                 </a>
                             </div>

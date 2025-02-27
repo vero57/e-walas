@@ -180,7 +180,7 @@
                             </td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <a href="{{ route('admwalasview.show', $walas->id) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('admwalasview.show', $walas->id) }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail Data">
                                         Detail
                                     </a>
                                 </div>

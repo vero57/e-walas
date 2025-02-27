@@ -123,15 +123,17 @@
             @if(session()->has('kakom_id'))
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
-                <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekakom" class="text-decoration-none">
-                    <span>{{ $kakom->nama }}</span>  <!-- Nama Walas yang sedang login -->
-                </a>
+               <!-- Tautkan nama walas ke /userprofile -->
+            <a href="/profilekakom" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Profil">
+                <span>{{ $kakom->nama }}</span>  <!-- Nama Walas yang sedang login -->
+            </a>
+
             @endif
-            <form action="{{ route('logoutkakom') }}" method="POST" class="ms-3">
-                @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
-            </form>
+           <!-- Tambahkan Tooltip untuk Logout -->
+          <form action="{{ route('logoutkakom') }}" method="POST" class="ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari akun Anda">
+              @csrf
+              <button type="submit" class="btn-getstarted">Logout</button>
+          </form>
         </div>
       
 
@@ -163,7 +165,8 @@
               </p>
 
               <div class="hero-buttons">
-                <a href="https://youtu.be/gJzssqWtwvc?si=kwJBFVSNF57xFdtp" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
+                <!-- Tombol Tutorial Penggunaan Website -->
+                <a href="https://youtu.be/gJzssqWtwvc?si=kwJBFVSNF57xFdtp" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat panduan penggunaan website">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
                 </a>
@@ -188,8 +191,8 @@
       <div class="stat-content">
         <h4>Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/kakomwalas">Lihat Data Administrasi Walas di Sini</a>
-    </p>
+            <a href="/kakomwalas" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat data administrasi wali kelas">Lihat Data Administrasi Walas di Sini</a>
+        </p>
       </div>
     </div>
   </div>
@@ -201,8 +204,8 @@
       <div class="stat-content">
         <h4>Tahun Akademik</h4>
         <p class="mb-0">
-        <a href="/kakomta">Monitoring Tahun Akademik di Sini</a>
-    </p>
+            <a href="/kakomta" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat dan pantau tahun akademik">Monitoring Tahun Akademik di Sini</a>
+        </p>
       </div>
     </div>
   </div>

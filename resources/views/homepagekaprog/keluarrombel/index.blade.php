@@ -368,7 +368,9 @@
             <td>
                 @if($rombels_id)
                     <a href="{{ route('detail.keluarormbelkakom', ['rombels_id' => $rombels_id]) }}" 
-                       class="btn btn-sm btn-info text-white">
+                       class="btn btn-sm btn-info text-white" data-bs-toggle="tooltip" 
+                                data-bs-placement="top" 
+                                title="Detail Data Siswa">
                         <i class="bi bi-info-circle text-white"></i> Detail Kelas
                     </a>
                 @else

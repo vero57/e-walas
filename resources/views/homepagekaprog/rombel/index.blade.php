@@ -291,7 +291,10 @@
                             </td>
                             <td>
                                 <a href="{{ route('rombel.showDetail', ['walas_id' => $data->walas_id]) }}" 
-                                   class="btn btn-sm btn-info text-white">
+                                class="btn btn-sm btn-info text-white" 
+                                data-bs-toggle="tooltip" 
+                                data-bs-placement="top" 
+                                title="Detail Rombel Kelas">
                                     <i class="bi bi-info-circle text-white"></i> Detail Kelas
                                 </a>
                             </td>

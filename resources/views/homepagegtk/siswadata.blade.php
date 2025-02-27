@@ -435,7 +435,7 @@
                 <div class="col-12 d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <!-- Tombol Unggah Data & Tambah Data -->
                     <div class="d-flex gap-2 flex-wrap">
-                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadSiswaModal">
                             <i class="bi bi-cloud-upload"></i> Unggah Data
                         </button>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -546,46 +546,65 @@
         </div>
 
 
-<!-- Modal Unggah Data -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+<!-- Modal Unggah Data Siswa -->
+<div class="modal fade" id="uploadSiswaModal" tabindex="-1" aria-labelledby="uploadSiswaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadModalLabel" style="color: white;">Unggah Data Siswa</h5>
+                <h5 class="modal-title" id="uploadSiswaModalLabel">Unggah Data Siswa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Tombol Download Template -->
-                <div class="mb-3">
-                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
-                </div>
-                <div class="mb-3">
-                    <h6>
-                Ketentuan Unggah Excel : <br>
-                Rombel WAJIB diketik lengkap. Contoh : X RPL 1 <br>
-                Jenis kelamin WAJIB diketik Laki-laki / Perempuan <br>
-                No WA  WAJIB menggunakan (') contoh : '628512345678 <br>
-                Password Default = 12345678
-                Status = aktif / nonaktif</h6>
-                </div>
-
-                <!-- Form Unggah Data -->
-                <form action="/siswa-import" method="post" enctype="multipart/form-data">
-                    @csrf
+            <form action="/siswa-import" method="post" enctype="multipart/form-data" id="uploadSiswaForm">
+                @csrf
+                <div class="modal-body">
+                    <!-- Tombol Download Template -->
                     <div class="mb-3">
-                        <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
+                        <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                     </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Unggah</button>
-            </div>
+
+                    <!-- Form Input -->
+                    <div class="mb-3">
+                        <label for="fileUploadSiswa" class="form-label">Pilih File (CSV, Excel)</label>
+                        <input type="file" name="file" class="form-control" id="fileUploadSiswa" accept=".csv, .xlsx" required>
+                    </div>
+
+                    <!-- Keterangan Proses Mengunggah (Awalnya Disembunyikan) -->
+                    <div id="uploadingMessage" class="alert alert-info d-none">
+                        <strong>⏳ Sedang mengunggah data...</strong> Mohon tunggu.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+
+                    <!-- Button Unggah -->
+                    <button type="submit" class="btn btn-primary" id="uploadSiswaButton">Unggah</button>
+
+                    <!-- Button Mengunggah + Spinner (Awalnya Disembunyikan) -->
+                    <button id="loadingSpinnerSiswa" class="btn btn-primary d-none" type="button" disabled>
+                        <span>Mengunggah...</span>
+                        <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Modal Loading -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3">⏳ <strong>Sedang mengunggah data...</strong> Mohon tunggu.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -741,6 +760,42 @@
     }
 
 </script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("uploadSiswaForm").addEventListener("submit", function(event) {
+        console.log("⏳ Form submission started..."); // Debugging
+
+        let uploadButton = document.getElementById("uploadSiswaButton");
+        let loadingSpinner = document.getElementById("loadingSpinnerSiswa");
+        let uploadingMessage = document.getElementById("uploadingMessage");
+
+        if (uploadButton && loadingSpinner && uploadingMessage) {
+            uploadButton.classList.add("d-none"); // Sembunyikan tombol unggah
+            loadingSpinner.classList.remove("d-none"); // Tampilkan tombol mengunggah
+            uploadingMessage.classList.remove("d-none"); // Tampilkan keterangan proses
+            console.log("✅ Spinner & keterangan proses muncul!"); // Debugging
+        } else {
+            console.log("❌ ERROR: Elemen tidak ditemukan!"); // Debugging jika ID salah
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("uploadSiswaForm").addEventListener("submit", function (event) {
+        console.log("⏳ Unggah dimulai..."); // Debugging
+        
+        let loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+
+        // Tampilkan modal loading
+        loadingModal.show();
+    });
+});
+
+
+</script>
+
 
 </body>
 

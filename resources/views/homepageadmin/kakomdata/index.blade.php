@@ -441,7 +441,7 @@
                 </div>
 
                 <!-- Form Unggah Data -->
-                <form action="/kakom-import" method="post" enctype="multipart/form-data">
+                <form action="/kakom-import" method="post" enctype="multipart/form-data" id="uploadKakomForm">
                     @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
@@ -451,7 +451,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Unggah</button>
+                <button type="submit" class="btn btn-primary" id="uploadKakomButton">Unggah</button>
+
+                <!-- Spinner Loading -->
+                <div id="loadingSpinnerKakom" class="d-none">
+                    <button class="btn btn-primary px-4 py-2 d-flex align-items-center justify-content-center w-100" type="button" disabled>
+                        <span>Mengunggah</span>
+                        <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
             </div>
             </form>
         </div>
@@ -573,6 +581,14 @@
             }
         };
     </script>
+
+<script>
+    document.getElementById("uploadKakomForm").addEventListener("submit", function(event) {
+        // Sembunyikan tombol unggah, tampilkan spinner
+        document.getElementById("uploadKakomButton").classList.add("d-none");
+        document.getElementById("loadingSpinnerKakom").classList.remove("d-none");
+    });
+</script>
 
 </body>
 

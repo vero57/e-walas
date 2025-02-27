@@ -418,7 +418,7 @@
     </div>
 </section>
 
-<!-- Modal Unggah Data -->
+<!-- Modal Unggah Data Guru -->
 <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -433,22 +433,31 @@
                 </div>
 
                 <!-- Form Unggah Data -->
-                <form action="/guru-import" method="post" enctype="multipart/form-data">
+                <form action="/guru-import" method="post" enctype="multipart/form-data" id="uploadForm">
                     @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>
-                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx">
+                        <input type="file" name="file" class="form-control" id="fileUpload" accept=".csv, .xlsx" required>
                     </div>
                 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Unggah</button>
+                <button type="submit" class="btn btn-primary" id="uploadButton">Unggah</button>
+
+                <!-- Spinner Loading -->
+                <div id="loadingSpinner" class="d-none">
+                    <button class="btn btn-primary px-4 py-2 d-flex align-items-center justify-content-center w-100" type="button" disabled>
+                        <span>Mengunggah</span>
+                        <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                    </button>
+                </div>
             </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -531,6 +540,12 @@
                 }, 2000); // Tunda selama 2 detik sebelum animasi
             }
         };
+       
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            // Sembunyikan tombol unggah, tampilkan spinner
+            document.getElementById("uploadButton").classList.add("d-none");
+            document.getElementById("loadingSpinner").classList.remove("d-none");
+        });
     </script>
 
 </body>
