@@ -167,7 +167,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Siswa">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -175,9 +175,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/datadiri" class="active">Beranda</a></li>
-        <li><a href="/datadiripage" >Data Diri</a></li>
-          <li><a href="/inputdatadiri" >Input Data Diri</a></li>
+        <li><a href="/datadiri" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda">Beranda</a></li>
+        <li><a href="/datadiripage" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Diri" >Data Diri</a></li>
+          <li><a href="/inputdatadiri" data-bs-toggle="tooltip" data-bs-placement="top" title="Input Data Diri" >Input Data Diri</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -186,13 +186,13 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilesiswa" class="text-decoration-none">
+                <a href="/profilesiswa" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                     <span>{{ $siswa->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutsiswa') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
             </form>
         </div>
     </div>
@@ -258,7 +258,7 @@
                         <td>{{ $siswa ? $siswa->nama : 'Nama Tidak Ada' }}</td>
                         <td>{{ $status ?? 'Tidak Ada Keterangan' }}</td>
                         <td>
-                            <a href="{{ url('/datadiripage') }}" class="btn btn-info btn-sm">Lihat Data</a>
+                            <a href="{{ url('/datadiripage') }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data">Lihat Data</a>
                         </td>
                     </tr>
                 </tbody>

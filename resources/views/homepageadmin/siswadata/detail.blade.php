@@ -326,7 +326,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Admin">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -343,7 +343,7 @@
      <div class="user-info d-flex align-items-center">
             <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
             </form>
         </div>
     </div>
@@ -361,14 +361,14 @@
             <div class="d-flex align-items-center justify-content-start">
                 <!-- Form Cari Siswa -->
                 <!-- Tombol Unggah Data -->
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unggah data Menggunakan Template">
                     <i class="bi bi-cloud-upload"></i> Unggah Data
                 </button>
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
                     <!-- Tombol Tambah Data -->
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah data Manual">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
 
@@ -447,7 +447,7 @@
             <div class="modal-body">
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
-                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                    <a href="{{ route('siswa.download-template') }}" class="btn btn-primary btn-sm" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Template Excel">Download Template Excel</a>
                 </div>
 
                 <!-- Form Unggah Data -->

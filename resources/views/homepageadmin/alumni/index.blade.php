@@ -296,7 +296,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembali Kehalaman Home Page">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -304,9 +304,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/tahunajaran" >Tahun Akademik</a></li>
-          <li><a href="/alumni" class="active">Alumni</a></li>
-          <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+        <li><a href="/tahunajaran" data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Akademik Data">Tahun Akademik</a></li>
+          <li><a href="/alumni" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Alumni Data">Alumni</a></li>
+          <li class="dropdown"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Akademik Aktif"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
             </ul>
@@ -314,7 +314,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
+      <form action="{{ route('logoutadmin') }}" method="POST" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar Akun">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -352,7 +352,7 @@
                             <td>{{ $idx + 1 }}</td>
                             <td>{{ $data->nama }}</td>
                             <td>
-                                <a href="https://wa.me/{{ $data->no_wa }}" target="_blank" class="btn btn-success">
+                                <a href="https://wa.me/{{ $data->no_wa }}" target="_blank" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Hubungi Alumni">
                                     <i class="fa-brands fa-whatsapp"></i> Chat Alumni
                                 </a>
                             </td>

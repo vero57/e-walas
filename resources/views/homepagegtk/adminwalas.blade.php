@@ -156,7 +156,7 @@ table td {
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembali Ke Halaman Home Page">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -173,11 +173,11 @@ table td {
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilewalas" class="text-decoration-none">
+                <a href="/profilewalas" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                     <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
@@ -223,7 +223,7 @@ table td {
                 <td>Identitas Kelas</td>
                 <td>
                 <a href="{{ route('identitaskelas.index') }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Identitas Kelas"></i>
                 </a>
                 </td>
             </tr>
@@ -232,7 +232,7 @@ table td {
                 <td>Lembar Pengesahan</td>
                 <td>
                     <a href="{{ route('lembarpengesahan.index') }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Lembar Pengesahan"></i>
                 </a>
                 </td>
             </tr>
@@ -241,7 +241,7 @@ table td {
                 <td>Struktur Organisasi Kelas</td>
                 <td>
                     <a href="{{ route('strukturorganisasi.index') }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Struktur Organisasi"></i>
                 </a>
                 </td>
             </tr>
@@ -250,7 +250,7 @@ table td {
                 <td>Jadwal KBM</td>
                 <td>
                     <a href="{{route('jadwalkbm.index')}}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Jadwal KBM"></i>
                 </a>
                 </td>
             </tr>
@@ -259,7 +259,7 @@ table td {
                 <td>Jadwal Kegiatan Piket Kelas</td>
                 <td>
                     <a href="{{route('jadwalpiket.index')}}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Jadwal Piket Kelas"></i>
                 </a>
                 </td>
             </tr>
@@ -271,7 +271,7 @@ table td {
                 <td>Kehadiran Peserta Didik</td>
                 <td>
                     <a href="{{route('presensi.index')}}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Presensi Peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -280,7 +280,7 @@ table td {
                 <td>Daftar Penyerahan/Pengembalian Rapor Siswa</td>
                 <td>
                     <a href="/serahterimarapor">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Daftar penyerahan Atau Pengembalian Rapor Siswa"></i>
                 </a>
                 </td>
             </tr>
@@ -289,7 +289,7 @@ table td {
                 <td>Catatan Kasus Peserta Didik</td>
                 <td>
                     <a href="/catatankasus">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Catatan Kasus Peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -298,7 +298,7 @@ table td {
                 <td>Agenda Kegiatan Walas</td>
                 <td>
                     <a href="/agendawalas">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Agenda Kegiatan Wali Kelas"></i>
                 </a>
                 </td>
             </tr>
@@ -307,7 +307,7 @@ table td {
                 <td>Daftar Peserta Didik</td>
                 <td>
                     <a href="/daftarpesertadidik">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Daftar Peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -316,7 +316,7 @@ table td {
                 <td>Rekapitulasi Jumlah Peserta Didik</td>
                 <td>
                     <a href="/rekapjumlahsiswa">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Rekapitulasi Jumlah Peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -325,7 +325,7 @@ table td {
                 <td>Home Visit</td>
                 <td>
                     <a href="/homevisit">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Home Visit"></i>
                 </a>
                 </td>
             </tr>
@@ -334,7 +334,7 @@ table td {
                 <td>Buku Tamu Orang Tua/Wali Peserta Didik</td>
                 <td>
                     <a href="/bukutamuortu">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Buku Tamu Orang Tua/Wali Peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -343,7 +343,7 @@ table td {
                 <td>Persentase Sosial Ekonomi</td>
                 <td>
                     <a href="/persentasesosialekonomi">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Persentase Sosial Ekonomi"></i>
                 </a>
                 </td>
             </tr>
@@ -352,7 +352,7 @@ table td {
                 <td>Rentang Pendapatan Orang Tua</td>
                 <td>
                     <a href="/pendapatanortu">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Rentang Pendapatan Orang Tua"></i>
                 </a>
                 </td>
             </tr>
@@ -361,7 +361,7 @@ table td {
                 <td>Prestasi Peserta Didik</td>
                 <td>
                     <a href="/prestasisiswa">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Prestasi Peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -370,7 +370,7 @@ table td {
                 <td>Grafik Jarak Tempuh Siswa</td>
                 <td>
                     <a href="/grafikjaraktempuh">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Grafik Jarak Tempuh Siswa"></i>
                 </a>
                 </td>
             </tr>
@@ -379,7 +379,7 @@ table td {
                 <td>Berita Acara Kenaikan Kelas</td>
                 <td>
                     <a href="/beritaacarakenaikan">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Berita Acara Kenaikan Kelas"></i>
                 </a>
                 </td>
             </tr>
@@ -388,7 +388,7 @@ table td {
                 <td>Berita Acara Kelulusan</td>
                 <td>
                     <a href="/beritaacarakelulusan">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Berita Acara Kelulusan"></i>
                 </a>
                 </td>
             </tr>
@@ -397,7 +397,7 @@ table td {
                 <td>Berita Acara Serah Terima</td>
                 <td>
                     <a href="/beritaacaraserahterima">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Berita acara Serah Terima"></i>
                 </a>
                 </td>
             </tr>

@@ -293,7 +293,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kepsekpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kepsekpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Kepsek">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -301,8 +301,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/kepsekpage" >Beranda</a></li>
-          <li><a href="/keluarrombeldata" class="active">Data Siswa Keluar Rombel</a></li>
+        <li><a href="/kepsekpage" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda" >Beranda</a></li>
+          <li><a href="/keluarrombeldata" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Siswa Keluar Rombel">Data Siswa Keluar Rombel</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2024/2025 - Aktif</a></li>
@@ -313,7 +313,7 @@
       </nav>
       <form action="{{ route('logoutkepsek') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
+                                    <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
                                 </form>
       
 
@@ -368,7 +368,7 @@
             <td>
                 @if($rombels_id)
                     <a href="{{ route('detail.keluarormbelkepsek', ['rombels_id' => $rombels_id]) }}" 
-                       class="btn btn-sm btn-info text-white">
+                       class="btn btn-sm btn-info text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Data">
                         <i class="bi bi-info-circle text-white"></i> Detail Kelas
                     </a>
                 @else

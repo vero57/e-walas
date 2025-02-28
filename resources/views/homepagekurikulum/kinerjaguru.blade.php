@@ -116,7 +116,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Kurikulum">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -124,7 +124,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/tahunajarandata">Beranda</a></li>
+        <li><a href="/tahunajarandata" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda">Beranda</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
@@ -135,7 +135,7 @@
       </nav>
       <form action="{{ route('logoutadmin') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
+                                    <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda" >Logout</button>
                                 </form>
       
 
@@ -158,7 +158,7 @@
                 <div class="d-flex-container">
                    <!-- Tombol Filter Data -->
 <div class="btn-group" role="group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"data-bs-toggle="tooltip" data-bs-placement="top" title="Filter Data">
         Filter Data
     </button>
     <ul class="dropdown-menu">

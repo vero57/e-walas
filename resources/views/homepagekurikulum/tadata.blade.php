@@ -175,7 +175,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Kurikulum">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -183,8 +183,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/tahunajarandata" class="active">Tahun Akademik</a></li>
-          <li><a href="/alumnidatakurikulum" >Alumni</a></li>
+        <li><a href="/tahunajarandata" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Akademik Data">Tahun Akademik</a></li>
+          <li><a href="/alumnidatakurikulum"data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data Alumni" >Alumni</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
@@ -199,11 +199,11 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekurikulum" class="text-decoration-none">
+                <a href="/profilekurikulum" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                     <span>{{ $kurikulum->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
@@ -240,7 +240,7 @@
                 <tbody>
                     <tr>
                     <td>
-                        <a href="/rombelpage" class="text-decoration-none fw-bold text-primary table-link-hover">
+                        <a href="/rombelpage" class="text-decoration-none fw-bold text-primary table-link-hover" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Rombel Detail">
                             {{ $tahunAjaran }} - {{ $status }}
                         </a>
                     </td>
@@ -251,7 +251,7 @@
                             <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
                                 <a href="/rombelpage" class="btn btn-sm btn-primary text-white">
-                                    <i class="bi bi-info-circle text-white"></i> Detail
+                                    <i class="bi bi-info-circle text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Rombel Detail"></i> Detail
                                 </a>
                             </div>
                         </td>
@@ -279,7 +279,7 @@
                             <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
                                 <a href="/keluarrombeldatakurikulum" class="btn btn-sm btn-primary text-white">
-                                    <i class="bi bi-info-circle text-white"></i> Detail
+                                    <i class="bi bi-info-circle text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar Rombel Detail"></i> Detail
                                 </a>
                             </div>
                         </td>

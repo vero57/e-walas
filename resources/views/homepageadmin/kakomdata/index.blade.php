@@ -294,7 +294,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembali ke Home Page">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -302,12 +302,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/wargasekolah">Beranda</a></li>
-          <li><a href="/walas">Wali Kelas</a></li>
-          <li><a href="/guru">Guru</a></li>
-          <li><a href="/kakom"class="active">Kepala Kompetensi</a></li>
-          <li><a href="/kurikulum">Kurikulum</a></li>
-          <li><a href="/kepalasekolah">Kepala Sekolah</a></li>
+        <li><a href="/wargasekolah" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda">Beranda</a></li>
+          <li><a href="/walas" data-bs-toggle="tooltip" data-bs-placement="top" title="Wali Kelas">Wali Kelas</a></li>
+          <li><a href="/guru" data-bs-toggle="tooltip" data-bs-placement="top" title="Guru">Guru</a></li>
+          <li><a href="/kakom"class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Kepala Kompetensi">Kepala Kompetensi</a></li>
+          <li><a href="/kurikulum" data-bs-toggle="tooltip" data-bs-placement="top" title="Kurikulum">Kurikulum</a></li>
+          <li><a href="/kepalasekolah" data-bs-toggle="tooltip" data-bs-placement="top" title="Kepala Sekolah">Kepala Sekolah</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -316,11 +316,11 @@
                   <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                   
                   <!-- Tautkan nama walas ke /userprofile -->
-                  <a href="/profileadmin" class="text-decoration-none">
+                  <a href="/profileadmin" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                       <span>{{ $admin->nama }}</span>  <!-- Nama Walas yang sedang login -->
                   </a>
               @endif
-      <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+      <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
           @csrf
           <button type="submit" class="btn-getstarted">Logout</button>
       </form>
@@ -341,10 +341,10 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unggah Data Melalui Template Excel">
                         <i class="bi bi-cloud-upload"></i> Unggah
                     </button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Data Manual">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
                 </div>
@@ -404,11 +404,11 @@
                 <td>
                 <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
                    <!-- Tombol Edit -->
-                   <a href="{{ route('kakom.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">
+                   <a href="{{ route('kakom.edit', $data->id) }}" class="btn btn-primary btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data Kakom">
                         Edit
                     </a>
                     <!-- Tombol Delete -->
-                    <a href="/hapuskakom/{{$data->id}}" class="btn btn-danger btn-sm">Hapus</a> 
+                    <a href="/hapuskakom/{{$data->id}}" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus data kakom">Hapus</a> 
                 </td>
                 </div>
             </tr>

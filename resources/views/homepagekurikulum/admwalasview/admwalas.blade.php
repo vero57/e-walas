@@ -156,7 +156,7 @@ table td {
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Kurikulum">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -173,13 +173,13 @@ table td {
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekurikulum" class="text-decoration-none">
+                <a href="/profilekurikulum" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Profile Kurikulum">
                     <span>{{ $kurikulums->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutkurikulum') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
             </form>
         </div>
 
@@ -216,7 +216,7 @@ table td {
                 <td>Identitas Kelas</td>
                 <td>
                      <!-- Link untuk mengarahkan ke halaman dengan walas_id -->
-                     <a href="{{ route('admwalas.identitaskelaskurikulum') }}?walas_id={{ $walas->id }}">
+                     <a href="{{ route('admwalas.identitaskelaskurikulum') }}?walas_id={{ $walas->id }}" >
                         <i class="fas fa-edit edit-icon" title="Detail Identitas Kelas"></i>
                     </a>
                 </td>
@@ -278,7 +278,7 @@ table td {
                 <td>Daftar Penyerahan/Pengembalian Rapor Siswa</td>
                 <td>
                 <a href="{{ route('admwalas.serahterimaraporkurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Serah terima Rapor"></i>
                 </a>
                 </td>
             </tr>
@@ -287,7 +287,7 @@ table td {
                 <td>Catatan Kasus Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.catatankasuskurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Catatan Kasus"></i>
                 </a>
                 </td>
             </tr>
@@ -306,7 +306,7 @@ table td {
                 <td>Daftar Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.daftarpesertadidikkurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Daftar peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -315,7 +315,7 @@ table td {
                 <td>Rekapitulasi Jumlah Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.rekapitulasipdidikkurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Rekapitulasi jumlah peserta Didik"></i>
                 </a>
                 </td>
             </tr>
@@ -324,7 +324,7 @@ table td {
                 <td>Home Visit</td>
                 <td>
                     <a href="{{ route('admwalas.homevisitkurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Home Visit Data"></i>
                 </a>
                 </td>
             </tr>
@@ -333,7 +333,7 @@ table td {
                 <td>Buku Tamu Orang Tua/Wali Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.bukutamuortukurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Buku Tamu OrangTua"></i>
                 </a>
                 </td>
             </tr>
@@ -351,7 +351,7 @@ table td {
                 <td>Rentang Pendapatan Orang Tua</td>
                 <td>
                 <a href="{{ route('admwalas.rentangpendapatanortukurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Rentang pendapatan Ortu"></i>
                 </a>
                 </td>
             </tr>
@@ -360,7 +360,7 @@ table td {
                 <td>Prestasi Peserta Didik</td>
                 <td>
                 <a href="{{ route('admwalas.prestasisiswakurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail presensi Siswa"></i>
                 </a>
                 </td>
             </tr>
@@ -369,7 +369,7 @@ table td {
                 <td>Grafik Jarak Tempuh Siswa</td>
                 <td>
                 <a href="{{ route('admwalas.grafikjaraktempuhkurikulum') }}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Grafik Jarak Tempuh"></i>
                 </a>
                 </td>
             </tr>
@@ -378,7 +378,7 @@ table td {
                 <td>Berita Acara Kenaikan Kelas</td>
                 <td>
                     <a href="{{ route ('admwalas.beritaacarakenaikankurikulum')}}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Detail Berita Acara kenaikan Kelas"></i>
                 </a>
                 </td>
             </tr>
@@ -387,7 +387,7 @@ table td {
                 <td>Berita Acara Kelulusan</td>
                 <td>
                     <a href="{{ route ('admwalas.beritaacarakelulusankurikulum')}}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Berita Acara Kelulusan"></i>
                 </a>
                 </td>
             </tr>
@@ -396,7 +396,7 @@ table td {
                 <td>Berita Acara Serah Terima</td>
                 <td>
                     <a href="{{ route ('admwalas.beritaacaraserahterimakurikulum')}}?walas_id={{ $walas->id }}">
-                    <i class="fas fa-edit edit-icon" title="Isi data"></i>
+                    <i class="fas fa-edit edit-icon" title="Berita Acara Serah Terima"></i>
                 </a>
                 </td>
             </tr>
