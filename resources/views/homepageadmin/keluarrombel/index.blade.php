@@ -293,7 +293,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Profile">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -301,9 +301,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/adminpage" >Beranda</a></li>
-          <li><a href="/keluarrombeldata" class="active">Data Siswa Keluar Rombel</a></li>
-          <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+        <li><a href="/adminpage" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda">Beranda</a></li>
+          <li><a href="/keluarrombeldata" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Siswa Keluar Rombel Data">Data Siswa Keluar Rombel</a></li>
+          <li class="dropdown"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Akademik Aktif"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2024/2025 - Aktif</a></li>
             </ul>
@@ -311,7 +311,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
+      <form action="{{ route('logoutadmin') }}" method="POST" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -368,7 +368,7 @@
             <td>
                 @if($rombels_id)
                     <a href="{{ route('detail.keluarormbel', ['rombels_id' => $rombels_id]) }}" 
-                       class="btn btn-sm btn-info text-white">
+                       class="btn btn-sm btn-info text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Siswa Keluar Rombel">
                         <i class="bi bi-info-circle text-white"></i> Detail Kelas
                     </a>
                 @else

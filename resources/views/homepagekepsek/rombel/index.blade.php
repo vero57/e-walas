@@ -175,7 +175,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kepsekpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kepsekpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Kepsek">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -183,8 +183,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/kepsekta">Tahun Akademik</a></li>
-        <li><a href="/kepsekrombel" class="active">Rombel</a></li>
+        <li><a href="/kepsekta" data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Akademik">Tahun Akademik</a></li>
+        <li><a href="/kepsekrombel" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Rombel Data">Rombel</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -194,13 +194,13 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekepsek" class="text-decoration-none">
+                <a href="/profilekepsek" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Profile">
                     <span>{{ $kepsek->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutkepsek') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
             </form>
         </div>
     </div>
@@ -219,7 +219,7 @@
             <div class="d-flex align-items-center justify-content-start">
             <div class="d-flex-container">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip" data-bs-placement="top" title="Filter Data">
                                 Filter Data
                             </button>
                             <ul class="dropdown-menu">
@@ -295,7 +295,7 @@
                 <td>{{ $data->walas_nama }}</td>
                 <td>
                 @if ($data->no_wa)
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $data->no_wa) }}" target="_blank">
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $data->no_wa) }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Hubungi Wali kelas">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="30">
                         </a>
                     @else
@@ -305,7 +305,7 @@
                     <td>
                         <!-- Aksi -->
                         <div class="d-inline-flex gap-2">
-                            <a href="{{ route('rombel.showDetailKepsek', ['walas_id' => $data->walas_id]) }}" class="btn btn-sm btn-info text-white">
+                            <a href="{{ route('rombel.showDetailKepsek', ['walas_id' => $data->walas_id]) }}" class="btn btn-sm btn-info text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail Kelas">
                                 <i class="bi bi-info-circle text-white"></i> Detail Kelas
                             </a>
                         </div>

@@ -125,13 +125,13 @@
                   <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                   
                   <!-- Tautkan nama walas ke /userprofile -->
-                  <a href="/profilewalas" class="text-decoration-none">
+                  <a href="/profilewalas" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                       <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
                   </a>
               @endif
       <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
           @csrf
-          <button type="submit" class="btn-getstarted">Logout</button>
+          <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
       </form>
 </div>
 
@@ -166,7 +166,7 @@
               </p>
 
               <div class="hero-buttons">
-                <a href="https://youtu.be/9auMDyT3BOA" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
+                <a href="https://youtu.be/9auMDyT3BOA" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Vidio">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
                 </a>
@@ -191,7 +191,7 @@
     <div class="stat-content">
         <h4>Siswa</h4>
         <p class="mb-0">
-            <a href="/siswadata">
+            <a href="/siswadata" data-bs-toggle="tooltip" data-bs-placement="top" title="Management Data Siswa">
                 Kelola Data Siswa di Sini
             </a>
         </p>
@@ -207,7 +207,7 @@
       <div class="stat-content">
         <h4>Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/adminwalas">Kelola Administrasi Walas di Sini</a>
+        <a href="/adminwalas" data-bs-toggle="tooltip" data-bs-placement="top" title="Management data Administrasi">Kelola Administrasi Walas di Sini</a>
     </p>
       </div>
     </div>

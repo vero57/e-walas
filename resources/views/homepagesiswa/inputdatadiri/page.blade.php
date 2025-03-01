@@ -279,7 +279,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Siswa">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -287,15 +287,15 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/datadiri" >Beranda</a></li>
-        <li><a href="/datadiripage" class="active" >Data Diri</a></li>
-          <li><a href="/inputdatadiri" >Input Data Diri</a></li>
+        <li><a href="/datadiri" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda" >Beranda</a></li>
+        <li><a href="/datadiripage" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Diri" >Data Diri</a></li>
+          <li><a href="/inputdatadiri" data-bs-toggle="tooltip" data-bs-placement="top" title="Input Data Diri">Input Data Diri</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 <form action="{{ route('logoutsiswa') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn-getstarted">Logout</button>
+                                    <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
                                 </form>
       
 
@@ -450,7 +450,7 @@
                         <p><strong>Kepribadian:</strong> {{ $biodata->kepribadian }}</p>
                        
                     <div class="card-footer text-end">
-                        <a href="{{ route('datadiri.edit', $biodata->id) }}" class="btn btn-danger btn-sm">Edit</a>
+                        <a href="{{ route('datadiri.edit', $biodata->id) }}" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Biodata">Edit</a>
                     </div>
                 </div>
             @endforeach

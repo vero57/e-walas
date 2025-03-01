@@ -111,7 +111,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Kurikulum">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -128,13 +128,13 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekurikulum" class="text-decoration-none">
+                <a href="/profilekurikulum" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                     <span>{{ $kurikulums->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutkurikulum') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
             </form>
         </div>
 
@@ -173,7 +173,7 @@
                             <td>{{ $walas->nama ?? 'Tidak Ada Data' }}</td>
                             <td class="text-center">
                                 @if ($walas->no_wa)
-                                    <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank">
+                                    <a href="https://wa.me/{{ $walas->no_wa }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Hubungi Wali Kelas">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
                                             alt="WhatsApp" width="25">
                                     </a>
@@ -185,7 +185,7 @@
                             </td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <a href="{{ route('admwalasviewkurikulum.show', $walas->id) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('admwalasviewkurikulum.show', $walas->id) }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail Administrasi">
                                         Detail
                                     </a>
                                 </div>

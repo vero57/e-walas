@@ -107,7 +107,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/kurikulumpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Kurikulum">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -120,13 +120,13 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilekurikulum" class="text-decoration-none">
+                <a href="/profilekurikulum" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                     <span>{{ $kurikulum->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun anda">Logout</button>
             </form>
         </div>
 
@@ -158,7 +158,7 @@
               </p>
 
               <div class="hero-buttons">
-                <a href="https://youtu.be/QCFP-MWvdc4?si=21rvyKKRsOmd8YyU" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox">
+                <a href="https://youtu.be/QCFP-MWvdc4?si=21rvyKKRsOmd8YyU" class="btn btn-link tutorial-btn mt-2 mt-sm-0 glightbox" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Vidio">
                     <i class="bi bi-play-circle me-1"></i>
                     Tutorial Penggunaan Website
                 </a>
@@ -183,7 +183,7 @@
       <div class="stat-content">
       <h4>Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/kurikulumwalas">Lihat Data Administrasi Walas di Sini</a>
+        <a href="/kurikulumwalas" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat data Administrasi Walas">Lihat Data Administrasi Walas di Sini</a>
     </p>
 </div>
 
@@ -198,7 +198,7 @@
         
     <h4>Tahun Akademik</h4>
     <p class="mb-0">
-        <a href="/tahunajarandata">Monitoring Tahun Akademik di Sini</a>
+        <a href="/tahunajarandata" data-bs-toggle="tooltip" data-bs-placement="top" title="Monitoring Tahun Akademik">Monitoring Tahun Akademik di Sini</a>
     </p>
       </div>
     </div>

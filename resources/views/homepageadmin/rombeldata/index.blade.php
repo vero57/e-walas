@@ -293,7 +293,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Admin">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -301,9 +301,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/tahunajaran" >Beranda</a></li>
-          <li><a href="/rombel" class="active">Rombel</a></li>
-          <li><a href="/datamapel">Mata Pelajaran</a></li>
+        <li><a href="/tahunajaran" data-bs-toggle="tooltip" data-bs-placement="top" title="Beranda">Beranda</a></li>
+          <li><a href="/rombel" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Rombel Data">Rombel</a></li>
+          <li><a href="/datamapel" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Mata Pelajaran">Mata Pelajaran</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
@@ -312,7 +312,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <form action="{{ route('logoutadmin') }}" method="POST">
+      <form action="{{ route('logoutadmin') }}" method="POST" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">
                                     @csrf
                                     <button type="submit" class="btn-getstarted">Logout</button>
                                 </form>
@@ -332,10 +332,10 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unggah Rombel Menggunakan Template">
                         <i class="bi bi-cloud-upload"></i> Unggah
                     </button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Rombel Manual">
                         <i class="bi bi-plus"></i> Tambah
                     </button>
                 </div>
@@ -383,18 +383,18 @@
                 <td>
                     <!-- Aksi -->
                     <div class="d-inline-flex gap-2">
-                    <a href="{{ route('detail.kelas', ['rombel_id' => $data->rombel_id]) }}" class="btn btn-sm btn-info text-white">
+                    <a href="{{ route('detail.kelas', ['rombel_id' => $data->rombel_id]) }}" class="btn btn-sm btn-info text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail Siswa">
                             <i class="bi bi-info-circle text-white"></i> Detail Kelas
                     </a>
                     </div>
                 </td>
                 <td class="text-center align-middle">
                     <!-- Tombol Edit -->
-                    <a href="{{ route('rombels.edit', $data->rombel_id) }}" class="btn rounded-circle shadow-sm edit-btn">
+                    <a href="{{ route('rombels.edit', $data->rombel_id) }}" class="btn rounded-circle shadow-sm edit-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Rombel">
                         <i class="bi bi-pencil" style="font-size: 20px; color: #6c757d;"></i>
                     </a>
                     <!-- Tombol Delete -->
-                    <a href="/hapusrombel/{{$data->rombel_id}}" class="btn rounded-circle shadow-sm" 
+                    <a href="/hapusrombel/{{$data->rombel_id}}" class="btn rounded-circle shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Rombel" 
                             style="background-color: #f8fbff; border: none; width: 50px; height: 50px;">
                         <i class="bi bi-trash" style="font-size: 20px; color: #6c757d;"></i>
                     </a>
@@ -419,10 +419,10 @@
             <div class="modal-body">
                 <!-- Tombol Download Template -->
                 <div class="mb-3">
-                    <a href="{{ route('rombel.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
+                    <a href="{{ route('rombel.download-template') }}" class="btn btn-primary btn-sm" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Download template Excel">Download Template Excel</a>
                 </div>
                 <!-- Form Unggah Data -->
-                <form action="/rombel-import" method="post" enctype="multipart/form-data" id="uploadForm">
+                <form action="/rombel-import" method="post" enctype="multipart/form-data" id="uploadForm" >
                     @csrf
                     <div class="mb-3">
                         <label for="fileUpload" class="form-label">Pilih File (CSV, Excel)</label>

@@ -353,7 +353,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Admin">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -370,7 +370,7 @@
      <div class="user-info d-flex align-items-center">
             <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">Logout</button>
             </form>
         </div>
     </div>
@@ -387,11 +387,11 @@
             <hr class="my-3"> <!-- Garis horizontal di bawah judul -->
             <div class="d-flex align-items-center justify-content-start">
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unggah data Siswa menggunakan Template">
                         <i class="bi bi-cloud-upload"></i> Unggah
                     </button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-plus"></i> Tambah
+                        <i class="bi bi-plus" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Data Siswa Manual"></i> Tambah
                     </button>
                     <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target=#modalSiswaTidakNaik>
                         <i class="bi bi-arrow-down-circle"></i> Siswa Tidak Naik Kelas

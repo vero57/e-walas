@@ -139,7 +139,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/siswapage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Home Page Siswa">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -157,13 +157,13 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilewalas" class="text-decoration-none">
+                <a href="/profilewalas" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Profile Siswa">
                     <span>{{ $siswa->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
             <form action="{{ route('logoutsiswa') }}" method="POST" class="ms-3">
                 @csrf
-                <button type="submit" class="btn-getstarted">Logout</button>
+                <button type="submit" class="btn-getstarted" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Siswa">Logout</button>
             </form>
         </div>
 
@@ -185,7 +185,7 @@
                 <!-- Tombol Tambah Data -->
                 <!-- Membungkus tombol dan search box dengan div untuk pengaturan jarak -->
                 <div class="d-flex-container">
-                <a href="/prestasisiswainputcreate" class="btn btn-primary">
+                <a href="/prestasisiswainputcreate" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah data Prestasi Siswa">
                     <i class="bi bi-plus"></i> Tambah
                 </a>
             </div>
@@ -256,9 +256,9 @@
                     <td class="text-center" colspan="2">
                         <div class="d-flex justify-content-center">
                             <!-- Tombol Edit -->
-                            <a href="{{ route('prestasisiswainput.edit', $data->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                            <a href="{{ route('prestasisiswainput.edit', $data->id) }}" class="btn btn-primary btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data">Edit</a>
                             <!-- Tombol Delete -->
-                            <a href="/hapusprestasisiswainput/{{$data->id}}" class="btn btn-danger btn-sm">Hapus</a>
+                            <a href="/hapusprestasisiswainput/{{$data->id}}" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Data">Hapus</a>
                         </div>
                     </td>
                 </tr>

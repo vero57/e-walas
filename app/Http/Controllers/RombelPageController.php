@@ -227,4 +227,14 @@ public function downloadTemplate()
     return view('homepageadmin.rombeldata.index', compact('vwrombels', 'walas'));
 }
 
+public function hapusrombel(string $id)
+    {
+        $rombel = Rombel::find($id);
+        if ($rombel) {
+            $rombel->delete();
+            return redirect('/rombel')->with('success', 'Rombel data Berhasil Dihapus ');
+        }
+        return redirect('/rombel')->with('error', 'Rombel not found!');
+    }
+
 }

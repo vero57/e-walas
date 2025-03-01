@@ -181,15 +181,15 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/adminpage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Home Page Admin">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/tahunajaran" class="active">Tahun Akademik</a></li>
-          <li><a href="/alumni">Alumni</a></li>
+        <li><a href="/tahunajaran" class="active" data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Ajaran Data">Tahun Akademik</a></li>
+          <li><a href="/alumni" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Alumni">Alumni</a></li>
           <li class="dropdown"><a href="#"><span>Tahun Akademik</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Tahun Ajaran 2025/2026 - Aktif</a></li>
@@ -205,11 +205,11 @@
                   <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                   
                   <!-- Tautkan nama walas ke /userprofile -->
-                  <a href="/profileadmin" class="text-decoration-none">
+                  <a href="/profileadmin" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Halaman Profile">
                       <span>{{ $admin->nama }}</span>  <!-- Nama Walas yang sedang login -->
                   </a>
               @endif
-      <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3">
+      <form action="{{ route('logoutadmin') }}" method="POST" class="ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">
           @csrf
           <button type="submit" class="btn-getstarted">Logout</button>
       </form>
@@ -244,7 +244,7 @@
                 <tbody>
                     <tr>
                     <td>
-                        <a href="/rombel" class="text-decoration-none fw-bold text-primary table-link-hover">
+                        <a href="/rombel" class="text-decoration-none fw-bold text-primary table-link-hover" data-bs-toggle="tooltip" data-bs-placement="top" title="Kelola Rombel">
                             {{ $tahunAjaran }} - {{ $status }}
                         </a>
                     </td>
@@ -254,7 +254,7 @@
                         <td>
                             <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
-                                <a href="/rombel" class="btn btn-sm btn-primary text-white">
+                                <a href="/rombel" class="btn btn-sm btn-primary text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Rombel dan Kelola">
                                     <i class="bi bi-info-circle text-white"></i> Detail
                                 </a>
                             </div>
@@ -276,15 +276,15 @@
                 <tbody>
                     <tr>
                         <td>
-                            <a href="/keluarrombeldata" class="text-decoration-none fw-bold text-primary table-link-hover">
+                            <a href="/keluarrombeldata" class="text-decoration-none fw-bold text-primary table-link-hover" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Keluar Rombel">
                                 2024/2025 - GANJIL
                             </a>
                         </td>
                         <td>
                             <!-- Aksi -->
                             <div class="d-inline-flex gap-2">
-                                <a href="/keluarrombeldata" class="btn btn-sm btn-primary text-white">
-                                    <i class="bi bi-info-circle text-white"></i> Detail
+                                <a href="/keluarrombeldata" class="btn btn-sm btn-primary text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Data Detail Keluar Rombel">
+                                    <i class="bi bi-info-circle text-white" ></i> Detail
                                 </a>
                             </div>
                         </td>

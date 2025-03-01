@@ -389,7 +389,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="/walaspage" class="logo d-flex align-items-center me-auto me-xl-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembali ke Halaman Home">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">E - Walas</h1>
@@ -408,11 +408,11 @@
                 <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
                 
                 <!-- Tautkan nama walas ke /userprofile -->
-                <a href="/profilewalas" class="text-decoration-none">
+                <a href="/profilewalas" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                     <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
                 </a>
             @endif
-            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3">
+            <form action="{{ route('logoutwalas') }}" method="POST" class="ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Keluar dari Akun Anda">
                 @csrf
                 <button type="submit" class="btn-getstarted">Logout</button>
             </form>
@@ -435,10 +435,10 @@
                 <div class="col-12 d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <!-- Tombol Unggah Data & Tambah Data -->
                     <div class="d-flex gap-2 flex-wrap">
-                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadSiswaModal">
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadSiswaModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unggah Data Melalui Excel">
                             <i class="bi bi-cloud-upload"></i> Unggah Data
                         </button>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Data Manual">
                             <i class="bi bi-plus"></i> Tambah
                         </button>
                     </div>
@@ -501,7 +501,7 @@
                     <td>{{ $data->status }}</td>
                     <td>
                         <div class="d-flex justify-content-center align-items-center gap-2">
-                        <button type="button" class="btn btn-primary" id="btnKeterangan_{{ $data->siswa_id }}"  onclick="showSelect(this)">
+                        <button type="button" class="btn btn-primary" id="btnKeterangan_{{ $data->siswa_id }}"  onclick="showSelect(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Atur Keterangan Siswa">
                             {{ $data->keterangan ?? 'Naik Kelas' }}
                         </button>
                             <select name="keterangan" id="selectKeterangan_{{ $data->siswa_id }}" class="form-control d-none" onchange="updateButton(this, {{ $data->siswa_id }})">
@@ -522,13 +522,13 @@
                     </td>
                     <td>
                         <div class="d-flex justify-content-center flex-wrap gap-2">
-                            <a href="{{ route('homepagegtk.biodatasiswa', $data->siswa_id) }}" class="btn btn-info btn-sm">
+                            <a href="{{ route('homepagegtk.biodatasiswa', $data->siswa_id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Biodata Siswa">
                                 Biodata
                             </a>
-                            <a href="{{ route('siswa.edit', $data->siswa_id) }}" class="btn btn-primary btn-sm">
+                            <a href="{{ route('siswa.edit', $data->siswa_id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data Siswa">
                                 Edit
                             </a>
-                            <a href="/hapussiswa/{{$data->siswa_id}}" class="btn btn-danger btn-sm">
+                            <a href="/hapussiswa/{{$data->siswa_id}}" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Siswa">
                                 Hapus
                             </a>
                         </div>
