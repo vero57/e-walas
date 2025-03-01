@@ -13,6 +13,12 @@ class WalasImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+      // Tentukan baris awal header data
+    public function headingRow(): int
+    {
+        return 5;
+    }
+    
     public function model(array $row)
     {
         return new Walas([

@@ -13,6 +13,11 @@ class KakomImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    public function headingRow(): int
+    {
+        return 5;
+    }
+    
     public function model(array $row)
     {
         return new Kakom([

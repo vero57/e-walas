@@ -421,14 +421,6 @@
                 <div class="mb-3">
                     <a href="{{ route('rombel.download-template') }}" class="btn btn-primary btn-sm" target="_blank">Download Template Excel</a>
                 </div>
-                <div class="mb-3">
-                Ketentuan Unggah Excel : <br>
-                Tingkat diketik romawi : X, XI, XII, XIII <br>
-                Nama kelas wajib diketik lengkap. Contoh : X RPL 1 <br>
-                Kompetensi wajib disingkat dan capslock : DKV, RPL, SIJA, TKJ, TKP, DPIB, TOI, TKR, TP, TFLM <br>
-                Walas wajib nama lengkap dan pastikan sudah terdaftar di user wali kelas <br>
-                </div>
-
                 <!-- Form Unggah Data -->
                 <form action="/rombel-import" method="post" enctype="multipart/form-data" id="uploadForm">
                     @csrf

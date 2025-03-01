@@ -16,6 +16,11 @@ class RombelImport implements ToCollection, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    public function headingRow(): int
+    {
+        return 7;
+    }
+    
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
