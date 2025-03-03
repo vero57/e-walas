@@ -16,6 +16,11 @@ class SiswaImport implements ToCollection, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    public function headingRow(): int
+    {
+        return 6;
+    }
+    
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {

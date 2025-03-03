@@ -217,12 +217,28 @@
                             <small id="fileWarning1" class="text-danger d-none">Ukuran file tidak boleh lebih dari 2 MB!</small>
                         </div>
 
-                        <!-- Dokumentasi (Gambar) -->
-                        <div class="mb-3">
-                            <label for="dokumentasi_url" class="form-label">Unggah Dokumentasi (Gambar):</label>
-                            <input type="file" name="dokumentasi_url" id="dokumentasi_url" class="form-control" accept="image/*" required>
-                            <small id="fileWarning2" class="text-danger d-none">Ukuran file tidak boleh lebih dari 1 MB!</small>
+                                                <div class="mb-3">
+                            <label class="form-label">Unggah Dokumentasi (Gambar):</label>
+                            
+                            <!-- Tombol untuk membuka kamera -->
+                            <button type="button" id="openCamera" class="btn btn-secondary">Buka Kamera</button>
+
+                            <!-- Video stream dari kamera -->
+                            <div id="cameraContainer" class="d-none">
+                                <video id="video" autoplay class="w-100"></video>
+                                <button type="button" id="captureImage" class="btn btn-primary mt-2">Ambil Gambar</button>
+                            </div>
+
+                            <!-- Canvas untuk menangkap gambar -->
+                            <canvas id="canvas" class="d-none"></canvas>
+
+                            <!-- Preview gambar -->
+                            <img id="previewDokumentasi" class="img-thumbnail d-none mt-2" width="200">
+
+                            <!-- Input file (bisa pakai kamera atau upload manual) -->
+                            <input type="file" name="dokumentasi_url" id="dokumentasi_url" accept="image/*" class="form-control mt-2">
                         </div>
+
 
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
@@ -245,6 +261,73 @@
     </div>
 
   </footer>
+       <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const openCameraBtn = document.getElementById("openCamera");
+    const captureImageBtn = document.getElementById("captureImage");
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const previewImg = document.getElementById("previewDokumentasi");
+    const fileInput = document.getElementById("dokumentasi_url");
+    const cameraContainer = document.getElementById("cameraContainer");
+
+    let stream = null;
+
+    // Buka kamera saat tombol diklik
+    openCameraBtn.addEventListener("click", async function() {
+        cameraContainer.classList.remove("d-none");
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+        } catch (error) {
+            alert("Kamera tidak bisa diakses. Coba izinkan akses kamera.");
+            console.error(error);
+        }
+    });
+
+    // Tangkap gambar dari kamera dan kecilkan ukuran
+    captureImageBtn.addEventListener("click", function() {
+        const maxWidth = 640;  // Lebar maksimum (bisa diubah)
+        const maxHeight = 480; // Tinggi maksimum (bisa diubah)
+        
+        const aspectRatio = video.videoWidth / video.videoHeight;
+
+        let newWidth = maxWidth;
+        let newHeight = maxWidth / aspectRatio;
+
+        if (newHeight > maxHeight) {
+            newHeight = maxHeight;
+            newWidth = maxHeight * aspectRatio;
+        }
+
+        // Atur ukuran canvas agar lebih kecil
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0, newWidth, newHeight);
+
+        // Konversi ke blob dengan kualitas rendah (JPEG 0.7)
+        canvas.toBlob(blob => {
+            const file = new File([blob], "dokumentasi.jpg", { type: "image/jpeg" });
+
+            // Masukkan file ke dalam input file
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+
+            // Tampilkan preview
+            previewImg.src = URL.createObjectURL(blob);
+            previewImg.classList.remove("d-none");
+
+            // Matikan kamera
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            cameraContainer.classList.add("d-none");
+        }, "image/jpeg", 0.7); // Kualitas 0.7 (bisa diubah, makin kecil makin ringan)
+    });
+});
+       </script>
+
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
