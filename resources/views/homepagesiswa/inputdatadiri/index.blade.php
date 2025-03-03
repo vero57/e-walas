@@ -366,6 +366,18 @@
 
                 <div class="row mb-3">
                     <div class="col-12">
+                        <label for="kepemilikan_rumah" class="form-label">Kepemilikan Rumah</label>
+                        <select name="kepemilikan_rumah" id="kepemilikan_rumah" class="form-control w-100" required>
+                            <option value="Lunas">Lunas</option>
+                            <option value="Sewa">Sewa</option>
+                            <option value="KPR/Kredit">KPR/Kredit</option>
+                            <option value="Kontrak">Kontrak</option>
+                            <option value="Inden">Inden</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
                         <label for="jalur_masuk" class="form-label">Jalur Masuk</label>
                         <select name="jalur_masuk" id="jalur_masuk" class="form-control w-100" required>
                             <option value="Afirmasi">Afirmasi</option>

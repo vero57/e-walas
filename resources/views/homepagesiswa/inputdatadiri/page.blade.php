@@ -395,6 +395,8 @@
                                     @endif
                                 </div>
                             </td>
+                            <br>
+                            <p><strong>Kepemilikan Rumah:</strong> {{ $biodata->kepemilikan_rumah }}</p>
                           <!-- Google Maps - Tampak Depan -->
                           <!-- <div class="mt-4">
                               <h5>Tampak Depan</h5>
@@ -407,8 +409,6 @@
                                   loading="lazy">
                               </iframe>
                           </div> -->
-                          <br>
-                          <br>
                     <div class="card-header">
                         <h5>Data Orang Tua</h5>
                     </div>

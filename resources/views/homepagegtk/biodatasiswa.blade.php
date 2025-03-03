@@ -412,20 +412,8 @@
                                     @endif
                                 </div>
                             </td>
-                          <br>
-                          <!-- Google Maps - Tampak Depan -->
-                          <!-- <div class="mt-4">
-                              <h5>Tampak Depan</h5>
-                              <iframe>
-                                  src="https://www.google.com/maps/embed?pb={{ $biodata->alamat_maps }}&output=svembed"
-                                  width="100%"
-                                  height="300"
-                                  style="border:0;"
-                                  allowfullscreen=""
-                                  loading="lazy">
-                              </iframe>
-                          </div> -->
-                          <br>
+                            <p><strong>Kepemilikan Rmah:</strong> {{ $biodata->kepemilikan_rumah }}</p>
+                        
                     <div class="card-header">
                         <h5>Data Orang Tua</h5>
                     </div>

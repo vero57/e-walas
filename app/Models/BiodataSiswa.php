@@ -19,6 +19,7 @@ class BiodataSiswa extends Model
        'alamat',
        'alamat_maps',
        'fotorumah_url',
+       'kepemilikan_rumah',
        'jalur_masuk',
        'jarak_rumah',
        'transportasi_sekolah',

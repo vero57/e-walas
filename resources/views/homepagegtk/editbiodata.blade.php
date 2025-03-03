@@ -388,6 +388,18 @@
                             @endif
             </div>
 
+                <div class="col-12">
+                    <label for="kepemilikan_rumah" class="form-label">Kepemilikan Rumah</label>
+                    <select name="kepemilikan_rumah" id="kepemilikan_rumah" class="form-control w-100" required>
+                        <option value="Lunas" {{ old('kepemilikan_rumah', $biodata->kepemilikan_rumah ?? '') == 'Lunas' ? 'selected' : '' }}>Lunas</option>
+                        <option value="KPR/Kredit" {{ old('kepemilikan_rumah', $biodata->kepemilikan_rumah ?? '') == 'KPR/Kredit' ? 'selected' : '' }}>KPR/Kredit</option>
+                        <option value="Sewa" {{ old('kepemilikan_rumah', $biodata->kepemilikan_rumah ?? '') == 'Sewa' ? 'selected' : '' }}>Sewa</option>
+                        <option value="Kontrak" {{ old('kepemilikan_rumah', $biodata->kepemilikan_rumah ?? '') == 'Kontrak' ? 'selected' : '' }}>Kontrak</option>
+                        <option value="Inden" {{ old('kepemilikan_rumah', $biodata->kepemilikan_rumah ?? '') == 'Inden' ? 'selected' : '' }}>Inden</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="col-12">
                     <label for="jalur_masuk" class="form-label">Jalur Masuk</label>
