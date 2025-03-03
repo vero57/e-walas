@@ -31,6 +31,10 @@
             width: 100%;
             text-align: left;
         }
+        .signature td, 
+        .signature th {
+        border: none !important;
+        }
     </style>
 </head>
 <body>

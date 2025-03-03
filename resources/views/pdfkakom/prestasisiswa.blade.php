@@ -40,6 +40,10 @@
             width: 100%;
             text-align: left;
         }
+        .signature td, 
+        .signature th {
+        border: none !important;
+        }
         .img-container img {
             width: 150px;
             height: 150px;

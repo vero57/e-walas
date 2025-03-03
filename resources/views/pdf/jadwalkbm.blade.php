@@ -40,6 +40,10 @@
             width: 100%;
             text-align: left;
         }
+        .signature td, 
+        .signature th {
+        border: none !important;
+        }
     </style>
 </head>
 <body>
@@ -91,7 +95,7 @@
     @endphp
 
     <div class="signature">
-        <table style="border: none; width: 100%;">
+        <table>
             <tr>
                 <td style="text-align: center;">Mengetahui,</td>
                 <td></td>
