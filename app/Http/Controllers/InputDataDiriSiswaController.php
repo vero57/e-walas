@@ -73,6 +73,7 @@ class InputDataDiriSiswaController extends Controller
             'alamat' => 'nullable|string|max:255',
             'alamat_maps' => 'nullable|string|max:1000',
             'fotorumah_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kepemilikan_rumah' => 'nullable|string|max:50',
             'jalur_masuk' => 'nullable|string|max:50',
             'jarak_rumah' => 'nullable|string|max:50',
             'transportasi_sekolah' => 'nullable|string|max:50',
@@ -233,6 +234,7 @@ class InputDataDiriSiswaController extends Controller
             'alamat' => 'nullable|string|max:255',
             'alamat_maps' => 'nullable|string|max:5000',
             'fotorumah_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kepemilikan_rumah' => 'nullable|string|max:50',
             'jalur_masuk' => 'nullable|string|max:50',
             'jarak_rumah' => 'nullable|string|max:50',
             'transportasi_sekolah' => 'nullable|string|max:50',
@@ -318,6 +320,7 @@ class InputDataDiriSiswaController extends Controller
     $biodata->alamat = $request->alamat;
     $biodata->alamat_maps = $request->alamat_maps;
     $biodata->fotorumah_url = $fotoRumahPath;
+    $biodata->kepemilikan_rumah = $request->kepemilikan_rumah;
     $biodata->jalur_masuk = $request->jalur_masuk;
     $biodata->jarak_rumah = $request->jarak_rumah;
     $biodata->transportasi_sekolah = $request->transportasi_sekolah;

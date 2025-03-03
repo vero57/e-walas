@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->text('alamat_maps');
             $table->string('fotorumah_url',255)->nullable();
+            $table->enum('kepemilikan_rumah', ['Lunas', 'Sewa', 'KPR/Kredit', 'Kontrak', 'Inden'])->default('Lunas');
             $table->enum('jalur_masuk', ['Afirmasi', 'Zonasi', 'Rapor', 'Prestasi', 'Anak Guru','Perpindahan Orang Tua',])->default('Rapor');
             $table->string('jarak_rumah',255);
             $table->string('transportasi_sekolah',255);
@@ -73,3 +74,6 @@ return new class extends Migration
         Schema::dropIfExists('biodata_siswas');
     }
 };
+
+
+
