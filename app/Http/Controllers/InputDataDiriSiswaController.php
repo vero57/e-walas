@@ -44,28 +44,27 @@ class InputDataDiriSiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-        public function store(Request $request)
+    public function store(Request $request)
     {
         // Menggunakan guard 'siswas' untuk mendapatkan data siswa yang login
         $siswa = Auth::guard('siswas')->user();
-
+    
         // Periksa apakah session 'siswa_id' ada
         if (!session()->has('siswa_id')) {
             return redirect('/loginsiswa')->with('error', 'Silakan login terlebih dahulu.');
         }
-
+    
         // Ambil data siswa berdasarkan 'siswa_id' yang ada di session
         $siswa = Siswa::find(session('siswa_id'));
-
+    
         // Periksa apakah data siswa ditemukan
         if (!$siswa) {
             return redirect('/loginsiswa')->with('error', 'Data siswa tidak ditemukan.');
         }
-
+    
         // Validasi input
         $validatedData = $request->validate([
             'walas_id' => 'nullable|integer',
-            'siswas_id' => 'nullable|integer',
             'nama_lengkap' => 'nullable|string|max:255',
             'jenis_kelamin' => 'nullable|string|max:10',
             'tempat_lahir' => 'nullable|string|max:255',
@@ -84,8 +83,8 @@ class InputDataDiriSiswaController extends Controller
             'jumlah_saudara' => 'nullable|integer',
             'no_wa' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
-            'nis' => 'nullable|string|max:20',
-            'nisn' => 'nullable|string|max:20',
+            'nis' => 'required|string|max:20',
+            'nisn' => 'required|string|max:20',
             'kelas' => 'nullable|string|max:50',
             'kompetensi' => 'nullable|string|max:100',
             'tahun_masuk' => 'nullable|string|max:4',
@@ -112,37 +111,39 @@ class InputDataDiriSiswaController extends Controller
             'pengalaman_ekskul' => 'nullable|string|max:255',
             'kepribadian' => 'nullable|string|max:255'
         ]);
-
+    
+        // Cek apakah NIS atau NISN sudah ada di database
+        $nisExists = BiodataSiswa::where('nis', $validatedData['nis'])->exists();
+        $nisnExists = BiodataSiswa::where('nisn', $validatedData['nisn'])->exists();
+    
+        if ($nisExists || $nisnExists) {
+            return redirect()->back()->with('error', 'NIS atau NISN sudah digunakan.');
+        }
+    
         // Menambahkan siswas_id ke request
         $validatedData['siswas_id'] = $siswa->id;
-
+    
         // Cek dan simpan file gambar jika ada
         if ($request->hasFile('fotorumah_url')) {
-            // Memberi nama unik pada file
             $fileName = uniqid() . '.' . $request->file('fotorumah_url')->getClientOriginalExtension();
-            
-            // Menyimpan file dengan nama unik
             $fotoRumahPath = $request->file('fotorumah_url')->storeAs('images/photos', $fileName, 'public');
-            
-            // Menyimpan path file yang ter-link di public
             $validatedData['fotorumah_url'] = $fotoRumahPath;
         }
-
-        // Mengecek apakah pekerjaan ayah adalah "Lainnya" dan mengganti nilainya jika perlu
+    
+        // Mengecek pekerjaan orang tua jika "Lainnya" diisi
         if ($request->pekerjaan_ayah === 'Lainnya' && $request->filled('pekerjaan_ayah_lainnya')) {
             $validatedData['pekerjaan_ayah'] = $request->pekerjaan_ayah_lainnya;
         }
-
-        // Mengecek apakah pekerjaan ibu adalah "Lainnya" dan mengganti nilainya jika perlu
         if ($request->pekerjaan_ibu === 'Lainnya' && $request->filled('pekerjaan_ibu_lainnya')) {
             $validatedData['pekerjaan_ibu'] = $request->pekerjaan_ibu_lainnya;
         }
-
+    
         // Simpan data ke database
         BiodataSiswa::create($validatedData);
     
         return redirect('/datadiripage')->with('success', 'Data Berhasil Ditambahkan!');
     }
+    
 
     
     /**
