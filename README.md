@@ -83,7 +83,7 @@ php artisan migrate --seed
 
 ### 5\. Menjalankan Proyek
 
-Buka dua terminal terpisah untuk menjalankan backend Laravel dan frontend Vite (bila menggunakan Laravel + Vite):
+Buka dua terminal terpisah untuk menjalankan Laravel:
 
 **Terminal – Laravel:**
 
