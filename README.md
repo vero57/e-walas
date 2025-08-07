@@ -1,66 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+-----
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🎓 E-Walas Project: Absensi Berbasis Face Recognition
 
-## About Laravel
+**E-Walas Project** adalah sebuah platform web untuk sistem absensi siswa yang inovatif, memanfaatkan teknologi **face recognition** dan terintegrasi dengan **WhatsApp**. Proyek ini bertujuan untuk membangun solusi absensi yang modern, akurat, dan efisien untuk lingkungan sekolah.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Fitur utama dari proyek ini meliputi:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  - **Absensi Face Recognition**: Verifikasi wajah dengan deteksi ekspresi untuk mencegah kecurangan.
+  - **Integrasi WhatsApp**: Notifikasi absensi dan rekap harian/mingguan otomatis dikirim ke orang tua dan walas.
+  - **Deteksi Lokasi Akurat**: Memastikan absensi hanya dapat dilakukan di lingkungan sekolah.
+  - **Pengajuan Izin Online**: Orang tua dapat mengajukan izin sakit atau keperluan lain melalui platform web.
+  - **Jurnal Mata Pelajaran Digital**: Siswa dapat mengisi jurnal dan mengunggah bukti foto kegiatan.
+  - **Sistem Poin Pelanggaran**: Pencatatan poin otomatis untuk siswa yang terlambat.
+  - **Live CCTV**: Tampilan CCTV real-time dari lab SIJA.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-----
 
-## Learning Laravel
+## 📦 Instalasi & Deployment
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sebelum memulai proses instalasi dan deployment proyek ini secara lokal, pastikan Anda telah menginstal beberapa **perangkat lunak pendukung (development tools)** berikut:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+  - **Git** – untuk meng-clone repository dari GitHub
+  - **Code editor** – disarankan menggunakan [Visual Studio Code](https://code.visualstudio.com/)
+  - **Web server stack** – seperti [Laragon](https://laragon.org/) atau [XAMPP](https://www.apachefriends.org/index.html), yang berfungsi sebagai aplikasi server lokal untuk menjalankan PHP dan MySQL
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-----
 
-## Laravel Sponsors
+### 1\. Clone Repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Untuk mulai bekerja dengan proyek ini, jalankan perintah berikut di terminal untuk meng-clone repository ke komputer lokal Anda:
 
-### Premium Partners
+```bash
+git clone https://github.com/berbinarin/e-walas.git
+cd e-walas
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Setelah itu, buka folder proyek yang telah di-clone menggunakan code editor seperti Visual Studio Code.
 
-## Contributing
+-----
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2\. Instalasi Dependency
 
-## Code of Conduct
+Selanjutnya, instal semua dependency backend dan frontend menggunakan perintah berikut di terminal:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+-----
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3\. Konfigurasi Environment
 
-## License
+Laravel menggunakan file `.env` untuk mengatur konfigurasi aplikasi. Jalankan langkah berikut:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+cp .env.example .env
+```
+
+Kemudian, sesuaikan isi file `.env` dengan pengaturan lokal Anda, seperti nama database, user, dan password.
+
+Setelah file `.env` disiapkan, langkah selanjutnya adalah menghasilkan kunci aplikasi Laravel. Jalankan perintah berikut di terminal:
+
+```bash
+php artisan key:generate
+```
+
+Perintah ini akan menghasilkan kunci aplikasi yang digunakan untuk mengenkripsi data sensitif di aplikasi Laravel Anda.
+
+-----
+
+### 4\. Migrasi & Seeding Database
+
+Pastikan aplikasi **web server stack** (seperti Laragon atau XAMPP) Anda sudah aktif dan database server (MySQL/MariaDB) sedang berjalan.
+
+Lalu jalankan perintah berikut untuk membuat dan mengisi struktur database:
+
+```bash
+php artisan migrate --seed
+```
+
+-----
+
+### 5\. Menjalankan Proyek
+
+Buka dua terminal terpisah untuk menjalankan backend Laravel dan frontend Vite (bila menggunakan Laravel + Vite):
+
+**Terminal – Laravel:**
+
+```bash
+php artisan serve
+```
+
+Lalu akses webnya melalui browser dengan mengetikan url
+
+```bash
+http://localhost:8000
+```
+
+-----
+
+## 👍🏻 Standarisasi dan Best Practice
+
+Pada poin ini akan dibahas beberapa Standar atau best practice yang diterapkan pada project ini guna meningkatkan efisiensi dan *readability* pada *source code*. Materi pada bagian ini banyak mengambil referensi dari repository GitHub [alexeymezenin - Laravel Best Practices](https://github.com/alexeymezenin/laravel-best-practices).
+
+### 1\. Penamaan Direktori dan File
+
+| **Konvensi** | **Penjelasan** | **Contoh** |
+|:---|:---|:---|
+| **Controller** | File controller di dalam folder **Controllers** harus diakhiri dengan kata `Controller` menggunakan format **PascalCase**. | `SiswaController.php`, `WalasController` |
+| **Model** | Nama file model menggunakan format **PascalCase** dan disarankan menggunakan nama tunggal untuk representasi entitas tunggal. | `Siswa.php`, `Kelas.php` |
+| **Migration** | File migrasi harus menggunakan format **snake\_case** dan disertai dengan deskripsi yang jelas mengenai fungsinya. | `create_absensis_table.php`, `add_geolokasi_to_absensis.php` |
+| **Seeder** | Gunakan format **PascalCase** untuk file seeder. Seeder biasanya menggunakan nama entitas yang dimodifikasi. | `UserSeeder.php`, `SiswaSeeder.php` |
+| **Middleware** | Gunakan format **PascalCase** untuk nama file middleware dan harus jelas menggambarkan fungsinya. | `Authenticate.php`, `CheckWalas.php` |
+| **Request** | Gunakan **PascalCase** untuk nama file request dan beri nama berdasarkan tindakan atau data yang diproses. | `StoreAbsensiRequest.php`, `UpdateJurnalRequest.php` |
+| **Service** | Jika menggunakan service classes, nama file harus menggunakan **PascalCase**. | `AbsensiService.php`, `WhatsAppService.php` |
+
+### 2\. Penamaan Variabel dan Properti
+
+| **Konvensi** | **Penjelasan** | **Contoh** |
+|:---|:---|:---|
+| **Variable dan Property** | Gunakan format **camelCase** untuk penamaan variabel dan properti di dalam kelas. | `$listSiswa`, `$notifikasiWhatsApp` |
+| **Constanta** | Gunakan format **UPPER\_SNAKE\_CASE** untuk konstanta, yang terdiri dari huruf kapital dan dipisahkan dengan underscore. | `MAX_TELAT_MENIT`, `DEFAULT_ROLE` |
+| **Function/Method** | Gunakan format **camelCase** untuk function atau method, dengan kata kerja yang jelas dan deskriptif. | `absenSiswa()`, `kirimNotifikasi()`, `verifikasiWajah()` |
+| **Function/Method di Resource Controller** | Gunakan format yang telah ditentukan oleh Laravel (index, store, show, update, destroy). | `index()`, `store()` |
+| **Parameter Function** | Gunakan **camelCase** untuk parameter function, sesuai dengan konvensi penamaan pada variabel. | `function kirimNotifikasi($siswaId, $pesan)` |
+
+### 3\. Penamaan URL, Route, dan View
+
+| **Konvensi** | **Penjelasan** | **Contoh** |
+|:---|:---|:---|
+| **URL/Route** | Gunakan **kebab-case** untuk nama URL dan route, sehingga mudah dibaca dan konsisten. Setiap kata dipisahkan dengan tanda hubung (-). | `/absensi`, `/jurnal-mapel` |
+| **Route Name** | Gunakan **snake\_case** dengan **dot notation** untuk route name. Setiap kata dipisahkan dengan tanda (\_). | `absensi.index`, `jurnal.create` |
+| **Blade View dan Components** | Gunakan format **kebab-case** untuk penamaan komponen Blade. | `absen-harian.blade.php`, `form-izin.blade.php` |
+
+### 4\. Penamaan Tabel dan Kolom Database
+
+| **Konvensi** | **Penjelasan** | **Contoh** |
+|:---|:---|:---|
+| **Tabel** | Gunakan **plural snake\_case** untuk nama tabel di database. Nama tabel harus menjelaskan jenis entitas yang disimpan. | `siswas`, `absensis`, `jurnals` |
+| **Column** | Gunakan **snake\_case** untuk nama kolom, dan pastikan nama kolom konsisten dan deskriptif terhadap data yang disimpan. | `id`, `nama_siswa`, `waktu_absensi` |
+| **Indeks/Foreign Key** | Gunakan **snake\_case** untuk nama indeks atau relation dan konsisten dalam penamaan. | `siswa_id`, `kelas_id`, `waktu_absensi_index` |
+
+### 5\. Best Practices Lainnya
+
+  - **Deskriptif**: Gunakan nama yang deskriptif untuk semua elemen dalam proyek agar mudah dipahami oleh pengembang lain.
+  - **Konsisten**: Pastikan Anda konsisten dengan format penamaan yang digunakan di seluruh proyek untuk menjaga kejelasan dan keterbacaan.
+  - **Singkat dan Padat**: Hindari penggunaan nama yang terlalu panjang. Usahakan agar nama tetap deskriptif namun tidak berlebihan.
